@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Enviar missões em lote · Gestor de Redes</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="page-head">
+      <div>
+        <div class="crumbs">Início • Gestão de Missões</div>
+        <h1>Enviar missões em lote</h1>
+        <p class="lead">Escolha uma missão e abra o assistente para escolher escolas e período.</p>
+      </div>
+  <button id="openDrawer" class="btn primary" aria-controls="drawer" aria-expanded="false">Abrir assistente</button>
+    </header>
+
+    <!-- Filtros fictícios / tabela de missões (exemplo mínimo) -->
+    <div class="filters">
+      <div>
+        <label>Sistema de ensino</label>
+        <select><option>Osasco</option></select>
+      </div>
+      <div>
+        <label>Ano escolar</label>
+        <select><option>5º ano</option></select>
+      </div>
+      <div>
+        <label>Busca</label>
+        <input type="search" placeholder="Pesquisar missão..." />
+      </div>
+    </div>
+
+    <table aria-label="Missões">
+      <thead>
+        <tr><th>Missão</th><th>Status</th><th class="muted">Ações</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Frações e números mistos</td>
+          <td><span class="badge ok">Ativa</span></td>
+          <td class="row-actions">
+            <button class="btn" data-open-assistant>Enviar em lote</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Problemas de multiplicação</td>
+          <td><span class="badge">Inativa</span></td>
+          <td class="row-actions">
+            <button class="btn" data-open-assistant>Enviar em lote</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Drawer -->
+  <div id="backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="drawer" class="drawer" role="dialog" aria-labelledby="dlg-title" aria-modal="true" aria-hidden="true">
+    <div class="drawer-head">
+  <button id="closeDrawer" class="btn ghost" aria-label="Fechar" aria-controls="drawer" aria-expanded="true">✕</button>
+      <h2 id="dlg-title">Assistente de envio em lote</h2>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Lista de escolas -->
+      <section class="list" aria-labelledby="schools-title">
+        <header>
+          <strong id="schools-title">Lista de escolas</strong>
+          <div style="display:flex;gap:8px">
+            <button class="btn" id="selectAll">Selecionar todas</button>
+            <button class="btn" id="clearAll">Limpar seleção</button>
+          </div>
+        </header>
+        <div class="row">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+            <input type="checkbox" class="school" data-students="180" />
+            EMEF Portal do Sol <span class="muted">· 180 alunos</span>
+          </label>
+          <span class="badge">não enviada</span>
+        </div>
+        <div class="row">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+            <input type="checkbox" class="school" data-students="140" />
+            EMEF Parque das Aves <span class="muted">· 140 alunos</span>
+          </label>
+          <span class="badge">não enviada</span>
+        </div>
+        <div class="row">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+            <input type="checkbox" class="school" data-students="90" />
+            EMEF Morro Doce <span class="muted">· 90 alunos</span>
+          </label>
+          <span class="badge">não enviada</span>
+        </div>
+      </section>
+
+      <!-- Configuração de período -->
+      <section class="list" aria-labelledby="period-title">
+        <header>
+          <strong id="period-title">Configuração de período</strong>
+          <label class="switch" title="Usar período padrão para todas as escolas">
+            <input type="checkbox" id="useDefaultPeriod" checked />
+            <span class="muted">Usar período padrão para todas as escolas</span>
+          </label>
+        </header>
+        <div style="display:grid;gap:12px;padding:12px 14px">
+          <div class="period" aria-label="Definição de período">
+            <div class="field">
+              <label for="startDate">Início</label>
+              <input id="startDate" type="date" />
+            </div>
+            <div class="field">
+              <label for="endDate">Fim</label>
+              <input id="endDate" type="date" />
+            </div>
+          </div>
+          <p class="muted" style="margin:0">Quando ativado o período padrão, ele será aplicado igualmente às escolas selecionadas.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- ===== NOVO FOOTER ===== -->
+    <footer class="drawer-footer">
+      <div class="footer-grid">
+        <!-- KPIs -->
+        <div class="kpis" aria-live="polite" aria-atomic="true">
+          <div class="kpi" title="Missões selecionadas">
+            <div>
+              <div class="label">Missões</div>
+              <div class="value mono" id="kpiMissions">1</div>
+            </div>
+          </div>
+          <div class="kpi" title="Escolas selecionadas">
+            <div>
+              <div class="label">Escolas</div>
+              <div class="value mono" id="kpiSchools">0</div>
+            </div>
+          </div>
+          <div class="kpi" title="Total de alunos alcançados">
+            <div>
+              <div class="label">Alunos</div>
+              <div class="value mono" id="kpiStudents">0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Período resumido -->
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <span class="badge kpi" id="periodBadge">
+            Período: <strong class="mono" id="badgeStart">—</strong> a <strong class="mono" id="badgeEnd">—</strong>
+          </span>
+          <span class="hint" id="periodHint">Defina Início e Fim para continuar</span>
+        </div>
+
+        <!-- CTA -->
+        <div class="footer-cta">
+          <button class="btn" id="cancelBtn">Cancelar</button>
+          <div class="divider" aria-hidden="true"></div>
+          <button class="btn primary" id="confirmBtn" disabled>Confirmar envio</button>
+        </div>
+      </div>
+    </footer>
+  </aside>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

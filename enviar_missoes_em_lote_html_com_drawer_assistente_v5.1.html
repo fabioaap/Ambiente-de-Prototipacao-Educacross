@@ -1,0 +1,2637 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Enviar missões em lote · Gestor de Redes</title>
+  <style>
+    :root{
+      --bg:#f8fafc;
+      --surface:#ffffff;
+      --surface-muted:#f1f5f9;
+      --stroke:#cbd5e1;
+      --shadow:rgba(15,23,42,0.08);
+      --text:#0f172a;
+      --muted:#64748b;
+      --primary:#2563eb;
+      --primary-muted:#dbeafe;
+      --ok:#16a34a;
+      --warn:#d97706;
+      --error:#dc2626;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .container{max-width:1200px;margin:0 auto;padding:24px}
+    header.page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+    .crumbs{font-size:12px;color:var(--muted)}
+    h1{margin:4px 0 8px;font-size:28px}
+    p.lead{margin:0;color:var(--muted)}
+    .btn{
+      appearance:none;
+      border:1px solid var(--stroke);
+      background:var(--surface);
+      color:var(--text);
+      padding:8px 14px;
+      border-radius:10px;
+      cursor:pointer;
+      transition:.15s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}
+    .btn:disabled{opacity:.45;cursor:not-allowed}
+    .btn:focus-visible{outline:3px solid var(--primary-muted);outline-offset:1px}
+    label{font-size:12px;color:var(--muted);display:block;margin-bottom:6px}
+    select,input[type="search"],input[type="date"]{
+      width:100%;
+      border:1px solid var(--stroke);
+      border-radius:10px;
+      padding:10px;
+      background:var(--surface);
+      color:var(--text);
+      transition:border .15s ease,box-shadow .15s ease;
+    }
+    input:focus-visible,select:focus-visible{outline:3px solid var(--primary-muted);outline-offset:1px}
+    .filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:16px}
+    table{width:100%;border-collapse:separate;border-spacing:0 8px}
+    thead th{font-size:12px;color:var(--muted);text-align:left;padding:6px 12px}
+    thead th:last-child{text-align:center !important;display:flex;justify-content:center;align-items:center}
+    tbody tr{background:var(--surface);box-shadow:0 1px 2px var(--shadow);border:1px solid var(--stroke);transition:border .2s ease}
+    tbody tr.row-selected{border-color:var(--primary);box-shadow:0 0 0 2px rgba(37,99,235,0.18)}
+    tbody td{padding:12px;vertical-align:middle}
+    tbody td:first-child{border-radius:10px 0 0 10px}
+    tbody td:last-child{border-radius:0 10px 10px 0}
+    .row-actions{display:flex;gap:8px;justify-content:flex-end}
+    .badge{display:inline-flex;align-items:center;gap:6px;padding:2px 8px;border-radius:999px;border:1px solid currentColor;font-size:12px}
+    .badge.ok{color:var(--ok);background:rgba(22,163,74,0.1)}
+    .badge.warn{color:var(--warn);background:rgba(217,119,6,0.1)}
+    .prog{display:flex;align-items:center;gap:8px}
+    .bar{flex:1;height:8px;border:1px solid var(--stroke);border-radius:999px;overflow:hidden;background:var(--surface-muted)}
+    .bar>span{display:block;height:100%;background:var(--primary);width:0}
+    input[type="checkbox"]{accent-color:var(--primary);width:18px;height:18px}
+    input[type="checkbox"]:focus-visible{outline:3px solid var(--primary-muted);outline-offset:2px}
+    .drawer-backdrop{position:fixed;inset:0;background:rgba(15,23,42,0.35);opacity:0;pointer-events:none;transition:.2s ease;z-index:40}
+    .drawer-backdrop.open{opacity:1;pointer-events:auto}
+    .drawer{position:fixed;top:0;right:0;bottom:0;width:720px;max-width:100%;background:var(--surface);border-left:1px solid var(--stroke);box-shadow:-8px 0 24px rgba(15,23,42,0.2);transform:translateX(100%);transition:transform .24s ease;display:flex;flex-direction:column;z-index:50}
+    .drawer.open{transform:translateX(0)}
+    .drawer-head{display:flex;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid var(--stroke);position:sticky;top:0;background:var(--surface);z-index:1}
+    .drawer-head h2{margin:0;font-size:18px}
+    .drawer-body{flex:1;overflow:auto;padding:18px 22px;display:grid;gap:24px}
+    .drawer-section{display:grid;gap:14px}
+    .drawer-section header{display:flex;justify-content:space-between;align-items:center;margin:0}
+    .drawer-section header .section-meta{display:flex;flex-direction:column;gap:4px}
+    .drawer-tabs{display:flex;gap:8px;padding:4px;background:var(--surface-muted);border-radius:999px}
+    .drawer-tab{border:none;background:none;padding:8px 16px;border-radius:999px;cursor:pointer;font:inherit;font-weight:600;color:var(--muted);display:inline-flex;align-items:center;gap:6px;transition:.2s}
+    .drawer-tab:focus-visible{outline:3px solid var(--primary-muted);outline-offset:1px}
+    .drawer-tab.is-active{background:var(--surface);color:var(--primary);box-shadow:0 1px 4px rgba(15,23,42,0.12),0 0 0 1px rgba(148,163,184,0.35)}
+    .drawer-tab .tab-pill{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:20px;padding:0 8px;border-radius:999px;background:var(--surface);color:var(--muted);font-size:12px;font-weight:500}
+    .drawer-tab.is-active .tab-pill{background:var(--primary-muted);color:var(--primary)}
+    .tab-panel.hidden{display:none}
+    .filters .full{grid-column:1/-1}
+    .summary-block{display:flex;gap:4px;flex-direction:column;color:var(--muted);font-size:13px}
+    .list{border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:var(--surface)}
+    .list__head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--surface-muted);border-bottom:1px solid var(--stroke);gap:12px}
+    .list__body{max-height:240px;overflow:auto}
+    .list-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 16px;border-top:1px solid var(--stroke)}
+    .list-row:first-child{border-top:none}
+    .helper-text{font-size:13px;color:var(--muted)}
+    .period-section{position:relative}
+    .period-toggle{margin-top:4px}
+    .period-check{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;cursor:pointer}
+    .period-check input{width:18px;height:18px}
+    .period-body{overflow:hidden;max-height:0;opacity:0;transition:max-height .25s ease,opacity .18s ease;margin-top:0}
+    .period-body.open{max-height:420px;opacity:1;margin-top:12px}
+    .period-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;align-items:end}
+    .period-actions{display:flex;align-items:flex-end}
+    .grid-wrapper{border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:var(--surface);transition:max-height .25s ease,opacity .18s ease}
+    .grid-wrapper.collapsed{max-height:0;opacity:0;margin-top:0;border:none}
+    .grid-wrapper.expanded{max-height:520px;opacity:1;margin-top:16px}
+    .grid-banner{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.25);border-radius:12px;margin-bottom:12px}
+    .grid-banner.hidden{display:none}
+    .grid-tools{padding:12px 16px;background:var(--surface-muted);border-bottom:1px solid var(--stroke);display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .link-btn{appearance:none;background:none;border:none;padding:0;color:var(--primary);font-size:13px;text-decoration:underline;cursor:pointer}
+    .grid{width:100%;border-collapse:collapse}
+    .grid th,.grid td{padding:10px 12px;border-bottom:1px solid var(--stroke);text-align:left;font-size:14px}
+    .grid tbody tr:last-child td{border-bottom:none}
+    .grid tbody tr.ok{background:#eff6ff}
+    .grid tbody tr.pending{background:#fef3c7}
+    .grid tbody tr.error{background:#fee2e2}
+    .cell-input{display:flex;align-items:center;position:relative;min-height:40px}
+    .cell-input input{flex:1;padding:8px 40px 8px 12px;font-size:14px;min-height:40px;cursor:pointer;border-radius:8px}
+    .cell-input input.error{border-color:var(--error);color:var(--error)}
+    .cell-input input.pending{border-color:var(--warn)}
+    .cell-action{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;padding:6px;border-radius:6px;font-size:16px;cursor:pointer;color:var(--muted);opacity:0;pointer-events:none;transition:.15s ease;z-index:5}
+    .cell-input:focus-within .cell-action{opacity:1;pointer-events:auto;color:var(--primary)}
+    .cell-input:hover .cell-action{opacity:0.7;pointer-events:auto;color:var(--muted)}
+    .cell-action:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+    .state-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:500;transition:all .15s ease}
+    .state-tag.ok{background:rgba(22,163,74,0.15);color:var(--ok);border:1px solid rgba(22,163,74,0.25)}
+    .state-tag.warn{background:rgba(217,119,6,0.18);color:var(--warn);border:1px solid rgba(217,119,6,0.25)}
+    .state-tag.error{background:rgba(220,38,38,0.18);color:var(--error);border:1px solid rgba(220,38,38,0.25)}
+    .state-tag.with-icon{gap:4px}
+    .error-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 6px;border-radius:6px;font-size:11px;font-weight:500;background:rgba(220,38,38,0.15);color:var(--error);border:1px solid rgba(220,38,38,0.25)}
+    .warning-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 6px;border-radius:6px;font-size:11px;font-weight:500;background:rgba(217,119,6,0.15);color:var(--warn);border:1px solid rgba(217,119,6,0.25)}
+    .error-icon{font-size:14px}
+    .warning-icon{font-size:14px}
+    .error-tooltip{position:relative;display:inline-block}
+    .error-tooltip:hover::after{content:attr(data-tooltip);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--error);color:white;padding:4px 8px;border-radius:6px;font-size:11px;white-space:nowrap;z-index:10}
+    .error-tooltip:hover::before{content:"";position:absolute;top:-4px;left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:var(--error);z-index:10}
+    .drawer-foot{border-top:1px solid var(--stroke);padding:16px 22px;background:var(--surface);display:flex;flex-direction:column;gap:12px}
+    .foot-meta{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+    .foot-actions{display:flex;justify-content:flex-end;gap:10px}
+    .drawer-pausa .drawer-head{align-items:flex-start}
+    .drawer-pausa .drawer-head h2{margin:0}
+    .drawer-pausa .drawer-sub{margin:0;color:var(--muted);font-size:14px}
+    .drawer-pausa .drawer-body{display:flex;flex-direction:column;gap:16px;padding:18px 22px}
+    .pause-controls{display:grid;gap:12px}
+    .pause-controls .field{display:flex;flex-direction:column;gap:6px}
+    .pause-filter-row{display:flex;gap:12px;flex-wrap:wrap}
+    .pause-summary{display:flex;gap:12px;font-size:13px;color:var(--muted);flex-wrap:wrap}
+    .pause-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    .pause-list .list__body{max-height:320px;overflow:auto}
+    .exec-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 16px;border-top:1px solid var(--stroke)}
+    .exec-row:first-child{border-top:none}
+    .exec-details{display:grid;gap:4px}
+    .exec-status{font-size:12px;text-transform:capitalize;color:var(--muted)}
+    .drawer-foot.pause-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+    .drawer-foot.pause-foot .message{margin:0}
+    .message{font-size:13px}
+    .message.warn{color:var(--warn)}
+    .message.error{color:var(--error)}
+    .message.ok{color:var(--ok)}
+    .toast{position:fixed;right:24px;bottom:24px;min-width:260px;background:var(--surface);border:1px solid var(--stroke);padding:14px 16px;border-radius:12px;box-shadow:0 8px 24px rgba(15,23,42,0.18);opacity:0;transform:translateY(20px);transition:.25s ease;z-index:60;pointer-events:none}
+    .toast.show{opacity:1;transform:translateY(0);pointer-events:auto}
+    .toast.success{border-color:rgba(22,163,74,0.35)}
+    .toast.error{border-color:rgba(220,38,38,0.35)}
+    .toast h3{margin:0 0 6px;font-size:14px}
+    .toast p{margin:0;font-size:13px;color:var(--muted)}
+    .alert-list{display:grid;gap:8px;font-size:13px}
+    .alert-item{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:10px 12px;border-radius:10px;background:var(--surface-muted);border:1px solid var(--stroke)}
+    .alert-item span{color:var(--muted);line-height:1.4}
+    .alert-item button{background:none;border:none;padding:0;color:var(--primary);text-decoration:underline;cursor:pointer;font:inherit}
+    dialog{border:none;border-radius:12px;padding:0;max-width:420px;width:100%;box-shadow:0 16px 48px rgba(15,23,42,0.35)}
+    dialog::backdrop{background:rgba(15,23,42,0.45)}
+    dialog form{padding:20px}
+    dialog h3{margin-top:0}
+    ul.simple{margin:12px 0;padding-left:18px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+    .hidden{display:none !important}
+
+/* barra simples para progresso por escola no drawer de pausa e play */
+.prog .bar{height:8px;border-radius:999px;background:var(--surface-muted);border:1px solid var(--stroke);overflow:hidden}
+.prog .bar span{display:block;height:100%;background:var(--primary);width:0;transition:width .3s}
+
+/* Estilos específicos para o drawer Gerenciar */
+.table-wrapper{overflow-x:auto}
+.table-wrapper table{width:100%;border-collapse:collapse}
+.table-wrapper thead th{font-size:12px;color:var(--muted);text-align:left;padding:12px;border-bottom:1px solid var(--stroke)}
+.table-wrapper tbody td{padding:12px;border-bottom:1px solid var(--stroke);vertical-align:middle}
+.table-wrapper tbody tr:last-child td{border-bottom:none}
+.table-wrapper .col-escola{font-weight:500}
+.table-wrapper .col-inicio,
+.table-wrapper .col-fim{font-size:13px;color:var(--muted)}
+.table-wrapper .col-progresso .progress{height:8px;border-radius:4px;background:var(--surface-muted);overflow:hidden}
+.table-wrapper .col-progresso .progress__bar{height:100%;transition:width .3s}
+.table-wrapper .col-status .chip{font-size:11px;padding:4px 8px;border-radius:12px;font-weight:500}
+.table-wrapper .chip--enviada{background:rgba(37,99,235,0.1);color:var(--primary)}
+.table-wrapper .chip--andamento{background:rgba(22,163,74,0.1);color:var(--ok)}
+    .table-wrapper .chip--pausada{background:rgba(217,119,6,0.1);color:var(--warn)}
+    .table-wrapper .chip--concluida{background:rgba(22,163,74,0.1);color:var(--ok)}
+    .table-wrapper .chip--erro{background:rgba(220,38,38,0.1);color:var(--error)}
+    .table-wrapper .chip--nao-enviada{background:rgba(148,163,184,0.15);color:var(--muted)}
+    .table-wrapper .col-acoes .btn{padding:6px 12px;font-size:13px}
+
+/* Cores do progresso por status no drawer Gerenciar */
+.is-enviada .progress__bar,
+.is-andamento .progress__bar { background: var(--primary); }
+.is-pausada .progress__bar { background: var(--muted); }
+.is-concluida .progress__bar { background: var(--ok); }
+.is-erro .progress__bar { background: var(--error); }
+
+/* Estilos para o footer do drawer Gerenciar */
+.drawer-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 22px;border-top:1px solid var(--stroke);background:var(--surface)}
+.drawer-foot .btn{flex-shrink:0}
+.drawer-foot .grow{flex:1}
+
+</style>
+</head>
+<body>
+  <div class="container">
+    <header class="page-head">
+      <div>
+        <div class="crumbs">Início • Gestão de Missões</div>
+        <h1>Enviar missões em lote</h1>
+        <p class="lead">Escolha uma missão e abra o assistente para escolher escolas e período.</p>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn" type="button">Ajuda</button>
+        <button class="btn" type="button">Histórico de envios</button>
+        <button class="btn" type="button" id="btnAbrirGerenciar">Gerenciar missões</button>
+      </div>
+    </header>
+
+    <section>
+      <div class="filters" aria-label="Filtros de missão">
+        <div>
+          <label for="sistemaEnsino">Sistema de ensino</label>
+          <select id="sistemaEnsino">
+            <option>Osasco</option>
+            <option>Barueri</option>
+            <option>Jandira</option>
+          </select>
+        </div>
+        <div>
+          <label for="anoEscolar">Ano escolar</label>
+          <select id="anoEscolar">
+            <option>5º ano</option>
+            <option>4º ano</option>
+            <option>3º ano</option>
+          </select>
+        </div>
+        <div>
+          <label for="buscaMissao">Busca por nome da missão</label>
+          <input type="search" id="buscaMissao" placeholder="Digite parte do nome" />
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div><span id="totalMissoes">0</span> missões disponíveis</div>
+        <div class="helper-text" id="selecionadasInfo">Nenhuma missão selecionada</div>
+      </div>
+
+      <table aria-label="Lista de missões">
+        <thead>
+          <tr>
+            <th scope="col">Missão</th>
+            <th scope="col">Uso na rede</th>
+            <th scope="col">Progresso</th>
+            <th scope="col" style="text-align: center;">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="missoesTbody"></tbody>
+      </table>
+    </section>
+  </div>
+  <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <button class="btn ghost" id="fecharDrawer" type="button" aria-label="Fechar assistente">✕</button>
+      <h2>Assistente de envio em lote</h2>
+    </div>
+
+    <div class="drawer-body">
+      <section class="drawer-section" aria-labelledby="secMissao">
+        <header>
+          <h3 id="secMissao">Missão</h3>
+        </header>
+        <div class="list" role="region" aria-live="polite">
+          <div class="list__head"><strong>Missão selecionada</strong></div>
+          <div class="list__body" id="listaMissoesSelecionadas"></div>
+        </div>
+      </section>
+
+      <section class="drawer-section" aria-labelledby="secEscolas">
+        <header>
+          <h3 id="secEscolas">Escolas</h3>
+        </header>
+        <div class="filters" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));align-items:end">
+          <div>
+            <label for="buscaEscola">Buscar escola</label>
+            <input type="search" id="buscaEscola" placeholder="Digite o nome" />
+          </div>
+          <div>
+            <label for="filtroStatus">Status de envio</label>
+            <select id="filtroStatus">
+              <option value="todas">Todas</option>
+              <option value="nao">Não enviadas</option>
+            </select>
+          </div>
+          <div class="summary-block">
+            <span id="contadorEscolas">0 selecionadas</span>
+            <span id="contadorAlunos">0 alunos</span>
+          </div>
+        </div>
+        <div class="list" role="region" aria-live="polite">
+          <div class="list__head" style="flex-direction:column;align-items:flex-start;gap:8px">
+            <div style="display:flex;justify-content:space-between;gap:8px;width:100%;align-items:center">
+              <strong>Lista de escolas</strong>
+              <span class="helper-text" id="statusBuscaEscolas">Mostrando todas</span>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn ghost" id="selecionarTodasEscolas" type="button">Selecionar todas</button>
+              <button class="btn ghost" id="limparEscolas" type="button">Limpar seleção</button>
+            </div>
+          </div>
+          <div class="list__body" id="listaEscolas"></div>
+        </div>
+      </section>
+
+      <section class="drawer-section period-section" aria-labelledby="secPeriodo">
+        <header>
+          <h3 id="secPeriodo">Configuração de período</h3>
+        </header>
+        <div class="period-toggle">
+          <label class="period-check" for="usarPadrao">
+            <input type="checkbox" id="usarPadrao" />
+            Usar período padrão para todas as escolas
+          </label>
+        </div>
+        <div class="period-body" id="periodBody" aria-hidden="true">
+          <div class="period-fields">
+            <div>
+              <label for="inicioPadrao">Início</label>
+              <input type="date" id="inicioPadrao" />
+            </div>
+            <div>
+              <label for="fimPadrao">Fim</label>
+              <input type="date" id="fimPadrao" />
+            </div>
+            <div class="period-actions">
+              <button class="btn ghost" id="detalharToggle" type="button">Detalhar por escola</button>
+            </div>
+          </div>
+          <p class="helper-text" id="resumoPadrao">Defina Início e Fim para continuar.</p>
+        </div>
+        <div class="grid-wrapper collapsed" id="gradeDetalheWrapper" aria-hidden="true">
+          <div class="grid-banner hidden" id="bannerAplicar">
+            <strong id="bannerTexto">Há escolas sem período. Aplicar período padrão nas linhas vazias?</strong>
+            <div style="display:flex;gap:8px">
+              <button class="btn ghost" id="bannerAplicarBtn" type="button">Aplicar</button>
+              <button class="btn ghost" id="bannerIgnorarBtn" type="button">Ignorar</button>
+            </div>
+          </div>
+          <div class="grid-tools">
+            <span class="helper-text" id="pendenciasResumo">ok 0 • pendências 0</span>
+            <button class="link-btn hidden" id="filtrarPendencias" type="button">Mostrar apenas pendentes</button>
+          </div>
+          <table class="grid" role="grid" aria-label="Períodos por escola">
+            <thead>
+              <tr>
+                <th scope="col">Escola</th>
+                <th scope="col">Início</th>
+                <th scope="col">Fim</th>
+              </tr>
+            </thead>
+            <tbody id="gradeDetalhe"></tbody>
+          </table>
+        </div>
+
+        <!-- Log de erros no footer -->
+        <div class="error-log hidden" id="errorLog" style="margin-top:16px;">
+          <div style="background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.25);border-radius:12px;padding:12px 16px;">
+            <h4 style="margin:0 0 8px;font-size:14px;color:var(--error);display:flex;align-items:center;gap:8px;">
+              <span>⚠️</span>
+              <span>Problemas encontrados</span>
+            </h4>
+            <div id="errorList" class="alert-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="drawer-section hidden" id="conflitosSection" aria-labelledby="secConflitos">
+        <header>
+          <h3 id="secConflitos">Conflitos e reescrita</h3>
+          <button class="btn ghost" type="button" id="verDetalhesConflitos">Ver detalhes</button>
+        </header>
+        <div class="period-toggle" style="margin-top:0">
+          <label class="period-check" for="reescreverToggle">
+            <input type="checkbox" id="reescreverToggle" />
+            Reescrever missões já enviadas e atualizar datas
+          </label>
+        </div>
+        <p class="helper-text">O progresso dos alunos é mantido.</p>
+      </section>
+
+      <section class="drawer-section hidden" id="simulacaoSection" aria-labelledby="secSimulacao">
+        <header>
+          <h3 id="secSimulacao">Resultado da simulação</h3>
+        </header>
+        <div id="simulacaoResumo" class="summary-block"></div>
+        <div id="simulacaoPendencias" class="alert-list"></div>
+      </section>
+    </div>
+
+    <div class="drawer-foot">
+      <div class="foot-meta">
+        <div class="summary-block">
+          <strong id="resumoRodape">0 missões • 0 escolas • 0 alunos</strong>
+          <span id="estadoRodape" class="message">Selecione missões e escolas para começar.</span>
+        </div>
+      </div>
+      <div class="foot-actions">
+        <button class="btn" id="simularBtn" type="button">Simular resultado</button>
+        <button class="btn primary" id="confirmarBtn" type="button" disabled>Confirmar envio</button>
+      </div>
+    </div>
+  </aside>
+
+
+
+
+
+
+
+  <!-- Drawer Gerenciar missões enviadas -->
+  <aside id="drawerGerenciar" class="drawer" role="dialog" aria-modal="true" aria-labelledby="gerenciarTitle" hidden>
+    <div class="drawer-head">
+      <h2 id="gerenciarTitle">Gerenciar missões enviadas</h2>
+      <button class="btn ghost" id="fecharDrawerGerenciar" aria-label="Fechar">✕</button>
+    </div>
+
+    <div class="drawer-body">
+      <div class="drawer-section">
+        <header>
+          <div class="section-meta">
+            <h3>Escolas</h3>
+            <span class="helper-text">Acompanhe as escolas com miss�o enviada ou pendente.</span>
+          </div>
+          <div class="drawer-tabs" role="tablist" aria-label="Filtrar por status de envio">
+            <button class="drawer-tab is-active" role="tab" aria-selected="true" data-tab="enviadas">
+              Enviada
+              <span class="tab-pill" id="countTabEnviadas">0</span>
+            </button>
+            <button class="drawer-tab" role="tab" aria-selected="false" data-tab="nao-enviadas">
+              Nao enviada
+              <span class="tab-pill" id="countTabNaoEnviadas">0</span>
+            </button>
+          </div>
+        </header>
+        <div class="tab-panel" data-panel="enviadas">
+          <div class="filters">
+        <div>
+          <label for="filtroStatusGerenciar">Status</label>
+          <select id="filtroStatusGerenciar">
+            <option value="todos">Todos</option>
+            <option value="enviada">Enviada</option>
+            <option value="andamento">Em andamento</option>
+            <option value="pausada">Pausada</option>
+            <option value="concluida">Concluída</option>
+            <option value="erro">Erro</option>
+          </select>
+        </div>
+        <div>
+          <label for="buscaEscola">Buscar escola</label>
+          <input type="search" id="buscaEscola" placeholder="Digite parte do nome" />
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="tabelaGerenciar">
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="checkAllGerenciar" aria-label="Selecionar todas" /></th>
+              <th>Escolas</th>
+              <th>Início</th>
+              <th>Fim</th>
+              <th>Progresso</th>
+              <th>Status</th>
+              <th style="text-align:center">Ações</th>
+            </tr>
+          </thead>
+          <tbody><!-- render via JS --></tbody>
+        </table>
+      </div>
+        </div>
+
+        <div class="tab-panel hidden" data-panel="nao-enviadas">
+          <div class="filters">
+            <div class="full">
+              <label for="buscaNaoEnviada">Buscar escola</label>
+              <input type="search" id="buscaNaoEnviada" placeholder="Digite parte do nome" />
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table id="tabelaNaoEnviadas">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkAllNaoEnviadas" aria-label="Selecionar todas as escolas nao enviadas" /></th>
+                  <th>Escolas</th>
+                  <th>Alunos</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody><!-- render via JS --></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-foot">
+      <button class="btn" id="btnPausarLote" disabled>Pausar selecionadas</button>
+      <button class="btn" id="btnReenviarLote" disabled>Reenviar selecionadas</button>
+      <div class="grow"></div>
+      <button class="btn primary" id="btnEnviarNovasEscolas">Enviar para novas escolas</button>
+    </div>
+  </aside>
+
+  <dialog id="detalhesDialog">
+    <form method="dialog">
+      <h3>Escolas com reescrita</h3>
+      <p>Estas escolas já possuem a missão enviada. Confira o período atual e o novo período.</p>
+      <ul id="listaDetalhesConflitos" class="simple"></ul>
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:18px">
+        <button class="btn ghost" value="cancel">Fechar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <h3 id="toastTitle">Tudo certo</h3>
+    <p id="toastDesc"></p>
+  </div>
+
+  <div class="sr-only" aria-live="polite" id="liveRegion"></div>
+
+
+
+  <script>
+    // Dados mockados - garantindo que estão definidos
+    const missoes = [
+      { id: 1, nome: "Frações e números mistos", status: "Ativa", usoNaRede: "2 de 20", statusLocal: "Parada", progresso: 0, periodo: "" },
+      { id: 2, nome: "Problemas de multiplicação", status: "Inativa", usoNaRede: "0 de 20", statusLocal: "Parada", progresso: 0, periodo: "" },
+      { id: 3, nome: "Geometria básica", status: "Agendada", usoNaRede: "5 de 20", statusLocal: "Parada", progresso: 0, periodo: "" },
+      { id: 4, nome: "Frações equivalentes", status: "Ativa", usoNaRede: "8 de 20", statusLocal: "Parada", progresso: 0, periodo: "" }
+    ];
+
+    const escolas = [
+      { id: 101, nome: "EMEF Osasco Centro", alunos: 320, enviada: true },
+      { id: 102, nome: "EMEF Jardim Flores", alunos: 260, enviada: false },
+      { id: 103, nome: "EMEF Vila Nova", alunos: 180, enviada: false },
+      { id: 104, nome: "EMEF Portal do Sol", alunos: 210, enviada: true },
+      { id: 105, nome: "EMEF Parque das Aves", alunos: 140, enviada: false },
+      { id: 106, nome: "EMEF Morro Doce", alunos: 90, enviada: false }
+    ];
+
+    // Estado inicial
+    const state = {
+      selectedMissions: new Set(),
+      selectedSchools: new Set(),
+      currentMissionId: null,
+      useDefaultPeriod: false,
+      defaultPeriod: { inicio: "", fim: "" },
+      detailBySchool: false,
+      detailPeriods: new Map(),
+      filterPendencias: false,
+      bannerIgnorado: false,
+      pendencias: [],
+      errors: new Map(),
+      reescrever: false,
+      simulacao: null
+    };
+  const timers = window.__execTimers ?? new Map();
+  window.__execTimers = timers;
+  // estado local de execução
+  missoes.forEach(m=>{
+    if(m.statusLocal == null) m.statusLocal = "Parada";
+    if(m.progresso == null) m.progresso = 0;
+    if(m.periodo == null) m.periodo = "";
+  });
+
+    function resetExecucoes(){
+      missoes.forEach(m=>{
+        m.statusLocal = "Parada";
+        m.progresso = 0;
+        m.periodo = "";
+      });
+      timers.forEach(t=>clearInterval(t));
+      timers.clear();
+    }
+
+  function iconPlay(){return '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'}
+  function iconPause(){return '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>'}
+  function iconCheck(){return '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.5-1.5z"/></svg>'}
+  function toggleButtonContent(m){
+    if(m.statusLocal==="Rodando") return iconPause()+' Pause';
+    if(m.statusLocal==="Concluida") return iconCheck()+' Concluida';
+    return iconPlay()+' Play';
+  }
+
+    function isToggleDisabled(m){
+      return m.statusLocal === "Concluida";
+    }
+
+    // Função segura para obter elementos DOM
+    function getElement(id) {
+      try {
+        return document.getElementById(id);
+      } catch (e) {
+        console.warn(`Elemento ${id} não encontrado`);
+        return null;
+      }
+    }
+
+    // Elementos DOM com verificação de segurança
+    const elements = {
+      missoesTbody: getElement("missoesTbody"),
+      totalMissoes: getElement("totalMissoes"),
+      selecionadasInfo: getElement("selecionadasInfo"),
+      drawer: getElement("drawer"),
+      drawerBackdrop: getElement("drawerBackdrop"),
+      fecharDrawer: getElement("fecharDrawer"),
+      listaMissoesSelecionadas: getElement("listaMissoesSelecionadas"),
+      buscaMissoes: getElement("buscaMissao"),
+      listaEscolas: getElement("listaEscolas"),
+      buscaEscola: getElement("buscaEscola"),
+      filtroStatus: getElement("filtroStatus"),
+      selecionarTodasEscolas: getElement("selecionarTodasEscolas"),
+      limparEscolas: getElement("limparEscolas"),
+      contadorEscolas: getElement("contadorEscolas"),
+      contadorAlunos: getElement("contadorAlunos"),
+      statusBuscaEscolas: getElement("statusBuscaEscolas"),
+      usarPadrao: getElement("usarPadrao"),
+      inicioPadrao: getElement("inicioPadrao"),
+      fimPadrao: getElement("fimPadrao"),
+      resumoPadrao: getElement("resumoPadrao"),
+      detalharToggle: getElement("detalharToggle"),
+      periodBody: getElement("periodBody"),
+      gradeDetalheWrapper: getElement("gradeDetalheWrapper"),
+      gradeDetalhe: getElement("gradeDetalhe"),
+      bannerAplicar: getElement("bannerAplicar"),
+      bannerTexto: getElement("bannerTexto"),
+      bannerAplicarBtn: getElement("bannerAplicarBtn"),
+      bannerIgnorarBtn: getElement("bannerIgnorarBtn"),
+      pendenciasResumo: getElement("pendenciasResumo"),
+      filtrarPendencias: getElement("filtrarPendencias"),
+      conflitosSection: getElement("conflitosSection"),
+      reescreverToggle: getElement("reescreverToggle"),
+      verDetalhesConflitos: getElement("verDetalhesConflitos"),
+      detalhesDialog: getElement("detalhesDialog"),
+      listaDetalhesConflitos: getElement("listaDetalhesConflitos"),
+      simulacaoSection: getElement("simulacaoSection"),
+      simulacaoResumo: getElement("simulacaoResumo"),
+      simulacaoPendencias: getElement("simulacaoPendencias"),
+      resumoRodape: getElement("resumoRodape"),
+      estadoRodape: getElement("estadoRodape"),
+      simularBtn: getElement("simularBtn"),
+      confirmarBtn: getElement("confirmarBtn"),
+      toast: getElement("toast"),
+      toastTitle: getElement("toastTitle"),
+      toastDesc: getElement("toastDesc"),
+      liveRegion: getElement("liveRegion")
+    };
+
+    if(elements.simularBtn){
+      /* REMOVIDO: substituído por listener global closest */
+      /*
+      elements.simularBtn.addEventListener("click", event=>{
+        event.preventDefault();
+        if(elements.simularBtn.disabled) return;
+        simular();
+      });
+      */
+    }
+
+    if(elements.confirmarBtn){
+      /* REMOVIDO: substituído por listener global closest */
+      /*
+      elements.confirmarBtn.addEventListener("click", event=>{
+        event.preventDefault();
+        event.stopPropagation();
+        if(elements.confirmarBtn.disabled) return;
+        confirmarEnvio();
+      });
+      */
+    }
+
+    const filtros = {
+      missoes: "",
+      escolas: "",
+      status: "todas"
+    };
+
+    function clearWizardSelections(){
+      state.selectedMissions.clear();
+      state.selectedSchools.clear();
+      state.useDefaultPeriod = false;
+      state.defaultPeriod = { inicio:"", fim:"" };
+      state.detailBySchool = false;
+      state.detailPeriods.clear();
+      state.filterPendencias = false;
+      state.bannerIgnorado = false;
+      state.pendencias = [];
+      state.errors.clear();
+      state.reescrever = false;
+      state.simulacao = null;
+      state.currentMissionId = null;
+      if(elements.confirmarBtn){
+        delete elements.confirmarBtn.dataset.missao;
+      }
+      filtros.missoes = "";
+      filtros.escolas = "";
+      filtros.status = "todas";
+      if(elements.buscaMissoes) elements.buscaMissoes.value = "";
+      if(elements.buscaEscola) elements.buscaEscola.value = "";
+      if(elements.filtroStatus) elements.filtroStatus.value = "todas";
+    }
+
+    function resetState(){
+      clearWizardSelections();
+      resetExecucoes();
+      renderAll();
+      announce("Assistente redefinido.");
+    }
+
+    function iniciarMissao(m){
+      m.statusLocal="Rodando";
+      m.status="Enviada";
+      if(m.progresso===0) m.progresso=1;
+      if(timers.has(m.id)) { clearInterval(timers.get(m.id)); timers.delete(m.id); }
+      const t=setInterval(()=>{
+        if(m.statusLocal!=="Rodando"){ clearInterval(t); timers.delete(m.id); return; }
+        m.progresso = Math.min(100, m.progresso + Math.ceil(Math.random()*4));
+        if(m.progresso>=100){
+          m.statusLocal="Concluida";
+          clearInterval(t); timers.delete(m.id);
+          showToast("Missão concluida","", "success");
+        }
+        renderMissoes();
+      }, 900);
+      timers.set(m.id,t);
+      renderMissoes();
+    }
+
+    function pausarMissao(m){
+      m.statusLocal="Pausada";
+      if(timers.has(m.id)) { clearInterval(timers.get(m.id)); timers.delete(m.id); }
+      renderMissoes();
+      showToast("Missão pausada","", "success");
+    }
+
+    function retomarMissao(m){
+      iniciarMissao(m);
+      showToast("Missão retomada","", "success");
+    }
+
+    function abrirPausaUI(open){
+      // Drawer de pausa foi removido conforme especificação
+      // Esta função não deve ser mais utilizada
+      console.warn("Drawer de pausa foi removido - usar novo drawer Gerenciar");
+    }
+
+    function abrirDrawerPausa(){
+      // Drawer de pausa foi removido conforme especificação
+      // Esta função não deve ser mais utilizada
+      console.warn("Drawer de pausa foi removido - usar novo drawer Gerenciar");
+    }
+
+    function renderAll(){
+      renderMissoes();
+      renderDrawer();
+      renderEscolas();
+      renderPeriodos();
+      updateSummary();
+      updateValidation();
+      renderSimulacao();
+    }
+
+    function renderMissoes(){
+      const termo = filtros.missoes.toLowerCase();
+      const lista = missoes.filter(m => m.nome.toLowerCase().includes(termo));
+      elements.totalMissoes.textContent = lista.length;
+      const selecionadaId = state.selectedMissions.size ? [...state.selectedMissions][0] : null;
+      elements.selecionadasInfo.textContent = selecionadaId ? `Missão #${selecionadaId} selecionada` : "Nenhuma missão selecionada";
+      elements.missoesTbody.innerHTML = "";
+      lista.forEach(m=>{
+        const tr = document.createElement("tr");
+        if(m.id === selecionadaId){
+          tr.classList.add("row-selected");
+        }
+        const cat = (m.statusLocal==="Rodando"||m.statusLocal==="Pausada"||m.statusLocal==="Concluida") ? "Enviada" : m.status;
+        const exec = m.statusLocal || "Parada";
+        const classeCat = (cat==="Enviada"||cat==="Ativa") ? "ok" : (cat==="Agendada" ? "warn" : "");
+        const classeExec = exec==="Rodando" ? "ok" : exec==="Pausada" ? "warn" : exec==="Concluida" ? "ok" : "";
+        const statusHtml = `
+          <span class="badge ${classeCat}">${cat}</span>
+          ${exec!=="Parada" ? `<span class="badge ${classeExec}" style="margin-left:6px">${exec}</span>` : ""}
+        `;
+        const progHtml = `
+          <div class="prog">
+            <div class="bar" aria-label="Progresso da missão ${m.nome}"><span style="width:${m.progresso}%"></span></div>
+            <small>${m.progresso}%</small>
+          </div>`;
+        const actionsHtml = `
+          <div class="row-actions">
+            <button class="btn" data-toggle="${m.id}" ${isToggleDisabled(m)?'disabled':''} aria-label="Tocar ou pausar">
+              ${toggleButtonContent(m)}
+            </button>
+          </div>`;
+        tr.innerHTML = `
+          <td>${m.nome}</td>
+          <td>${m.usoNaRede}</td>
+          <td>${progHtml}</td>
+          <td style="text-align: center;">${actionsHtml}</td>
+        `;
+        elements.missoesTbody.appendChild(tr);
+      });
+    }
+
+    function renderDrawer(){
+      const lista = elements.listaMissoesSelecionadas;
+      lista.innerHTML = "";
+      const selecionadas = missoes.filter(m=>state.selectedMissions.has(m.id));
+      if(!selecionadas.length){
+        const vazio = document.createElement("div");
+        vazio.className = "helper-text";
+        vazio.style.padding = "16px";
+        vazio.textContent = "Selecione uma missão na tabela para configurar o envio.";
+        lista.appendChild(vazio);
+      } else {
+        selecionadas.forEach(m=>{
+          const div = document.createElement("div");
+          div.className = "list-row";
+          div.style.gridTemplateColumns = "1fr";
+          div.innerHTML = `
+            <div>
+              <strong>${m.nome}</strong><br>
+              <small class="helper-text">${m.status} • Uso na rede ${m.usoNaRede}</small>
+            </div>
+          `;
+          lista.appendChild(div);
+        });
+      }
+    }
+
+    function filtrarEscolas(){
+      const termo = filtros.escolas.toLowerCase();
+      const status = filtros.status;
+      return escolas.filter(e=>{
+        if(termo && !e.nome.toLowerCase().includes(termo)) return false;
+        if(status === "nao" && e.enviada) return false;
+        return true;
+      });
+    }
+
+    function renderEscolas(){
+      const container = elements.listaEscolas;
+      container.innerHTML = "";
+      const lista = filtrarEscolas();
+      if(!lista.length){
+        container.innerHTML = `<div class="list-row"><div class="helper-text">Nenhuma escola encontrada. <button class="btn ghost" id="limparBuscaEscolas" type="button">Limpar filtros</button></div></div>`;
+      } else {
+        lista.forEach(e=>{
+          const checked = state.selectedSchools.has(e.id) ? "checked" : "";
+          const div = document.createElement("div");
+          div.className = "list-row";
+          const statusTxt = e.enviada ? "enviada" : "não enviada";
+          div.innerHTML = `
+            <input type="checkbox" class="chk-escola" data-escola="${e.id}" ${checked} aria-label="Selecionar ${e.nome}">
+            <div>
+              <strong>${e.nome}</strong><br>
+              <small class="helper-text">${e.alunos} alunos</small>
+            </div>
+            <span class="badge ${e.enviada ? "warn" : ""}">${statusTxt}</span>
+          `;
+          container.appendChild(div);
+        });
+      }
+      const termo = filtros.escolas;
+      const statusLabel = filtros.status === "nao" ? "não enviadas" : "todas";
+      elements.statusBuscaEscolas.textContent = termo ? `Filtrando por "${termo}" (${statusLabel})` : (filtros.status === "nao" ? "Mostrando não enviadas" : "Mostrando todas");
+      updateEscolasResumo();
+    }
+
+    function updateEscolasResumo(){
+      const selecionadas = escolas.filter(e=>state.selectedSchools.has(e.id));
+      elements.contadorEscolas.textContent = `${selecionadas.length} selecionadas`;
+      const totalAlunos = selecionadas.reduce((sum,e)=>sum+e.alunos,0);
+      elements.contadorAlunos.textContent = `${totalAlunos} alunos`;
+      const enviadas = selecionadas.filter(e=>e.enviada);
+      elements.conflitosSection.classList.toggle("hidden", !enviadas.length);
+      if(enviadas.length){
+        renderConflitosDetalhes(enviadas);
+      }
+    }
+
+    function renderConflitosDetalhes(lista){
+      elements.listaDetalhesConflitos.innerHTML = "";
+      lista.forEach(escola=>{
+        const periodo = resolvePeriodoParaEscola(escola.id);
+        const li = document.createElement("li");
+        li.textContent = `${escola.nome} — período novo: ${periodo.inicio ? formatDate(periodo.inicio) : "sem início"} a ${periodo.fim ? formatDate(periodo.fim) : "sem fim"}`;
+        elements.listaDetalhesConflitos.appendChild(li);
+      });
+    }
+
+    function renderPeriodos(){
+      const usar = state.useDefaultPeriod;
+      elements.usarPadrao.checked = usar;
+      elements.periodBody.classList.toggle("open", usar);
+      elements.periodBody.setAttribute("aria-hidden", usar ? "false" : "true");
+      if(!usar){
+        state.detailBySchool = false;
+        state.filterPendencias = false;
+        state.bannerIgnorado = false;
+      }
+      elements.inicioPadrao.value = state.defaultPeriod.inicio;
+      elements.fimPadrao.value = state.defaultPeriod.fim;
+      const inicio = state.defaultPeriod.inicio;
+      const fim = state.defaultPeriod.fim;
+      const temDatas = inicio && fim;
+      let resumo;
+      if(!usar){
+        resumo = "Você está enviando sem período.";
+      } else if(!temDatas){
+        resumo = "Defina Início e Fim para continuar.";
+      } else if(state.detailBySchool){
+        const detalhadas = state.selectedSchools.size;
+        resumo = `Período detalhado em ${detalhadas} escola(s).`;
+      } else {
+        resumo = `Período padrão ${formatDate(inicio)} a ${formatDate(fim)} para ${state.selectedSchools.size} escola(s).`;
+      }
+      elements.resumoPadrao.textContent = resumo;
+      const temEscolas = state.selectedSchools.size > 0;
+      const detalharDisponivel = usar && temDatas && temEscolas;
+      elements.detalharToggle.disabled = !detalharDisponivel;
+      elements.detalharToggle.classList.toggle("primary", state.detailBySchool);
+      elements.detalharToggle.textContent = state.detailBySchool ? "Ocultar detalhamento" : "Detalhar por escola";
+      const wrapper = elements.gradeDetalheWrapper;
+      const ativo = usar && state.detailBySchool;
+      wrapper.classList.toggle("expanded", ativo);
+      wrapper.classList.toggle("collapsed", !ativo);
+      wrapper.setAttribute("aria-hidden", ativo ? "false" : "true");
+      renderGradeDetalhe();
+    }
+
+    function seedDetailPeriods(){
+      if(!state.detailBySchool) return;
+      const inicio = state.defaultPeriod.inicio;
+      const fim = state.defaultPeriod.fim;
+      if(!(isValidDateValue(inicio) && isValidDateValue(fim))) return;
+      state.selectedSchools.forEach(id=>{
+        if(!state.detailPeriods.has(id)){
+          state.detailPeriods.set(id, { inicio, fim });
+        }
+      });
+    }
+
+    function renderGradeDetalhe(){
+      const corpo = elements.gradeDetalhe;
+      if(!corpo) return;
+      corpo.innerHTML = "";
+      const wrapperAtivo = state.useDefaultPeriod && state.detailBySchool;
+      if(!wrapperAtivo){
+        elements.pendenciasResumo.textContent = "ok 0 • pendências 0";
+        elements.filtrarPendencias.classList.add("hidden");
+        if(elements.bannerAplicar) elements.bannerAplicar.classList.add("hidden");
+        return;
+      }
+      const selecionadas = escolas.filter(e=>state.selectedSchools.has(e.id));
+      if(!selecionadas.length){
+        corpo.innerHTML = `<tr><td colspan="4" class="helper-text">Selecione escolas para detalhar períodos.</td></tr>`;
+        elements.pendenciasResumo.textContent = "ok 0 • pendências 0";
+        elements.filtrarPendencias.classList.add("hidden");
+        if(elements.bannerAplicar) elements.bannerAplicar.classList.add("hidden");
+        return;
+      }
+      const defaultInicio = state.defaultPeriod.inicio;
+      const defaultFim = state.defaultPeriod.fim;
+      const defaultValido = isValidDateValue(defaultInicio) && isValidDateValue(defaultFim);
+      const somentePendencias = state.filterPendencias;
+      const blankIds = [];
+      let okCount = 0;
+      let pendCount = 0;
+
+      const listaParaRender = selecionadas.filter(escola=>{
+        const possuiErro = state.errors.has(escola.id);
+        const possuiPendencia = state.pendencias.some(p=>p.idEscola === escola.id);
+        if(somentePendencias){
+          return possuiErro || possuiPendencia;
+        }
+        return true;
+      });
+
+      listaParaRender.forEach(escola=>{
+        const detalhe = state.detailPeriods.get(escola.id) || {};
+        const displayInicio = detalhe.inicio || "";
+        const displayFim = detalhe.fim || "";
+        const possuiErro = state.errors.has(escola.id);
+        const pendenciaEntry = state.pendencias.find(p=>p.idEscola === escola.id);
+        let estado = "ok";
+        if(possuiErro){
+          estado = "error";
+          pendCount++;
+        } else if(pendenciaEntry){
+          estado = "pending";
+          pendCount++;
+        } else {
+          okCount++;
+        }
+        if(!displayInicio && !displayFim && defaultValido){
+          blankIds.push(escola.id);
+        }
+        const effective = resolvePeriodoParaEscola(escola.id);
+        const tr = document.createElement("tr");
+        tr.className = estado;
+        tr.dataset.schoolId = escola.id;
+        tr.innerHTML = `
+          <td>${escola.nome}</td>
+          <td>
+            <div class="cell-input">
+              <input type="date" data-field="inicio" data-escola="${escola.id}" value="${displayInicio}" aria-label="Início para ${escola.nome}">
+              <button class="cell-action" type="button" data-copy="${escola.id}" data-field="inicio" title="Copiar este valor para as linhas abaixo" aria-label="Copiar data de início">&#8681;</button>
+            </div>
+          </td>
+          <td>
+            <div class="cell-input">
+              <input type="date" data-field="fim" data-escola="${escola.id}" value="${displayFim}" aria-label="Fim para ${escola.nome}">
+              <button class="cell-action" type="button" data-copy="${escola.id}" data-field="fim" title="Copiar este valor para as linhas abaixo" aria-label="Copiar data de fim">&#8681;</button>
+            </div>
+          </td>
+        `;
+        corpo.appendChild(tr);
+      });
+
+      if(!corpo.children.length){
+        corpo.innerHTML = `<tr><td colspan="4" class="helper-text">Nenhuma pendência encontrada.</td></tr>`;
+      }
+
+      elements.pendenciasResumo.textContent = `ok ${okCount} • pendências ${pendCount}`;
+      if(pendCount){
+        elements.filtrarPendencias.classList.remove("hidden");
+        elements.filtrarPendencias.textContent = state.filterPendencias ? "Mostrar todas" : `${pendCount} pendência(s). Mostrar apenas pendentes`;
+      } else {
+        elements.filtrarPendencias.classList.add("hidden");
+        elements.filtrarPendencias.textContent = "Mostrar apenas pendentes";
+      }
+
+      if(elements.bannerAplicar){
+        const mostrar = defaultValido && blankIds.length > 0 && !state.bannerIgnorado;
+        elements.bannerAplicar.classList.toggle("hidden", !mostrar);
+        if(mostrar){
+          elements.bannerTexto.textContent = `Há escolas sem período. Aplicar período padrão ${formatDate(defaultInicio)} a ${formatDate(defaultFim)} nas linhas vazias?`;
+          elements.bannerAplicar.dataset.blankIds = blankIds.join(",");
+        } else {
+          elements.bannerAplicar.dataset.blankIds = "";
+        }
+      }
+    }
+
+    function estadoLabel(estado, effective, id){
+      if(estado === "error"){
+        const erroMsg = state.errors.get(id) || "Erro";
+        if(erroMsg.includes("Fim deve ser depois")){
+          return `<div class="error-badge" data-tooltip="A data de fim deve ser posterior à data de início">
+            <span class="error-icon">⚠️</span>
+            <span>Fim antes do início</span>
+          </div>`;
+        }
+        if(erroMsg.includes("Formato de data inválido")){
+          return `<div class="error-badge" data-tooltip="Use o formato DD/MM/AAAA">
+            <span class="error-icon">📅</span>
+            <span>Data inválida</span>
+          </div>`;
+        }
+        return `<div class="error-badge">
+          <span class="error-icon">❌</span>
+          <span>${erroMsg}</span>
+        </div>`;
+      }
+
+      if(estado === "pending"){
+        const pend = state.pendencias.find(p=>p.idEscola === id);
+        const mensagem = pend ? pend.mensagem : "Pendente";
+        if(mensagem.includes("Preencha a data")){
+          return `<div class="warning-badge" data-tooltip="Defina as datas de início e fim para continuar">
+            <span class="warning-icon">📝</span>
+            <span>Datas pendentes</span>
+          </div>`;
+        }
+        return `<div class="warning-badge">
+          <span class="warning-icon">⏳</span>
+          <span>${mensagem}</span>
+        </div>`;
+      }
+
+      if(effective.inicio && effective.fim){
+        return `<span class="state-tag ok with-icon">
+          <span>✅</span>
+          <span>${formatDate(effective.inicio)} a ${formatDate(effective.fim)}</span>
+        </span>`;
+      }
+
+      return `<span class="state-tag ok">
+        <span>✅</span>
+        <span>Sem período</span>
+      </span>`;
+    }
+
+    function resolvePeriodoParaEscola(idEscola){
+      const detalhe = state.detailPeriods.get(idEscola);
+      if(state.detailBySchool && detalhe){
+        return { inicio: detalhe.inicio || "", fim: detalhe.fim || "" };
+      }
+      if(state.useDefaultPeriod){
+        return { ...state.defaultPeriod };
+      }
+      return { inicio:"", fim:"" };
+    }
+
+    function formatDate(valor){
+      if(!valor) return "";
+      const [yyyy,mm,dd] = valor.split("-");
+      return `${dd}/${mm}/${yyyy}`;
+    }
+
+    function isValidDateValue(value){
+      if(!value) return false;
+      const time = Date.parse(value);
+      return !Number.isNaN(time);
+    }
+
+    function updateSummary(){
+      const totalMissoes = state.selectedMissions.size;
+      const selecionadas = escolas.filter(e=>state.selectedSchools.has(e.id));
+      const totalEscolas = selecionadas.length;
+      const totalAlunos = selecionadas.reduce((sum,e)=>sum+e.alunos,0);
+      elements.resumoRodape.textContent = `${totalMissoes} missões • ${totalEscolas} escolas • ${totalAlunos} alunos`;
+    }
+
+    function updateValidation(){
+      state.errors.clear();
+      state.pendencias = [];
+      const defaultInicio = state.defaultPeriod.inicio;
+      const defaultFim = state.defaultPeriod.fim;
+      const defaultInicioValido = isValidDateValue(defaultInicio);
+      const defaultFimValido = isValidDateValue(defaultFim);
+
+      if(state.useDefaultPeriod){
+        if(!defaultInicio || !defaultFim){
+          state.errors.set("padrao", "Defina Início e Fim para continuar");
+        } else if(!defaultInicioValido || !defaultFimValido){
+          state.errors.set("padrao", "Formato de data inválido");
+        } else if(defaultFim <= defaultInicio){
+          state.errors.set("padrao", "Fim deve ser depois do início");
+        }
+      }
+
+      if(state.detailBySchool){
+        state.selectedSchools.forEach(id=>{
+          const detalhe = state.detailPeriods.get(id) || {};
+          const inicio = detalhe.inicio || "";
+          const fim = detalhe.fim || "";
+          const inicioValido = isValidDateValue(inicio);
+          const fimValido = isValidDateValue(fim);
+          if(!inicio && !fim){
+            state.pendencias.push({ idEscola:id, mensagem:"Preencha a data", foco:`input[data-escola="${id}"][data-field="inicio"]` });
+          } else {
+            if(!inicio){
+              state.pendencias.push({ idEscola:id, mensagem:"Preencha a data de início", foco:`input[data-escola="${id}"][data-field="inicio"]` });
+            }
+            if(!fim){
+              state.pendencias.push({ idEscola:id, mensagem:"Preencha a data de fim", foco:`input[data-escola="${id}"][data-field="fim"]` });
+            }
+          }
+          if((inicio && !inicioValido) || (fim && !fimValido)){
+            state.errors.set(id, "Formato de data inválido");
+            state.pendencias.push({ idEscola:id, mensagem:"Formato de data inválido", foco:`input[data-escola="${id}"][data-field="${!inicioValido ? "inicio" : "fim"}"]` });
+          } else if(inicio && fim && fim <= inicio){
+            state.errors.set(id, "Fim deve ser depois de Início");
+            state.pendencias.push({ idEscola:id, mensagem:"Fim deve ser depois de Início", foco:`input[data-escola="${id}"][data-field="fim"]` });
+          }
+        });
+        if(state.filterPendencias && !state.pendencias.length && !state.errors.size){
+          state.filterPendencias = false;
+        }
+      }
+
+      const temErro = state.errors.size > 0;
+      const hasPendencias = state.pendencias.length > 0;
+      const faltaSelecao = !state.selectedMissions.size || !state.selectedSchools.size;
+      const conflitoSemReescrever = state.selectedSchools.size && escolas.some(e=>state.selectedSchools.has(e.id) && e.enviada) && !state.reescrever;
+      const pronto = !temErro && !hasPendencias && !faltaSelecao;
+      const resumoPeriodo = getPeriodoResumo();
+
+      let mensagem = "";
+      let classe = "message";
+      if(temErro){
+        mensagem = Array.from(state.errors.values())[0];
+        classe = "message error";
+      } else if(hasPendencias){
+        mensagem = `${state.pendencias.length} pendência(s) encontradas.`;
+        classe = "message warn";
+      } else if(faltaSelecao){
+        mensagem = "Selecione pelo menos uma missão e uma escola.";
+      } else if(conflitoSemReescrever){
+        mensagem = "Missão já ativa nesta escola. Ative reescrever para atualizar datas.";
+        classe = "message warn";
+      } else {
+        mensagem = resumoPeriodo.texto;
+        classe = resumoPeriodo.classe;
+      }
+
+      elements.estadoRodape.textContent = mensagem;
+      elements.estadoRodape.className = classe;
+      elements.confirmarBtn.disabled = !pronto;
+      renderGradeDetalhe();
+      renderErrorLog();
+      renderPendenciasList();
+    }
+
+    function getPeriodoResumo(){
+      if(!state.useDefaultPeriod){
+        return { texto:"Sem período", classe:"message" };
+      }
+      const inicio = state.defaultPeriod.inicio;
+      const fim = state.defaultPeriod.fim;
+      if(!inicio || !fim){
+        return { texto:"Defina Início e Fim para continuar", classe:"message warn" };
+      }
+      if(state.detailBySchool){
+        const detalhadas = state.selectedSchools.size;
+        return { texto:`Período detalhado em ${detalhadas} escola(s)`, classe:"message ok" };
+      }
+      return { texto:`Período padrão ${formatDate(inicio)} a ${formatDate(fim)}`, classe:"message ok" };
+    }
+
+    function renderErrorLog(){
+      const errorLog = elements.errorLog;
+      const errorList = document.getElementById("errorList");
+      if(!errorLog || !errorList) return;
+
+      const allErrors = [];
+      state.errors.forEach((erroMsg, id) => {
+        const escola = escolas.find(e => e.id === id);
+        if(escola){
+          allErrors.push({
+            escola: escola.nome,
+            erro: erroMsg,
+            tipo: "error"
+          });
+        }
+      });
+
+      if(allErrors.length > 0){
+        errorLog.classList.remove("hidden");
+        errorList.innerHTML = "";
+
+        allErrors.forEach(({escola, erro, tipo}) => {
+          const item = document.createElement("div");
+          item.className = "alert-item";
+
+          const descricao = document.createElement("span");
+          descricao.innerHTML = `
+            <strong>${escola}</strong><br>
+            <small style="color: var(--error);">${erro}</small>
+          `;
+
+          const botao = document.createElement("button");
+          botao.type = "button";
+          botao.textContent = "Corrigir";
+          botao.className = "btn ghost";
+          botao.style.fontSize = "11px";
+          botao.style.padding = "4px 8px";
+
+          item.appendChild(descricao);
+          item.appendChild(botao);
+          errorList.appendChild(item);
+        });
+      } else {
+        errorLog.classList.add("hidden");
+      }
+    }
+
+    function renderPendenciasList(){
+      const container = elements.simulacaoPendencias;
+      container.innerHTML = "";
+      const colecao = [...state.pendencias];
+      if(state.simulacao && Array.isArray(state.simulacao.pendencias)){
+        colecao.push(...state.simulacao.pendencias);
+      }
+      if(!colecao.length){
+        if(!elements.simulacaoSection.classList.contains("hidden")){
+          container.innerHTML = `<span class="helper-text">Sem pendências.</span>`;
+        }
+        return;
+      }
+      const vistos = new Set();
+      colecao.forEach(p=>{
+        const chave = `${p.foco || ""}-${p.idEscola ?? ""}`;
+        if(vistos.has(chave)) return;
+        vistos.add(chave);
+        const escola = escolas.find(e=>e.id === p.idEscola);
+        const item = document.createElement("div");
+        item.className = "alert-item";
+        const descricao = document.createElement("span");
+        descricao.textContent = `${escola?.nome || "Escola"} • ${p.mensagem}`;
+        const botao = document.createElement("button");
+        botao.type = "button";
+        botao.dataset.focus = p.foco || "";
+        botao.textContent = "Ir para a célula";
+        botao.addEventListener("click", ()=>{
+          if(!p.foco) return;
+          const target = document.querySelector(p.foco);
+          if(target){
+            target.focus();
+          }
+        });
+        item.appendChild(descricao);
+        item.appendChild(botao);
+        container.appendChild(item);
+      });
+    }
+
+    function handleOpenDrawer(id){
+      const numericId = Number(id);
+      if(!numericId) return;
+      state.selectedMissions.clear();
+      state.selectedMissions.add(numericId);
+      state.currentMissionId = numericId;
+      if(elements.confirmarBtn){
+        elements.confirmarBtn.dataset.missao = String(numericId);
+      }
+      renderMissoes();
+      renderDrawer();
+      updateSummary();
+      updateValidation();
+      openDrawer();
+    }
+
+    function openDrawer(){
+      elements.drawer.classList.add("open");
+      elements.drawerBackdrop.classList.add("open");
+      elements.drawer.setAttribute("aria-hidden","false");
+      elements.drawerBackdrop.setAttribute("aria-hidden","false");
+      // Removido requestAnimationFrame para evitar problemas de timing
+      // Executar foco diretamente com verificação de segurança
+      setTimeout(()=>{
+        if(state.useDefaultPeriod && elements.inicioPadrao){
+          elements.inicioPadrao.focus();
+        } else if(elements.buscaEscola){
+          elements.buscaEscola.focus();
+        }
+      }, 10);
+    }
+
+    function closeDrawer(){
+      elements.drawer.classList.remove("open");
+      elements.drawerBackdrop.classList.remove("open");
+      elements.drawer.setAttribute("aria-hidden","true");
+      elements.drawerBackdrop.setAttribute("aria-hidden","true");
+    }
+
+    function toggleEscola(id, checked){
+      if(checked){
+        state.selectedSchools.add(id);
+        if(state.detailBySchool){
+          seedDetailPeriods();
+        }
+      } else {
+        state.selectedSchools.delete(id);
+        state.detailPeriods.delete(id);
+      }
+      state.bannerIgnorado = false;
+      updateEscolasResumo();
+      updateSummary();
+      renderPeriodos();
+      updateValidation();
+    }
+
+    function setDefaultPeriod(field,value){
+      state.defaultPeriod[field] = value;
+      state.bannerIgnorado = false;
+      updateValidation();
+      renderPeriodos();
+    }
+
+    function setDetailPeriod(id, field, value){
+      const atual = state.detailPeriods.get(id) || { inicio:"", fim:"" };
+      const atualizado = { ...atual, [field]: value };
+      state.detailPeriods.set(id, atualizado);
+      if(value === ""){
+        state.bannerIgnorado = false;
+      }
+      updateValidation();
+    }
+
+    function applyDefaultToBlanks(blankIds){
+      const inicio = state.defaultPeriod.inicio;
+      const fim = state.defaultPeriod.fim;
+      if(!(isValidDateValue(inicio) && isValidDateValue(fim))){
+        showToast("Período padrão incompleto", "Defina Início e Fim para continuar.", "error");
+        return;
+      }
+      blankIds.forEach(id=>{
+        const atual = state.detailPeriods.get(id) || {};
+        state.detailPeriods.set(id, { ...atual, inicio, fim });
+      });
+      state.bannerIgnorado = true;
+      updateValidation();
+      renderPeriodos();
+    }
+    function copyValueDown(fromId, field){
+      const listaOrdenada = escolas.filter(e=>state.selectedSchools.has(e.id));
+      if(!listaOrdenada.length) return;
+      const index = listaOrdenada.findIndex(e=>e.id === fromId);
+      if(index === -1) return;
+      const origem = state.detailPeriods.get(fromId) || {};
+      const defaultValor = field === "inicio" ? state.defaultPeriod.inicio : state.defaultPeriod.fim;
+      const valor = origem[field] || defaultValor;
+      if(!valor) return;
+      for(let i=index+1;i<listaOrdenada.length;i++){
+        const id = listaOrdenada[i].id;
+        if(state.filterPendencias){
+          const possuiErro = state.errors.has(id);
+          const possuiPendencia = state.pendencias.some(p=>p.idEscola === id);
+          if(!possuiErro && !possuiPendencia) continue;
+        }
+        const atual = state.detailPeriods.get(id) || {};
+        state.detailPeriods.set(id, { ...atual, [field]: valor });
+      }
+      updateValidation();
+      renderPeriodos();
+    }
+
+    function toggleReescrever(valor){
+      state.reescrever = valor;
+      updateValidation();
+    }
+
+    function simular(){
+      const missoesSelecionadas = missoes.filter(m=>state.selectedMissions.has(m.id));
+      const escolasSelecionadas = escolas.filter(e=>state.selectedSchools.has(e.id));
+      let totalAlunos = 0;
+      const pendenciasSimulacao = [];
+      const resumo = missoesSelecionadas.map(missao=>{
+        const item = { missao:missao.nome, novas:[], reescritas:[], semAlteracao:[] };
+        escolasSelecionadas.forEach(escola=>{
+          const periodo = resolvePeriodoParaEscola(escola.id);
+          if(escola.enviada){
+            if(state.reescrever){
+              item.reescritas.push(escola.nome);
+              totalAlunos += escola.alunos;
+            } else {
+              item.semAlteracao.push(escola.nome);
+            }
+          } else {
+            item.novas.push(escola.nome);
+            totalAlunos += escola.alunos;
+          }
+          if(!periodo.inicio || !periodo.fim){
+            pendenciasSimulacao.push({
+              idEscola:escola.id,
+              mensagem:"Período ausente",
+              foco: state.detailBySchool ? `input[data-escola="${escola.id}"][data-field="inicio"]` : "#inicioPadrao"
+            });
+          }
+        });
+        return item;
+      });
+      state.simulacao = {
+        resumo,
+        totalAlunosImpactados: totalAlunos,
+        pendencias: pendenciasSimulacao
+      };
+      renderSimulacao();
+      showToast("Simulação concluída", `Total de alunos impactados: ${totalAlunos}`, "success");
+    }
+
+    function renderSimulacao(){
+      if(!state.simulacao){
+        elements.simulacaoSection.classList.add("hidden");
+        return;
+      }
+      const { resumo, totalAlunosImpactados } = state.simulacao;
+      elements.simulacaoSection.classList.remove("hidden");
+      elements.simulacaoResumo.innerHTML = `
+        <strong>${totalAlunosImpactados} alunos impactados</strong>
+        ${resumo.map(r=>`
+          <div>
+            <strong>${r.missao}</strong><br>
+            <small class="helper-text">Novas: ${r.novas.length} • Reescritas: ${r.reescritas.length} • Sem alteração: ${r.semAlteracao.length}</small>
+          </div>
+        `).join("")}
+      `;
+      renderPendenciasList();
+    }
+
+    function confirmarEnvio(){
+      const btnDataId = elements.confirmarBtn?.dataset?.missao;
+      const missaoId = btnDataId ? Number(btnDataId) : (state.currentMissionId ?? (state.selectedMissions.size ? [...state.selectedMissions][0] : null));
+      if(!missaoId){
+        showToast("Selecione uma missão", "Escolha uma missão para confirmar o envio.", "error");
+        return;
+      }
+      const missao = missoes.find(item=>item.id === Number(missaoId));
+      if(!missao){
+        showToast("Missão não encontrada", "Recarregue a lista de missões e tente novamente.", "error");
+        return;
+      }
+      const resumoPeriodo = getPeriodoResumo();
+      missao.periodo = resumoPeriodo?.texto || "";
+      iniciarMissao(missao);
+      showToast("Missão enviada","Rodando","success");
+      closeDrawer();
+      clearWizardSelections();
+      renderAll();
+    }
+
+    function showToast(titulo, descricao, tipo="success"){
+      elements.toastTitle.textContent = titulo;
+      elements.toastDesc.textContent = descricao;
+      elements.toast.className = `toast show ${tipo}`;
+      setTimeout(()=> elements.toast.classList.remove("show"), 2400);
+      announce(`${titulo}. ${descricao}`);
+    }
+
+    function announce(mensagem){
+      elements.liveRegion.textContent = mensagem;
+    }
+
+    document.addEventListener("click", (e)=>{
+      const target = e.target;
+
+     const btnSimular = target.closest && target.closest("#simularBtn");
+     if(btnSimular){
+       e.preventDefault();
+       simular();
+       return;
+      }
+
+      const btnFechar = target.closest && target.closest("#fecharDrawer");
+      if(btnFechar || target === elements.drawerBackdrop){
+        closeDrawer();
+        return;
+      }
+
+      let toggleBtn = null;
+      if(target instanceof Element){
+        toggleBtn = target.closest("button[data-toggle]");
+      }
+      if(toggleBtn){
+        const id = Number(toggleBtn.dataset.toggle);
+        const missao = missoes.find(item=>item.id === id);
+        if(!missao) return;
+        if(missao.statusLocal === "Parada"){
+          handleOpenDrawer(missao.id);
+        } else if(missao.statusLocal === "Rodando"){
+          // Drawer de pausa foi removido - usar novo drawer Gerenciar
+          openDrawerGerenciar();
+        } else if(missao.statusLocal === "Pausada"){
+          retomarMissao(missao);
+        }
+        return;
+      }
+      if(target.dataset && target.dataset.abrir){
+        handleOpenDrawer(Number(target.dataset.abrir));
+      }
+      if(target.id === "limparBuscaEscolas"){
+        filtros.escolas = "";
+        filtros.status = "todas";
+        elements.buscaEscola.value = "";
+        if(elements.filtroStatus) elements.filtroStatus.value = "todas";
+        renderEscolas();
+      }
+      if(target === elements.selecionarTodasEscolas){
+        filtrarEscolas().forEach(e=>state.selectedSchools.add(e.id));
+        if(state.detailBySchool){
+          seedDetailPeriods();
+        }
+        updateEscolasResumo();
+        renderEscolas();
+        renderPeriodos();
+      }
+      if(target === elements.limparEscolas){
+        state.selectedSchools.clear();
+        state.detailPeriods.clear();
+        updateEscolasResumo();
+        renderEscolas();
+        renderPeriodos();
+        updateValidation();
+      }
+      if(target === elements.detalharToggle){
+        state.detailBySchool = !state.detailBySchool;
+        if(state.detailBySchool){
+          seedDetailPeriods();
+          state.bannerIgnorado = false;
+        }
+        renderPeriodos();
+        updateValidation();
+        if(state.detailBySchool){
+          setTimeout(()=>{
+            const primeiroCampo = elements.gradeDetalhe?.querySelector("input[type='date']");
+            if(primeiroCampo) primeiroCampo.focus();
+          }, 10);
+        }
+      }
+      if(target === elements.filtrarPendencias){
+        state.filterPendencias = !state.filterPendencias;
+        renderGradeDetalhe();
+      }
+      if(target === elements.bannerAplicarBtn && elements.bannerAplicar){
+        const ids = (elements.bannerAplicar.dataset.blankIds || "").split(",").filter(Boolean).map(Number);
+        applyDefaultToBlanks(ids);
+      }
+      if(target === elements.bannerIgnorarBtn){
+        state.bannerIgnorado = true;
+        if(elements.bannerAplicar){
+          elements.bannerAplicar.classList.add("hidden");
+        }
+      }
+      if(target.dataset && target.dataset.copy){
+        copyValueDown(Number(target.dataset.copy), target.dataset.field);
+      }
+      if(target === elements.verDetalhesConflitos){
+        elements.detalhesDialog.showModal();
+      }
+    });
+
+    document.addEventListener("change", event=>{
+      const target = event.target;
+      if(target.classList.contains("chk-pausa")){
+        const any = [...document.querySelectorAll(".chk-pausa")].some(x=>x.checked);
+        const confirmar = document.getElementById("confirmarPausa");
+        if(confirmar){
+          confirmar.disabled = !any;
+        }
+      }
+      if(target.classList.contains("chk-escola")){
+        const id = Number(target.dataset.escola);
+        toggleEscola(id, target.checked);
+      }
+      if(target === elements.filtroStatus){
+        filtros.status = target.value;
+        renderEscolas();
+      }
+      if(target === elements.usarPadrao){
+        state.useDefaultPeriod = target.checked;
+        if(!state.useDefaultPeriod){
+          state.detailBySchool = false;
+        }
+        if(state.useDefaultPeriod){
+          setTimeout(()=> elements.inicioPadrao && elements.inicioPadrao.focus(), 10);
+        }
+        renderPeriodos();
+        updateValidation();
+      }
+      if(target === elements.reescreverToggle){
+        toggleReescrever(target.checked);
+      }
+      if(target.dataset && target.dataset.escola && target.dataset.field){
+        const id = Number(target.dataset.escola);
+        setDetailPeriod(id, target.dataset.field, target.value);
+      }
+    });
+
+    // Event listeners removidos pois os drawers foram removidos conforme especificação
+
+    document.addEventListener("input", event=>{
+      const target = event.target;
+      if(target === elements.buscaMissoes){
+        filtros.missoes = target.value;
+        renderMissoes();
+      }
+      if(target === elements.buscaEscola){
+        filtros.escolas = target.value;
+        renderEscolas();
+      }
+      if(target === elements.inicioPadrao){
+        setDefaultPeriod("inicio", target.value);
+      }
+      if(target === elements.fimPadrao){
+        setDefaultPeriod("fim", target.value);
+      }
+    });
+
+  document.addEventListener("keydown", event=>{
+    if(event.key === "Escape" && elements.drawer.classList.contains("open")){
+      closeDrawer();
+    }
+  });
+
+  // Função de inicialização segura
+  function inicializarAplicacao() {
+    try {
+      console.log("Inicializando aplicação...");
+      
+      // Inicializar estado das missões
+      missoes.forEach(m => {
+        if (m.statusLocal == null) m.statusLocal = "Parada";
+        if (m.progresso == null) m.progresso = 0;
+        if (m.periodo == null) m.periodo = "";
+      });
+
+      // Limpar timers anteriores
+      timers.forEach(t => clearInterval(t));
+      timers.clear();
+
+      // Renderizar tudo
+      renderMissoes();
+      renderDrawer();
+      renderEscolas();
+      renderPeriodos();
+      updateSummary();
+      updateValidation();
+      renderSimulacao();
+
+      console.log("Aplicação inicializada com sucesso");
+    } catch (error) {
+      console.error("Erro na inicialização:", error);
+    }
+  }
+
+  // Inicializar quando DOM estiver pronto
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', inicializarAplicacao);
+  } else {
+    inicializarAplicacao();
+  }
+
+  resetExecucoes();
+
+// ===== Execução por escola e pausa e play por escola =====
+window.execucaoPorEscola = window.execucaoPorEscola || new Map();
+const PLOG = { ok:(...a)=>console.log("[PausaEscola]",...a), warn:(...a)=>console.warn("[PausaEscola]",...a), err:(...a)=>console.error("[PausaEscola]",...a) };
+
+function getExecMap(missaoId){
+  if(!window.execucaoPorEscola.has(missaoId)){
+    window.execucaoPorEscola.set(missaoId, new Map());
+  }
+  return window.execucaoPorEscola.get(missaoId);
+}
+
+// popular execucao por escola quando confirmar envio
+(function patchConfirmarParaEscolas(){
+  if(window.__patchedConfirmarParaEscolas) return;
+  window.__patchedConfirmarParaEscolas = true;
+
+  document.addEventListener("click", (e)=>{
+    const btn = e.target.closest && e.target.closest("#confirmarBtn");
+    if(!btn) return;
+
+    // Removido queueMicrotask para evitar problemas de comunicação assíncrona
+    // Executar diretamente com verificação adequada de estado
+    try{
+      const missaoId = state?.selectedMissions?.size ? [...state.selectedMissions][0] : null;
+      if(!missaoId){ PLOG.warn("Confirmar sem missao selecionada"); return; }
+      const mapa = getExecMap(missaoId);
+      const selecionadas = escolas.filter(e => state.selectedSchools.has(e.id));
+
+      selecionadas.forEach(escola=>{
+        const atual = mapa.get(escola.id);
+        if(!atual){
+          mapa.set(escola.id, { statusLocal:"Rodando", progresso: Math.max(1, Math.floor(Math.random()*4)) });
+        }else{
+          if(atual.statusLocal !== "Concluida"){
+            atual.statusLocal = "Rodando";
+            if(atual.progresso === 0) atual.progresso = 1;
+          }
+        }
+      });
+
+      iniciarTimerAgregadoMissao(missaoId);
+      PLOG.ok("Execucao por escola atualizada", missaoId, selecionadas.map(s=>s.id));
+    }catch(err){ PLOG.err("Falha ao popular execucao por escola", err); }
+  });
+})();
+
+function iniciarTimerAgregadoMissao(missaoId){
+  try{
+    const m = missoes.find(x=>x.id === missaoId);
+    if(!m) return;
+    if(!window.__timerAgregado) window.__timerAgregado = new Map();
+    if(window.__timerAgregado.get(missaoId)) return;
+
+    const t = setInterval(()=>{
+      const mapa = getExecMap(missaoId);
+      const rodando = [...mapa.entries()].filter(([,v])=> v.statusLocal==="Rodando");
+      rodando.forEach(([id, info])=>{
+        info.progresso = Math.min(100, info.progresso + Math.ceil(Math.random()*3));
+        if(info.progresso >= 100) info.statusLocal = "Concluida";
+      });
+
+      const ativas = [...mapa.values()].filter(v => v.progresso > 0);
+      if(ativas.length){
+        const media = Math.round(ativas.reduce((s,v)=>s+v.progresso,0) / ativas.length);
+        m.progresso = media;
+        if(media >= 100){
+          m.statusLocal = "Concluida";
+          clearInterval(t);
+          window.__timerAgregado.delete(missaoId);
+          showToast?.("Missão concluida","", "success");
+        }else{
+          m.statusLocal = rodando.length ? "Rodando" : "Pausada";
+          m.status = "Enviada";
+        }
+      }
+      renderMissoes?.();
+    }, 1100);
+
+    window.__timerAgregado.set(missaoId, t);
+  }catch(err){ PLOG.err("Falha no timer agregado", err); }
+}
+
+// abrir drawer de pausa por escola
+function abrirDrawerPausaPorEscola(){
+  try{
+    const missaoId = state?.selectedMissions?.size ? [...state.selectedMissions][0] : null;
+    if(!missaoId){ PLOG.warn("Abrir pausa sem missao selecionada"); return; }
+    const mapa = getExecMap(missaoId);
+    const filtro = document.getElementById("filtroStatusPausa");
+    const busca = document.getElementById("buscaEscolaPausa");
+    const lista = document.getElementById("listaEscolasPausa");
+    const titulo = document.getElementById("tituloListaPausa");
+    const resumoQtd = document.getElementById("resumoPausaQtd");
+    const resumoAlunos = document.getElementById("resumoPausaAlunos");
+    const btnConfirmar = document.getElementById("confirmarPausaEscola");
+    if(!lista){ PLOG.err("listaEscolasPausa ausente"); return; }
+
+    titulo.textContent = "Escolas da missão em execução";
+    btnConfirmar.disabled = true;
+
+    function renderLista(){
+      const termo = (busca.value || "").toLowerCase();
+      const qual = (filtro?.value) || "todas";
+      lista.innerHTML = "";
+      const entradas = [...mapa.entries()].map(([id, info])=>{
+        const escola = escolas.find(e=>e.id===id);
+        return { id, escola, info };
+      }).filter(item=>{
+        if(!item.escola) return false;
+        if(termo && !item.escola.nome.toLowerCase().includes(termo)) return false;
+        if(qual === "rodando" && item.info.statusLocal!=="Rodando") return false;
+        if(qual === "pausada" && item.info.statusLocal!=="Pausada") return false;
+        return true;
+      });
+
+      if(!entradas.length){
+        lista.innerHTML = `<div class="list-row"><span class="helper-text">Nenhuma escola para este filtro</span></div>`;
+      }else{
+        entradas.forEach(({id, escola, info})=>{
+          const linha = document.createElement("div");
+          linha.className = "list-row";
+          const estado = info.statusLocal;
+          const classe = estado==="Rodando" ? "ok" : estado==="Pausada" ? "warn" : estado==="Concluida" ? "ok" : "";
+          linha.innerHTML = `
+            <input type="checkbox" class="chk-pausa-escola" data-escola="\${id}">
+            <div style="width:100%">
+              <strong>\${escola.nome}</strong><br>
+              <small class="helper-text">\${escola.alunos} alunos</small>
+              <div class="prog" style="margin-top:8px">
+                <div class="bar" aria-label="Progresso \${escola.nome}"><span style="width:\${info.progresso}%"></span></div>
+                <small>\${info.progresso}%</small>
+              </div>
+            </div>
+            <span class="badge \${classe}">\${estado}</span>
+          `;
+          lista.appendChild(linha);
+        });
+      }
+      atualizarResumoSelecao();
+    }
+
+    function atualizarResumoSelecao(){
+      const marcados = [...document.querySelectorAll(".chk-pausa-escola:checked")];
+      const ids = marcados.map(x=>Number(x.dataset.escola));
+      const totalAlunos = ids.reduce((s,id)=> s + (escolas.find(e=>e.id===id)?.alunos || 0), 0);
+      resumoQtd.textContent = `${ids.length} selecionadas`;
+      resumoAlunos.textContent = `${totalAlunos} alunos`;
+      btnConfirmar.disabled = ids.length === 0;
+    }
+
+    document.getElementById("selecionarTodasPausa").onclick = ()=>{
+      document.querySelectorAll(".chk-pausa-escola").forEach(c=> c.checked = true);
+      atualizarResumoSelecao();
+    };
+    document.getElementById("limparSelecaoPausa").onclick = ()=>{
+      document.querySelectorAll(".chk-pausa-escola").forEach(c=> c.checked = false);
+      atualizarResumoSelecao();
+    };
+    document.getElementById("listaEscolasPausa").onclick = (ev)=>{
+      if(ev.target.classList.contains("chk-pausa-escola")) atualizarResumoSelecao();
+    };
+    if(busca) busca.oninput = renderLista;
+    if(filtro) filtro.onchange = renderLista;
+
+    renderLista();
+    abrirUI(true, "drawerPausaEscola");
+  }catch(err){ PLOG.err("Falha ao abrir drawer de pausa por escola", err); }
+}
+
+// pausar marcadas
+document.getElementById("confirmarPausaEscola")?.addEventListener("click", ()=>{
+  try{
+    const missaoId = state?.selectedMissions?.size ? [...state.selectedMissions][0] : null;
+    if(!missaoId){ PLOG.warn("Confirmar pausa sem missao selecionada"); return; }
+    const mapa = getExecMap(missaoId);
+    const ids = [...document.querySelectorAll(".chk-pausa-escola:checked")].map(x=>Number(x.dataset.escola));
+    ids.forEach(id=>{
+      const info = mapa.get(id);
+      if(info) info.statusLocal = "Pausada";
+    });
+    const todas = [...mapa.values()];
+    const algumaRodando = todas.some(v=>v.statusLocal==="Rodando");
+    const missao = missoes.find(m=>m.id===missaoId);
+    if(missao){
+      missao.statusLocal = algumaRodando ? "Rodando" : "Pausada";
+      renderMissoes?.();
+    }
+    abrirUI(false, "drawerPausaEscola");
+    showToast?.(ids.length>1 ? "Missões pausadas" : "Missão pausada", "", "success");
+    PLOG.ok("Pausa aplicada por escola", { missaoId, ids });
+  }catch(err){ PLOG.err("Falha em confirmar pausa por escola", err); }
+});
+
+// abrir drawer de play por escola
+function abrirDrawerPlayPorEscola(){
+  try{
+    const missaoId = state?.selectedMissions?.size ? [...state.selectedMissions][0] : null;
+    if(!missaoId){ PLOG.warn("Abrir play sem missao selecionada"); return; }
+    const mapa = getExecMap(missaoId);
+    const busca = document.getElementById("buscaEscolaPlay");
+    const lista = document.getElementById("listaEscolasPlay");
+    const resumoQtd = document.getElementById("resumoPlayQtd");
+    const resumoAlunos = document.getElementById("resumoPlayAlunos");
+    const btnConfirmar = document.getElementById("confirmarPlayEscola");
+    if(!lista){ PLOG.err("listaEscolasPlay ausente"); return; }
+
+    btnConfirmar.disabled = true;
+
+    function renderLista(){
+      const termo = (busca.value || "").toLowerCase();
+      lista.innerHTML = "";
+      const entradas = [...mapa.entries()].map(([id, info])=>{
+        const escola = escolas.find(e=>e.id===id);
+        return { id, escola, info };
+      }).filter(item=>{
+        if(!item.escola) return false;
+        if(item.info.statusLocal!=="Pausada") return false;
+        if(termo && !item.escola.nome.toLowerCase().includes(termo)) return false;
+        return true;
+      });
+
+      if(!entradas.length){
+        lista.innerHTML = `<div class="list-row"><span class="helper-text">Nenhuma escola pausada</span></div>`;
+      }else{
+        entradas.forEach(({id, escola, info})=>{
+          const linha = document.createElement("div");
+          linha.className = "list-row";
+          linha.innerHTML = `
+            <input type="checkbox" class="chk-play-escola" data-escola="\${id}">
+            <div style="width:100%">
+              <strong>\${escola.nome}</strong><br>
+              <small class="helper-text">\${escola.alunos} alunos</small>
+              <div class="prog" style="margin-top:8px">
+                <div class="bar" aria-label="Progresso \${escola.nome}"><span style="width:\${info.progresso}%"></span></div>
+                <small>\${info.progresso}%</small>
+              </div>
+            </div>
+            <span class="badge warn">Pausada</span>
+          `;
+          lista.appendChild(linha);
+        });
+      }
+      atualizarResumoSelecaoPlay();
+    }
+
+    function atualizarResumoSelecaoPlay(){
+      const marcados = [...document.querySelectorAll(".chk-play-escola:checked")];
+      const ids = marcados.map(x=>Number(x.dataset.escola));
+      const totalAlunos = ids.reduce((s,id)=> s + (escolas.find(e=>e.id===id)?.alunos || 0), 0);
+      resumoQtd.textContent = `${ids.length} selecionadas`;
+      resumoAlunos.textContent = `${totalAlunos} alunos`;
+      btnConfirmar.disabled = ids.length === 0;
+    }
+
+    document.getElementById("selecionarTodasPlay").onclick = ()=>{
+      document.querySelectorAll(".chk-play-escola").forEach(c=> c.checked = true);
+      atualizarResumoSelecaoPlay();
+    };
+    document.getElementById("limparSelecaoPlay").onclick = ()=>{
+      document.querySelectorAll(".chk-play-escola").forEach(c=> c.checked = false);
+      atualizarResumoSelecaoPlay();
+    };
+    document.getElementById("listaEscolasPlay").onclick = (ev)=>{
+      if(ev.target.classList.contains("chk-play-escola")) atualizarResumoSelecaoPlay();
+    };
+    if(busca) busca.oninput = renderLista;
+
+    renderLista();
+    abrirUI(true, "drawerPlayEscola");
+  }catch(err){ PLOG.err("Falha ao abrir drawer de play por escola", err); }
+}
+
+// retomar marcadas
+document.getElementById("confirmarPlayEscola")?.addEventListener("click", ()=>{
+  try{
+    const missaoId = state?.selectedMissions?.size ? [...state.selectedMissions][0] : null;
+    if(!missaoId){ PLOG.warn("Confirmar play sem missao selecionada"); return; }
+    const mapa = getExecMap(missaoId);
+    const ids = [...document.querySelectorAll(".chk-play-escola:checked")].map(x=>Number(x.dataset.escola));
+    ids.forEach(id=>{
+      const info = mapa.get(id);
+      if(info){
+        info.statusLocal = "Rodando";
+        if(info.progresso === 0) info.progresso = 1;
+      }
+    });
+    const missao = missoes.find(m=>m.id===missaoId);
+    if(missao){
+      iniciarTimerAgregadoMissao(missaoId);
+      missao.statusLocal = "Rodando";
+      missao.status = "Enviada";
+      renderMissoes?.();
+    }
+    abrirUI(false, "drawerPlayEscola");
+    showToast?.(ids.length>1 ? "Missões retomadas" : "Missão retomada", "", "success");
+    PLOG.ok("Play aplicado por escola", { missaoId, ids });
+  }catch(err){ PLOG.err("Falha em confirmar play por escola", err); }
+});
+
+// alternar visibilidade do drawer alvo compartilhando o backdrop
+function abrirUI(open, targetId){
+  const d = document.getElementById(targetId || "drawerPausaEscola");
+  const bd = document.getElementById("drawerBackdrop") || elements?.drawerBackdrop;
+  d.classList.toggle("open", open);
+  bd?.classList.toggle("open", open);
+  d.setAttribute("aria-hidden", open ? "false" : "true");
+  bd?.setAttribute("aria-hidden", open ? "false" : "true");
+  if(open){
+    setTimeout(()=> d.querySelector("input[type=\"checkbox\"]")?.focus(), 0);
+  }
+}
+document.getElementById("fecharPausaEscola")?.addEventListener("click", ()=> abrirUI(false, "drawerPausaEscola"));
+document.getElementById("fecharPlayEscola")?.addEventListener("click", ()=> abrirUI(false, "drawerPlayEscola"));
+
+// faz o botão Pause ou Play da linha abrir o drawer correto
+(function patchToggleParaAbrirPausaEscola(){
+  if(window.__patchedTogglePausaEscola) return;
+  window.__patchedTogglePausaEscola = true;
+
+  document.addEventListener("click", (e)=>{
+    const t = e.target.closest && e.target.closest("[data-toggle]");
+    if(!t) return;
+    const id = Number(t.getAttribute("data-toggle"));
+    const m = missoes.find(x=>x.id===id);
+    if(!m) return;
+    try{ state.selectedMissions.clear(); state.selectedMissions.add(m.id); }catch(_){}
+    if(m.statusLocal === "Rodando"){
+      abrirDrawerPausaPorEscola();
+    }else if(m.statusLocal === "Pausada"){
+      abrirDrawerPlayPorEscola();
+    }
+  });
+})();
+
+// 4) Clique global tolerante para Confirmar e Simular no drawer de envio
+document.addEventListener("click", (e)=>{
+  const btnConfirmar = e.target.closest("#confirmarBtn");
+  if(btnConfirmar){
+    e.preventDefault();
+    if(!elements.confirmarBtn.disabled) confirmarEnvio();
+    return;
+  }
+
+  const btnSimular = e.target.closest("#simularBtn");
+  if(btnSimular){
+    e.preventDefault();
+    simular();
+    return;
+  }
+
+  const btnAbrirGerenciar = e.target.closest("#btnAbrirGerenciar");
+  if(btnAbrirGerenciar){
+    openDrawerGerenciar();
+    return;
+  }
+});
+
+// ===== NOVO DRAWER GERENCIAR MISSÕES ENVIADAS =====
+// Estado único para o drawer de Gerenciar
+let missionSchools = [
+  // { id, escola, inicio, fim, progresso, status }
+  // status: 'enviada'|'andamento'|'pausada'|'concluida'|'erro'
+];
+
+// Dados mockados iniciais para o drawer Gerenciar
+function inicializarDadosGerenciar(){
+  if(missionSchools.length === 0){
+    // Simular dados iniciais baseados nas escolas existentes
+    escolas.forEach(escola => {
+      if(escola.enviada){
+        missionSchools.push({
+          id: Date.now() + Math.random(),
+          escola: escola.nome,
+          escolaId: escola.id,
+          inicio: "2024-01-15",
+          fim: "2024-06-15",
+          progresso: Math.floor(Math.random() * 100),
+          status: ['enviada', 'andamento', 'pausada', 'concluida'][Math.floor(Math.random() * 4)]
+        });
+      }
+    });
+  }
+}
+
+// Estado do drawer Gerenciar
+let gerenciarState = {
+  filtroStatus: "todos",
+  buscaEscola: "",
+  buscaNaoEnviada: "",
+  selecionadas: new Set(),
+  selecionadasNaoEnviadas: new Set(),
+  activeTab: "enviadas",
+  tabsBound: false
+};
+
+// Elementos do drawer Gerenciar
+const gerenciarElements = {
+  drawer: null,
+  filtroStatus: null,
+  buscaEscola: null,
+  tabela: null,
+  checkAll: null,
+  btnPausarLote: null,
+  btnReenviarLote: null,
+  btnEnviarNovas: null,
+  tabButtons: [],
+  tabPanels: [],
+  countEnviadas: null,
+  countNaoEnviadas: null,
+  buscaNaoEnviada: null,
+  tabelaNaoEnviadas: null,
+  checkAllNaoEnviadas: null
+};
+
+function inicializarDrawerGerenciar(){
+  gerenciarElements.drawer = document.getElementById("drawerGerenciar");
+  gerenciarElements.filtroStatus = document.getElementById("filtroStatusGerenciar");
+  gerenciarElements.buscaEscola = document.getElementById("buscaEscola");
+  gerenciarElements.tabela = document.getElementById("tabelaGerenciar");
+  gerenciarElements.checkAll = document.getElementById("checkAllGerenciar");
+  gerenciarElements.btnPausarLote = document.getElementById("btnPausarLote");
+  gerenciarElements.btnReenviarLote = document.getElementById("btnReenviarLote");
+  gerenciarElements.btnEnviarNovas = document.getElementById("btnEnviarNovasEscolas");
+  gerenciarElements.tabButtons = Array.from(gerenciarElements.drawer.querySelectorAll(".drawer-tab"));
+  gerenciarElements.tabPanels = Array.from(gerenciarElements.drawer.querySelectorAll(".tab-panel"));
+  gerenciarElements.countEnviadas = document.getElementById("countTabEnviadas");
+  gerenciarElements.countNaoEnviadas = document.getElementById("countTabNaoEnviadas");
+  gerenciarElements.buscaNaoEnviada = document.getElementById("buscaNaoEnviada");
+  gerenciarElements.tabelaNaoEnviadas = document.querySelector("#tabelaNaoEnviadas tbody");
+  gerenciarElements.checkAllNaoEnviadas = document.getElementById("checkAllNaoEnviadas");
+
+  if(!gerenciarState.tabsBound){
+    gerenciarElements.tabButtons.forEach(btn => {
+      btn.addEventListener("click", () => setActiveTab(btn.dataset.tab));
+    });
+    gerenciarState.tabsBound = true;
+  }
+}
+
+function openDrawerGerenciar(){
+  inicializarDadosGerenciar();
+  inicializarDrawerGerenciar();
+  gerenciarState.filtroStatus = "todos";
+  gerenciarState.buscaEscola = "";
+  gerenciarState.buscaNaoEnviada = "";
+  gerenciarState.selecionadas.clear();
+  gerenciarState.selecionadasNaoEnviadas.clear();
+  gerenciarState.activeTab = "enviadas";
+
+  if(gerenciarElements.filtroStatus) gerenciarElements.filtroStatus.value = "todos";
+  if(gerenciarElements.buscaEscola) gerenciarElements.buscaEscola.value = "";
+  if(gerenciarElements.buscaNaoEnviada) gerenciarElements.buscaNaoEnviada.value = "";
+  if(gerenciarElements.checkAll){
+    gerenciarElements.checkAll.checked = false;
+  }
+  if(gerenciarElements.checkAllNaoEnviadas){
+    gerenciarElements.checkAllNaoEnviadas.checked = false;
+  }
+
+  setActiveTab("enviadas");
+  gerenciarElements.drawer.classList.add("open");
+  gerenciarElements.drawer.setAttribute("aria-hidden", "false");
+  // Focus trap e retorno de foco
+  setTimeout(() => {
+    const primeiroInput = gerenciarState.activeTab === "enviadas"
+      ? gerenciarElements.filtroStatus
+      : gerenciarElements.buscaNaoEnviada;
+    if(primeiroInput) primeiroInput.focus();
+  }, 10);
+}
+
+function closeDrawerGerenciar(){
+  gerenciarElements.drawer.classList.remove("open");
+  gerenciarElements.drawer.setAttribute("aria-hidden", "true");
+}
+
+function filterGerenciar(){
+  const termo = gerenciarState.buscaEscola.toLowerCase();
+  const status = gerenciarState.filtroStatus;
+
+  return missionSchools.filter(item => {
+    const matchEscola = termo === "" || item.escola.toLowerCase().includes(termo);
+    const matchStatus = status === "todos" || item.status === status;
+    return matchEscola && matchStatus;
+  });
+}
+
+function filterNaoEnviadas(){
+  const termo = gerenciarState.buscaNaoEnviada.toLowerCase();
+  return escolas.filter(escola => {
+    if(escola.enviada) return false;
+    return termo === "" || escola.nome.toLowerCase().includes(termo);
+  });
+}
+
+function updateTabCounts(){
+  if(gerenciarElements.countEnviadas){
+    gerenciarElements.countEnviadas.textContent = missionSchools.length;
+  }
+  if(gerenciarElements.countNaoEnviadas){
+    const totalNaoEnviadas = escolas.filter(escola => !escola.enviada).length;
+    gerenciarElements.countNaoEnviadas.textContent = totalNaoEnviadas;
+  }
+}
+
+function setActiveTab(tab){
+  if(!gerenciarElements.drawer) return;
+
+  gerenciarState.activeTab = tab;
+
+  gerenciarElements.tabButtons.forEach(btn => {
+    const isCurrent = btn.dataset.tab === tab;
+    btn.classList.toggle("is-active", isCurrent);
+    btn.setAttribute("aria-selected", isCurrent ? "true" : "false");
+    btn.setAttribute("tabindex", isCurrent ? "0" : "-1");
+  });
+
+  gerenciarElements.tabPanels.forEach(panel => {
+    const isCurrent = panel.dataset.panel === tab;
+    panel.classList.toggle("hidden", !isCurrent);
+  });
+
+  gerenciarState.selecionadas.clear();
+  if(gerenciarElements.checkAll){
+    gerenciarElements.checkAll.checked = false;
+    gerenciarElements.checkAll.disabled = tab !== "enviadas";
+  }
+  if(gerenciarElements.checkAllNaoEnviadas){
+    const pendentes = filterNaoEnviadas();
+    const todosMarcados = pendentes.length > 0 && pendentes.every(escola => gerenciarState.selecionadasNaoEnviadas.has(escola.id));
+    gerenciarElements.checkAllNaoEnviadas.checked = tab === "nao-enviadas" && todosMarcados;
+    gerenciarElements.checkAllNaoEnviadas.disabled = pendentes.length === 0;
+  }
+
+  if(gerenciarElements.btnPausarLote){
+    gerenciarElements.btnPausarLote.style.display = tab === "enviadas" ? "" : "none";
+  }
+  if(gerenciarElements.btnReenviarLote){
+    gerenciarElements.btnReenviarLote.style.display = tab === "enviadas" ? "" : "none";
+  }
+  if(gerenciarElements.btnEnviarNovas){
+    gerenciarElements.btnEnviarNovas.style.display = tab === "nao-enviadas" ? "" : "none";
+  }
+
+  atualizarBotoesLote();
+  atualizarBotaoEnviarNovas();
+
+  if(tab === "enviadas"){
+    renderTabelaGerenciar();
+  } else {
+    renderTabelaNaoEnviadas();
+  }
+}
+
+function renderTabelaGerenciar(){
+  if(!gerenciarElements.tabela) return;
+  const tbody = gerenciarElements.tabela.querySelector("tbody");
+  if(!tbody) return;
+  tbody.innerHTML = "";
+
+  updateTabCounts();
+
+  const filtradas = filterGerenciar();
+  if(filtradas.length === 0){
+    tbody.innerHTML = '<tr><td colspan="7" class="helper-text">Nenhuma escola encontrada</td></tr>';
+    return;
+  }
+
+  filtradas.forEach(item => {
+    const tr = document.createElement("tr");
+    tr.className = `is-${item.status}`;
+    tr.dataset.id = item.id;
+
+    const checked = gerenciarState.selecionadas.has(item.id) ? "checked" : "";
+    const acoesCondicionais = gerarAcoesCondicionais(item);
+
+    tr.innerHTML = `
+      <td><input type="checkbox" class="rowCheck" ${checked} aria-label="Selecionar ${item.escola}" /></td>
+      <td class="col-escola">${item.escola}</td>
+      <td class="col-inicio">${formatDate(item.inicio)}</td>
+      <td class="col-fim">${formatDate(item.fim)}</td>
+      <td class="col-progresso">
+        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${item.progresso}" title="Missão ${item.progresso}% concluída">
+          <div class="progress__bar" style="width:${item.progresso}%"></div>
+        </div>
+      </td>
+      <td class="col-status"><span class="chip chip--${item.status}">${getStatusLabel(item.status)}</span></td>
+      <td class="col-acoes" style="text-align:center">${acoesCondicionais}</td>
+    `;
+
+    tbody.appendChild(tr);
+  });
+
+  atualizarBotoesLote();
+}
+
+function renderTabelaNaoEnviadas(){
+  if(!gerenciarElements.tabelaNaoEnviadas) return;
+
+  const tbody = gerenciarElements.tabelaNaoEnviadas;
+  tbody.innerHTML = "";
+
+  const pendentes = filterNaoEnviadas();
+
+  if(pendentes.length === 0){
+    tbody.innerHTML = '<tr><td colspan="4" class="helper-text">Nenhuma escola pendente encontrada</td></tr>';
+  } else {
+    pendentes.forEach(escola => {
+      const tr = document.createElement("tr");
+      const checked = gerenciarState.selecionadasNaoEnviadas.has(escola.id) ? "checked" : "";
+      tr.dataset.id = escola.id;
+      tr.innerHTML = `
+        <td><input type="checkbox" class="rowCheckNao" ${checked} aria-label="Selecionar ${escola.nome}" /></td>
+        <td class="col-escola">${escola.nome}</td>
+        <td>${escola.alunos} alunos</td>
+        <td class="col-status"><span class="chip chip--nao-enviada">Nao enviada</span></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  if(gerenciarElements.checkAllNaoEnviadas){
+    gerenciarElements.checkAllNaoEnviadas.disabled = pendentes.length === 0;
+    gerenciarElements.checkAllNaoEnviadas.checked = pendentes.length > 0 && pendentes.every(escola => gerenciarState.selecionadasNaoEnviadas.has(escola.id));
+  }
+
+  updateTabCounts();
+  atualizarBotaoEnviarNovas();
+}
+
+function gerarAcoesCondicionais(item){
+  switch(item.status){
+    case 'enviada':
+    case 'andamento':
+      return `<button class="btn" data-action="pausar" data-id="${item.id}" aria-label="Pausar missão">Pausar</button>`;
+    case 'pausada':
+      return `<button class="btn" data-action="reenviar" data-id="${item.id}" aria-label="Reenviar missão">Reenviar</button>`;
+    case 'concluida':
+      return `<span class="helper-text">Concluída</span>`;
+    case 'erro':
+      return `<button class="btn" data-action="reenviar" data-id="${item.id}" aria-label="Reenviar missão">Reenviar</button>
+              <span class="error-icon" aria-hidden="true" style="margin-left:8px">⚠️</span>`;
+    default:
+      return '';
+  }
+}
+
+function getStatusLabel(status){
+  const labels = {
+    'enviada': 'Enviada',
+    'andamento': 'Em andamento',
+    'pausada': 'Pausada',
+    'concluida': 'Concluída',
+    'erro': 'Erro'
+  };
+  return labels[status] || status;
+}
+
+function atualizarBotoesLote(){
+  if(gerenciarState.activeTab !== "enviadas"){
+    if(gerenciarElements.btnPausarLote) gerenciarElements.btnPausarLote.disabled = true;
+    if(gerenciarElements.btnReenviarLote) gerenciarElements.btnReenviarLote.disabled = true;
+    return;
+  }
+
+  const selecionadas = [...gerenciarState.selecionadas];
+  const itensSelecionados = missionSchools.filter(item => selecionadas.includes(item.id));
+
+  const pausaveis = itensSelecionados.filter(item =>
+    item.status === 'enviada' || item.status === 'andamento'
+  );
+
+  const reenviaveis = itensSelecionados.filter(item =>
+    item.status === 'pausada' || item.status === 'erro'
+  );
+
+  gerenciarElements.btnPausarLote.disabled = pausaveis.length === 0;
+  gerenciarElements.btnReenviarLote.disabled = reenviaveis.length === 0;
+}
+
+function atualizarBotaoEnviarNovas(){
+  if(!gerenciarElements.btnEnviarNovas) return;
+  if(gerenciarState.activeTab !== "nao-enviadas"){
+    gerenciarElements.btnEnviarNovas.disabled = true;
+    return;
+  }
+  gerenciarElements.btnEnviarNovas.disabled = gerenciarState.selecionadasNaoEnviadas.size === 0;
+}
+
+function toggleAllRows(){
+  if(gerenciarState.activeTab !== "enviadas") return;
+
+  const checkboxes = gerenciarElements.tabela.querySelectorAll(".rowCheck");
+  const checkAll = gerenciarElements.checkAll.checked;
+
+  checkboxes.forEach(cb => {
+    cb.checked = checkAll;
+    const id = Number(cb.closest("tr").dataset.id);
+    if(checkAll){
+      gerenciarState.selecionadas.add(id);
+    } else {
+      gerenciarState.selecionadas.delete(id);
+    }
+  });
+
+  atualizarBotoesLote();
+}
+
+function selectedIds(){
+  return [...gerenciarState.selecionadas];
+}
+
+function toggleAllNaoEnviadas(){
+  if(!gerenciarElements.checkAllNaoEnviadas) return;
+  const pendentes = filterNaoEnviadas();
+  gerenciarState.selecionadasNaoEnviadas.clear();
+
+  if(gerenciarElements.checkAllNaoEnviadas.checked){
+    pendentes.forEach(escola => gerenciarState.selecionadasNaoEnviadas.add(escola.id));
+  }
+
+  renderTabelaNaoEnviadas();
+}
+
+function selectedNaoEnviadasIds(){
+  return [...gerenciarState.selecionadasNaoEnviadas];
+}
+
+async function pauseMission(ids){
+  // PUT /missions/pause
+  ids.forEach(id => {
+    const item = missionSchools.find(m => m.id === id);
+    if(item) item.status = 'pausada';
+  });
+  renderTabelaGerenciar();
+  showToast("Missões pausadas", "", "success");
+}
+
+async function resumeMission(ids){
+  // PUT /missions/resume (reenviar)
+  ids.forEach(id => {
+    const item = missionSchools.find(m => m.id === id);
+    if(item) item.status = 'andamento';
+  });
+  renderTabelaGerenciar();
+  showToast("Missões reenviadas", "", "success");
+}
+
+async function sendToNewSchools(){
+  if(gerenciarState.activeTab !== "nao-enviadas"){
+    showToast("Abra a aba Nao enviada para selecionar escolas", "", "error");
+    return;
+  }
+
+  const ids = selectedNaoEnviadasIds();
+  if(ids.length === 0){
+    showToast("Selecione ao menos uma escola para enviar", "", "error");
+    return;
+  }
+
+  const hoje = new Date();
+  const inicioISO = hoje.toISOString().slice(0, 10);
+  const fimData = new Date(hoje);
+  fimData.setDate(fimData.getDate() + 30);
+  const fimISO = fimData.toISOString().slice(0, 10);
+
+  ids.forEach(id => {
+    const escola = escolas.find(e => e.id === id);
+    if(!escola || escola.enviada) return;
+
+    escola.enviada = true;
+
+    if(!missionSchools.some(m => m.escolaId === escola.id)){
+      missionSchools.push({
+        id: Date.now() + Math.random(),
+        escola: escola.nome,
+        escolaId: escola.id,
+        inicio: inicioISO,
+        fim: fimISO,
+        progresso: 0,
+        status: 'enviada'
+      });
+    }
+  });
+
+  gerenciarState.selecionadasNaoEnviadas.clear();
+  renderTabelaNaoEnviadas();
+  renderTabelaGerenciar();
+  showToast("Missoes enviadas para novas escolas", "", "success");
+}
+
+// Eventos do drawer Gerenciar
+document.addEventListener("click", (e) => {
+  const target = e.target;
+
+  if(target.id === "fecharDrawerGerenciar" || target === gerenciarElements.drawer){
+    closeDrawerGerenciar();
+    return;
+  }
+
+  if(target.closest("#drawerGerenciar")){
+    const action = target.dataset.action;
+    const id = Number(target.dataset.id);
+
+    if(action === "pausar"){
+      pauseMission([id]);
+    } else if(action === "reenviar"){
+      resumeMission([id]);
+    }
+  }
+
+  if(target.id === "btnPausarLote"){
+    pauseMission(selectedIds());
+  }
+
+  if(target.id === "btnReenviarLote"){
+    resumeMission(selectedIds());
+  }
+
+  if(target.id === "btnEnviarNovasEscolas"){
+    sendToNewSchools();
+  }
+});
+
+document.addEventListener("change", (e) => {
+  const target = e.target;
+
+  if(target.id === "filtroStatusGerenciar"){
+    gerenciarState.filtroStatus = target.value;
+    renderTabelaGerenciar();
+  }
+
+  if(target.id === "checkAllGerenciar"){
+    toggleAllRows();
+  }
+
+  if(target.classList.contains("rowCheck")){
+    const id = Number(target.closest("tr").dataset.id);
+    if(target.checked){
+      gerenciarState.selecionadas.add(id);
+    } else {
+      gerenciarState.selecionadas.delete(id);
+    }
+    atualizarBotoesLote();
+  }
+
+  if(target.id === "checkAllNaoEnviadas"){
+    toggleAllNaoEnviadas();
+  }
+
+  if(target.classList.contains("rowCheckNao")){
+    const id = Number(target.closest("tr").dataset.id);
+    if(target.checked){
+      gerenciarState.selecionadasNaoEnviadas.add(id);
+    } else {
+      gerenciarState.selecionadasNaoEnviadas.delete(id);
+    }
+
+    if(gerenciarElements.checkAllNaoEnviadas){
+      const pendentes = filterNaoEnviadas();
+      const todosMarcados = pendentes.length > 0 && pendentes.every(escola => gerenciarState.selecionadasNaoEnviadas.has(escola.id));
+      gerenciarElements.checkAllNaoEnviadas.checked = todosMarcados;
+    }
+
+    atualizarBotaoEnviarNovas();
+  }
+});
+
+document.addEventListener("input", (e) => {
+  const target = e.target;
+
+  if(target.id === "buscaEscola"){
+    gerenciarState.buscaEscola = target.value.trim();
+    renderTabelaGerenciar();
+  }
+
+  if(target.id === "buscaNaoEnviada"){
+    gerenciarState.buscaNaoEnviada = target.value.trim();
+    renderTabelaNaoEnviadas();
+  }
+});
+
+document.addEventListener("keydown", (e) => {
+  if(e.key === "Escape" && gerenciarElements.drawer?.classList.contains("open")){
+    closeDrawerGerenciar();
+  }
+});
+
+</script>
+
+</body>
+</html>
