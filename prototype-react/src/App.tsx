@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react"
 import {
   Avatar,
   AvatarFallback,
@@ -18,8 +19,17 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import { Checkbox } from "@/components/ui/checkbox"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Progress } from "@/components/ui/progress"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   Select,
   SelectContent,
@@ -45,7 +55,9 @@ import { cn } from "@/lib/utils"
 import {
   type LucideIcon,
   Book,
+  CalendarDays,
   ChartColumn,
+  ChevronDown,
   ChevronLeft,
   Clock3,
   Download,
@@ -143,6 +155,7 @@ const metrics: MetricCard[] = [
 ]
 
 type Mission = {
+  id: string
   title: string
   plus?: boolean
   usage: string
@@ -150,10 +163,17 @@ type Mission = {
   barColor: string
   status: string
   statusColor: string
+  drawerScenario: keyof typeof missionDrawerScenarios
+}
+
+type LegendItem = {
+  label: string
+  color: string
 }
 
 const missions: Mission[] = [
   {
+    id: "capitulo-1",
     title: "Capítulo 1: Sistema de numeração decimal e números naturais",
     plus: true,
     usage: "15 de 30",
@@ -161,16 +181,20 @@ const missions: Mission[] = [
     barColor: "bg-[#008143]",
     status: "Finalizado",
     statusColor: "text-[#008143]",
+    drawerScenario: "sent-active",
   },
   {
+    id: "capitulo-2",
     title: "Capítulo 2: Números Racionais",
     usage: "15 de 30",
     progress: 20,
     barColor: "bg-[#F04461]",
     status: "Crítico",
     statusColor: "text-[#B91C1C]",
+    drawerScenario: "unsent-basic",
   },
   {
+    id: "capitulo-3",
     title: "Capítulo 3: Números Decimais",
     plus: true,
     usage: "15 de 30",
@@ -178,37 +202,39 @@ const missions: Mission[] = [
     barColor: "bg-[#F04461]",
     status: "Crítico",
     statusColor: "text-[#B91C1C]",
+    drawerScenario: "unsent-with-period",
   },
   {
+    id: "complementar-1",
     title: "Complementar: Frações 1",
     usage: "15 de 30",
     progress: 0,
     barColor: "bg-slate-300",
     status: "Não iniciado",
     statusColor: "text-slate-400",
+    drawerScenario: "unsent-detail",
   },
   {
+    id: "complementar-2",
     title: "Complementar 2: Frações 2",
     usage: "15 de 30",
     progress: 20,
     barColor: "bg-[#FFB155]",
     status: "Moderado",
     statusColor: "text-[#B45309]",
+    drawerScenario: "sent-inactive",
   },
   {
+    id: "capitulo-4",
     title: "Capítulo 4: Números Inteiros",
     usage: "15 de 30",
     progress: 0,
     barColor: "bg-slate-300",
     status: "Não iniciado",
     statusColor: "text-slate-400",
+    drawerScenario: "unsent-basic",
   },
 ]
-
-type LegendItem = {
-  label: string
-  color: string
-}
 
 const progressLegend: LegendItem[] = [
   { label: "Finalizado ≥ 100%", color: "bg-[#008143]" },
@@ -225,11 +251,198 @@ const performanceLegend: LegendItem[] = [
   { label: "Abaixo do Básico < 25% de acertos", color: "bg-[#F04461]" },
 ]
 
+type DrawerTabKey = "sent" | "unsent"
+type DrawerStatusTone = "success" | "warning" | "neutral"
+type MissionStateTone = "info" | "warning"
+
+type DrawerSchoolRow = {
+  id: string
+  name: string
+  students: number
+  startDate: string
+  endDate: string
+  status: {
+    label: string
+    tone: DrawerStatusTone
+  }
+}
+
+type DrawerTabConfig = {
+  rows: DrawerSchoolRow[]
+  statusFilterOptions: string[]
+  defaultStatusFilter: string
+  ctaLabel: string
+  ctaVariant: "destructive" | "default"
+  showDefinePeriod: boolean
+  defaultDefinePeriod: boolean
+  detailPerSchoolAvailable: boolean
+  defaultDetailPerSchool: boolean
+  defaultSelectedAll: boolean
+}
+
+type MissionDrawerScenario = {
+  defaultTab: DrawerTabKey
+  missionState?: string
+  missionStateTone?: MissionStateTone
+  usage: string
+  tabOverrides?: Partial<Record<DrawerTabKey, Partial<DrawerTabConfig>>>
+}
+
+const statusToneClasses: Record<DrawerStatusTone, string> = {
+  success: "bg-[#CFF8DF] text-[#016B3D]",
+  warning: "bg-[#FFE7C2] text-[#B45309]",
+  neutral: "bg-slate-200 text-slate-600",
+}
+
+const missionStateToneClasses: Record<MissionStateTone, string> = {
+  info: "text-[#4A3BD4]",
+  warning: "text-[#B45309]",
+}
+
+const sentRows: DrawerSchoolRow[] = [
+  {
+    id: "sent-1",
+    name: "EMEF Osasco Centro",
+    students: 320,
+    startDate: "09/08/2023",
+    endDate: "09/08/2023",
+    status: { label: "Iniciada", tone: "success" },
+  },
+  {
+    id: "sent-2",
+    name: "EMEF Osasco Centro",
+    students: 320,
+    startDate: "09/08/2023",
+    endDate: "09/08/2023",
+    status: { label: "Iniciada", tone: "success" },
+  },
+  {
+    id: "sent-3",
+    name: "EMEF Osasco Centro",
+    students: 320,
+    startDate: "09/08/2023",
+    endDate: "09/08/2023",
+    status: { label: "Iniciada", tone: "success" },
+  },
+]
+
+const unsentRows: DrawerSchoolRow[] = [
+  {
+    id: "unsent-1",
+    name: "EMEF Osasco Centro",
+    students: 320,
+    startDate: "09/08/2023",
+    endDate: "09/08/2023",
+    status: { label: "Não enviada", tone: "warning" },
+  },
+  {
+    id: "unsent-2",
+    name: "EMEF Osasco Centro",
+    students: 320,
+    startDate: "09/08/2023",
+    endDate: "09/08/2023",
+    status: { label: "Não enviada", tone: "warning" },
+  },
+  {
+    id: "unsent-3",
+    name: "EMEF Osasco Centro",
+    students: 320,
+    startDate: "09/08/2023",
+    endDate: "09/08/2023",
+    status: { label: "Não enviada", tone: "warning" },
+  },
+]
+
+const drawerTabBase: Record<DrawerTabKey, DrawerTabConfig> = {
+  sent: {
+    rows: sentRows,
+    statusFilterOptions: ["Todas", "Iniciada", "Pausada"],
+    defaultStatusFilter: "Todas",
+    ctaLabel: "Pausar",
+    ctaVariant: "destructive",
+    showDefinePeriod: false,
+    defaultDefinePeriod: false,
+    detailPerSchoolAvailable: false,
+    defaultDetailPerSchool: false,
+    defaultSelectedAll: false,
+  },
+  unsent: {
+    rows: unsentRows,
+    statusFilterOptions: ["Todas", "Não enviada"],
+    defaultStatusFilter: "Todas",
+    ctaLabel: "Enviar",
+    ctaVariant: "default",
+    showDefinePeriod: true,
+    defaultDefinePeriod: false,
+    detailPerSchoolAvailable: true,
+    defaultDetailPerSchool: false,
+    defaultSelectedAll: true,
+  },
+}
+
+const missionDrawerScenarios: Record<string, MissionDrawerScenario> = {
+  "sent-active": {
+    defaultTab: "sent",
+    usage: "Uso na rede 2 de 20",
+  },
+  "sent-inactive": {
+    defaultTab: "sent",
+    missionState: "Inativa",
+    missionStateTone: "warning",
+    usage: "Uso na rede 0 de 20",
+    tabOverrides: {
+      sent: {
+        defaultSelectedAll: true,
+      },
+    },
+  },
+  "unsent-basic": {
+    defaultTab: "unsent",
+    missionState: "Inativa",
+    missionStateTone: "warning",
+    usage: "Uso na rede 0 de 20",
+    tabOverrides: {
+      unsent: {
+        defaultDefinePeriod: false,
+        defaultDetailPerSchool: false,
+      },
+    },
+  },
+  "unsent-with-period": {
+    defaultTab: "unsent",
+    missionState: "Inativa",
+    missionStateTone: "warning",
+    usage: "Uso na rede 0 de 20",
+    tabOverrides: {
+      unsent: {
+        defaultDefinePeriod: true,
+        defaultDetailPerSchool: false,
+      },
+    },
+  },
+  "unsent-detail": {
+    defaultTab: "unsent",
+    missionState: "Inativa",
+    missionStateTone: "warning",
+    usage: "Uso na rede 0 de 20",
+    tabOverrides: {
+      unsent: {
+        defaultDefinePeriod: true,
+        defaultDetailPerSchool: true,
+      },
+    },
+  },
+}
+
+const missionDrawerDefaultScenarioKey: keyof typeof missionDrawerScenarios = "sent-active"
+
 export default function App() {
+  const [openMissionId, setOpenMissionId] = useState<string | null>(null)
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#F3F4F8] text-slate-900">
       <div className="mx-auto grid min-h-screen max-w-[1440px] lg:grid-cols-[260px_1fr]">
-        <AppSidebar />
+        <Sidebar />
         <div className="flex min-h-screen flex-col">
           <Topbar />
           <main className="flex-1 space-y-6 overflow-y-auto bg-transparent p-4 sm:p-6">
@@ -241,16 +454,21 @@ export default function App() {
                 </Button>
               </div>
               <PageContent />
+              <MissionSection onOpenMission={setOpenMissionId} />
             </section>
             <Footer />
           </main>
         </div>
       </div>
+      <MissionDrawer
+        missionId={openMissionId}
+        onClose={() => setOpenMissionId(null)}
+      />
     </div>
   )
 }
 
-function AppSidebar() {
+function Sidebar() {
   return (
     <aside className="hidden border-r border-slate-200 bg-white px-6 py-8 lg:flex lg:w-[260px] lg:flex-col lg:gap-10">
       <div className="flex items-center gap-3">
@@ -378,7 +596,6 @@ function PageContent() {
         <TabsContent value="livros" className="space-y-6 focus-visible:outline-none">
           <FiltersRow />
           <MetricsGrid />
-          <MissionSection />
         </TabsContent>
 
         <TabsContent value="escolas">
@@ -448,7 +665,8 @@ function MetricsGrid() {
                   <div key={`${metric.title}-progress-${index}`} className="space-y-1">
                     <div className="flex items-center justify-between text-sm font-semibold text-slate-900">
                       <span>{entry.label}</span>
-                      <span>{entry.value}
+                      <span>
+                        {entry.value}
                         {entry.suffix ?? "%"}
                       </span>
                     </div>
@@ -495,7 +713,11 @@ function MetricsGrid() {
   )
 }
 
-function MissionSection() {
+function MissionSection({
+  onOpenMission,
+}: {
+  onOpenMission: (missionId: string) => void
+}) {
   return (
     <div className="space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -543,7 +765,7 @@ function MissionSection() {
           </TableHeader>
           <TableBody>
             {missions.map((mission) => (
-              <TableRow key={mission.title} className="border-b border-slate-100 last:border-0">
+              <TableRow key={mission.id} className="border-b border-slate-100 last:border-0">
                 <TableCell className="space-y-1 text-sm font-semibold text-slate-900">
                   <div className="flex flex-wrap items-center gap-2">
                     <span>{mission.title}</span>
@@ -575,6 +797,7 @@ function MissionSection() {
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8 rounded-full text-[#4A3BD4] hover:bg-[#EFE8FF]"
+                    onClick={() => onOpenMission(mission.id)}
                   >
                     <Settings className="h-4 w-4" />
                   </Button>
@@ -600,6 +823,392 @@ function MissionSection() {
       <Legend title="Progresso" items={progressLegend} />
       <Legend title="Rendimento" items={performanceLegend} />
     </div>
+  )
+}
+
+function MissionDrawer({
+  missionId,
+  onClose,
+}: {
+  missionId: string | null
+  onClose: () => void
+}) {
+  const mission = useMemo(() => missions.find((item) => item.id === missionId), [missionId])
+  const scenarioKey = mission?.drawerScenario ?? missionDrawerDefaultScenarioKey
+  const scenario = missionDrawerScenarios[scenarioKey]
+
+  return (
+    <Sheet open={Boolean(missionId)} onOpenChange={(open) => (open ? undefined : onClose())}>
+      <SheetContent className="flex w-full max-w-[1100px] flex-col rounded-l-[32px] border-l border-slate-200 bg-white p-0">
+        <SheetHeader className="flex flex-row items-center justify-between border-b border-slate-200 px-8 py-5">
+          <SheetTitle className="text-lg font-semibold text-slate-900">
+            Enviar missão em lote
+          </SheetTitle>
+        </SheetHeader>
+        <ScrollArea className="flex-1">
+          <div className="px-8 py-6">
+            {mission ? (
+              <MissionDrawerContent mission={mission} scenario={scenario} />
+            ) : null}
+          </div>
+        </ScrollArea>
+      </SheetContent>
+    </Sheet>
+  )
+}
+
+function MissionDrawerContent({
+  mission,
+  scenario,
+}: {
+  mission: Mission
+  scenario: MissionDrawerScenario
+}) {
+  const tabConfigs = useMemo(() => buildTabConfigs(scenario), [scenario])
+  const [tab, setTab] = useState<DrawerTabKey>(scenario.defaultTab)
+  const [search, setSearch] = useState("")
+  const [statusFilter, setStatusFilter] = useState(
+    tabConfigs[scenario.defaultTab].defaultStatusFilter
+  )
+  const [selectedSchools, setSelectedSchools] = useState<Set<string>>(
+    tabConfigs[scenario.defaultTab].defaultSelectedAll
+      ? new Set(tabConfigs[scenario.defaultTab].rows.map((row) => row.id))
+      : new Set()
+  )
+  const [definePeriod, setDefinePeriod] = useState(
+    tabConfigs[scenario.defaultTab].defaultDefinePeriod
+  )
+  const [detailPerSchool, setDetailPerSchool] = useState(
+    tabConfigs[scenario.defaultTab].defaultDetailPerSchool
+  )
+
+  useEffect(() => {
+    setTab(scenario.defaultTab)
+    setSearch("")
+  }, [scenario])
+
+  useEffect(() => {
+    const config = tabConfigs[tab]
+    setStatusFilter(config.defaultStatusFilter)
+    setSelectedSchools(
+      config.defaultSelectedAll
+        ? new Set(config.rows.map((row) => row.id))
+        : new Set()
+    )
+    setDefinePeriod(config.defaultDefinePeriod)
+    setDetailPerSchool(config.defaultDetailPerSchool)
+  }, [tab, tabConfigs])
+
+  const currentConfig = tabConfigs[tab]
+
+  const filteredRows = useMemo(() => {
+    return currentConfig.rows.filter((row) => {
+      const matchesSearch = row.name.toLowerCase().includes(search.toLowerCase())
+      const matchesStatus =
+        statusFilter === "Todas" || row.status.label === statusFilter
+      return matchesSearch && matchesStatus
+    })
+  }, [currentConfig.rows, search, statusFilter])
+
+  const allVisibleSelected =
+    filteredRows.length > 0 &&
+    filteredRows.every((row) => selectedSchools.has(row.id))
+  const someSelected =
+    filteredRows.some((row) => selectedSchools.has(row.id)) && !allVisibleSelected
+
+  const handleSelectAll = (checked: boolean | "indeterminate") => {
+    if (checked) {
+      const updated = new Set(selectedSchools)
+      filteredRows.forEach((row) => updated.add(row.id))
+      setSelectedSchools(updated)
+    } else {
+      const updated = new Set(selectedSchools)
+      filteredRows.forEach((row) => updated.delete(row.id))
+      setSelectedSchools(updated)
+    }
+  }
+
+  const toggleSchool = (id: string, checked: boolean | "indeterminate") => {
+    setSelectedSchools((prev) => {
+      const updated = new Set(prev)
+      if (checked) {
+        updated.add(id)
+      } else {
+        updated.delete(id)
+      }
+      return updated
+    })
+  }
+
+  return (
+    <div className="space-y-6">
+      <section className="rounded-3xl border border-[#E7E7F4] bg-[#F9F8FF] p-6 shadow-[0_12px_30px_rgba(120,108,196,0.12)]">
+        <p className="text-sm font-semibold text-[#4A3BD4]">Missão selecionada</p>
+        <div className="mt-1 flex flex-wrap items-center gap-3 text-lg font-semibold text-slate-900">
+          {mission.title}
+          {mission.plus ? (
+            <Badge className="rounded-full bg-[#EFE8FF] px-3 py-1 text-xs font-semibold text-[#4A3BD4]">
+              Missão Plus
+            </Badge>
+          ) : null}
+        </div>
+        <p className="mt-2 text-sm text-muted-foreground">
+          {scenario.missionState ? (
+            <span className={cn("font-semibold", missionStateToneClasses[scenario.missionStateTone ?? "info"])}>
+              {scenario.missionState}
+            </span>
+          ) : null}
+          {scenario.missionState ? " · " : null}
+          {scenario.usage}
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="text-lg font-semibold text-slate-900">Escolas</h3>
+        </div>
+        <Tabs value={tab} onValueChange={(value) => setTab(value as DrawerTabKey)}>
+          <TabsList className="gap-2 rounded-full bg-[#EFEAFC] p-1">
+            <TabsTrigger
+              value="sent"
+              className="rounded-full px-5 py-2 text-sm font-semibold text-[#7360DF] data-[state=active]:bg-white data-[state=active]:text-[#4A3BD4]"
+            >
+              Enviadas
+            </TabsTrigger>
+            <TabsTrigger
+              value="unsent"
+              className="rounded-full px-5 py-2 text-sm font-semibold text-[#7360DF] data-[state=active]:bg-white data-[state=active]:text-[#4A3BD4]"
+            >
+              Não enviada
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </section>
+
+      <section className="space-y-4">
+        <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_220px]">
+          <div className="space-y-2">
+            <Label htmlFor="search-school" className="text-xs text-muted-foreground">
+              Buscar escola
+            </Label>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                id="search-school"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                placeholder="Digite o nome da escola"
+                className="h-11 rounded-xl border-slate-200 pl-9 text-sm"
+              />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <Label className="text-xs text-muted-foreground">Status de envio</Label>
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="h-11 rounded-xl border-slate-200 text-sm">
+                <SelectValue placeholder="Filtrar" />
+              </SelectTrigger>
+              <SelectContent>
+                {currentConfig.statusFilterOptions.map((option) => (
+                  <SelectItem key={option} value={option}>
+                    {option}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        <div className="overflow-hidden rounded-2xl border border-slate-200">
+          <Table>
+            <TableHeader className="bg-[#F7F6FF] text-xs uppercase tracking-wide text-[#7C7DA6]">
+              <TableRow>
+                <TableHead className="w-[40px]">
+                  <Checkbox
+                    checked={allVisibleSelected ? true : someSelected ? "indeterminate" : false}
+                    onCheckedChange={handleSelectAll}
+                    aria-label="Selecionar todas as escolas visíveis"
+                  />
+                </TableHead>
+                <TableHead className="w-[35%]">
+                  <div className="flex items-center gap-1">
+                    Escolas
+                    <ChevronDown className="h-3 w-3" />
+                  </div>
+                </TableHead>
+                <TableHead>
+                  <div className="flex items-center gap-1">
+                    Alunos
+                    <ChevronDown className="h-3 w-3" />
+                  </div>
+                </TableHead>
+                <TableHead>
+                  <div className="flex items-center gap-1">
+                    Início
+                    <ChevronDown className="h-3 w-3" />
+                  </div>
+                </TableHead>
+                <TableHead>
+                  <div className="flex items-center gap-1">
+                    Fim
+                    <ChevronDown className="h-3 w-3" />
+                  </div>
+                </TableHead>
+                <TableHead className="text-right">
+                  <div className="inline-flex items-center gap-1">
+                    Status
+                    <ChevronDown className="h-3 w-3" />
+                  </div>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredRows.map((row) => (
+                <TableRow key={row.id} className="border-t border-slate-100">
+                  <TableCell>
+                    <Checkbox
+                      checked={selectedSchools.has(row.id)}
+                      onCheckedChange={(checked) => toggleSchool(row.id, checked)}
+                      aria-label={`Selecionar ${row.name}`}
+                    />
+                  </TableCell>
+                  <TableCell className="text-sm font-semibold text-[#3E3D60]">{row.name}</TableCell>
+                  <TableCell className="text-sm text-muted-foreground">
+                    {row.students.toLocaleString("pt-BR")} alunos
+                  </TableCell>
+                  <TableCell className="text-sm text-muted-foreground">{row.startDate}</TableCell>
+                  <TableCell className="text-sm text-muted-foreground">{row.endDate}</TableCell>
+                  <TableCell className="text-right">
+                    <Badge className={cn("rounded-full px-3 py-1 text-xs font-semibold", statusToneClasses[row.status.tone])}>
+                      {row.status.label}
+                    </Badge>
+                  </TableCell>
+                </TableRow>
+              ))}
+              {filteredRows.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={6} className="py-8 text-center text-sm text-muted-foreground">
+                    Nenhuma escola encontrada para o filtro selecionado.
+                  </TableCell>
+                </TableRow>
+              ) : null}
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+
+      {currentConfig.showDefinePeriod ? (
+        <section className="space-y-4 rounded-2xl bg-[#F7F6FF] p-5">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <Checkbox
+                id="toggle-period"
+                checked={definePeriod}
+                onCheckedChange={(value) => setDefinePeriod(Boolean(value))}
+                className="h-5 w-5 rounded-lg border-[#4A3BD4]/40"
+              />
+              <Label
+                htmlFor="toggle-period"
+                className="text-sm font-semibold text-[#4A3BD4]"
+              >
+                Definir um período?
+              </Label>
+            </div>
+            {definePeriod && currentConfig.detailPerSchoolAvailable ? (
+              <Button
+                variant="outline"
+                className="rounded-full border-[#4A3BD4] px-4 text-sm font-semibold text-[#4A3BD4] hover:bg-[#EFE8FF]"
+                onClick={() => setDetailPerSchool((prev) => !prev)}
+              >
+                {detailPerSchool ? "Agrupar por período" : "Detalhar por escola?"}
+              </Button>
+            ) : null}
+          </div>
+
+          {definePeriod ? (
+            detailPerSchool ? (
+              <div className="space-y-3 rounded-2xl border border-[#E1E0F2] bg-white p-4">
+                {currentConfig.rows.map((row) => (
+                  <div
+                    key={`detail-${row.id}`}
+                    className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_repeat(2,minmax(0,180px))]"
+                  >
+                    <div className="text-sm font-semibold text-slate-700">
+                      {row.name}
+                    </div>
+                    <DateField label="Início" value="18/10/2023" />
+                    <DateField label="Fim" value="16/11/2023" />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="grid gap-3 sm:grid-cols-[repeat(2,minmax(0,200px))]">
+                <DateField label="Início" value="16/10/2023" />
+                <DateField label="Fim" value="17/11/2023" />
+              </div>
+            )
+          ) : null}
+        </section>
+      ) : null}
+
+      <section className="flex justify-center">
+        <Button
+          variant={currentConfig.ctaVariant}
+          className={cn(
+            "w-48 rounded-full text-sm font-semibold",
+            currentConfig.ctaVariant === "destructive"
+              ? "bg-[#F4766E] text-white hover:bg-[#E5675E]"
+              : "bg-[#4A3BD4] text-white hover:bg-[#3A2DB8]"
+          )}
+        >
+          {currentConfig.ctaLabel}
+        </Button>
+      </section>
+    </div>
+  )
+}
+
+function DateField({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="space-y-1.5">
+      <Label className="text-xs text-muted-foreground">{label}</Label>
+      <Button
+        variant="outline"
+        className="w-full justify-between rounded-xl border-slate-200 px-3 text-sm font-semibold text-slate-600 hover:bg-[#F3F0FF]"
+      >
+        <span>{value}</span>
+        <CalendarDays className="h-4 w-4 text-[#4A3BD4]" />
+      </Button>
+    </div>
+  )
+}
+
+function buildTabConfigs(
+  scenario: MissionDrawerScenario
+): Record<DrawerTabKey, DrawerTabConfig> {
+  return (["sent", "unsent"] as DrawerTabKey[]).reduce(
+    (acc, key) => {
+      const base = drawerTabBase[key]
+      const overrides = scenario.tabOverrides?.[key] ?? {}
+      acc[key] = {
+        ...base,
+        ...overrides,
+        rows: overrides.rows ?? base.rows,
+        statusFilterOptions: overrides.statusFilterOptions ?? base.statusFilterOptions,
+        defaultStatusFilter: overrides.defaultStatusFilter ?? base.defaultStatusFilter,
+        ctaLabel: overrides.ctaLabel ?? base.ctaLabel,
+        ctaVariant: overrides.ctaVariant ?? base.ctaVariant,
+        showDefinePeriod: overrides.showDefinePeriod ?? base.showDefinePeriod,
+        defaultDefinePeriod: overrides.defaultDefinePeriod ?? base.defaultDefinePeriod,
+        detailPerSchoolAvailable:
+          overrides.detailPerSchoolAvailable ?? base.detailPerSchoolAvailable,
+        defaultDetailPerSchool:
+          overrides.defaultDetailPerSchool ?? base.defaultDetailPerSchool,
+        defaultSelectedAll: overrides.defaultSelectedAll ?? base.defaultSelectedAll,
+      }
+      return acc
+    },
+    {} as Record<DrawerTabKey, DrawerTabConfig>
   )
 }
 
