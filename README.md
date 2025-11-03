@@ -29,6 +29,75 @@ npm run test:coverage
 
 Vitest esta configurado com Testing Library e ambiente JSDOM. Ha um teste de fumaca para o componente `Dashboard` validando a renderizacao dos mocks centralizados.
 
+## Verificacao automatica de ambiente
+
+Para usuarios nao-tecnicos ou quando o ambiente parecer "quebrado", execute:
+
+```powershell
+npm run check-env
+```
+
+Este comando verifica automaticamente:
+- ✅ Dependencias instaladas
+- ✅ TypeScript compila sem erros
+- ✅ Todos os testes passam
+- ✅ Build de producao funciona
+
+Se tudo estiver OK, voce vera uma mensagem de sucesso com instrucoes de uso.
+
+## Sistema de Configuracao de IA
+
+Este projeto possui um **sistema robusto de instrucoes** para GitHub Copilot e Cursor AI, garantindo que todo codigo gerado siga padroes de qualidade rigorosos.
+
+### Arquivos de configuracao
+
+| Arquivo | Proposito | Usado por |
+| ------- | --------- | --------- |
+| `.github/copilot-instructions.md` | Instrucoes completas para Copilot | GitHub Copilot |
+| `.cursorrules` | Instrucoes para Cursor AI | Cursor AI |
+| `.prompts/instructions.md` | Prompt orquestrador principal | Ambos |
+| `.prompts/blocks/` | Blocos modulares de instrucoes | Sistema de prompts |
+
+### Padroes obrigatorios (NAO NEGOCIAVEIS)
+
+1. **Idioma:** 100% portugues do Brasil (pt-BR) — codigo, commits, documentacao, testes
+2. **Apresentar 2-3 opcoes** com pros/contras e custo/prazo antes de implementar
+3. **Pedir confirmacao** antes de acoes irreversiveis (delecoes, migracoes)
+4. **Finalizar com autoavaliacao:**
+   - Clareza (0-10)
+   - Completude (0-10)
+   - Eficiencia (0-10)
+   - Nivel de confianca (0-100%)
+
+### Stack padrao
+
+- **Frontend:** Next.js (App Router) + React + TypeScript + Tailwind + shadcn/ui
+- **Estado:** Zustand + React Query
+- **Backend:** Node.js + NestJS + Fastify
+- **Banco:** PostgreSQL + Prisma
+- **Infra:** Redis, BullMQ, S3, Docker, GitHub Actions
+- **Testes:** Vitest + Playwright + Storybook
+- **Arquitetura:** Limpa/Hexagonal (Dominio → Aplicacao → Infra → Interface)
+
+### Definicao de Pronto (DoD)
+
+Uma entrega so e "pronta" quando:
+
+- [ ] Codigo compila e todos os testes passam (≥80% cobertura)
+- [ ] Flags e coortes documentadas, com TTL e owner (se aplicavel)
+- [ ] Logs estruturados e SLIs verificados
+- [ ] Documentacao atualizada (README/ADR/Storybook/OpenAPI)
+- [ ] Checklist de PR completo
+- [ ] Rollback documentado
+
+### Como validar configuracoes
+
+Para verificar se Copilot/Cursor estao seguindo as instrucoes:
+
+1. **Teste simples:** Peca ao Copilot para criar um componente — ele deve apresentar 2-3 opcoes, usar pt-BR e finalizar com autoavaliacao
+2. **Verifique logs:** Copilot deve mencionar `.github/copilot-instructions.md` como fonte
+3. **Cursor AI:** Deve referenciar `.cursorrules` e `.prompts/instructions.md`
+
 ## Troubleshooting rapido
 
 - Execute `npm install` sempre que o `package-lock.json` mudar.

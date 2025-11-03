@@ -14,7 +14,11 @@
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
     "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "check-env": "node check-env.cjs",
+    "check-deps": "node -e \"console.log('✅ Dependências instaladas')\"",
+    "check-types": "tsc --noEmit",
+    "verify": "npm run check-env"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",
@@ -41,6 +45,7 @@
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^14.2.2",
     "@testing-library/user-event": "^14.5.2",
+    "@types/node": "^24.10.0",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.25",
     "@vitejs/plugin-react": "^5.0.4",

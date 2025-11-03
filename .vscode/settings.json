@@ -8,5 +8,12 @@
     "typescriptreact"
   ],
   "typescript.tsserver.maxTsServerMemory": 4096,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "files.associations": {
+    "*.md": "markdown"
+  },
+  "github.copilot.enable": {
+    "*": true
+  },
+  "github.copilot.inlineSuggest.enable": true
 }
