@@ -21,7 +21,6 @@ function getIndicatorClass(status: string){
 }
 
 export default function Dashboard(){
-
   return (
     <div className="dashboard">
       <div className="cards">
@@ -53,10 +52,10 @@ export default function Dashboard(){
             </tr>
           </thead>
           <tbody>
-            {missions.map(m => (
-              <tr key={m.id} className="mission-row">
+            {missions.map((m, i) => (
+              <tr key={m.id || i} className="mission-row">
                 <td className="m-title">{m.title}</td>
-                <td className="m-usage">15 de 30</td>
+                <td className="m-usage">{m.usage || '0 de 30'}</td>
                 <td style={{width:360}}>
                   <div className="progress-cell">
                     <div className="progress-row">

@@ -4,8 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+  "dev": "vite",
+  "check-mocks": "node ./prototype-react/scripts/check-mocks.cjs",
+  "prebuild": "npm run check-mocks",
+  "build": "npm run check-mocks && vite build",
     "build:watch": "vite build --watch",
     "preview": "vite preview",
     "preview:live": "concurrently \"npm:build:watch\" \"npm run preview -- --host\"",

@@ -53,6 +53,11 @@ import {
 } from "@/components/ui/table"
 import { cn } from "@/lib/utils"
 import {
+  missions,
+  type Mission,
+  type MissionDrawerScenarioKey,
+} from "./mocks/missions"
+import {
   type LucideIcon,
   Book,
   CalendarDays,
@@ -91,28 +96,15 @@ const navItems: NavItem[] = [
   { label: "Cadastros", icon: FileText },
   { label: "Ajudas e Materiais", icon: FileText },
 ]
-
-type MetricEntry =
-  | { type: "progress"; label: string; value: number; suffix?: string; color: string }
-  | { type: "badge"; label: string; value: string; className: string }
-  | { type: "plain"; text: string; subText?: string }
-
-type MetricCard = {
-  title: string
-  icon: LucideIcon
-  entries: MetricEntry[]
-  footer?: string
-}
-
 const metrics: MetricCard[] = [
   {
-    title: "Progresso mÃ©dio",
+    title: "Progresso médio",
     icon: Gauge,
     entries: [
-      { type: "progress", label: "Em missÃµes totais", value: 20, suffix: "%", color: "bg-[#F04461]" },
-      { type: "progress", label: "Em missÃµes enviadas", value: 100, suffix: "%", color: "bg-[#008143]" },
+      { type: "progress", label: "Em missões totais", value: 20, suffix: "%", color: "bg-[#F04461]" },
+      { type: "progress", label: "Em missões enviadas", value: 100, suffix: "%", color: "bg-[#008143]" },
     ],
-    footer: "21.600 missÃµes enviadas / 108.000 missÃµes totais",
+    footer: "21.600 missões enviadas / 108.000 missões totais",
   },
   {
     title: "Alunos que jogaram",
@@ -128,113 +120,48 @@ const metrics: MetricCard[] = [
     footer: "Cobertura dentro da rede",
   },
   {
-    title: "Rendimento mÃ©dio",
+    title: "Rendimento médio",
     icon: Target,
     entries: [
       {
         type: "badge",
         label: "95% de acertos",
-        value: "AvanÃ§ado",
+        value: "Avançado",
         className: "bg-[#CFF8DF] text-[#016B3D]",
       },
     ],
-    footer: "MÃ©dia geral da rede",
+    footer: "Média geral da rede",
   },
   {
     title: "Tempo total investido",
     icon: Clock3,
     entries: [{ type: "plain", text: "262h 29min 20s" }],
-    footer: "SomatÃ³rio de tempo em missÃµes",
+    footer: "Somatório de tempo em missões",
   },
   {
     title: "Total de desafios realizados",
     icon: ListChecks,
     entries: [{ type: "plain", text: "300.800", subText: "desafios realizados" }],
-    footer: "AtÃ© 11 de marÃ§o de 2024",
+    footer: "Até 11 de março de 2024",
   },
 ]
 
-type Mission = {
-  id: string
+type MetricEntry =
+  | { type: "progress"; label: string; value: number; suffix?: string; color: string }
+  | { type: "badge"; label: string; value: string; className: string }
+  | { type: "plain"; text: string; subText?: string }
+
+type MetricCard = {
   title: string
-  plus?: boolean
-  usage: string
-  progress: number
-  barColor: string
-  status: string
-  statusColor: string
-  drawerScenario: keyof typeof missionDrawerScenarios
+  icon: LucideIcon
+  entries: MetricEntry[]
+  footer?: string
 }
 
 type LegendItem = {
   label: string
   color: string
 }
-
-const missions: Mission[] = [
-  {
-    id: "capitulo-1",
-    title: "CapÃ­tulo 1: Sistema de numeraÃ§Ã£o decimal e nÃºmeros naturais",
-    plus: true,
-    usage: "15 de 30",
-    progress: 100,
-    barColor: "bg-[#008143]",
-    status: "Finalizado",
-    statusColor: "text-[#008143]",
-    drawerScenario: "sent-active",
-  },
-  {
-    id: "capitulo-2",
-    title: "CapÃ­tulo 2: NÃºmeros Racionais",
-    usage: "15 de 30",
-    progress: 20,
-    barColor: "bg-[#F04461]",
-    status: "CrÃ­tico",
-    statusColor: "text-[#B91C1C]",
-    drawerScenario: "unsent-basic",
-  },
-  {
-    id: "capitulo-3",
-    title: "CapÃ­tulo 3: NÃºmeros Decimais",
-    plus: true,
-    usage: "15 de 30",
-    progress: 20,
-    barColor: "bg-[#F04461]",
-    status: "CrÃ­tico",
-    statusColor: "text-[#B91C1C]",
-    drawerScenario: "unsent-with-period",
-  },
-  {
-    id: "complementar-1",
-    title: "Complementar: FraÃ§Ãµes 1",
-    usage: "15 de 30",
-    progress: 0,
-    barColor: "bg-slate-300",
-    status: "NÃ£o iniciado",
-    statusColor: "text-slate-400",
-    drawerScenario: "unsent-detail",
-  },
-  {
-    id: "complementar-2",
-    title: "Complementar 2: FraÃ§Ãµes 2",
-    usage: "15 de 30",
-    progress: 20,
-    barColor: "bg-[#FFB155]",
-    status: "Moderado",
-    statusColor: "text-[#B45309]",
-    drawerScenario: "sent-inactive",
-  },
-  {
-    id: "capitulo-4",
-    title: "CapÃ­tulo 4: NÃºmeros Inteiros",
-    usage: "15 de 30",
-    progress: 0,
-    barColor: "bg-slate-300",
-    status: "NÃ£o iniciado",
-    statusColor: "text-slate-400",
-    drawerScenario: "unsent-basic",
-  },
-]
 
 const performanceLegend: LegendItem[] = [
   { label: "AvanÃ§ado â‰¥ 70% de acertos", color: "bg-[#008143]" },
@@ -372,7 +299,7 @@ const drawerTabBase: Record<DrawerTabKey, DrawerTabConfig> = {
   },
 }
 
-const missionDrawerScenarios: Record<string, MissionDrawerScenario> = {
+const missionDrawerScenarios: Record<MissionDrawerScenarioKey, MissionDrawerScenario> = {
   "sent-active": {
     defaultTab: "sent",
     usage: "Uso na rede 2 de 20",
@@ -426,7 +353,7 @@ const missionDrawerScenarios: Record<string, MissionDrawerScenario> = {
   },
 }
 
-const missionDrawerDefaultScenarioKey: keyof typeof missionDrawerScenarios = "sent-active"
+const missionDrawerDefaultScenarioKey: MissionDrawerScenarioKey = "sent-active"
 
 export default function App() {
   const [openMissionId, setOpenMissionId] = useState<string | null>(null)
@@ -1245,4 +1172,3 @@ function Footer() {
     </footer>
   )
 }
-
