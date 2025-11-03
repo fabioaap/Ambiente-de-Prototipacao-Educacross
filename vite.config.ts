@@ -10,10 +10,15 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src')
-    }
+      "@": path.resolve(__dirname, "src"),
+    },
   },
   server: {
-    port: 5173
-  }
+    port: 5173,
+  },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: path.resolve(__dirname, "src/test/setup.ts"),
+  },
 })
