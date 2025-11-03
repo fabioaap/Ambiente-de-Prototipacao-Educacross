@@ -1,0 +1,6 @@
+:root {
+  --color-brand-primary: #5B5BD6;
+  --color-text-default: var(--color-brand-primary);
+  --size-radius-lg: 12px;
+  --size-spacing-md: 16px;
+}
