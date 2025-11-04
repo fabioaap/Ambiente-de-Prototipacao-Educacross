@@ -40,10 +40,34 @@ npm run check-env
 Este comando verifica automaticamente:
 - ✅ Dependencias instaladas
 - ✅ TypeScript compila sem erros
-- ✅ Todos os testes passam
+- ✅ Todos os testes Passam
 - ✅ Build de producao funciona
 
 Se tudo estiver OK, voce vera uma mensagem de sucesso com instrucoes de uso.
+
+## Protótipos
+
+### Stage01 - Landing Page Vuexy Inspired
+
+Protótipo de landing page inspirado na estética moderna do template Vuexy, implementado com Next.js, React, TypeScript e Tailwind CSS.
+
+**Características:**
+- Design system consistente com cores e tipografia inspiradas no Vuexy
+- Componentes reutilizáveis (`shadcn/ui`)
+- Layout responsivo e moderno
+- Seções: Herói, Como Funciona, Benefícios, CTA e Rodapé
+
+**Como acessar:**
+```powershell
+npm run dev
+# Acesse: http://localhost:5174/prototipo/stage01
+```
+
+**Arquivos relacionados:**
+- `apps/prototipo/stage01/page.tsx` - Página principal
+- `apps/prototipo/stage01/components/` - Componentes das seções
+- `tailwind.config.js` - Configuração com cores Vuexy
+- `apps/prototipo/stage01/page.test.tsx` - Testes da página
 
 ## Sistema de Configuracao de IA
 
