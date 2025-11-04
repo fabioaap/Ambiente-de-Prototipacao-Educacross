@@ -1,0 +1,219 @@
+import { Meta, Canvas, Story } from '@storybook/blocks'
+
+<Meta title="🏠 Welcome" />
+
+# 🚀 Plataforma de Prototipagem Unificada - Educacross
+
+Bem-vindo ao **Storybook** da plataforma de envio de missões em lote!
+
+Este é o hub centralizado para documentação, componentes e validação de jornadas de usuário.
+
+---
+
+## 📚 O que você encontra aqui?
+
+### 🎨 **Componentes UI**
+Biblioteca de componentes reutilizáveis com variantes e estados:
+- **Button** — Múltiplas variantes (default, outline, ghost, etc)
+- **Card** — Container para agrupar conteúdo
+- **Badge** — Rótulos e categorias
+- **Input** — Campos de entrada
+- **Progress** — Barras de progresso
+- E mais...
+
+### 🏗️ **Componentes Complexos**
+Componentes específicos da aplicação:
+- **Dashboard** — Painel principal com estatísticas
+- **Forms** — Formulários de entrada
+- **Tables** — Tabelas de dados
+
+### 📍 **Jornadas de Usuário**
+Fluxos detalhados de cada persona:
+- **👨‍🏫 Professor (Front-office)** — Enviar missões em lote
+- **👩‍💼 Administrador (Backoffice)** — Gerenciar e monitorar
+- **🎮 Aluno (Games)** — Jogar e competir
+
+Veja em: **Documentação > Jornadas**
+
+---
+
+## 🎯 Como Usar Este Storybook
+
+### 1. **Explorar Componentes**
+- Clique em qualquer componente na barra esquerda
+- Veja a história (story) na aba **Story**
+- Use **Controls** para testar variações
+- Leia **Docs** para documentação completa
+
+### 2. **Entender Jornadas**
+- Navegue até **Documentação > Jornadas**
+- Leia a especificação completa
+- Veja os componentes necessários
+- Identifique como os componentes suportam a jornada
+
+### 3. **Validar com Designers**
+- Compartilhe links de Stories específicas
+- Discuta variações usando Controls
+- Compare com designs no Figma
+- Aprove antes de implementação
+
+---
+
+## 🚦 Status Atual
+
+| Componente | Status | Stories |
+|------------|--------|---------|
+| **UI Basics** | ✅ Pronto | 15+ |
+| **Button** | ✅ Documentado | 8 |
+| **Card** | ✅ Documentado | 3 |
+| **Badge** | ✅ Documentado | 4 |
+| **Dashboard** | ✅ Documentado | 3 |
+| **Front-office Específicos** | ⏳ Em desenvolvimento | - |
+| **Backoffice Específicos** | ⏳ Planejado | - |
+| **Games Específicos** | ⏳ Planejado | - |
+
+---
+
+## 📖 Documentação Importante
+
+- **[📚 Guia de Storybook](/?path=/docs/guia-storybook--docs)** — Como criar e documentar stories
+- **[📍 Guia de Jornadas](/?path=/docs/guia-jornadas--docs)** — Como documentar fluxos de usuário
+- **[🏗️ ADR-0006](/?path=/docs/adr-0006--docs)** — Arquitetura da plataforma
+- **[📋 README](/)** — Overview geral do projeto
+
+---
+
+## 🎨 Design System
+
+### Cores (Vuexy Aesthetic)
+- **Primary:** `#7367ef` (Roxo)
+- **Success:** `#28a745` (Verde)
+- **Warning:** `#ff9800` (Laranja)
+- **Danger:** `#f4365c` (Vermelho)
+- **Info:** `#00bcd4` (Ciano)
+
+### Tipografia
+- **Fonte principal:** Sistema de fontes do SO
+- **Títulos:** Bold, 18-32px
+- **Corpo:** Regular, 14-16px
+- **Labels:** Medium, 12-14px
+
+### Espaçamento
+- **Xs:** 4px
+- **Sm:** 8px
+- **Md:** 16px
+- **Lg:** 24px
+- **Xl:** 32px
+
+---
+
+## 🚀 Roadmap
+
+### ✅ Concluído (Sprint 1)
+- Setup Storybook com React + Vite
+- Componentes UI base
+- Stories básicas
+- Documentação de jornadas
+
+### ⏳ Em Progresso (Sprint 2)
+- Componentes Front-office
+- Integração Figma
+- Testes visuais com Chromatic
+
+### 📅 Planejado (Sprints 3-5)
+- Componentes Backoffice
+- Componentes Games Platform
+- Validação com usuários
+- Handoff para Vue.js team
+
+---
+
+## 💡 Dicas Úteis
+
+### Buscar Componentes
+Clique no **search** (🔍) na barra superior para encontrar rapidamente.
+
+### Compartilhar uma Story
+Clique na URL da story específica para copiar. Exemplo:
+```
+http://localhost:6006/?path=/story/ui-button--primary
+```
+
+### Ver em Full Screen
+Clique no ícone de tela cheia (⛶) no canto superior direito.
+
+### Comparar Variações
+Use **Controls** para testar props em tempo real sem recarregar.
+
+---
+
+## 🤝 Fluxo de Trabalho
+
+### Para Designers 👨‍🎨
+1. Abra o Storybook
+2. Encontre o componente que precisa validar
+3. Teste com Controls (cores, tamanhos, estados)
+4. Aprove ou sugira mudanças no Slack
+5. Dev implementa feedback
+
+### Para Developers 💻
+1. Leia a jornada em `docs/journeys/`
+2. Identifique componentes necessários
+3. Implemente componente React
+4. Crie `.stories.tsx` ao lado
+5. Adicione documentação em `argTypes`
+6. Compartilhe link da story com PM/Design
+
+### Para Product Managers 📊
+1. Leia documentação de jornada em `docs/journeys/`
+2. Veja protótipo interativo em Stories
+3. Valide requisitos com componentes
+4. Aprove ou sugira iterações
+5. Documente feedback para dev
+
+---
+
+## 📞 Suporte
+
+- **Dúvidas sobre Storybook?** Leia [STORYBOOK_GUIDE.md](/?path=/docs/guia-storybook--docs)
+- **Dúvidas sobre Jornadas?** Leia [JOURNEYS_GUIDE.md](/?path=/docs/guia-jornadas--docs)
+- **Arquitetura?** Leia [ADR-0006](/?path=/docs/adr-0006--docs)
+- **Problemas?** Abra issue no GitHub
+
+---
+
+## 🎓 Próximos Passos
+
+### Imediato (Esta Semana)
+- [ ] Explorar todos os componentes UI disponíveis
+- [ ] Ler jornadas de usuário
+- [ ] Familiarizar-se com Controls
+
+### Curto Prazo (Próximas 2 semanas)
+- [ ] Validar componentes com Figma
+- [ ] Iniciar prototipagem Front-office
+- [ ] Setup CI/CD para Storybook
+
+### Médio Prazo (Próximo mês)
+- [ ] Completar jornada Front-office
+- [ ] Iniciar Backoffice
+- [ ] Integração com Figma
+- [ ] Testes visuais
+
+---
+
+## 🏆 Objetivos
+
+Este Storybook tem como objetivos:
+
+✅ **Centralizar** toda documentação de componentes  
+✅ **Acelerar** feedback loops entre design e dev  
+✅ **Validar** ideias com usuários rapidamente  
+✅ **Facilitar** handoff para Vue.js team  
+✅ **Documentar** decisões arquiteturais  
+
+---
+
+**Última atualização:** 2024-11-04  
+**Ambiente:** Development  
+**Version:** 1.0.0

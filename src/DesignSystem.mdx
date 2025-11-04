@@ -1,0 +1,62 @@
+import { Meta, Canvas, Story } from '@storybook/blocks'
+import { Button } from './components/ui/button'
+import Dashboard from './components/Dashboard'
+
+<Meta title="Design System/Overview" />
+
+# Sistema de Design - Protótipo Jornada
+
+Bem-vindo ao sistema de design unificado para o protótipo de envio de missões escolares em lote.
+
+## 🎨 Princípios de Design
+
+- **Consistência**: Componentes padronizados com Vuexy aesthetics
+- **Acessibilidade**: WCAG AA+ compliance
+- **Responsividade**: Mobile-first approach
+- **Performance**: Componentes otimizados
+
+## 🧩 Componentes Principais
+
+### Botões
+
+Os botões seguem as diretrizes do Vuexy com variantes para diferentes ações.
+
+<Canvas>
+  <Story of={Button} />
+</Canvas>
+
+### Dashboard
+
+O dashboard principal mostra estatísticas e lista de missões.
+
+<Canvas>
+  <Story of={Dashboard} />
+</Canvas>
+
+## 🎯 Plataformas Suportadas
+
+1. **Front-office**: Interface para professores e coordenadores
+2. **Backoffice**: Sistema administrativo
+3. **Jogos**: Plataforma gamificada para alunos
+
+## 📚 Documentação de Jornada
+
+Cada jornada do usuário é documentada com:
+- Wireframes em Figma
+- Protótipos interativos
+- Casos de uso
+- Critérios de aceitação
+
+## 🔗 Integrações
+
+- **Figma**: Design system source of truth
+- **Storybook**: Component documentation
+- **Chromatic**: Visual testing
+- **GitHub Actions**: CI/CD pipeline
+
+## 🚀 Próximos Passos
+
+- [ ] Implementar componentes Vuexy restantes
+- [ ] Criar jornadas completas para as 3 plataformas
+- [ ] Configurar integração Figma
+- [ ] Implementar testes visuais com Chromatic

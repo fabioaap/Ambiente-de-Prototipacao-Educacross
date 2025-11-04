@@ -11,14 +11,97 @@ npm run dev
 
 O Vite sobe em `http://localhost:5173`.
 
-## Storybook
+## Storybook - Documentação de Componentes
+
+Storybook é a fonte de verdade para documentação, testes visuais e validação de componentes.
+
+### Como rodar o Storybook
 
 ```powershell
+# Servidor de desenvolvimento
 npm run storybook
+
+# Build estático (para CI/CD ou deploy)
 npm run storybook:build
 ```
 
-A instancia local roda em `http://localhost:6006` e reutiliza o mesmo design system e mocks do aplicativo.
+A instância local roda em `http://localhost:6006` e reusa o mesmo design system e mocks do aplicativo.
+
+### Estrutura de Stories
+
+Stories estão localizadas ao lado dos componentes:
+```
+src/
+├── components/
+│   ├── Dashboard.tsx
+│   ├── Dashboard.stories.tsx    ← Story do Dashboard
+│   └── ui/
+│       ├── button.tsx
+│       ├── Button.stories.tsx   ← Story do Button
+│       ├── card.tsx
+│       └── Card.stories.tsx     ← Story do Card
+```
+
+### Criando uma nova Story
+
+1. **Arquivo:** Crie `NomeComponente.stories.tsx` ao lado do componente
+2. **Template:** Use o padrão CSF 3.0 (Component Story Format)
+
+```typescript
+import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from './button'
+
+const meta: Meta<typeof Button> = {
+  title: 'UI/Button',
+  component: Button,
+  parameters: { layout: 'centered' },
+  tags: ['autodocs'],
+}
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Primary: Story = {
+  args: { children: 'Click me', variant: 'default' },
+}
+
+export const Disabled: Story = {
+  args: { children: 'Disabled', disabled: true },
+}
+```
+
+### Documentação de Jornadas
+
+Jornadas de usuário são documentadas em Markdown na pasta `docs/journeys/`:
+
+```
+docs/journeys/
+├── 01-professor-frontend.md      ← Jornada do Professor
+├── 02-admin-backoffice.md        ← Jornada do Administrador
+└── 03-student-games-platform.md  ← Jornada do Aluno
+```
+
+Cada jornada contém:
+- 👤 Persona
+- 🎯 Objetivo
+- 📋 Fluxo passo-a-passo
+- 📊 Critérios de aceitação
+- 🚀 Componentes necessários
+- 🔄 Fluxos alternativos
+
+### Adons e Integrações
+
+O Storybook já vem configurado com:
+- `@storybook/addon-essentials` — Docs, Controls, Actions
+- `@storybook/addon-interactions` — Testes de interação
+- `@storybook/addon-links` — Navegação entre stories
+- `@storybook/addon-docs` — Documentação MDX
+
+### Próximos Passos
+
+- [ ] Integrar Chromatic para visual regression testing
+- [ ] Sincronizar Figma via storybook-connect
+- [ ] Criar testes visuais automáticos
 
 ## Testes
 
