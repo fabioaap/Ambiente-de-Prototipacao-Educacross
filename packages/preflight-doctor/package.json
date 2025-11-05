@@ -1,0 +1,21 @@
+{
+    "name": "@educacross/preflight-doctor",
+    "version": "0.1.0",
+    "description": "Utilitário CLI para estabilização de ambiente local (preflight checks)",
+    "main": "bin/cli.js",
+    "bin": {
+        "preflight-doctor": "bin/cli.js"
+    },
+    "author": "Educacross",
+    "license": "MIT",
+    "scripts": {
+        "preflight": "pwsh ./scripts/preflight.ps1"
+    },
+    "keywords": [
+        "preflight",
+        "doctor",
+        "ambiente",
+        "cli",
+        "educacross"
+    ]
+}

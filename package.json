@@ -9,7 +9,8 @@
     "prebuild": "npm run check-mocks",
     "build": "npm run check-mocks && vite build",
     "build:watch": "vite build --watch",
-    "preview": "vite preview",
+    "preview": "vite preview --host 0.0.0.0 --port 5173",
+    "serve-dist": "npx serve dist -l 5173",
     "preview:live": "concurrently \"npm:build:watch\" \"npm run preview -- --host\"",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
@@ -18,7 +19,8 @@
     "check-env": "node check-env.cjs",
     "check-deps": "node -e \"console.log('✅ Dependências instaladas')\"",
     "check-types": "tsc --noEmit",
-    "verify": "npm run check-env"
+    "verify": "npm run check-env",
+    "preflight": "npx --workspace=packages/preflight-doctor preflight-doctor"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",

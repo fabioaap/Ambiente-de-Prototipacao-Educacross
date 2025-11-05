@@ -1,4 +1,25 @@
-﻿# Prototipo Jornada - Educacross
+﻿# Diagnóstico e estabilização de ambiente
+
+Antes de rodar o projeto, execute:
+
+```sh
+npm run preflight
+```
+
+Esse comando utiliza o utilitário `@educacross/preflight-doctor` para:
+- Verificar e liberar portas (5173, 4173, 6006, 3000)
+- Encerrar processos travados
+- Limpar cache de build
+- Validar dependências
+
+Para corrigir automaticamente, rode:
+
+```sh
+npm run preflight -- --fix
+```
+
+Veja mais detalhes e opções em [`packages/preflight-doctor/README.md`](./packages/preflight-doctor/README.md).
+# Prototipo Jornada - Educacross
 
 Prototipo React utilizado para simular o fluxo de envio de missoes em lote na plataforma Educacross.
 
