@@ -1,184 +1,934 @@
-<!doctype html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Nova questão de avaliação — Leitura</title>
-    <link rel="stylesheet" href="styles.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+
+    <link rel="stylesheet" href="./style.css" />
+
+
+
 </head>
 
 <body>
-    <section class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
-        <!-- Header leve: apenas navegação de questões + fechar -->
-        <header class="modal__header">
-            <div class="header__left"></div>
-            <div class="header__right">
-                <div class="qnav" role="group" aria-label="Navegação entre questões">
-                    <button id="prevBtn" class="btn variant-ghost size-sm" aria-label="Questão anterior">‹
-                        Anterior</button>
-                    <div class="qnav__info"><span id="qCounter" aria-live="polite">Q1 de 3</span></div>
-                    <button id="nextBtn" class="btn variant-default size-sm" aria-label="Próxima questão">Próxima
-                        ›</button>
-                </div>
-                <button class="modal__close" aria-label="Fechar">×</button>
+
+    <div class="dialogdialog" id="modalRoot"
+        style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:1000; background:rgba(44,44,44,0.18); overflow:auto;">
+        <div class="modal-dialog">
+            <div class="modal-header">
             </div>
-        </header>
+            <div class="modal-body">
+                <div class="linha-2-parent">
+                    <div class="linha-2">
+                        <div class="frame-parent">
+                            <div class="frame-group">
+                                <div class="label-wrapper">
+                                    <b class="label" id="modalTitle">Questão:</b>
+                                </div>
+                                <div class="help-parent">
+                                    <img class="help-icon" alt="">
+                                    <img class="help-icon" src="./Assets/Icon Color.svg" alt="Ajuda">
 
-        <!-- Âncoras de seção -->
-        <nav class="nav">
-            <a href="#identificacao">Identificação</a>
-            <a href="#metacampos">Metacampos</a>
-            <a href="#topico">Tópico</a>
-            <a href="#habilidades">Habilidades</a>
-            <a href="#enunciado">Enunciado</a>
-            <a href="#alternativas">Alternativas</a>
-        </nav>
+                                    <div class="dialogdialog-label">Onde é exibido?</div>
+                                </div>
+                            </div>
+                            <div class="frame-container">
+                                <div class="label-wrapper">
+                                    <div class="label">Tópicos cadastrados*</div>
+                                </div>
+                                <div class="frame-wrapper">
+                                    <div class="instance-wrapper">
+                                        <div class="tipo-parent">
+                                            <div class="label">Escolha um tópico existente para cadastrar um subtópico
+                                            </div>
+                                            <img class="icon" alt="">
+                                            <img class="icon" src="./Assets/Mask.svg" alt="Ícone">
 
-        <main class="modal__body">
-            <!-- NOVO: Título e Status no corpo -->
-            <section id="identificacao" class="card" aria-label="Identificação da questão">
-                <div class="card__body">
-                    <div class="field">
-                        <div class="field__label">Título</div>
-                        <div class="field__value" id="modalTitle">Nova questão de avaliação</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <b class="b" id="qStatus">#687</b>
+                        </div>
+                        <div class="frame-parent">
+                            <div class="frame-group">
+                                <div class="label-wrapper">
+                                    <b class="label">Área de conhecimento:</b>
+                                </div>
+                                <div class="help-parent">
+                                    <img class="help-icon" alt="">
+
+                                    <div class="dialogdialog-label">Onde é exibido?</div>
+                                </div>
+                            </div>
+                            <div class="frame-container">
+                                <div class="label-wrapper">
+                                    <div class="label">Tópicos cadastrados*</div>
+                                </div>
+                                <div class="frame-wrapper">
+                                    <div class="instance-wrapper">
+                                        <div class="tipo-parent">
+                                            <div class="label">Escolha um tópico existente para cadastrar um subtópico
+                                            </div>
+                                            <img class="icon" alt="">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <b class="b" id="fieldArea">Matemática</b>
+                        </div>
+                        <div class="frame-parent">
+                            <div class="frame-group">
+                                <div class="label-wrapper">
+                                    <b class="label">Nível de Taxonomia de Bloom:</b>
+                                </div>
+                                <div class="help-parent">
+                                    <img class="help-icon" alt="">
+
+                                    <div class="dialogdialog-label">Onde é exibido?</div>
+                                </div>
+                            </div>
+                            <div class="frame-container">
+                                <div class="label-wrapper">
+                                    <div class="label">Tópicos cadastrados*</div>
+                                </div>
+                                <div class="frame-wrapper">
+                                    <div class="instance-wrapper">
+                                        <div class="tipo-parent">
+                                            <div class="label">Escolha um tópico existente para cadastrar um subtópico
+                                            </div>
+                                            <img class="icon" alt="">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <b class="b" id="fieldTax">4: Analisar</b>
+                        </div>
+                        <div class="frame-parent">
+                            <div class="frame-group">
+                                <div class="label-wrapper">
+                                    <b class="label">Subnível de Taxonomia de Bloom:</b>
+                                </div>
+                                <div class="help-parent">
+                                    <img class="help-icon" alt="">
+
+                                    <div class="dialogdialog-label">Onde é exibido?</div>
+                                </div>
+                            </div>
+                            <div class="frame-container">
+                                <div class="label-wrapper">
+                                    <div class="label">Tópicos cadastrados*</div>
+                                </div>
+                                <div class="frame-wrapper">
+                                    <div class="instance-wrapper">
+                                        <div class="tipo-parent">
+                                            <div class="label">Escolha um tópico existente para cadastrar um subtópico
+                                            </div>
+                                            <img class="icon" alt="">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <b class="b" id="fieldSubTax">4.2 Organizar</b>
+                        </div>
                     </div>
-                    <div class="field">
-                        <div class="field__label">Status da questão</div>
-                        <div class="field__value"><span
-                                class="badge badge--warn inline-flex items-center rounded-full border bg-muted/60 px-2.5 py-1 text-sm font-medium text-warning"
-                                id="qStatus">Inativa</span></div>
-                    </div>
-                </div>
-            </section>
+                    <div class="instance-wrapper">
+                        <div class="dialogdialog-modal-header">
+                            <b class="tpico-de-conhecimento" id="qHelp">Tópico de conhecimento</b>
+                        </div>
+                        <div class="linha-3">
+                            <div class="frame-parent">
+                                <div class="frame-group">
+                                    <div class="label-wrapper">
+                                        <b class="label">Título:</b>
+                                    </div>
+                                    <div class="help-parent">
+                                        <img class="help-icon" alt="">
 
-            <!-- Faixa de meta superior -->
-            <div class="rounded-xl border bg-card text-card-foreground shadow-sm p-5 grid gap-3 card--soft">
-                <div class="flex items-center gap-3 text-xl font-bold">Código da Questão: 1234</div>
-                <div class="flex items-center gap-3">
-                    <a href="#" class="text-primary font-semibold underline-offset-2 hover:underline">Matriz/currículo:
-                        BNCC</a>
-                    <span
-                        class="inline-flex items-center rounded-full border bg-muted/60 text-muted-foreground px-2.5 py-1 text-sm font-medium">Temática</span>
-                    <span
-                        class="inline-flex items-center rounded-full border bg-emerald-50 text-emerald-700 px-2.5 py-1 text-sm font-semibold border-emerald-200">Habilidade</span>
-                </div>
-                <div class="rounded-md border bg-muted/40 px-3 py-2 text-[.975rem] leading-relaxed text-foreground/90">
-                    Descritor da habilidade: ...
+                                        <div class="dialogdialog-label">Onde é exibido?</div>
+                                    </div>
+                                </div>
+                                <div class="frame-container">
+                                    <div class="label-wrapper">
+                                        <div class="label">Tópicos cadastrados*</div>
+                                    </div>
+                                    <div class="frame-wrapper">
+                                        <div class="instance-wrapper">
+                                            <div class="tipo-parent">
+                                                <div class="label">Escolha um tópico existente para cadastrar um
+                                                    subtópico</div>
+                                                <img class="icon" alt="">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <b class="b">1.31.1.2 Período de uma dízima periódica</b>
+                            </div>
+                            <div class="frame-parent">
+                                <div class="frame-group">
+                                    <div class="label-wrapper">
+                                        <b class="label">Objeto do conhecimento:</b>
+                                    </div>
+                                    <div class="help-parent">
+                                        <img class="help-icon" alt="">
+
+                                        <div class="dialogdialog-label">Onde é exibido?</div>
+                                    </div>
+                                </div>
+                                <div class="frame-container">
+                                    <div class="label-wrapper">
+                                        <div class="label">Tópicos cadastrados*</div>
+                                    </div>
+                                    <div class="frame-wrapper">
+                                        <div class="instance-wrapper">
+                                            <div class="tipo-parent">
+                                                <div class="label">Escolha um tópico existente para cadastrar um
+                                                    subtópico</div>
+                                                <img class="icon" alt="">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <b class="b">Dízimas Periódicas</b>
+                            </div>
+                            <div class="frame-parent">
+                                <div class="frame-group">
+                                    <div class="label-wrapper">
+                                        <b class="label">Temática: </b>
+                                    </div>
+                                    <div class="help-parent">
+                                        <img class="help-icon" alt="">
+
+                                        <div class="dialogdialog-label">Onde é exibido?</div>
+                                    </div>
+                                </div>
+                                <div class="frame-container">
+                                    <div class="label-wrapper">
+                                        <div class="label">Tópicos cadastrados*</div>
+                                    </div>
+                                    <div class="frame-wrapper">
+                                        <div class="instance-wrapper">
+                                            <div class="tipo-parent">
+                                                <div class="label">Escolha um tópico existente para cadastrar um
+                                                    subtópico</div>
+                                                <img class="icon" alt="">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <b class="b">Números</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="instance-wrapper">
+                        <div class="dialogdialog-modal-header">
+                            <b class="tpico-de-conhecimento">Habilidades relacionadas</b>
+                        </div>
+                        <div class="dialogdialog-linha-3">
+                            <div class="frame-parent">
+                                <div class="frame-parent19">
+                                    <div class="label-wrapper">
+                                        <div class="label">Tópicos cadastrados*</div>
+                                    </div>
+                                    <div class="frame-wrapper">
+                                        <div class="instance-wrapper">
+                                            <div class="tipo-parent">
+                                                <div class="label">Escolha um tópico existente para cadastrar um
+                                                    subtópico</div>
+                                                <img class="icon" alt="">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bncc-6-ano">BNCC 6º Ano - Números - EF06MA02 - Contar de maneira exata ou
+                                    aproximada, utilizando diferentes estratégias como o pareamento e outros
+                                    agrupamentos.</div>
+                            </div>
+                            <div class="md">
+                                <b class="dialogdialog-label">Muito Difícil</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="instance-wrapper">
+                        <div class="dialogdialog-modal-header">
+                            <b class="tpico-de-conhecimento">Enunciado da questão</b>
+                        </div>
+                        <div class="linha-32">
+                            <div class="linha-2-parent">
+                                <div class="frame-parent21">
+                                    <div class="frame-parent">
+                                        <div class="frame-group">
+                                            <div class="label-wrapper">
+                                                <b class="label">Questão</b>
+                                            </div>
+                                            <div class="help-parent">
+                                                <img class="help-icon" alt="">
+
+                                                <div class="dialogdialog-label">Onde é exibido?</div>
+                                            </div>
+                                        </div>
+                                        <div class="frame-container">
+                                            <div class="label-wrapper">
+                                                <div class="label">Tópicos cadastrados*</div>
+                                            </div>
+                                            <div class="frame-wrapper">
+                                                <div class="instance-wrapper">
+                                                    <div class="tipo-parent">
+                                                        <div class="label">Escolha um tópico existente para cadastrar um
+                                                            subtópico</div>
+                                                        <img class="icon" alt="">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="icon-parent">
+                                        <img class="icon9" alt="">
+                                        <img class="icon9" src="./Assets/Mask.svg" alt="Ícone decorativo">
+
+                                        <div class="tpico-de-conhecimento" id="qText">“Já pensou: sentar-se na mesma
+                                            poltrona que Sherlock Holmes ocupava quando refletia sobre alguns dos casos
+                                            mais complicados que investigava, ou analisando pistas para solucionar um
+                                            deles ou mesmo para capturar um de seus inúmeros inimigos? Uau! Demais!
+                                            Ariel queria. Queria de verdade. Queria demais.”</div>
+                                    </div>
+                                </div>
+                                <div class="frame-parent21">
+                                    <div class="frame-parent">
+                                        <div class="frame-group">
+                                            <div class="label-wrapper">
+                                                <b class="label">Texto de ajuda</b>
+                                            </div>
+                                            <div class="help-parent">
+                                                <img class="help-icon" alt="">
+
+                                                <div class="dialogdialog-label">Onde é exibido?</div>
+                                            </div>
+                                        </div>
+                                        <div class="frame-container">
+                                            <div class="label-wrapper">
+                                                <div class="label">Tópicos cadastrados*</div>
+                                            </div>
+                                            <div class="frame-wrapper">
+                                                <div class="instance-wrapper">
+                                                    <div class="tipo-parent">
+                                                        <div class="label">Escolha um tópico existente para cadastrar um
+                                                            subtópico</div>
+                                                        <img class="icon" alt="">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="icon-parent">
+                                        <img class="icon9" alt="">
+
+                                        <div class="tpico-de-conhecimento">Imagine-se na mesma poltrona onde Sherlock
+                                            Holmes se sentava, mergulhando em seus pensamentos sobre os casos mais
+                                            intrigantes. Você pode quase sentir a tensão no ar enquanto ele analisa
+                                            pistas e planeja a captura de seus adversários. É uma experiência fascinante
+                                            que muitos desejam vivenciar. Ariel sonha com isso, ansiando por um momento
+                                            tão emocionante e envolvente.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="instance-wrapper">
+                        <div class="dialogdialog-modal-header">
+                            <b class="tpico-de-conhecimento">Alternativas</b>
+                        </div>
+                        <div class="linha-33">
+                            <div class="frame-parent29">
+                                <div class="frame-parent30">
+                                    <div class="frame-parent31">
+                                        <div class="frame-parent32">
+                                            <div class="frame-group">
+                                                <div class="label-wrapper">
+                                                    <b class="label">A)</b>
+                                                </div>
+                                                <div class="help-parent">
+                                                    <img class="help-icon" alt="">
+
+                                                    <div class="dialogdialog-label">Onde é exibido?</div>
+                                                </div>
+                                            </div>
+                                            <div class="frame-container">
+                                                <div class="label-wrapper">
+                                                    <div class="label">Tópicos cadastrados*</div>
+                                                </div>
+                                                <div class="frame-wrapper">
+                                                    <div class="instance-wrapper">
+                                                        <div class="tipo-parent">
+                                                            <div class="label">Escolha um tópico existente para
+                                                                cadastrar um subtópico</div>
+                                                            <img class="icon" alt="">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="chip">
+                                                <div class="chip-bg-success">
+                                                    <div class="dialogdialog-chip">Correta</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="icon-parent">
+                                            <img class="icon9" alt="">
+
+                                            <div class="tpico-de-conhecimento" id="altAText">“Já pensou: sentar-se na
+                                                mesma poltrona que Sherlock Holmes ocupava quando refletia sobre alguns
+                                                dos casos mais complicados que investigava, ou analisando pistas para
+                                                solucionar um deles ou mesmo para capturar um de seus inúmeros
+                                                inimigos? Uau! Demais! Ariel queria. Queria de verdade. Queria demais.”
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="frame-parent35">
+                                        <div class="frame-parent">
+                                            <div class="frame-group">
+                                                <div class="label-wrapper">
+                                                    <b class="label">Texto de ajuda</b>
+                                                </div>
+                                                <div class="help-parent">
+                                                    <img class="help-icon" alt="">
+
+                                                    <div class="dialogdialog-label">Onde é exibido?</div>
+                                                </div>
+                                            </div>
+                                            <div class="frame-parent19">
+                                                <div class="label-wrapper">
+                                                    <div class="label">Tópicos cadastrados*</div>
+                                                </div>
+                                                <div class="frame-wrapper">
+                                                    <div class="instance-wrapper">
+                                                        <div class="tipo-parent">
+                                                            <div class="label">Escolha um tópico existente para
+                                                                cadastrar um subtópico</div>
+                                                            <img class="icon" alt="">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dialogdialog-icon-parent">
+                                            <img class="icon9" alt="">
+
+                                            <div class="tpico-de-conhecimento">“Já pensou: sentar-se na mesma poltrona
+                                                que Sherlock Holmes ocupava quando refletia sobre alguns dos casos mais
+                                                complicados que investigava, ou analisando pistas para solucionar um
+                                                deles ou mesmo para capturar um de seus inúmeros inimigos? Uau! Demais!
+                                                Ariel queria. Queria de verdade. Queria demais.”</div>
+                                        </div>
+                                    </div>
+                                    <div class="frame-parent35">
+                                        <div class="frame-parent">
+                                            <div class="frame-group">
+                                                <div class="label-wrapper">
+                                                    <b class="label">Resolução</b>
+                                                </div>
+                                                <div class="help-parent">
+                                                    <img class="help-icon" alt="">
+
+                                                    <div class="dialogdialog-label">Onde é exibido?</div>
+                                                </div>
+                                            </div>
+                                            <div class="frame-parent19">
+                                                <div class="label-wrapper">
+                                                    <div class="label">Tópicos cadastrados*</div>
+                                                </div>
+                                                <div class="frame-wrapper">
+                                                    <div class="instance-wrapper">
+                                                        <div class="tipo-parent">
+                                                            <div class="label">Escolha um tópico existente para
+                                                                cadastrar um subtópico</div>
+                                                            <img class="icon" alt="">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dialogdialog-icon-parent">
+                                            <img class="icon9" alt="">
+
+                                            <div class="tpico-de-conhecimento">“Já pensou: sentar-se na mesma poltrona
+                                                que Sherlock Holmes ocupava quando refletia sobre alguns dos casos mais
+                                                complicados que investigava, ou analisando pistas para solucionar um
+                                                deles ou mesmo para capturar um de seus inúmeros inimigos? Uau! Demais!
+                                                Ariel queria. Queria de verdade. Queria demais.”</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="frame-parent43">
+                                    <div class="frame-parent31">
+                                        <div class="frame-parent32">
+                                            <div class="frame-group">
+                                                <div class="label-wrapper">
+                                                    <b class="label">B)</b>
+                                                </div>
+                                                <div class="help-parent">
+                                                    <img class="help-icon" alt="">
+
+                                                    <div class="dialogdialog-label">Onde é exibido?</div>
+                                                </div>
+                                            </div>
+                                            <div class="frame-container">
+                                                <div class="label-wrapper">
+                                                    <div class="label">Tópicos cadastrados*</div>
+                                                </div>
+                                                <div class="frame-wrapper">
+                                                    <div class="instance-wrapper">
+                                                        <div class="tipo-parent">
+                                                            <div class="label">Escolha um tópico existente para
+                                                                cadastrar um subtópico</div>
+                                                            <img class="icon" alt="">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="chip">
+                                                <div class="dialogdialog-chip-bg-success">
+                                                    <div class="dialogdialog-chip">Incorreta</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="icon-parent">
+                                            <img class="icon9" alt="">
+
+                                            <div class="tpico-de-conhecimento" id="altBText">“Já pensou: sentar-se na
+                                                mesma poltrona que Sherlock Holmes ocupava quando refletia sobre alguns
+                                                dos casos mais complicados que investigava, ou analisando pistas para
+                                                solucionar um deles ou mesmo para capturar um de seus inúmeros
+                                                inimigos? Uau! Demais! Ariel queria. Queria de verdade. Queria demais.”
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="frame-parent35">
+                                        <div class="frame-parent">
+                                            <div class="frame-group">
+                                                <div class="label-wrapper">
+                                                    <b class="label">Texto de ajuda</b>
+                                                </div>
+                                                <div class="help-parent">
+                                                    <img class="help-icon" alt="">
+
+                                                    <div class="dialogdialog-label">Onde é exibido?</div>
+                                                </div>
+                                            </div>
+                                            <div class="frame-parent19">
+                                                <div class="label-wrapper">
+                                                    <div class="label">Tópicos cadastrados*</div>
+                                                </div>
+                                                <div class="frame-wrapper">
+                                                    <div class="instance-wrapper">
+                                                        <div class="tipo-parent">
+                                                            <div class="label">Escolha um tópico existente para
+                                                                cadastrar um subtópico</div>
+                                                            <img class="icon" alt="">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dialogdialog-icon-parent">
+                                            <img class="icon9" alt="">
+
+                                            <div class="tpico-de-conhecimento">“Já pensou: sentar-se na mesma poltrona
+                                                que Sherlock Holmes ocupava quando refletia sobre alguns dos casos mais
+                                                complicados que investigava, ou analisando pistas para solucionar um
+                                                deles ou mesmo para capturar um de seus inúmeros inimigos? Uau! Demais!
+                                                Ariel queria. Queria de verdade. Queria demais.”</div>
+                                        </div>
+                                    </div>
+                                    <div class="frame-parent35">
+                                        <div class="frame-parent">
+                                            <div class="frame-group">
+                                                <div class="label-wrapper">
+                                                    <b class="label">Distrator</b>
+                                                </div>
+                                                <div class="help-parent">
+                                                    <img class="help-icon" alt="">
+
+                                                    <div class="dialogdialog-label">Onde é exibido?</div>
+                                                </div>
+                                            </div>
+                                            <div class="frame-parent19">
+                                                <div class="label-wrapper">
+                                                    <div class="label">Tópicos cadastrados*</div>
+                                                </div>
+                                                <div class="frame-wrapper">
+                                                    <div class="instance-wrapper">
+                                                        <div class="tipo-parent">
+                                                            <div class="label">Escolha um tópico existente para
+                                                                cadastrar um subtópico</div>
+                                                            <img class="icon" alt="">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dialogdialog-icon-parent">
+                                            <img class="icon9" alt="">
+
+                                            <div class="tpico-de-conhecimento">“Já pensou: sentar-se na mesma poltrona
+                                                que Sherlock Holmes ocupava quando refletia sobre alguns dos casos mais
+                                                complicados que investigava, ou analisando pistas para solucionar um
+                                                deles ou mesmo para capturar um de seus inúmeros inimigos? Uau! Demais!
+                                                Ariel queria. Queria de verdade. Queria demais.”</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="frame-parent43">
+                                    <div class="frame-parent31">
+                                        <div class="frame-parent32">
+                                            <div class="frame-group">
+                                                <div class="label-wrapper">
+                                                    <b class="label">C)</b>
+                                                </div>
+                                                <div class="help-parent">
+                                                    <img class="help-icon" alt="">
+
+                                                    <div class="dialogdialog-label">Onde é exibido?</div>
+                                                </div>
+                                            </div>
+                                            <div class="frame-container">
+                                                <div class="label-wrapper">
+                                                    <div class="label">Tópicos cadastrados*</div>
+                                                </div>
+                                                <div class="frame-wrapper">
+                                                    <div class="instance-wrapper">
+                                                        <div class="tipo-parent">
+                                                            <div class="label">Escolha um tópico existente para
+                                                                cadastrar um subtópico</div>
+                                                            <img class="icon" alt="">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="chip">
+                                                <div class="dialogdialog-chip-bg-success">
+                                                    <div class="dialogdialog-chip">Incorreta</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="icon-parent">
+                                            <img class="icon9" alt="">
+
+                                            <div class="tpico-de-conhecimento" id="altCText">“Já pensou: sentar-se na
+                                                mesma poltrona que Sherlock Holmes ocupava quando refletia sobre alguns
+                                                dos casos mais complicados que investigava, ou analisando pistas para
+                                                solucionar um deles ou mesmo para capturar um de seus inúmeros
+                                                inimigos? Uau! Demais! Ariel queria. Queria de verdade. Queria demais.”
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="frame-parent35">
+                                        <div class="frame-parent">
+                                            <div class="frame-group">
+                                                <div class="label-wrapper">
+                                                    <b class="label">Texto de ajuda</b>
+                                                </div>
+                                                <div class="help-parent">
+                                                    <img class="help-icon" alt="">
+
+                                                    <div class="dialogdialog-label">Onde é exibido?</div>
+                                                </div>
+                                            </div>
+                                            <div class="frame-parent19">
+                                                <div class="label-wrapper">
+                                                    <div class="label">Tópicos cadastrados*</div>
+                                                </div>
+                                                <div class="frame-wrapper">
+                                                    <div class="instance-wrapper">
+                                                        <div class="tipo-parent">
+                                                            <div class="label">Escolha um tópico existente para
+                                                                cadastrar um subtópico</div>
+                                                            <img class="icon" alt="">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dialogdialog-icon-parent">
+                                            <img class="icon9" alt="">
+
+                                            <div class="tpico-de-conhecimento">“Já pensou: sentar-se na mesma poltrona
+                                                que Sherlock Holmes ocupava quando refletia sobre alguns dos casos mais
+                                                complicados que investigava, ou analisando pistas para solucionar um
+                                                deles ou mesmo para capturar um de seus inúmeros inimigos? Uau! Demais!
+                                                Ariel queria. Queria de verdade. Queria demais.”</div>
+                                        </div>
+                                    </div>
+                                    <div class="frame-parent35">
+                                        <div class="frame-parent">
+                                            <div class="frame-group">
+                                                <div class="label-wrapper">
+                                                    <b class="label">Distrator</b>
+                                                </div>
+                                                <div class="help-parent">
+                                                    <img class="help-icon" alt="">
+
+                                                    <div class="dialogdialog-label">Onde é exibido?</div>
+                                                </div>
+                                            </div>
+                                            <div class="frame-parent19">
+                                                <div class="label-wrapper">
+                                                    <div class="label">Tópicos cadastrados*</div>
+                                                </div>
+                                                <div class="frame-wrapper">
+                                                    <div class="instance-wrapper">
+                                                        <div class="tipo-parent">
+                                                            <div class="label">Escolha um tópico existente para
+                                                                cadastrar um subtópico</div>
+                                                            <img class="icon" alt="">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dialogdialog-icon-parent">
+                                            <img class="icon9" alt="">
+
+                                            <div class="tpico-de-conhecimento">“Já pensou: sentar-se na mesma poltrona
+                                                que Sherlock Holmes ocupava quando refletia sobre alguns dos casos mais
+                                                complicados que investigava, ou analisando pistas para solucionar um
+                                                deles ou mesmo para capturar um de seus inúmeros inimigos? Uau! Demais!
+                                                Ariel queria. Queria de verdade. Queria demais.”</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="frame-parent43">
+                                    <div class="frame-parent31">
+                                        <div class="frame-parent71">
+                                            <div class="frame-group">
+                                                <div class="label-wrapper">
+                                                    <b class="label">D)</b>
+                                                </div>
+                                                <div class="help-parent">
+                                                    <img class="help-icon" alt="">
+
+                                                    <div class="dialogdialog-label">Onde é exibido?</div>
+                                                </div>
+                                            </div>
+                                            <div class="frame-container">
+                                                <div class="label-wrapper">
+                                                    <div class="label">Tópicos cadastrados*</div>
+                                                </div>
+                                                <div class="frame-wrapper">
+                                                    <div class="instance-wrapper">
+                                                        <div class="tipo-parent">
+                                                            <div class="label">Escolha um tópico existente para
+                                                                cadastrar um subtópico</div>
+                                                            <img class="icon" alt="">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="chip">
+                                                <div class="dialogdialog-chip-bg-success">
+                                                    <div class="dialogdialog-chip">Incorreta</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="icon-parent">
+                                            <img class="icon9" alt="">
+
+                                            <div class="tpico-de-conhecimento" id="altDText">“Já pensou: sentar-se na
+                                                mesma poltrona que Sherlock Holmes ocupava quando refletia sobre alguns
+                                                dos casos mais complicados que investigava, ou analisando pistas para
+                                                solucionar um deles ou mesmo para capturar um de seus inúmeros
+                                                inimigos? Uau! Demais! Ariel queria. Queria de verdade. Queria demais.”
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="frame-parent35">
+                                        <div class="frame-parent">
+                                            <div class="frame-group">
+                                                <div class="label-wrapper">
+                                                    <b class="label">Texto de ajuda</b>
+                                                </div>
+                                                <div class="help-parent">
+                                                    <img class="help-icon" alt="">
+
+                                                    <div class="dialogdialog-label">Onde é exibido?</div>
+                                                </div>
+                                            </div>
+                                            <div class="frame-parent19">
+                                                <div class="label-wrapper">
+                                                    <div class="label">Tópicos cadastrados*</div>
+                                                </div>
+                                                <div class="frame-wrapper">
+                                                    <div class="instance-wrapper">
+                                                        <div class="tipo-parent">
+                                                            <div class="label">Escolha um tópico existente para
+                                                                cadastrar um subtópico</div>
+                                                            <img class="icon" alt="">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dialogdialog-icon-parent">
+                                            <img class="icon9" alt="">
+
+                                            <div class="tpico-de-conhecimento">“Já pensou: sentar-se na mesma poltrona
+                                                que Sherlock Holmes ocupava quando refletia sobre alguns dos casos mais
+                                                complicados que investigava, ou analisando pistas para solucionar um
+                                                deles ou mesmo para capturar um de seus inúmeros inimigos? Uau! Demais!
+                                                Ariel queria. Queria de verdade. Queria demais.”</div>
+                                        </div>
+                                    </div>
+                                    <div class="frame-parent35">
+                                        <div class="frame-parent">
+                                            <div class="frame-group">
+                                                <div class="label-wrapper">
+                                                    <b class="label">Distrator</b>
+                                                </div>
+                                                <div class="help-parent">
+                                                    <img class="help-icon" alt="">
+
+                                                    <div class="dialogdialog-label">Onde é exibido?</div>
+                                                </div>
+                                            </div>
+                                            <div class="frame-parent19">
+                                                <div class="label-wrapper">
+                                                    <div class="label">Tópicos cadastrados*</div>
+                                                </div>
+                                                <div class="frame-wrapper">
+                                                    <div class="instance-wrapper">
+                                                        <div class="tipo-parent">
+                                                            <div class="label">Escolha um tópico existente para
+                                                                cadastrar um subtópico</div>
+                                                            <img class="icon" alt="">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dialogdialog-icon-parent">
+                                            <img class="icon9" alt="">
+
+                                            <div class="tpico-de-conhecimento">“Já pensou: sentar-se na mesma poltrona
+                                                que Sherlock Holmes ocupava quando refletia sobre alguns dos casos mais
+                                                complicados que investigava, ou analisando pistas para solucionar um
+                                                deles ou mesmo para capturar um de seus inúmeros inimigos? Uau! Demais!
+                                                Ariel queria. Queria de verdade. Queria demais.”</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="modal-footer">
+                <div class="actions-container">
+                    <div class="button-parent">
+                        <div class="button">
+                            <div class="fechar">Fechar</div>
+                        </div>
+                        <div class="dialogdialog-button">
+                            <div class="fechar">Salvar alterações</div>
+                        </div>
+                    </div>
+                    <div class="pagination2-mediamdefault1">
+                        <div class="pagination">
+                            <img class="right-icon" alt="">
 
-            <!-- Painéis de info -->
-            <div class="grid md:grid-cols-2 gap-4">
-                <div
-                    class="rounded-xl border bg-card text-card-foreground shadow-sm p-4 flex items-start justify-between card--soft">
-                    <div>
-                        <div class="text-[.95rem] font-semibold text-foreground/80">Nível de dificuldade</div>
-                        <div class="text-2xl font-bold text-foreground">Difícil</div>
-                        <span
-                            class="inline-flex items-center rounded-full border bg-red-50 text-red-700 px-2.5 py-1 text-sm font-semibold border-red-200">
-                            Difícil</span>
-                    </div>
-                    <svg class="size-6 opacity-70" viewBox="0 0 24 24">
-                        <!-- ícone -->
-                    </svg>
-                </div>
-                <div
-                    class="rounded-xl border bg-card text-card-foreground shadow-sm p-4 flex items-start justify-between card--soft">
-                    <div>
-                        <div class="text-[.95rem] font-semibold text-foreground/80">Tempo médio de resposta</div>
-                        <div class="text-2xl font-bold text-foreground">2min 30s</div>
-                    </div>
-                    <svg class="size-6 opacity-70" viewBox="0 0 24 24">
-                        <!-- ícone -->
-                    </svg>
-                </div>
-            </div>
+                            <div class="numbers">
+                                <div class="rectangle">
+                                </div>
+                                <div class="background">
+                                    <div class="dialogdialog-background">
+                                    </div>
+                                </div>
+                                <div class="div">7</div>
+                                <div class="dialogdialog-div">6</div>
+                                <div class="div2">5</div>
+                                <div class="div3">4</div>
+                                <div class="div4">3</div>
+                                <div class="div5">2</div>
+                                <div class="div6">1</div>
+                            </div>
+                            <img class="left-icon" alt="">
 
-            <!-- Enunciado -->
-            <div class="rounded-xl border bg-card text-card-foreground shadow-sm p-5 card--soft">
-                <div class="text-base font-bold tracking-wide text-foreground">Enunciado da questão</div>
-                <div class="rounded-md border bg-muted px-4 py-3 leading-relaxed text-foreground/90">“Já pensou:
-                    sentar-se na mesma poltrona que Sherlock Holmes ocupava quando refletia sobre alguns dos casos mais
-                    complicados que investigava...”</div>
-            </div>
-
-            <!-- Alternativas -->
-            <div class="grid md:grid-cols-2 gap-4">
-                <div
-                    class="relative rounded-xl border bg-card text-card-foreground shadow-sm p-5 min-h-[160px] grid content-center text-center">
-                    <span
-                        class="absolute top-3 left-3 grid place-items-center w-7 h-7 rounded-full bg-muted text-xs font-bold">A</span>
-                    <div
-                        class="rounded-md border bg-muted px-3 py-2 text-[1.05rem] leading-relaxed text-foreground/90 font-semibold">
-                        a coragem de Ariel de encarar inimigos.
-                    </div>
-                </div>
-                <div
-                    class="relative rounded-xl border-green-500 bg-card text-card-foreground shadow-sm p-5 min-h-[160px] grid content-center text-center alt--ok">
-                    <span
-                        class="absolute top-3 left-3 grid place-items-center w-7 h-7 rounded-full bg-muted text-xs font-bold">B</span>
-                    <div
-                        class="rounded-md border bg-muted px-3 py-2 text-[1.05rem] leading-relaxed text-foreground/90 font-semibold">
-                        a admiração de Ariel e seu desejo genuíno.
-                    </div>
-                    <div
-                        class="alt__footer rounded-b-xl bg-green-500/10 text-green-700 text-sm font-semibold px-3 py-2 text-left">
-                        Alternativa com maior número de respostas.
-                    </div>
-                </div>
-                <div
-                    class="relative rounded-xl border bg-card text-card-foreground shadow-sm p-5 min-h-[160px] grid content-center text-center">
-                    <span
-                        class="absolute top-3 left-3 grid place-items-center w-7 h-7 rounded-full bg-muted text-xs font-bold">C</span>
-                    <div
-                        class="rounded-md border bg-muted px-3 py-2 text-[1.05rem] leading-relaxed text-foreground/90 font-semibold">
-                        o medo de Ariel de sair de casa.
-                    </div>
-                </div>
-                <div
-                    class="relative rounded-xl border bg-card text-card-foreground shadow-sm p-5 min-h-[160px] grid content-center text-center">
-                    <span
-                        class="absolute top-3 left-3 grid place-items-center w-7 h-7 rounded-full bg-muted text-xs font-bold">D</span>
-                    <div
-                        class="rounded-md border bg-muted px-3 py-2 text-[1.05rem] leading-relaxed text-foreground/90 font-semibold">
-                        a dúvida de Ariel sobre o futuro.
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="default-iconbutton">
+            <img class="btn-icon-btn-lg-btn-primary" alt="">
+            <img class="btn-icon-btn-lg-btn-primary" src="./Assets/x.svg" alt="Fechar">
+            <img class="right-icon" src="./Assets/voltar.svg" alt="Próxima">
+            <img class="left-icon" src="./Assets/voltar.svg" alt="Anterior" style="transform: scaleX(-1);">
+        </div>
 
-            <!-- Pares label→valor (vertical, bloco legível) -->
-            <div class="field">
-                <div class="field__label text-sm font-semibold text-foreground">Área do conhecimento*</div>
-                <div
-                    class="field__value rounded-md border bg-muted px-3 py-2 text-[1.05rem] leading-relaxed text-foreground/90 font-semibold">
-                    Matemática
-                </div>
-            </div>
-            <div class="field">
-                <div class="field__label text-sm font-semibold text-foreground">Nível de Taxonomia de Bloom*</div>
-                <div
-                    class="field__value rounded-md border bg-muted px-3 py-2 text-[1.05rem] leading-relaxed text-foreground/90 font-semibold">
-                    4: Analisar
-                </div>
-            </div>
-            <div class="field">
-                <div class="field__label text-sm font-semibold text-foreground">Subnível de Taxonomia de Bloom*</div>
-                <div
-                    class="field__value rounded-md border bg-muted px-3 py-2 text-[1.05rem] leading-relaxed text-foreground/90 font-semibold">
-                    4.2 Organizar
-                </div>
-            </div>
-        </main>
+        <!-- Navegação dinâmica das questões -->
+        <div class="modal-footer" style="margin-top:32px; display:flex; justify-content:center; gap:24px;">
+            <button id="prevBtn"
+                style="padding:8px 18px; border-radius:6px; border:1px solid #7367f0; background:#fff; color:#7367f0; font-weight:600;">Anterior</button>
+            <span id="qCounter" style="font-size:1.1rem; font-weight:600; color:#7367f0;">1 / 3</span>
+            <button id="nextBtn"
+                style="padding:8px 18px; border-radius:6px; border:1px solid #7367f0; background:#fff; color:#7367f0; font-weight:600;">Próxima</button>
+            <button id="closeModalBtn"
+                style="margin-left:32px; padding:8px 18px; border-radius:6px; border:1px solid #ea5455; background:#fff; color:#ea5455; font-weight:600;">Fechar</button>
+        </div>
+    </div>
 
-        <footer class="modal__footer">
-            <button class="btn variant-secondary" aria-label="Cancelar">Cancelar</button>
-            <button class="btn variant-default" aria-label="Aprovar">Aprovar</button>
-            <button class="btn variant-destructive" aria-label="Reprovar">Reprovar</button>
-        </footer>
-    </section>
 
-    <script src="app.js" defer></script>
+
+
+    <script src="./app.js"></script>
+    <script>
+        // Abrir modal ao clicar no lápis de edição
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = document.getElementById('modalRoot');
+            var editIcon = document.getElementById('edit3Icon');
+            var closeBtn = document.getElementById('closeModalBtn');
+            if (editIcon && modal) {
+                editIcon.addEventListener('click', function (e) {
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            if (closeBtn && modal) {
+                closeBtn.addEventListener('click', function (e) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                });
+            }
+            // Fechar modal ao clicar fora
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

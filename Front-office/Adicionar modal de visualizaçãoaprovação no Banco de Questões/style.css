@@ -1,0 +1,611 @@
+.dialogdialog {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    text-align: left;
+    font-size: 14px;
+    color: #5e5873;
+    font-family: Montserrat;
+}
+
+.modal-dialog {
+    width: 1014px;
+    box-shadow: 0px 4px 18px rgba(47, 43, 61, 0.16);
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 0;
+}
+
+/* Header fixo no topo do modal */
+.modal-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    align-self: stretch;
+    height: 42px;
+    border-radius: 24px 24px 0px 0px;
+    background-color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 24px;
+    box-sizing: border-box;
+}
+
+.modal-body {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+}
+
+.linha-2-parent {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.linha-2 {
+    align-self: stretch;
+    border-radius: 6px;
+    border: 1px solid #d8d6de;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 10px;
+    color: #676d7d;
+}
+
+.frame-parent {
+    align-self: stretch;
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.frame-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    flex-shrink: 0;
+}
+
+.label-wrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.label {
+    position: relative;
+    line-height: 21px;
+}
+
+.help-parent {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    font-size: 12px;
+    color: #00cfe8;
+}
+
+.help-icon {
+    height: 16px;
+    width: 16px;
+    position: relative;
+}
+
+.dialogdialog-label {
+    position: relative;
+    line-height: 18px;
+}
+
+.frame-container {
+    width: 1091px;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    flex-shrink: 0;
+    color: #6e6b7b;
+}
+
+.frame-wrapper {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.instance-wrapper {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.tipo-parent {
+    align-self: stretch;
+    height: 44px;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #d8d6de;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    gap: 20px;
+}
+
+.icon {
+    height: 18px;
+    width: 18px;
+    position: relative;
+}
+
+.b {
+    position: relative;
+    line-height: 21px;
+    color: #7367f0;
+    flex-shrink: 0;
+}
+
+.dialogdialog-modal-header {
+    align-self: stretch;
+    border-radius: 6px 6px 0px 0px;
+    background-color: #d8d6de;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+.tpico-de-conhecimento {
+    align-self: stretch;
+    position: relative;
+    line-height: 21px;
+}
+
+.linha-3 {
+    align-self: stretch;
+    border-radius: 0px 0px 6px 6px;
+    border-right: 1px solid #d8d6de;
+    border-bottom: 1px solid #d8d6de;
+    border-left: 1px solid #d8d6de;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 10px;
+    color: #676d7d;
+}
+
+.dialogdialog-linha-3 {
+    align-self: stretch;
+    border-radius: 0px 0px 6px 6px;
+    border-right: 1px solid #d8d6de;
+    border-bottom: 1px solid #d8d6de;
+    border-left: 1px solid #d8d6de;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 10px;
+    color: #6e6b7b;
+}
+
+.frame-parent19 {
+    width: 1091px;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    flex-shrink: 0;
+}
+
+.bncc-6-ano {
+    flex: 1;
+    position: relative;
+    line-height: 21px;
+    color: #7367f0;
+    flex-shrink: 0;
+}
+
+.md {
+    border-radius: 100px;
+    background-color: rgba(234, 84, 85, 0.12);
+    border: 1px solid #ea5455;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 10px;
+    font-size: 12px;
+    color: #ea5455;
+}
+
+.linha-32 {
+    align-self: stretch;
+    border-radius: 0px 0px 6px 6px;
+    border-right: 1px solid #d8d6de;
+    border-bottom: 1px solid #d8d6de;
+    border-left: 1px solid #d8d6de;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    color: #676d7d;
+}
+
+.frame-parent21 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.icon-parent {
+    align-self: stretch;
+    border-radius: 6px;
+    background-color: #fff;
+    border: 1px solid #d8d6de;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 10px;
+    color: #6e6b7b;
+}
+
+.icon9 {
+    width: 18px;
+    height: 18px;
+    position: relative;
+    display: none;
+}
+
+.linha-33 {
+    align-self: stretch;
+    border-radius: 0px 0px 6px 6px;
+    border-right: 1px solid #d8d6de;
+    border-bottom: 1px solid #d8d6de;
+    border-left: 1px solid #d8d6de;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    color: #6e6b7b;
+}
+
+.frame-parent29 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.frame-parent30 {
+    align-self: stretch;
+    border-radius: 6px;
+    background-color: #fff;
+    border: 2px solid #28c76f;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 10px;
+}
+
+.frame-parent31 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    color: #676d7d;
+}
+
+.frame-parent32 {
+    align-self: stretch;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: -16px;
+}
+
+.chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    flex-shrink: 0;
+    text-align: center;
+    font-size: 13px;
+    color: #fff;
+    font-family: 'Public Sans';
+}
+
+.chip-bg-success {
+    border-radius: 16px;
+    background-color: #28c76f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 10px;
+    box-sizing: border-box;
+    min-width: 24px;
+}
+
+.dialogdialog-chip {
+    flex: 1;
+    position: relative;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+.frame-parent35 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.dialogdialog-icon-parent {
+    align-self: stretch;
+    border-radius: 6px;
+    background-color: #fff;
+    border: 1px solid #d8d6de;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 10px;
+}
+
+.frame-parent43 {
+    align-self: stretch;
+    border-radius: 6px;
+    background-color: #fff;
+    border: 2px solid #d8d6de;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 10px;
+}
+
+.dialogdialog-chip-bg-success {
+    border-radius: 16px;
+    background-color: #82868b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 10px;
+    box-sizing: border-box;
+    min-width: 24px;
+}
+
+.frame-parent71 {
+    align-self: stretch;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: -17px;
+}
+
+/* Footer fixo no rodapé do modal */
+.modal-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0px 24px 24px;
+    text-align: center;
+    color: #7367f0;
+    background: #fff;
+}
+
+.actions-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.button-parent {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.button {
+    border-radius: 5.01px;
+    border: 1px solid #7367f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11.8px 21.8px 11.8px 25.6px;
+}
+
+.fechar {
+    position: relative;
+    line-height: 14px;
+    font-weight: 500;
+}
+
+.dialogdialog-button {
+    border-radius: 5.01px;
+    background-color: #7367f0;
+    border: 1px solid #7367f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11.8px 21.8px 11.8px 25.6px;
+    color: #fff;
+}
+
+.pagination2-mediamdefault1 {
+    height: 28px;
+    width: 244px;
+    position: relative;
+    font-size: 12px;
+    color: #6e6b7b;
+}
+
+.pagination {
+    position: absolute;
+    top: calc(50% - 16px);
+    left: calc(50% - 122px);
+    width: 244px;
+    height: 32px;
+}
+
+.right-icon {
+    position: absolute;
+    top: calc(50% - 14px);
+    left: calc(50% + 94px);
+    width: 28px;
+    height: 28px;
+}
+
+.numbers {
+    position: absolute;
+    top: calc(50% - 16px);
+    left: calc(50% - 90px);
+    width: 180px;
+    height: 32px;
+    overflow: hidden;
+}
+
+.rectangle {
+    position: absolute;
+    height: 87.5%;
+    width: 100%;
+    top: 6.25%;
+    right: 0%;
+    bottom: 6.25%;
+    left: 0%;
+    border-radius: 16px;
+    background-color: #f3f2f7;
+}
+
+.background {
+    position: absolute;
+    height: 100%;
+    width: 17.78%;
+    top: 0%;
+    right: 41.67%;
+    bottom: 0%;
+    left: 40.56%;
+}
+
+.dialogdialog-background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 0%;
+    border-radius: 29px;
+    background-color: #7367f0;
+}
+
+.div {
+    position: absolute;
+    top: calc(50% - 9px);
+    left: 88.61%;
+    line-height: 18px;
+}
+
+.dialogdialog-div {
+    position: absolute;
+    top: calc(50% - 9px);
+    left: 76.39%;
+    line-height: 18px;
+}
+
+.div2 {
+    position: absolute;
+    top: calc(50% - 9px);
+    left: 64.44%;
+    line-height: 18px;
+}
+
+.div3 {
+    position: absolute;
+    top: calc(50% - 11px);
+    left: 46.67%;
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.div4 {
+    position: absolute;
+    top: calc(50% - 9px);
+    left: 30.56%;
+    line-height: 18px;
+}
+
+.div5 {
+    position: absolute;
+    top: calc(50% - 9px);
+    left: 18.33%;
+    line-height: 18px;
+}
+
+.div6 {
+    position: absolute;
+    top: calc(50% - 9px);
+    left: 7.5%;
+    line-height: 18px;
+}
+
+.left-icon {
+    position: absolute;
+    top: calc(50% - 14px);
+    left: calc(50% - 122px);
+    width: 28px;
+    height: 28px;
+}
+
+.default-iconbutton {
+    margin: 0 !important;
+    position: absolute;
+    top: -5px;
+    left: 999px;
+    box-shadow: 0px 1px 6px rgba(47, 43, 61, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.btn-icon-btn-lg-btn-primary {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+}

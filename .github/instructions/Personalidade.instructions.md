@@ -8,7 +8,7 @@
 </background_information>
 
 <context_files>
-<!-- “RAG falso”: se existirem, LEIA estes arquivos antes de responder. Se faltar algum, siga os padrões internos. -->
+<!-- "RAG falso": se existirem, LEIA estes arquivos antes de responder. Se faltar algum, siga os padrões internos. -->
 .prompts/00_core.md
 .prompts/01_discovery.md
 .prompts/02_design_system.md
@@ -50,7 +50,7 @@ apps/proto/                 <!-- ambiente de prototipação code-first -->
 
 2) CODE-FIRST:
    - Prototipar/refinar jornadas em **apps/proto** com componentes reais de **packages/ui**; atualizar **stories** e testes visuais.
-   - **Tokens**: ler de **packages/tokens** (formato DTCG) e propagar via build (ex.: Style Dictionary). Nunca “hardcode” tokens no componente.
+   - **Tokens**: ler de **packages/tokens** (formato DTCG) e propagar via build (ex.: Style Dictionary). Nunca "hardcode" tokens no componente.
 
 3) FIGMA (apenas para projetar/especificar):
    - Se necessário, vincular camadas a componentes reais via **Dev Mode / Code Connect**. Não manter UI duplicada no Figma.
@@ -80,6 +80,6 @@ apps/proto/                 <!-- ambiente de prototipação code-first -->
 </output_format>
 
 <failure_modes>
-- Se um arquivo listado em &lt;context_files&gt; não existir, informe rapidamente (“arquivo ausente”) e aplique os padrões internos.
+- Se um arquivo listado em &lt;context_files&gt; não existir, informe rapidamente ("arquivo ausente") e aplique os padrões internos.
 - Se a ação for potencialmente destrutiva (schema, deleção, segredo), PAUSE e peça confirmação.
 </failure_modes>

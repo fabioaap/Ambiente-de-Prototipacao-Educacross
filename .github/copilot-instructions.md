@@ -2,15 +2,42 @@
 
 ## 🎯 Contexto
 
-Este projeto segue padrões rigorosos de qualidade, arquitetura limpa e descoberta técnica condicional.
+**Ambiente de Prototipagem e Validação - Educacross v1**
+
+Ambiente dedicado para **equipe de produto e designers** criar protótipos funcionais, documentar fluxos e jornadas de usuário para:
+- 📊 **Apresentações para stakeholders**
+- 🧪 **Testes de usabilidade com usuários reais** 
+- 🚀 **Construção de MVPs para validação**
+- 📋 **Documentação de fluxos antes da implementação Vue.js**
+
+Foco principal: wizard de envio de missões gamificadas em lote para professores e coordenadores pedagógicos.
+
+## 🏗️ Arquitetura Específica do Projeto (v1)
+
+### Estrutura Multi-Stack (orientada para validação)
+- **Front-office**: HTML/CSS/JS puro (prototipagem rápida para testes)
+- **Back-office**: HTML/CSS/JS puro (demonstrações para stakeholders) 
+- **Game**: Stack separada (a ser definida)
+- **Documentação**: Storybook para documentar componentes e gerar código Vue.js
+- **Design Import**: MCP Figma para clonar designs com alta fidelidade
+- **Jornadas**: Markdown em `docs/journeys/` com personas, fluxos e cenários de teste
+- **Mocks**: Dados simulados realistas para demonstrações convincentes
+
+### Padrão de Wizard Multi-Etapas (HTML/JS)
+```javascript
+// Pattern de state management vanilla JS
+const wizardState = {
+  currentStep: 'turma', // 'turma' | 'missoes' | 'configuracao' | 'revisao' | 'sucesso'
+  selectedData: {},
+  // Dados derivados calculados com funções puras
+}
+```
 
 ## 📚 Leitura obrigatória
 
 Antes de gerar código, consulte:
-- `.github/instructions/Personalidade.instructions.md` — Instruções completas (PRIORIDADE)
-- `.prompts/instructions.md` — Prompt principal
-- `.prompts/blocks/00_core.md` — Fundação (papel, stack, DoD)
-- `.prompts/blocks/03_arch_clean.md` — Arquitetura limpa
+- `docs/journeys/JOURNEY-envio-missoes-em-lote.md` — Fluxo principal e personas
+- `docs/adr/ADR-0006-unified-prototyping-platform.md` — Arquitetura e decisões técnicas
 
 ## 🚨 Regras não negociáveis
 
@@ -35,15 +62,56 @@ Antes de gerar código, consulte:
 - Eficiência (0-10)
 - Nível de confiança (0-100%)
 
-## 🏗️ Stack padrão
+## 🔧 Comandos Essenciais
 
-- **Frontend:** Next.js (App Router) + React + TypeScript + Tailwind + shadcn/ui
-- **Estado:** Zustand + React Query
-- **Backend:** Node.js + NestJS + Fastify
-- **Banco:** PostgreSQL + Prisma
-- **Infra:** Redis, BullMQ, S3, Docker, GitHub Actions
-- **Testes:** Vitest + Playwright + Storybook
-- **Arquitetura:** Limpa/Hexagonal (Domínio → Aplicação → Infra → Interface)
+```powershell
+# Desenvolvimento principal (v1 - HTML/CSS/JS)
+# Abrir protótipos diretamente no navegador ou usar Live Server
+
+# Design Import do Figma (MCP)
+# Usar ferramentas MCP do Figma para importar designs com alta fidelidade
+# Converte automaticamente componentes Figma → HTML/CSS
+
+# Documentação e geração de código Vue.js
+npm run storybook        # Storybook para documentar e gerar código Vue.js
+npm run storybook:build  # Build estático do Storybook
+
+# Validação de qualidade
+npm run check-env        # Verificação completa do ambiente (quando aplicável)
+npm run dev              # Vite dev server para componentes React (http://localhost:5173)
+npm run test             # Testes unitários com Vitest
+npm run check-types      # Verificação de tipos TypeScript
+```
+
+## 📊 Estrutura de Dados Específica
+
+### Entidades Principais (JavaScript vanilla)
+```javascript
+// Estruturas de dados para protótipos HTML/JS
+const turmaExample = {
+  id: 'turma-001',
+  nome: '3º Ano A', 
+  serie: '3º Ano',
+  professor: 'João Silva',
+  alunos: 25,
+  disciplina: 'Matemática',
+  ativo: true
+}
+
+const missaoExample = {
+  id: 'missao-001',
+  titulo: 'Frações Divertidas',
+  nivel: 'facil', // 'facil' | 'medio' | 'dificil'
+  pontos: 100,
+  competencias: ['Matemática', 'Raciocínio Lógico'],
+  uso: 15
+}
+```
+
+### Sistema de Mocks (crucial para prototipagem)
+- **Dados realistas**: Arrays em JavaScript com dados simulados da plataforma real
+- **Funções de simulação**: `simularEnvioBatch()` com setTimeout para latência
+- **Armazenamento local**: localStorage para persistir estado entre páginas
 
 ## ✅ Definição de Pronto (DoD)
 
@@ -82,27 +150,81 @@ Uma entrega só é "pronta" quando:
   - Flags removidas ou promovidas
   - LGPD e ética garantidas
 
-## 🎨 Design System e UI Consistente
+## 🎨 Padrões de UI e Componentes (v1)
 
-- Grid system unificado e tokens documentados
-- Componentes com variações (hover, active, error, disabled)
-- Acessibilidade e contraste (WCAG AA+)
-- Documentação no Storybook como fonte de verdade
-- Snapshots de UI para prevenir regressões
+### Design System: CSS/HTML Nativo + Figma Import
+- **Estilização**: CSS puro com classes utilitárias ou Tailwind via CDN
+- **Paleta educacional**: Azuis (#0066CC), verdes (#00AA44) para gamificação
+- **Import Figma**: MCP Figma para clonar componentes com fidelidade pixel-perfect
+- **Componentes**: Reutilização via templates HTML e classes CSS consistentes
+- **Responsividade**: CSS Grid e Flexbox nativos
 
-## 🏛️ Arquitetura Limpa e Testável
+### Padrão de Componentes HTML
+```html
+<!-- Template reutilizável para cards -->
+<div class="card-missao" data-missao-id="123">
+  <div class="card-header">
+    <span class="nivel-badge nivel-facil">Fácil</span>
+    <span class="pontos">100 pts</span>
+  </div>
+  <h3 class="titulo">Nome da Missão</h3>
+  <div class="competencias">...</div>
+</div>
+```
 
-### Camadas:
-1. **Domínio** — Regras de negócio puras
-2. **Aplicação** — Casos de uso e orquestração
-3. **Infraestrutura** — Frameworks, adaptadores e I/O
-4. **Interface** — UI, APIs e gateways
+### JavaScript Pattern para Estado
+```javascript
+// Gerenciamento de estado global simples
+const AppState = {
+  currentStep: 'turma',
+  selectedTurmas: [],
+  updateStep: function(step) { this.currentStep = step; },
+  // Eventos customizados para comunicação entre componentes
+}
+```
 
-### Regras:
-- Dependências sempre apontam para o núcleo (domínio)
-- Nenhuma lógica de negócio depende de frameworks
-- Cada camada testável isoladamente
-- Portas/adaptadores permitem experimentação segura
+### Storybook para Documentação Vue.js
+```typescript
+// Stories documentam componentes para conversão em Vue.js
+export const CardMissao: Story = {
+  args: { nivel: 'facil', pontos: 100, titulo: 'Exemplo' },
+  // Documentação automática gera código Vue.js equivalente
+}
+```
+
+## 🧩 Arquitetura de Prototipagem (v1)
+
+### Estrutura de Pasta HTML/JS
+```
+Front-office/
+├── [protótipos].html  # Páginas HTML individuais para cada fluxo
+├── assets/           # CSS, JS, imagens
+├── components/       # Templates HTML reutilizáveis 
+└── mocks/           # Arrays JS com dados simulados
+
+Back-office/
+├── [páginas específicas].html
+├── assets/
+└── mocks/
+
+Game/                 # Stack separada (TBD)
+
+src/                  # Componentes React para Storybook → Vue.js
+├── components/       # Componentes documentados no Storybook
+└── stories/          # Stories que geram documentação Vue.js
+```
+
+### Princípios Específicos do Protótipo (orientado para validação)
+- **Dados realistas**: Arrays JavaScript simulam cenários reais para demonstrações
+- **Fidelidade visual**: MCP Figma garante proximidade pixel-perfect com designs
+- **Experiência convincente**: UX/UI idêntica ao produto final para testes válidos
+- **Estado persistente**: localStorage para simular jornadas completas
+- **Facilidade de modificação**: Código simples para iteração rápida com feedback
+
+### Fluxo de Dados (HTML/JS Pattern)
+```
+HTML → Event Listeners → JavaScript Functions → DOM Updates → localStorage
+```
 
 ## 📋 Checklist de PR
 
@@ -168,6 +290,12 @@ Criar componente de botão reutilizável com variantes.
 - Eficiência: 10/10
 - Confiança: 100%
 ```
+
+## 🎯 Para mais detalhes
+
+Consulte:
+- Sistema de prompts modulares em `.prompts/`
+- Instruções completas em `.github/instructions/Personalidade.instructions.md`
 
 ## 📖 Para mais detalhes
 
