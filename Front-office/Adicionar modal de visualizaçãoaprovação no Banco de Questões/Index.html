@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nova questão de avaliação — Leitura</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <section class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+        <!-- Header leve: apenas navegação de questões + fechar -->
+        <header class="modal__header">
+            <div class="header__left"></div>
+            <div class="header__right">
+                <div class="qnav" role="group" aria-label="Navegação entre questões">
+                    <button id="prevBtn" class="btn variant-ghost size-sm" aria-label="Questão anterior">‹
+                        Anterior</button>
+                    <div class="qnav__info"><span id="qCounter" aria-live="polite">Q1 de 3</span></div>
+                    <button id="nextBtn" class="btn variant-default size-sm" aria-label="Próxima questão">Próxima
+                        ›</button>
+                </div>
+                <button class="modal__close" aria-label="Fechar">×</button>
+            </div>
+        </header>
+
+        <!-- Âncoras de seção -->
+        <nav class="nav">
+            <a href="#identificacao">Identificação</a>
+            <a href="#metacampos">Metacampos</a>
+            <a href="#topico">Tópico</a>
+            <a href="#habilidades">Habilidades</a>
+            <a href="#enunciado">Enunciado</a>
+            <a href="#alternativas">Alternativas</a>
+        </nav>
+
+        <main class="modal__body">
+            <!-- NOVO: Título e Status no corpo -->
+            <section id="identificacao" class="card" aria-label="Identificação da questão">
+                <div class="card__body">
+                    <div class="field">
+                        <div class="field__label">Título</div>
+                        <div class="field__value" id="modalTitle">Nova questão de avaliação</div>
+                    </div>
+                    <div class="field">
+                        <div class="field__label">Status da questão</div>
+                        <div class="field__value"><span
+                                class="badge badge--warn inline-flex items-center rounded-full border bg-muted/60 px-2.5 py-1 text-sm font-medium text-warning"
+                                id="qStatus">Inativa</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Faixa de meta superior -->
+            <div class="rounded-xl border bg-card text-card-foreground shadow-sm p-5 grid gap-3 card--soft">
+                <div class="flex items-center gap-3 text-xl font-bold">Código da Questão: 1234</div>
+                <div class="flex items-center gap-3">
+                    <a href="#" class="text-primary font-semibold underline-offset-2 hover:underline">Matriz/currículo:
+                        BNCC</a>
+                    <span
+                        class="inline-flex items-center rounded-full border bg-muted/60 text-muted-foreground px-2.5 py-1 text-sm font-medium">Temática</span>
+                    <span
+                        class="inline-flex items-center rounded-full border bg-emerald-50 text-emerald-700 px-2.5 py-1 text-sm font-semibold border-emerald-200">Habilidade</span>
+                </div>
+                <div class="rounded-md border bg-muted/40 px-3 py-2 text-[.975rem] leading-relaxed text-foreground/90">
+                    Descritor da habilidade: ...
+                </div>
+            </div>
+
+            <!-- Painéis de info -->
+            <div class="grid md:grid-cols-2 gap-4">
+                <div
+                    class="rounded-xl border bg-card text-card-foreground shadow-sm p-4 flex items-start justify-between card--soft">
+                    <div>
+                        <div class="text-[.95rem] font-semibold text-foreground/80">Nível de dificuldade</div>
+                        <div class="text-2xl font-bold text-foreground">Difícil</div>
+                        <span
+                            class="inline-flex items-center rounded-full border bg-red-50 text-red-700 px-2.5 py-1 text-sm font-semibold border-red-200">
+                            Difícil</span>
+                    </div>
+                    <svg class="size-6 opacity-70" viewBox="0 0 24 24">
+                        <!-- ícone -->
+                    </svg>
+                </div>
+                <div
+                    class="rounded-xl border bg-card text-card-foreground shadow-sm p-4 flex items-start justify-between card--soft">
+                    <div>
+                        <div class="text-[.95rem] font-semibold text-foreground/80">Tempo médio de resposta</div>
+                        <div class="text-2xl font-bold text-foreground">2min 30s</div>
+                    </div>
+                    <svg class="size-6 opacity-70" viewBox="0 0 24 24">
+                        <!-- ícone -->
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Enunciado -->
+            <div class="rounded-xl border bg-card text-card-foreground shadow-sm p-5 card--soft">
+                <div class="text-base font-bold tracking-wide text-foreground">Enunciado da questão</div>
+                <div class="rounded-md border bg-muted px-4 py-3 leading-relaxed text-foreground/90">“Já pensou:
+                    sentar-se na mesma poltrona que Sherlock Holmes ocupava quando refletia sobre alguns dos casos mais
+                    complicados que investigava...”</div>
+            </div>
+
+            <!-- Alternativas -->
+            <div class="grid md:grid-cols-2 gap-4">
+                <div
+                    class="relative rounded-xl border bg-card text-card-foreground shadow-sm p-5 min-h-[160px] grid content-center text-center">
+                    <span
+                        class="absolute top-3 left-3 grid place-items-center w-7 h-7 rounded-full bg-muted text-xs font-bold">A</span>
+                    <div
+                        class="rounded-md border bg-muted px-3 py-2 text-[1.05rem] leading-relaxed text-foreground/90 font-semibold">
+                        a coragem de Ariel de encarar inimigos.
+                    </div>
+                </div>
+                <div
+                    class="relative rounded-xl border-green-500 bg-card text-card-foreground shadow-sm p-5 min-h-[160px] grid content-center text-center alt--ok">
+                    <span
+                        class="absolute top-3 left-3 grid place-items-center w-7 h-7 rounded-full bg-muted text-xs font-bold">B</span>
+                    <div
+                        class="rounded-md border bg-muted px-3 py-2 text-[1.05rem] leading-relaxed text-foreground/90 font-semibold">
+                        a admiração de Ariel e seu desejo genuíno.
+                    </div>
+                    <div
+                        class="alt__footer rounded-b-xl bg-green-500/10 text-green-700 text-sm font-semibold px-3 py-2 text-left">
+                        Alternativa com maior número de respostas.
+                    </div>
+                </div>
+                <div
+                    class="relative rounded-xl border bg-card text-card-foreground shadow-sm p-5 min-h-[160px] grid content-center text-center">
+                    <span
+                        class="absolute top-3 left-3 grid place-items-center w-7 h-7 rounded-full bg-muted text-xs font-bold">C</span>
+                    <div
+                        class="rounded-md border bg-muted px-3 py-2 text-[1.05rem] leading-relaxed text-foreground/90 font-semibold">
+                        o medo de Ariel de sair de casa.
+                    </div>
+                </div>
+                <div
+                    class="relative rounded-xl border bg-card text-card-foreground shadow-sm p-5 min-h-[160px] grid content-center text-center">
+                    <span
+                        class="absolute top-3 left-3 grid place-items-center w-7 h-7 rounded-full bg-muted text-xs font-bold">D</span>
+                    <div
+                        class="rounded-md border bg-muted px-3 py-2 text-[1.05rem] leading-relaxed text-foreground/90 font-semibold">
+                        a dúvida de Ariel sobre o futuro.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pares label→valor (vertical, bloco legível) -->
+            <div class="field">
+                <div class="field__label text-sm font-semibold text-foreground">Área do conhecimento*</div>
+                <div
+                    class="field__value rounded-md border bg-muted px-3 py-2 text-[1.05rem] leading-relaxed text-foreground/90 font-semibold">
+                    Matemática
+                </div>
+            </div>
+            <div class="field">
+                <div class="field__label text-sm font-semibold text-foreground">Nível de Taxonomia de Bloom*</div>
+                <div
+                    class="field__value rounded-md border bg-muted px-3 py-2 text-[1.05rem] leading-relaxed text-foreground/90 font-semibold">
+                    4: Analisar
+                </div>
+            </div>
+            <div class="field">
+                <div class="field__label text-sm font-semibold text-foreground">Subnível de Taxonomia de Bloom*</div>
+                <div
+                    class="field__value rounded-md border bg-muted px-3 py-2 text-[1.05rem] leading-relaxed text-foreground/90 font-semibold">
+                    4.2 Organizar
+                </div>
+            </div>
+        </main>
+
+        <footer class="modal__footer">
+            <button class="btn variant-secondary" aria-label="Cancelar">Cancelar</button>
+            <button class="btn variant-default" aria-label="Aprovar">Aprovar</button>
+            <button class="btn variant-destructive" aria-label="Reprovar">Reprovar</button>
+        </footer>
+    </section>
+
+    <script src="app.js" defer></script>
+</body>
+
+</html>
