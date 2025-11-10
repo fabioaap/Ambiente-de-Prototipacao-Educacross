@@ -1105,59 +1105,7 @@
                                 </div>
                             </div>
 
-                            <!-- Distribuição por Bloom -->
-                            <div style="margin-top: 32px;">
-                                <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px; color: #5e5873;">
-                                    Distribuição por Bloom
-                                    <span id="bloom-status" class="badge-status alerta">⚠ Verificar soma</span>
-                                </h3>
 
-                                <div class="dist-input-group">
-                                    <div class="dist-input-row">
-                                        <label for="bloom-lembrar">Lembrar</label>
-                                        <input type="number" id="bloom-lembrar" value="20" min="0"
-                                            onchange="window.updateBloom('lembrar', parseInt(this.value) || 0)"
-                                            aria-label="Quantidade Bloom - Lembrar">
-                                    </div>
-                                    <div class="dist-input-row">
-                                        <label for="bloom-compreender">Compreender</label>
-                                        <input type="number" id="bloom-compreender" value="30" min="0"
-                                            onchange="window.updateBloom('compreender', parseInt(this.value) || 0)"
-                                            aria-label="Quantidade Bloom - Compreender">
-                                    </div>
-                                    <div class="dist-input-row">
-                                        <label for="bloom-aplicar">Aplicar</label>
-                                        <input type="number" id="bloom-aplicar" value="30" min="0"
-                                            onchange="window.updateBloom('aplicar', parseInt(this.value) || 0)"
-                                            aria-label="Quantidade Bloom - Aplicar">
-                                    </div>
-                                    <div class="dist-input-row">
-                                        <label for="bloom-analisar">Analisar</label>
-                                        <input type="number" id="bloom-analisar" value="25" min="0"
-                                            onchange="window.updateBloom('analisar', parseInt(this.value) || 0)"
-                                            aria-label="Quantidade Bloom - Analisar">
-                                    </div>
-                                    <div class="dist-input-row">
-                                        <label for="bloom-avaliar">Avaliar</label>
-                                        <input type="number" id="bloom-avaliar" value="10" min="0"
-                                            onchange="window.updateBloom('avaliar', parseInt(this.value) || 0)"
-                                            aria-label="Quantidade Bloom - Avaliar">
-                                    </div>
-                                    <div class="dist-input-row">
-                                        <label for="bloom-criar">Criar</label>
-                                        <input type="number" id="bloom-criar" value="5" min="0"
-                                            onchange="window.updateBloom('criar', parseInt(this.value) || 0)"
-                                            aria-label="Quantidade Bloom - Criar">
-                                    </div>
-                                </div>
-
-                                <!-- Preset Bloom -->
-                                <button class="btn btn-outline" id="btn-bloom-base"
-                                    style="margin-top: 12px; max-width: 100%;"
-                                    onclick="window.applyPreset('bloomBase')">
-                                    Aplicar Preset Base (20/25/25/15/10/5)
-                                </button>
-                            </div>
                         </div>
                     </div>
 
@@ -1739,6 +1687,17 @@
                         lembrar: 20, compreender: 25, aplicar: 25,
                         analisar: 15, avaliar: 10, criar: 5
                     });
+                    break;
+                case 'bloomEqualizar':
+                    const eqBloom = equalizarTotal(total, 6);
+                    newBloom = {
+                        lembrar: eqBloom[0],
+                        compreender: eqBloom[1],
+                        aplicar: eqBloom[2],
+                        analisar: eqBloom[3],
+                        avaliar: eqBloom[4],
+                        criar: eqBloom[5]
+                    };
                     break;
             }
 
