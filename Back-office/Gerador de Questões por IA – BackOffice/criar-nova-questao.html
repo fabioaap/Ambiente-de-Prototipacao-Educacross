@@ -1015,8 +1015,8 @@
                     <!-- Total de questões -->
                     <div class="input-group" style="max-width: 200px; margin-bottom: 24px;">
                         <label class="input-label" for="total-questoes">Total de questões do lote *</label>
-                        <input type="number" id="total-questoes" class="input-field" value="120" min="1" max="1000"
-                            onchange="window.setTotalQuestoes(parseInt(this.value) || 120)"
+                        <input type="number" id="total-questoes" class="input-field" value="20" min="1" max="1000"
+                            onchange="window.setTotalQuestoes(parseInt(this.value) || 20)"
                             aria-label="Total de questões do lote" style="text-align: center; font-weight: 600;">
                     </div>
 
@@ -1041,7 +1041,7 @@
                             <div class="kpis-grid">
                                 <div class="kpi-card">
                                     <div class="kpi-label">Total</div>
-                                    <div class="kpi-value" id="kpi-total">120</div>
+                                    <div class="kpi-value" id="kpi-total">20</div>
                                 </div>
                                 <div class="kpi-card">
                                     <div class="kpi-label">Tópicos</div>
@@ -1053,7 +1053,7 @@
                                 </div>
                                 <div class="kpi-card">
                                     <div class="kpi-label">Restante</div>
-                                    <div class="kpi-value" id="kpi-restante">120</div>
+                                    <div class="kpi-value" id="kpi-restante">20</div>
                                 </div>
                             </div>
                         </div>
@@ -1069,22 +1069,34 @@
 
                                 <div class="dist-input-group">
                                     <div class="dist-input-row">
+                                        <label for="diff-muito-facil">Muito fácil</label>
+                                        <input type="number" id="diff-muito-facil" value="4" min="0"
+                                            onchange="window.updateDiff('muitoFacil', parseInt(this.value) || 0)"
+                                            aria-label="Quantidade de questões muito fáceis">
+                                    </div>
+                                    <div class="dist-input-row">
                                         <label for="diff-facil">Fácil</label>
-                                        <input type="number" id="diff-facil" value="40" min="0"
+                                        <input type="number" id="diff-facil" value="4" min="0"
                                             onchange="window.updateDiff('facil', parseInt(this.value) || 0)"
                                             aria-label="Quantidade de questões fáceis">
                                     </div>
                                     <div class="dist-input-row">
                                         <label for="diff-medio">Médio</label>
-                                        <input type="number" id="diff-medio" value="60" min="0"
+                                        <input type="number" id="diff-medio" value="4" min="0"
                                             onchange="window.updateDiff('medio', parseInt(this.value) || 0)"
                                             aria-label="Quantidade de questões médias">
                                     </div>
                                     <div class="dist-input-row">
                                         <label for="diff-dificil">Difícil</label>
-                                        <input type="number" id="diff-dificil" value="20" min="0"
+                                        <input type="number" id="diff-dificil" value="4" min="0"
                                             onchange="window.updateDiff('dificil', parseInt(this.value) || 0)"
                                             aria-label="Quantidade de questões difíceis">
+                                    </div>
+                                    <div class="dist-input-row">
+                                        <label for="diff-muito-dificil">Muito difícil</label>
+                                        <input type="number" id="diff-muito-dificil" value="4" min="0"
+                                            onchange="window.updateDiff('muitoDificil', parseInt(this.value) || 0)"
+                                            aria-label="Quantidade de questões muito difíceis">
                                     </div>
                                 </div>
 
@@ -1092,11 +1104,11 @@
                                 <div class="preset-buttons">
                                     <button class="btn btn-outline btn-preset" id="btn-diff-a"
                                         onclick="window.applyPreset('diffA')">
-                                        Preset A (40/40/20)
+                                        Preset A (20/20/20/20/20)
                                     </button>
                                     <button class="btn btn-outline btn-preset" id="btn-diff-b"
                                         onclick="window.applyPreset('diffB')">
-                                        Preset B (30/50/20)
+                                        Preset B (10/20/40/20/10)
                                     </button>
                                     <button class="btn btn-outline btn-preset" id="btn-equalizar"
                                         onclick="window.applyPreset('equalizar')">
@@ -1154,9 +1166,10 @@
                     <!-- ========== BLOCO: RESUMO E AÇÕES ========== -->
                     <div class="resumo-lote" id="resumo-lote" role="status" aria-live="polite">
                         <strong>Resumo do lote:</strong>
-                        Total <strong id="resumo-total">120</strong> questões •
-                        Dificuldade: Fácil <strong id="resumo-facil">40</strong>, Médio <strong
-                            id="resumo-medio">60</strong>, Difícil <strong id="resumo-dificil">20</strong> •
+                        Total <strong id="resumo-total">20</strong> questões •
+                        Dificuldade: MF<strong id="resumo-muito-facil">4</strong>, F<strong
+                            id="resumo-facil">4</strong>, M<strong id="resumo-medio">4</strong>, D<strong
+                            id="resumo-dificil">4</strong>, MD<strong id="resumo-muito-dificil">4</strong> •
                         Bloom: L<strong id="resumo-lembrar">20</strong> C<strong id="resumo-compreender">30</strong>
                         A<strong id="resumo-aplicar">30</strong> N<strong id="resumo-analisar">25</strong> V<strong
                             id="resumo-avaliar">10</strong> Cr<strong id="resumo-criar">5</strong>
@@ -1380,9 +1393,9 @@
 
         // ===== ESTADO GLOBAL =====
         window.batchState = {
-            totalQuestoes: 120,
+            totalQuestoes: 20,
             distribuicao: {
-                dificuldade: { facil: 40, medio: 60, dificil: 20 },
+                dificuldade: { muitoFacil: 4, facil: 4, medio: 4, dificil: 4, muitoDificil: 4 },
                 bloom: { lembrar: 20, compreender: 30, aplicar: 30, analisar: 25, avaliar: 10, criar: 5 },
                 topicos: [],
                 habilidades: []
@@ -1444,7 +1457,7 @@
 
         function somaDiff() {
             const d = window.batchState.distribuicao.dificuldade;
-            return d.facil + d.medio + d.dificil;
+            return d.muitoFacil + d.facil + d.medio + d.dificil + d.muitoDificil;
         }
 
         function somaBloom() {
@@ -1471,9 +1484,11 @@
             const d = window.batchState.distribuicao.dificuldade;
             const total = somaDiff();
             const dados = [
+                { label: 'Muito fácil', valor: d.muitoFacil, cor: '#00d25b' },
                 { label: 'Fácil', valor: d.facil, cor: '#28c76f' },
                 { label: 'Médio', valor: d.medio, cor: '#ff9f43' },
-                { label: 'Difícil', valor: d.dificil, cor: '#ea5455' }
+                { label: 'Difícil', valor: d.dificil, cor: '#ea5455' },
+                { label: 'Muito difícil', valor: d.muitoDificil, cor: '#8b0000' }
             ];
 
             // Limpar canvas
@@ -1592,9 +1607,11 @@
             const b = state.distribuicao.bloom;
 
             document.getElementById('resumo-total').textContent = state.totalQuestoes;
+            document.getElementById('resumo-muito-facil').textContent = d.muitoFacil;
             document.getElementById('resumo-facil').textContent = d.facil;
             document.getElementById('resumo-medio').textContent = d.medio;
             document.getElementById('resumo-dificil').textContent = d.dificil;
+            document.getElementById('resumo-muito-dificil').textContent = d.muitoDificil;
             document.getElementById('resumo-lembrar').textContent = b.lembrar;
             document.getElementById('resumo-compreender').textContent = b.compreender;
             document.getElementById('resumo-aplicar').textContent = b.aplicar;
@@ -1636,9 +1653,11 @@
             window.batchState.distribuicao.bloom = newBloom;
 
             // Atualizar inputs
+            document.getElementById('diff-muito-facil').value = newDiff.muitoFacil;
             document.getElementById('diff-facil').value = newDiff.facil;
             document.getElementById('diff-medio').value = newDiff.medio;
             document.getElementById('diff-dificil').value = newDiff.dificil;
+            document.getElementById('diff-muito-dificil').value = newDiff.muitoDificil;
 
             document.getElementById('bloom-lembrar').value = newBloom.lembrar;
             document.getElementById('bloom-compreender').value = newBloom.compreender;
@@ -1673,14 +1692,14 @@
 
             switch (type) {
                 case 'diffA':
-                    newDiff = distribuirProporcional(total, { facil: 40, medio: 40, dificil: 20 });
+                    newDiff = distribuirProporcional(total, { muitoFacil: 20, facil: 20, medio: 20, dificil: 20, muitoDificil: 20 });
                     break;
                 case 'diffB':
-                    newDiff = distribuirProporcional(total, { facil: 30, medio: 50, dificil: 20 });
+                    newDiff = distribuirProporcional(total, { muitoFacil: 10, facil: 20, medio: 40, dificil: 20, muitoDificil: 10 });
                     break;
                 case 'equalizar':
-                    const eq = equalizarTotal(total, 3);
-                    newDiff = { facil: eq[0], medio: eq[1], dificil: eq[2] };
+                    const eq = equalizarTotal(total, 5);
+                    newDiff = { muitoFacil: eq[0], facil: eq[1], medio: eq[2], dificil: eq[3], muitoDificil: eq[4] };
                     break;
                 case 'bloomBase':
                     newBloom = distribuirProporcional(total, {
@@ -1703,9 +1722,11 @@
 
             if (newDiff) {
                 window.batchState.distribuicao.dificuldade = newDiff;
+                document.getElementById('diff-muito-facil').value = newDiff.muitoFacil;
                 document.getElementById('diff-facil').value = newDiff.facil;
                 document.getElementById('diff-medio').value = newDiff.medio;
                 document.getElementById('diff-dificil').value = newDiff.dificil;
+                document.getElementById('diff-muito-dificil').value = newDiff.muitoDificil;
                 renderPieChart();
             }
 
