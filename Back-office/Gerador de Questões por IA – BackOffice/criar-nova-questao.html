@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Nova Questão | Backoffice Educacross</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f8f7fa;
+            color: #6e6b7b;
+            overflow-x: hidden;
+        }
+
+        /* Layout Principal com Sidebar */
+        .app-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 282px;
+            background: #283046;
+            padding: 40px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .logo-icon {
+            width: 50.9px;
+            height: 32.3px;
+        }
+
+        .logo-text {
+            width: 174.4px;
+            height: 28.4px;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar-item:hover {
+            background: rgba(186, 191, 199, 0.12);
+        }
+
+        .sidebar-item.active {
+            background: #7367f0;
+        }
+
+        .sidebar-item.expanded {
+            background: rgba(186, 191, 199, 0.12);
+        }
+
+        .sidebar-item-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-item-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar-item-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 24px;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .sidebar-chevron {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s;
+        }
+
+        .sidebar-chevron.rotated {
+            transform: rotate(90deg);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 282px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Global Header */
+        .global-header {
+            background: white;
+            border: 1px solid #e2e2e3;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 16px 16px 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-user-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: #6e6b7b;
+            letter-spacing: 0.4px;
+        }
+
+        .user-avatar {
+            width: 42px;
+            height: 42px;
+            background: #7367f0;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 20px;
+            color: white;
+        }
+
+        /* Container */
+        .container {
+            padding: 24px;
+        }
+
+        /* Header */
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 28px;
+            color: #7367f0;
+            line-height: 1;
+        }
+
+        .status-toggle {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status-label {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 21px;
+            color: #6e6b7b;
+        }
+
+        /* Switch Toggle */
+        .switch {
+            position: relative;
+            width: 42px;
+            height: 24px;
+            background: #cccccc;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .switch.active {
+            background: #7367f0;
+        }
+
+        .switch-thumb {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 14px;
+            height: 14px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.2);
+            transition: left 0.3s;
+        }
+
+        .switch.active .switch-thumb {
+            left: 23px;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            margin-bottom: 20px;
+        }
+
+        /* Grid de Inputs */
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-label {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 21px;
+            color: #6e6b7b;
+        }
+
+        .input-field {
+            height: 44px;
+            padding: 10px;
+            border: 1px solid #d8d6de;
+            border-radius: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: #6e6b7b;
+            background: white;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .input-field.disabled {
+            background: #efefef;
+            color: #6e6b7b;
+        }
+
+        .input-field .material-icons {
+            font-size: 18px;
+            color: #6e6b7b;
+        }
+
+        /* Ícone de Área de Conhecimento */
+        .area-icon {
+            width: 26px;
+            height: 26px;
+            background: #00bdb8;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .area-icon svg {
+            width: 16.25px;
+            height: 16.25px;
+            fill: white;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 21px;
+            line-height: 1;
+            color: #7367f0;
+        }
+
+        .info-tooltip {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .info-tooltip .material-icons {
+            font-size: 20px;
+            color: #6e6b7b;
+        }
+
+        .info-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 18px;
+            color: #6e6b7b;
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 10px 20px;
+            height: 44px;
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 21px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid;
+            width: 100%;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #7367f0;
+            border-color: #7367f0;
+        }
+
+        .btn-outline:hover {
+            background: #f8f7fa;
+        }
+
+        .btn .material-icons {
+            font-size: 24px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+                z-index: 1000;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Logo -->
+            <div class="sidebar-logo">
+                <img src="http://localhost:3845/assets/fc350196eeccad1c31f74003168667ff2738f230.svg" alt="Educacross"
+                    class="logo-icon">
+                <img src="http://localhost:3845/assets/02c0430fdb846f19613868e4acf3979a1909dd7a.svg" alt="Educacross"
+                    class="logo-text">
+            </div>
+
+            <!-- Menu Items -->
+            <a href="#" class="sidebar-item">
+                <div class="sidebar-item-content">
+                    <img src="http://localhost:3845/assets/2ca9569a7d4f485fd3c33847ea82a97004715cc8.svg"
+                        class="sidebar-item-icon" alt="Home">
+                    <span class="sidebar-item-text">Home</span>
+                </div>
+            </a>
+
+            <div class="sidebar-item expanded" onclick="toggleMenu(this)">
+                <div class="sidebar-item-content">
+                    <img src="http://localhost:3845/assets/2cb38a8d5a5313004952ecac69da45caa4c9d213.svg"
+                        class="sidebar-item-icon" alt="Gestão">
+                    <span class="sidebar-item-text">Gestão de Atividades</span>
+                </div>
+                <span class="material-icons sidebar-chevron rotated">chevron_right</span>
+            </div>
+
+            <a href="#" class="sidebar-item" style="padding-left: 28px;">
+                <div class="sidebar-item-content">
+                    <span class="sidebar-item-text" style="font-size: 14px;">Banco de Jogos</span>
+                </div>
+            </a>
+
+            <a href="#" class="sidebar-item active" style="padding-left: 28px;">
+                <div class="sidebar-item-content">
+                    <span class="sidebar-item-text" style="font-size: 14px;">Banco de Questões</span>
+                </div>
+            </a>
+
+            <div class="sidebar-item" onclick="toggleMenu(this)">
+                <div class="sidebar-item-content">
+                    <img src="http://localhost:3845/assets/fd4d0ebd2439e4f604b7590094cb52c94fe52519.svg"
+                        class="sidebar-item-icon" alt="Pedagógica">
+                    <span class="sidebar-item-text">Gestão Pedagógica</span>
+                </div>
+                <span class="material-icons sidebar-chevron">chevron_right</span>
+            </div>
+
+            <div class="sidebar-item" onclick="toggleMenu(this)">
+                <div class="sidebar-item-content">
+                    <img src="http://localhost:3845/assets/6717dc006cf7cb9471033846a4c7cb5b1c427cf8.svg"
+                        class="sidebar-item-icon" alt="Escolas">
+                    <span class="sidebar-item-text">Gestão de Escolas</span>
+                </div>
+                <span class="material-icons sidebar-chevron">chevron_right</span>
+            </div>
+
+            <div class="sidebar-item" onclick="toggleMenu(this)">
+                <div class="sidebar-item-content">
+                    <img src="http://localhost:3845/assets/89bdeeb65269946d7ded20f1a84d51f217859cb0.svg"
+                        class="sidebar-item-icon" alt="Acessos">
+                    <span class="sidebar-item-text">Gestão de Acessos</span>
+                </div>
+                <span class="material-icons sidebar-chevron">chevron_right</span>
+            </div>
+
+            <div class="sidebar-item" onclick="toggleMenu(this)">
+                <div class="sidebar-item-content">
+                    <img src="http://localhost:3845/assets/927ec6bb4c4c2d85365dbb514c771c0902c255f7.svg"
+                        class="sidebar-item-icon" alt="Eventos">
+                    <span class="sidebar-item-text">Eventos</span>
+                </div>
+                <span class="material-icons sidebar-chevron">chevron_right</span>
+            </div>
+
+            <div class="sidebar-item" onclick="toggleMenu(this)">
+                <div class="sidebar-item-content">
+                    <img src="http://localhost:3845/assets/3a94cf894bd354583ce297d872cd3cc6edf24725.svg"
+                        class="sidebar-item-icon" alt="Sistema">
+                    <span class="sidebar-item-text">Sistema de Ensino</span>
+                </div>
+                <span class="material-icons sidebar-chevron">chevron_right</span>
+            </div>
+
+            <div class="sidebar-item" onclick="toggleMenu(this)">
+                <div class="sidebar-item-content">
+                    <img src="http://localhost:3845/assets/299a25971f290a19be475e4c884e7531056f2c99.svg"
+                        class="sidebar-item-icon" alt="Biblioteca">
+                    <span class="sidebar-item-text">Biblioteca</span>
+                </div>
+                <span class="material-icons sidebar-chevron">chevron_right</span>
+            </div>
+
+            <div class="sidebar-item" onclick="toggleMenu(this)">
+                <div class="sidebar-item-content">
+                    <img src="http://localhost:3845/assets/d63a1f3efa343a253445adb8e4099ed13b4c6179.svg"
+                        class="sidebar-item-icon" alt="Expedição">
+                    <span class="sidebar-item-text">Expedição Leitura</span>
+                </div>
+                <span class="material-icons sidebar-chevron">chevron_right</span>
+            </div>
+
+            <div class="sidebar-item" onclick="toggleMenu(this)">
+                <div class="sidebar-item-content">
+                    <img src="http://localhost:3845/assets/f7209ab7d192043960e12c508d3b8054b7bc5cfc.svg"
+                        class="sidebar-item-icon" alt="Relatórios">
+                    <span class="sidebar-item-text">Relatórios</span>
+                </div>
+                <span class="material-icons sidebar-chevron">chevron_right</span>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Global Header -->
+            <header class="global-header">
+                <div></div> <!-- Placeholder para centralizar user info -->
+                <div class="header-user-info">
+                    <span class="user-name">Usuário do backoffice</span>
+                    <div class="user-avatar">A</div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="container">
+                <!-- Header -->
+                <div class="page-header">
+                    <h1 class="page-title">Nova questão de quiz</h1>
+                    <div class="status-toggle">
+                        <span class="status-label">Status da questão:</span>
+                        <div class="switch" id="statusSwitch" onclick="toggleStatus()">
+                            <div class="switch-thumb"></div>
+                        </div>
+                        <span class="status-label" id="statusText">Inativa</span>
+                    </div>
+                </div>
+
+                <!-- Card: Informações Básicas -->
+                <div class="card">
+                    <div class="input-grid">
+                        <!-- Área de conhecimento -->
+                        <div class="input-group">
+                            <label class="input-label">Área de conhecimento*</label>
+                            <div class="input-field disabled">
+                                <div class="area-icon">
+                                    <svg viewBox="0 0 16.25 16.25">
+                                        <path fill="white" d="M8.125 0L0 8.125l8.125 8.125 8.125-8.125L8.125 0z" />
+                                    </svg>
+                                </div>
+                                <span>Matemática</span>
+                            </div>
+                        </div>
+
+                        <!-- Nível de Taxonomia -->
+                        <div class="input-group">
+                            <label class="input-label">Nível de Taxonomia de Bloom*</label>
+                            <div class="input-field">
+                                <span>Não mapeado</span>
+                                <span class="material-icons" style="margin-left: auto;">expand_more</span>
+                            </div>
+                        </div>
+
+                        <!-- Subnível -->
+                        <div class="input-group">
+                            <label class="input-label">Subnível de Taxonomia de Bloom*</label>
+                            <div class="input-field disabled">
+                                <span>Não mapeado</span>
+                                <span class="material-icons" style="margin-left: auto;">expand_more</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Habilidades e Tópicos -->
+                <div class="card">
+                    <!-- Seção Habilidades -->
+                    <div class="section-header">
+                        <h2 class="section-title">Habilidades</h2>
+                        <div class="info-tooltip">
+                            <span class="material-icons">info</span>
+                            <span class="info-text">Só é permitida a inclusão de uma (1) habilidade por questão.</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline">
+                        <span class="material-icons">add_circle</span>
+                        Incluir Habilidade
+                    </button>
+
+                    <!-- Seção Tópico de Conhecimento -->
+                    <div class="section-header" style="margin-top: 20px;">
+                        <h2 class="section-title">Tópico de conhecimento</h2>
+                        <div class="info-tooltip">
+                            <span class="material-icons">info</span>
+                            <span class="info-text">Só é permitida a inclusão de um (1) tópico por questão</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline">
+                        <span class="material-icons">add_circle</span>
+                        Incluir Tópico
+                    </button>
+                </div>
+            </div> <!-- Fecha container -->
+        </main> <!-- Fecha main-content -->
+    </div> <!-- Fecha app-layout -->
+
+    <script>
+        // Toggle de Status
+        function toggleStatus() {
+            const switchEl = document.getElementById('statusSwitch');
+            const statusText = document.getElementById('statusText');
+
+            switchEl.classList.toggle('active');
+
+            if (switchEl.classList.contains('active')) {
+                statusText.textContent = 'Ativa';
+            } else {
+                statusText.textContent = 'Inativa';
+            }
+        }
+
+        // Simulação de clique nos botões
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const action = this.textContent.trim();
+                console.log(`Ação: ${action}`);
+                alert(`Funcionalidade "${action}" será implementada em breve!`);
+            });
+        });
+
+        // Toggle de menu da sidebar
+        function toggleMenu(element) {
+            const chevron = element.querySelector('.sidebar-chevron');
+            if (chevron) {
+                chevron.classList.toggle('rotated');
+                element.classList.toggle('expanded');
+            }
+        }
+    </script>
+</body>
+
+</html>
