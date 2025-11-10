@@ -279,6 +279,21 @@
             color: #6e6b7b;
         }
 
+        /* Select customizado */
+        select.input-field {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%236e6b7b' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 20px;
+            padding-right: 40px;
+        }
+
+        select.input-field:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
         /* Ícone de Área de Conhecimento */
         .area-icon {
             width: 26px;
@@ -390,6 +405,370 @@
                 gap: 16px;
                 align-items: flex-start;
             }
+        }
+
+        /* ========== ESTILOS PARA QUANTIDADES DO LOTE ========== */
+
+        /* Grid responsivo 2 colunas */
+        .batch-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 24px;
+        }
+
+        @media (max-width: 968px) {
+            .batch-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Canvas pizza */
+        #pie-dificuldade {
+            max-width: 300px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* KPIs grid */
+        .kpis-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .kpi-card {
+            background: #f8f7fa;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid #e2e2e3;
+        }
+
+        .kpi-label {
+            font-size: 11px;
+            color: #6e6b7b;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .kpi-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #7367f0;
+        }
+
+        /* Badges de status */
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .badge-status.ok {
+            background: #28c76f;
+            color: white;
+        }
+
+        .badge-status.alerta {
+            background: #ff9f43;
+            color: white;
+        }
+
+        .badge-status.erro {
+            background: #ea5455;
+            color: white;
+        }
+
+        /* Tabelas dinâmicas */
+        .tabela-dinamica {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            font-size: 13px;
+        }
+
+        .tabela-dinamica th,
+        .tabela-dinamica td {
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 1px solid #e2e2e3;
+        }
+
+        .tabela-dinamica th {
+            background: #f8f7fa;
+            font-weight: 600;
+            color: #5e5873;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .tabela-dinamica input[type="number"] {
+            width: 80px;
+            padding: 6px 10px;
+            border: 1px solid #d8d6de;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .tabela-dinamica input[type="text"] {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #d8d6de;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #ea5455;
+            padding: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-icon:hover {
+            color: #d32f2f;
+        }
+
+        /* Botões de preset */
+        .preset-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .btn-preset {
+            flex: 1;
+            min-width: 140px;
+            font-size: 12px;
+            padding: 8px 12px;
+        }
+
+        /* Resumo do lote */
+        .resumo-lote {
+            background: linear-gradient(135deg, #7367f0 0%, #9e95f5 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 32px;
+            color: white;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .resumo-lote strong {
+            font-weight: 600;
+        }
+
+        /* Botões de ação */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .action-buttons .btn {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        /* Inputs de distribuição */
+        .dist-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .dist-input-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .dist-input-row label {
+            min-width: 100px;
+            font-weight: 500;
+            font-size: 13px;
+            color: #5e5873;
+        }
+
+        .dist-input-row input[type="number"] {
+            width: 100px;
+            padding: 8px 12px;
+            border: 1px solid #d8d6de;
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+        }
+
+        /* Radio customizado */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .radio-item:hover {
+            background: #f8f7fa;
+        }
+
+        .radio-item input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #7367f0;
+        }
+
+        .radio-item label {
+            cursor: pointer;
+            font-size: 14px;
+            color: #5e5873;
+        }
+
+        /* Barra de progresso de alocação */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e2e3;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #7367f0;
+            transition: width 0.3s;
+        }
+
+        .progress-fill.over {
+            background: #ea5455;
+        }
+
+        .progress-text {
+            font-size: 11px;
+            color: #6e6b7b;
+            margin-top: 4px;
+        }
+
+        /* ========== ESTILOS PARA HABILIDADES E TÓPICOS (FIGMA) ========== */
+
+        /* Card de Habilidade */
+        .habilidade-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(115, 103, 240, 0.12);
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .habilidade-card p {
+            flex: 1;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 21px;
+            color: #7367f0;
+            margin: 0;
+        }
+
+        .habilidade-card .btn-delete-card {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .habilidade-card .btn-delete-card:hover {
+            opacity: 0.7;
+        }
+
+        /* Card de Tópico */
+        .topico-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            border: 1px solid #7367f0;
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .topico-card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .topico-card-content h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            line-height: normal;
+            color: #7367f0;
+            margin: 0;
+        }
+
+        .topico-card-content p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 21px;
+            color: #6e6b7b;
+            margin: 0;
+        }
+
+        .topico-card-content p strong {
+            font-weight: 700;
+            color: #7367f0;
+        }
+
+        .topico-card .btn-delete-card {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .topico-card .btn-delete-card:hover {
+            opacity: 0.7;
         }
     </style>
 </head>
@@ -553,19 +932,26 @@
                         <!-- Nível de Taxonomia -->
                         <div class="input-group">
                             <label class="input-label">Nível de Taxonomia de Bloom*</label>
-                            <div class="input-field">
-                                <span>Não mapeado</span>
-                                <span class="material-icons" style="margin-left: auto;">expand_more</span>
-                            </div>
+                            <select id="nivel-bloom" class="input-field"
+                                onchange="window.handleNivelBloomChange(this.value)" style="cursor: pointer;">
+                                <option value="">Não mapeado</option>
+                                <option value="lembrar">Lembrar</option>
+                                <option value="compreender">Compreender</option>
+                                <option value="aplicar">Aplicar</option>
+                                <option value="analisar">Analisar</option>
+                                <option value="avaliar">Avaliar</option>
+                                <option value="criar">Criar</option>
+                            </select>
                         </div>
 
                         <!-- Subnível -->
                         <div class="input-group">
                             <label class="input-label">Subnível de Taxonomia de Bloom*</label>
-                            <div class="input-field disabled">
-                                <span>Não mapeado</span>
-                                <span class="material-icons" style="margin-left: auto;">expand_more</span>
-                            </div>
+                            <select id="subnivel-bloom" class="input-field"
+                                onchange="window.handleSubnivelBloomChange(this.value)" disabled
+                                style="cursor: not-allowed; opacity: 0.6;">
+                                <option value="">Não mapeado</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -574,31 +960,274 @@
                 <div class="card">
                     <!-- Seção Habilidades -->
                     <div class="section-header">
-                        <h2 class="section-title">Habilidades</h2>
+                        <h2 class="section-title" style="color: #7367f0; font-size: 21px;">Habilidades relacionadas</h2>
                         <div class="info-tooltip">
                             <span class="material-icons">info</span>
                             <span class="info-text">Só é permitida a inclusão de uma (1) habilidade por questão.</span>
                         </div>
                     </div>
-                    <button class="btn btn-outline">
+
+                    <!-- Container de Habilidades Adicionadas -->
+                    <div id="habilidades-container"
+                        style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                        <!-- Estado vazio - será preenchido dinamicamente -->
+                    </div>
+
+                    <button class="btn btn-outline" id="btn-add-habilidade-card" onclick="window.addHabilidadeCard()"
+                        style="margin-top: 10px;">
                         <span class="material-icons">add_circle</span>
                         Incluir Habilidade
                     </button>
 
                     <!-- Seção Tópico de Conhecimento -->
-                    <div class="section-header" style="margin-top: 20px;">
-                        <h2 class="section-title">Tópico de conhecimento</h2>
+                    <div class="section-header" style="margin-top: 32px;">
+                        <h2 class="section-title" style="color: #7367f0; font-size: 21px;">Tópico de conhecimento</h2>
                         <div class="info-tooltip">
                             <span class="material-icons">info</span>
-                            <span class="info-text">Só é permitida a inclusão de um (1) tópico por questão</span>
+                            <span class="info-text">Só é permitida a inclusão de um (1) tópico por questão.</span>
                         </div>
                     </div>
-                    <button class="btn btn-outline">
+
+                    <!-- Container de Tópicos Adicionados -->
+                    <div id="topicos-container"
+                        style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                        <!-- Estado vazio - será preenchido dinamicamente -->
+                    </div>
+
+                    <button class="btn btn-outline" id="btn-add-topico-card" onclick="window.addTopicoCard()"
+                        style="margin-top: 10px;">
                         <span class="material-icons">add_circle</span>
                         Incluir Tópico
                     </button>
                 </div>
-            </div> <!-- Fecha container -->
+
+                <!-- ========== BLOCO: QUANTIDADES DO LOTE ========== -->
+                <div class="card" style="margin-top: 32px;">
+                    <div class="section-header">
+                        <h2 class="section-title">Quantidades do lote</h2>
+                        <div class="info-tooltip">
+                            <span class="material-icons">info</span>
+                            <span class="info-text">Defina o total e distribua por dificuldade e Bloom. As somas devem
+                                bater o total.</span>
+                        </div>
+                    </div>
+
+                    <!-- Total de questões -->
+                    <div class="input-group" style="max-width: 200px; margin-bottom: 24px;">
+                        <label class="input-label" for="total-questoes">Total de questões do lote *</label>
+                        <input type="number" id="total-questoes" class="input-field" value="120" min="1" max="1000"
+                            onchange="window.setTotalQuestoes(parseInt(this.value) || 120)"
+                            aria-label="Total de questões do lote" style="text-align: center; font-weight: 600;">
+                    </div>
+
+                    <!-- Grid: Visualização à esquerda, Controles à direita -->
+                    <div class="batch-grid">
+                        <!-- COLUNA ESQUERDA: Visualização e KPIs -->
+                        <div>
+                            <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px; color: #5e5873;">
+                                Visualização</h3>
+
+                            <!-- Canvas do gráfico de pizza -->
+                            <div
+                                style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #e2e2e3;">
+                                <canvas id="pie-dificuldade" width="300" height="300"
+                                    aria-label="Gráfico de distribuição por dificuldade" role="img"></canvas>
+                                <div id="pie-legend"
+                                    style="margin-top: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 12px;">
+                                </div>
+                            </div>
+
+                            <!-- KPIs -->
+                            <div class="kpis-grid">
+                                <div class="kpi-card">
+                                    <div class="kpi-label">Total</div>
+                                    <div class="kpi-value" id="kpi-total">120</div>
+                                </div>
+                                <div class="kpi-card">
+                                    <div class="kpi-label">Tópicos</div>
+                                    <div class="kpi-value" id="kpi-topicos">0</div>
+                                </div>
+                                <div class="kpi-card">
+                                    <div class="kpi-label">Habilidades</div>
+                                    <div class="kpi-value" id="kpi-habilidades">0</div>
+                                </div>
+                                <div class="kpi-card">
+                                    <div class="kpi-label">Restante</div>
+                                    <div class="kpi-value" id="kpi-restante">120</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COLUNA DIREITA: Controles de Distribuição -->
+                        <div>
+                            <!-- Distribuição por Dificuldade -->
+                            <div>
+                                <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px; color: #5e5873;">
+                                    Distribuição por dificuldade
+                                    <span id="diff-status" class="badge-status alerta">⚠ Verificar soma</span>
+                                </h3>
+
+                                <div class="dist-input-group">
+                                    <div class="dist-input-row">
+                                        <label for="diff-facil">Fácil</label>
+                                        <input type="number" id="diff-facil" value="40" min="0"
+                                            onchange="window.updateDiff('facil', parseInt(this.value) || 0)"
+                                            aria-label="Quantidade de questões fáceis">
+                                    </div>
+                                    <div class="dist-input-row">
+                                        <label for="diff-medio">Médio</label>
+                                        <input type="number" id="diff-medio" value="60" min="0"
+                                            onchange="window.updateDiff('medio', parseInt(this.value) || 0)"
+                                            aria-label="Quantidade de questões médias">
+                                    </div>
+                                    <div class="dist-input-row">
+                                        <label for="diff-dificil">Difícil</label>
+                                        <input type="number" id="diff-dificil" value="20" min="0"
+                                            onchange="window.updateDiff('dificil', parseInt(this.value) || 0)"
+                                            aria-label="Quantidade de questões difíceis">
+                                    </div>
+                                </div>
+
+                                <!-- Presets de Dificuldade -->
+                                <div class="preset-buttons">
+                                    <button class="btn btn-outline btn-preset" id="btn-diff-a"
+                                        onclick="window.applyPreset('diffA')">
+                                        Preset A (40/40/20)
+                                    </button>
+                                    <button class="btn btn-outline btn-preset" id="btn-diff-b"
+                                        onclick="window.applyPreset('diffB')">
+                                        Preset B (30/50/20)
+                                    </button>
+                                    <button class="btn btn-outline btn-preset" id="btn-equalizar"
+                                        onclick="window.applyPreset('equalizar')">
+                                        Equalizar
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Distribuição por Bloom -->
+                            <div style="margin-top: 32px;">
+                                <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px; color: #5e5873;">
+                                    Distribuição por Bloom
+                                    <span id="bloom-status" class="badge-status alerta">⚠ Verificar soma</span>
+                                </h3>
+
+                                <div class="dist-input-group">
+                                    <div class="dist-input-row">
+                                        <label for="bloom-lembrar">Lembrar</label>
+                                        <input type="number" id="bloom-lembrar" value="20" min="0"
+                                            onchange="window.updateBloom('lembrar', parseInt(this.value) || 0)"
+                                            aria-label="Quantidade Bloom - Lembrar">
+                                    </div>
+                                    <div class="dist-input-row">
+                                        <label for="bloom-compreender">Compreender</label>
+                                        <input type="number" id="bloom-compreender" value="30" min="0"
+                                            onchange="window.updateBloom('compreender', parseInt(this.value) || 0)"
+                                            aria-label="Quantidade Bloom - Compreender">
+                                    </div>
+                                    <div class="dist-input-row">
+                                        <label for="bloom-aplicar">Aplicar</label>
+                                        <input type="number" id="bloom-aplicar" value="30" min="0"
+                                            onchange="window.updateBloom('aplicar', parseInt(this.value) || 0)"
+                                            aria-label="Quantidade Bloom - Aplicar">
+                                    </div>
+                                    <div class="dist-input-row">
+                                        <label for="bloom-analisar">Analisar</label>
+                                        <input type="number" id="bloom-analisar" value="25" min="0"
+                                            onchange="window.updateBloom('analisar', parseInt(this.value) || 0)"
+                                            aria-label="Quantidade Bloom - Analisar">
+                                    </div>
+                                    <div class="dist-input-row">
+                                        <label for="bloom-avaliar">Avaliar</label>
+                                        <input type="number" id="bloom-avaliar" value="10" min="0"
+                                            onchange="window.updateBloom('avaliar', parseInt(this.value) || 0)"
+                                            aria-label="Quantidade Bloom - Avaliar">
+                                    </div>
+                                    <div class="dist-input-row">
+                                        <label for="bloom-criar">Criar</label>
+                                        <input type="number" id="bloom-criar" value="5" min="0"
+                                            onchange="window.updateBloom('criar', parseInt(this.value) || 0)"
+                                            aria-label="Quantidade Bloom - Criar">
+                                    </div>
+                                </div>
+
+                                <!-- Preset Bloom -->
+                                <button class="btn btn-outline" id="btn-bloom-base"
+                                    style="margin-top: 12px; max-width: 100%;"
+                                    onclick="window.applyPreset('bloomBase')">
+                                    Aplicar Preset Base (20/25/25/15/10/5)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- ========== BLOCO: IMAGENS DO LOTE ========== -->
+                    <div class="card" style="margin-top: 32px;">
+                        <div class="section-header">
+                            <h2 class="section-title">Imagens do lote</h2>
+                            <div class="info-tooltip">
+                                <span class="material-icons">info</span>
+                                <span class="info-text">Configure quantas imagens por questão (opcional)</span>
+                            </div>
+                        </div>
+
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="img-0" name="img-per-question" value="0" checked
+                                    onchange="window.updateImagens('porQuestao', parseInt(this.value))">
+                                <label for="img-0">Sem imagem</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="img-1" name="img-per-question" value="1"
+                                    onchange="window.updateImagens('porQuestao', parseInt(this.value))">
+                                <label for="img-1">Uma imagem por questão</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="img-2" name="img-per-question" value="2"
+                                    onchange="window.updateImagens('porQuestao', parseInt(this.value))">
+                                <label for="img-2">Duas imagens por questão</label>
+                            </div>
+                        </div>
+
+                        <!-- Select de estratégia (aparece quando imagem > 0) -->
+                        <div id="imagem-estrategia-container" style="display: none; margin-top: 16px;">
+                            <div class="input-group" style="max-width: 350px;">
+                                <label class="input-label" for="imagem-estrategia">Estratégia de imagem</label>
+                                <select id="imagem-estrategia" class="input-field"
+                                    onchange="window.updateImagens('estrategia', this.value)">
+                                    <option value="gerar">Gerar por IA (contexto do enunciado)</option>
+                                    <option value="upload">Fazer upload depois</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ========== BLOCO: RESUMO E AÇÕES ========== -->
+                    <div class="resumo-lote" id="resumo-lote" role="status" aria-live="polite">
+                        <strong>Resumo do lote:</strong>
+                        Total <strong id="resumo-total">120</strong> questões •
+                        Dificuldade: Fácil <strong id="resumo-facil">40</strong>, Médio <strong
+                            id="resumo-medio">60</strong>, Difícil <strong id="resumo-dificil">20</strong> •
+                        Bloom: L<strong id="resumo-lembrar">20</strong> C<strong id="resumo-compreender">30</strong>
+                        A<strong id="resumo-aplicar">30</strong> N<strong id="resumo-analisar">25</strong> V<strong
+                            id="resumo-avaliar">10</strong> Cr<strong id="resumo-criar">5</strong>
+                        <span id="resumo-imagens"> • Sem imagens</span>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-outline" id="btn-salvar" onclick="window.salvarRascunho()">
+                            <span class="material-icons">save</span>
+                            Salvar rascunho
+                        </button>
+                        <button class="btn btn-primary" id="btn-prosseguir" onclick="window.prosseguirGeracao()"
+                            disabled style="background: #7367f0; color: white; border-color: #7367f0;">
+                            <span class="material-icons">arrow_forward</span>
+                            Prosseguir para Geração por IA
+                        </button>
+                    </div>
+
+                </div> <!-- Fecha container -->
         </main> <!-- Fecha main-content -->
     </div> <!-- Fecha app-layout -->
 
@@ -617,15 +1246,6 @@
             }
         }
 
-        // Simulação de clique nos botões
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', function () {
-                const action = this.textContent.trim();
-                console.log(`Ação: ${action}`);
-                alert(`Funcionalidade "${action}" será implementada em breve!`);
-            });
-        });
-
         // Toggle de menu da sidebar
         function toggleMenu(element) {
             const chevron = element.querySelector('.sidebar-chevron');
@@ -634,6 +1254,733 @@
                 element.classList.toggle('expanded');
             }
         }
+
+        // ========== SISTEMA DE TAXONOMIA DE BLOOM ==========
+        const subníveisBloom = {
+            lembrar: [
+                'Reconhecer',
+                'Recordar'
+            ],
+            compreender: [
+                'Interpretar',
+                'Exemplificar',
+                'Classificar',
+                'Resumir',
+                'Inferir',
+                'Comparar',
+                'Explicar'
+            ],
+            aplicar: [
+                'Executar',
+                'Implementar'
+            ],
+            analisar: [
+                'Diferenciar',
+                'Organizar',
+                'Atribuir'
+            ],
+            avaliar: [
+                'Verificar',
+                'Criticar'
+            ],
+            criar: [
+                'Gerar',
+                'Planejar',
+                'Produzir'
+            ]
+        };
+
+        window.handleNivelBloomChange = function (nivel) {
+            const subnivelSelect = document.getElementById('subnivel-bloom');
+
+            if (!nivel || nivel === '') {
+                // Resetar subnível
+                subnivelSelect.innerHTML = '<option value="">Não mapeado</option>';
+                subnivelSelect.disabled = true;
+                subnivelSelect.style.cursor = 'not-allowed';
+                subnivelSelect.style.opacity = '0.6';
+                console.info('[bloom] Nível resetado');
+                return;
+            }
+
+            // Habilitar subnível e popular opções
+            const opcoes = subníveisBloom[nivel] || [];
+            subnivelSelect.innerHTML = '<option value="">Selecione o subnível...</option>' +
+                opcoes.map(sub => `<option value="${sub.toLowerCase()}">${sub}</option>`).join('');
+
+            subnivelSelect.disabled = false;
+            subnivelSelect.style.cursor = 'pointer';
+            subnivelSelect.style.opacity = '1';
+
+            console.info('[bloom] Nível alterado para:', nivel, '| Subníveis disponíveis:', opcoes.length);
+        };
+
+        window.handleSubnivelBloomChange = function (subnivel) {
+            console.info('[bloom] Subnível selecionado:', subnivel);
+        };
+
+        // ========== SISTEMA DE HABILIDADES E TÓPICOS (CARDS FIGMA) ==========
+        // LIMITE: 1 habilidade e 1 tópico apenas
+        let habilidadeAtual = null;
+        let topicoAtual = null;
+
+        // Adicionar Habilidade (Card Figma) - Máximo 1
+        window.addHabilidadeCard = function () {
+            if (habilidadeAtual !== null) {
+                console.warn('[habilidades-card] Já existe uma habilidade. Remova antes de adicionar outra.');
+                return;
+            }
+
+            const id = 'hab-card-1';
+            const texto = `BNCC 6º Ano - Números - EF06MA02 - Contar de maneira exata ou aproximada, utilizando diferentes estratégias como o pareamento e outros agrupamentos.`;
+
+            habilidadeAtual = { id, texto };
+            renderHabilidadeCard();
+            console.info('[habilidades-card] Adicionada:', id);
+        };
+
+        // Remover Habilidade (Card Figma)
+        window.removeHabilidadeCard = function () {
+            habilidadeAtual = null;
+            renderHabilidadeCard();
+            console.info('[habilidades-card] Removida');
+        };
+
+        // Renderizar Card de Habilidade (singular)
+        function renderHabilidadeCard() {
+            const container = document.getElementById('habilidades-container');
+            const btnAdd = document.getElementById('btn-add-habilidade-card');
+
+            if (!container || !btnAdd) return;
+
+            if (habilidadeAtual === null) {
+                container.innerHTML = '';
+                btnAdd.style.display = 'inline-flex';
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="habilidade-card" data-id="${habilidadeAtual.id}">
+                    <p>${habilidadeAtual.texto}</p>
+                    <button type="button" class="btn-delete-card" onclick="window.removeHabilidadeCard()" aria-label="Remover habilidade">
+                        <img src="http://localhost:3845/assets/a3d21160deeed3fe1cf7763baeb2077cfca1b658.svg" alt="Deletar" style="width: 24px; height: 24px;">
+                    </button>
+                </div>
+            `;
+
+            // Ocultar botão "Incluir" após adicionar
+            btnAdd.style.display = 'none';
+        }
+
+        // Adicionar Tópico (Card Figma) - Máximo 1
+        window.addTopicoCard = function () {
+            if (topicoAtual !== null) {
+                console.warn('[topicos-card] Já existe um tópico. Remova antes de adicionar outro.');
+                return;
+            }
+
+            const id = 'top-card-1';
+            const codigo = '1.31.1.2';
+            const titulo = 'Período de uma dízima periódica';
+            const objeto = 'Dízimas Periódicas';
+            const tematica = 'Números';
+
+            topicoAtual = { id, codigo, titulo, objeto, tematica };
+            renderTopicoCard();
+            console.info('[topicos-card] Adicionado:', id);
+        };
+
+        // Remover Tópico (Card Figma)
+        window.removeTopicoCard = function () {
+            topicoAtual = null;
+            renderTopicoCard();
+            console.info('[topicos-card] Removido');
+        };
+
+        // Renderizar Card de Tópico (singular)
+        function renderTopicoCard() {
+            const container = document.getElementById('topicos-container');
+            const btnAdd = document.getElementById('btn-add-topico-card');
+
+            if (!container || !btnAdd) return;
+
+            if (topicoAtual === null) {
+                container.innerHTML = '';
+                btnAdd.style.display = 'inline-flex';
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="topico-card" data-id="${topicoAtual.id}">
+                    <div class="topico-card-content">
+                        <h3>${topicoAtual.codigo} ${topicoAtual.titulo}</h3>
+                        <p>Objeto do conhecimento: <strong>${topicoAtual.objeto}</strong><br>Temática: <strong>${topicoAtual.tematica}</strong></p>
+                    </div>
+                    <button type="button" class="btn-delete-card" onclick="window.removeTopicoCard()" aria-label="Remover tópico">
+                        <img src="http://localhost:3845/assets/a3d21160deeed3fe1cf7763baeb2077cfca1b658.svg" alt="Deletar" style="width: 24px; height: 24px;">
+                    </button>
+                </div>
+            `;
+
+            // Ocultar botão "Incluir" após adicionar
+            btnAdd.style.display = 'none';
+        }
+
+        // ========== SISTEMA DE QUANTIDADES DO LOTE ==========
+        // Sistema de distribuição de questões com gráfico interativo
+        // Gerencia: dificuldade, Bloom, tópicos, habilidades e imagens
+
+        // ===== ESTADO GLOBAL =====
+        window.batchState = {
+            totalQuestoes: 120,
+            distribuicao: {
+                dificuldade: { facil: 40, medio: 60, dificil: 20 },
+                bloom: { lembrar: 20, compreender: 30, aplicar: 30, analisar: 25, avaliar: 10, criar: 5 },
+                topicos: [],
+                habilidades: []
+            },
+            imagens: {
+                porQuestao: 0,
+                estrategia: "gerar"
+            }
+        };
+
+        // ===== VARIÁVEIS GLOBAIS PARA GRÁFICO =====
+        let pieCanvas = null;
+        let pieCtx = null;
+        let topicoCounter = 0;
+        let habilidadeCounter = 0;
+
+        // ===== UTILITÁRIOS =====
+        function equalizarTotal(total, partes) {
+            const base = Math.floor(total / partes);
+            const resto = total - (base * partes);
+            const resultado = [];
+            for (let i = 0; i < partes; i++) {
+                resultado.push(base + (i < resto ? 1 : 0));
+            }
+            return resultado;
+        }
+
+        function distribuirProporcional(alvo, mapa) {
+            const keys = Object.keys(mapa);
+            const somaAtual = keys.reduce((acc, k) => acc + mapa[k], 0);
+
+            if (somaAtual === 0) {
+                return equalizarTotal(alvo, keys.length).reduce((obj, val, i) => {
+                    obj[keys[i]] = val;
+                    return obj;
+                }, {});
+            }
+
+            const razao = alvo / somaAtual;
+            const temp = {};
+            keys.forEach(k => temp[k] = Math.floor(mapa[k] * razao));
+
+            let somaTemp = Object.values(temp).reduce((a, b) => a + b, 0);
+            const diff = alvo - somaTemp;
+
+            if (diff !== 0) {
+                const erros = keys.map(k => ({
+                    key: k,
+                    erro: Math.abs((mapa[k] * razao) - temp[k])
+                })).sort((a, b) => b.erro - a.erro);
+
+                for (let i = 0; i < Math.abs(diff); i++) {
+                    temp[erros[i % erros.length].key] += (diff > 0 ? 1 : -1);
+                }
+            }
+
+            return temp;
+        }
+
+        function somaDiff() {
+            const d = window.batchState.distribuicao.dificuldade;
+            return d.facil + d.medio + d.dificil;
+        }
+
+        function somaBloom() {
+            const b = window.batchState.distribuicao.bloom;
+            return b.lembrar + b.compreender + b.aplicar + b.analisar + b.avaliar + b.criar;
+        }
+
+        function somaTopicos() {
+            return window.batchState.distribuicao.topicos.reduce((acc, t) => acc + t.qtd, 0);
+        }
+
+        function somaHabilidades() {
+            return window.batchState.distribuicao.habilidades.reduce((acc, h) => acc + h.qtd, 0);
+        }
+
+        // ===== RENDERIZAÇÃO DE GRÁFICO =====
+        function renderPieChart() {
+            if (!pieCanvas) {
+                pieCanvas = document.getElementById('pie-dificuldade');
+                if (!pieCanvas) return;
+                pieCtx = pieCanvas.getContext('2d');
+            }
+
+            const d = window.batchState.distribuicao.dificuldade;
+            const total = somaDiff();
+            const dados = [
+                { label: 'Fácil', valor: d.facil, cor: '#28c76f' },
+                { label: 'Médio', valor: d.medio, cor: '#ff9f43' },
+                { label: 'Difícil', valor: d.dificil, cor: '#ea5455' }
+            ];
+
+            // Limpar canvas
+            pieCtx.clearRect(0, 0, pieCanvas.width, pieCanvas.height);
+
+            // Desenhar pizza
+            let startAngle = -Math.PI / 2;
+            const centerX = pieCanvas.width / 2;
+            const centerY = pieCanvas.height / 2;
+            const radius = Math.min(centerX, centerY) - 20;
+
+            dados.forEach(item => {
+                const sliceAngle = (item.valor / total) * 2 * Math.PI;
+
+                pieCtx.beginPath();
+                pieCtx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+                pieCtx.lineTo(centerX, centerY);
+                pieCtx.fillStyle = item.cor;
+                pieCtx.fill();
+                pieCtx.strokeStyle = '#fff';
+                pieCtx.lineWidth = 2;
+                pieCtx.stroke();
+
+                startAngle += sliceAngle;
+            });
+
+            // Atualizar legenda
+            const legendHTML = dados.map(item => {
+                const perc = total > 0 ? Math.round((item.valor / total) * 100) : 0;
+                return `<div style="display:flex;align-items:center;gap:8px;">
+                    <span style="width:12px;height:12px;background:${item.cor};border-radius:2px;"></span>
+                    <span>${item.label}: ${item.valor} (${perc}%)</span>
+                </div>`;
+            }).join('');
+
+            const legendEl = document.getElementById('pie-legend');
+            if (legendEl) legendEl.innerHTML = legendHTML;
+        }
+
+        // ===== ATUALIZAÇÃO DE STATUS =====
+        function updateValidationStatus() {
+            const totalQuestoes = window.batchState.totalQuestoes;
+            const totalDiff = somaDiff();
+            const totalBloom = somaBloom();
+
+            // Status Dificuldade
+            const diffEl = document.getElementById('diff-status');
+            if (diffEl) {
+                if (totalDiff === totalQuestoes) {
+                    diffEl.className = 'badge-status ok';
+                    diffEl.innerHTML = '✓ OK';
+                } else {
+                    diffEl.className = 'badge-status alerta';
+                    diffEl.innerHTML = `⚠ Soma: ${totalDiff}/${totalQuestoes}`;
+                }
+            }
+
+            // Status Bloom
+            const bloomEl = document.getElementById('bloom-status');
+            if (bloomEl) {
+                if (totalBloom === totalQuestoes) {
+                    bloomEl.className = 'badge-status ok';
+                    bloomEl.innerHTML = '✓ OK';
+                } else {
+                    bloomEl.className = 'badge-status alerta';
+                    bloomEl.innerHTML = `⚠ Soma: ${totalBloom}/${totalQuestoes}`;
+                }
+            }
+
+            // KPIs
+            const kpiTotal = document.getElementById('kpi-total');
+            const kpiTopicos = document.getElementById('kpi-topicos');
+            const kpiHab = document.getElementById('kpi-habilidades');
+            const kpiRest = document.getElementById('kpi-restante');
+
+            if (kpiTotal) kpiTotal.textContent = totalQuestoes;
+            if (kpiTopicos) kpiTopicos.textContent = somaTopicos();
+            if (kpiHab) kpiHab.textContent = somaHabilidades();
+            if (kpiRest) kpiRest.textContent = totalQuestoes - somaTopicos();
+
+            // Progress bars
+            updateProgressBar('topicos', somaTopicos(), totalQuestoes);
+            updateProgressBar('habilidades', somaHabilidades(), totalQuestoes);
+
+            // Resumo
+            updateResumo();
+
+            // Botão Prosseguir
+            const btnProsseguir = document.getElementById('btn-prosseguir');
+            if (btnProsseguir) {
+                if (totalDiff === totalQuestoes && totalBloom === totalQuestoes) {
+                    btnProsseguir.disabled = false;
+                    btnProsseguir.style.opacity = '1';
+                } else {
+                    btnProsseguir.disabled = true;
+                    btnProsseguir.style.opacity = '0.6';
+                }
+            }
+        }
+
+        function updateProgressBar(tipo, alocado, total) {
+            const progressFill = document.getElementById(`progress-${tipo}`);
+            const progressText = document.getElementById(`progress-${tipo}-text`);
+
+            if (progressFill && progressText) {
+                const percent = total > 0 ? Math.round((alocado / total) * 100) : 0;
+                progressFill.style.width = `${Math.min(percent, 100)}%`;
+                progressFill.className = 'progress-fill' + (alocado > total ? ' over' : '');
+                progressText.textContent = `Alocado: ${alocado} de ${total}`;
+            }
+        }
+
+        function updateResumo() {
+            const state = window.batchState;
+            const d = state.distribuicao.dificuldade;
+            const b = state.distribuicao.bloom;
+
+            document.getElementById('resumo-total').textContent = state.totalQuestoes;
+            document.getElementById('resumo-facil').textContent = d.facil;
+            document.getElementById('resumo-medio').textContent = d.medio;
+            document.getElementById('resumo-dificil').textContent = d.dificil;
+            document.getElementById('resumo-lembrar').textContent = b.lembrar;
+            document.getElementById('resumo-compreender').textContent = b.compreender;
+            document.getElementById('resumo-aplicar').textContent = b.aplicar;
+            document.getElementById('resumo-analisar').textContent = b.analisar;
+            document.getElementById('resumo-avaliar').textContent = b.avaliar;
+            document.getElementById('resumo-criar').textContent = b.criar;
+
+            const imgEl = document.getElementById('resumo-imagens');
+            if (imgEl) {
+                if (state.imagens.porQuestao === 0) {
+                    imgEl.textContent = ' • Sem imagens';
+                } else if (state.imagens.porQuestao === 1) {
+                    imgEl.textContent = ' • 1 imagem por questão';
+                } else {
+                    imgEl.textContent = ' • 2 imagens por questão';
+                }
+            }
+        }
+
+        // ===== FUNÇÕES PÚBLICAS =====
+        window.getBatchState = function () {
+            console.log('[lote] Estado atual:', window.batchState);
+            return window.batchState;
+        };
+
+        window.setTotalQuestoes = function (novoTotal) {
+            if (novoTotal < 1 || isNaN(novoTotal)) {
+                novoTotal = 1;
+                document.getElementById('total-questoes').value = 1;
+            }
+
+            window.batchState.totalQuestoes = novoTotal;
+
+            // Redistribuir proporcionalmente
+            const newDiff = distribuirProporcional(novoTotal, window.batchState.distribuicao.dificuldade);
+            window.batchState.distribuicao.dificuldade = newDiff;
+
+            const newBloom = distribuirProporcional(novoTotal, window.batchState.distribuicao.bloom);
+            window.batchState.distribuicao.bloom = newBloom;
+
+            // Atualizar inputs
+            document.getElementById('diff-facil').value = newDiff.facil;
+            document.getElementById('diff-medio').value = newDiff.medio;
+            document.getElementById('diff-dificil').value = newDiff.dificil;
+
+            document.getElementById('bloom-lembrar').value = newBloom.lembrar;
+            document.getElementById('bloom-compreender').value = newBloom.compreender;
+            document.getElementById('bloom-aplicar').value = newBloom.aplicar;
+            document.getElementById('bloom-analisar').value = newBloom.analisar;
+            document.getElementById('bloom-avaliar').value = newBloom.avaliar;
+            document.getElementById('bloom-criar').value = newBloom.criar;
+
+            renderPieChart();
+            updateValidationStatus();
+            console.info('[lote] Total alterado para', novoTotal);
+        };
+
+        window.updateDiff = function (nivel, valor) {
+            if (valor < 0 || isNaN(valor)) valor = 0;
+            window.batchState.distribuicao.dificuldade[nivel] = valor;
+            renderPieChart();
+            updateValidationStatus();
+            console.info('[lote] diffChanged', window.batchState.distribuicao.dificuldade);
+        };
+
+        window.updateBloom = function (nivel, valor) {
+            if (valor < 0 || isNaN(valor)) valor = 0;
+            window.batchState.distribuicao.bloom[nivel] = valor;
+            updateValidationStatus();
+            console.info('[lote] bloomChanged', window.batchState.distribuicao.bloom);
+        };
+
+        window.applyPreset = function (type) {
+            const total = window.batchState.totalQuestoes;
+            let newDiff, newBloom;
+
+            switch (type) {
+                case 'diffA':
+                    newDiff = distribuirProporcional(total, { facil: 40, medio: 40, dificil: 20 });
+                    break;
+                case 'diffB':
+                    newDiff = distribuirProporcional(total, { facil: 30, medio: 50, dificil: 20 });
+                    break;
+                case 'equalizar':
+                    const eq = equalizarTotal(total, 3);
+                    newDiff = { facil: eq[0], medio: eq[1], dificil: eq[2] };
+                    break;
+                case 'bloomBase':
+                    newBloom = distribuirProporcional(total, {
+                        lembrar: 20, compreender: 25, aplicar: 25,
+                        analisar: 15, avaliar: 10, criar: 5
+                    });
+                    break;
+            }
+
+            if (newDiff) {
+                window.batchState.distribuicao.dificuldade = newDiff;
+                document.getElementById('diff-facil').value = newDiff.facil;
+                document.getElementById('diff-medio').value = newDiff.medio;
+                document.getElementById('diff-dificil').value = newDiff.dificil;
+                renderPieChart();
+            }
+
+            if (newBloom) {
+                window.batchState.distribuicao.bloom = newBloom;
+                document.getElementById('bloom-lembrar').value = newBloom.lembrar;
+                document.getElementById('bloom-compreender').value = newBloom.compreender;
+                document.getElementById('bloom-aplicar').value = newBloom.aplicar;
+                document.getElementById('bloom-analisar').value = newBloom.analisar;
+                document.getElementById('bloom-avaliar').value = newBloom.avaliar;
+                document.getElementById('bloom-criar').value = newBloom.criar;
+            }
+
+            updateValidationStatus();
+            console.info('[lote] Preset aplicado:', type);
+        };
+
+        window.addLinhaTopico = function () {
+            topicoCounter++;
+            const novoTopico = {
+                id: 'topico-' + topicoCounter,
+                nome: 'Tópico ' + topicoCounter,
+                qtd: 0
+            };
+            window.batchState.distribuicao.topicos.push(novoTopico);
+            renderTabelaTopicos();
+            updateValidationStatus();
+        };
+
+        window.removeTopico = function (id) {
+            window.batchState.distribuicao.topicos = window.batchState.distribuicao.topicos.filter(t => t.id !== id);
+            renderTabelaTopicos();
+            updateValidationStatus();
+        };
+
+        window.updateTopico = function (id, campo, valor) {
+            const topico = window.batchState.distribuicao.topicos.find(t => t.id === id);
+            if (topico) {
+                if (campo === 'nome') {
+                    topico.nome = valor;
+                } else if (campo === 'qtd') {
+                    topico.qtd = parseInt(valor) || 0;
+                }
+                updateValidationStatus();
+            }
+        };
+
+        function renderTabelaTopicos() {
+            const tbody = document.getElementById('topicos-tbody');
+            if (!tbody) return;
+
+            if (window.batchState.distribuicao.topicos.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="3" style="text-align: center; color: #6e6b7b; padding: 20px;">
+                            Nenhum tópico adicionado ainda
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = window.batchState.distribuicao.topicos.map(t => `
+                <tr>
+                    <td>
+                        <input 
+                            type="text" 
+                            value="${t.nome}" 
+                            onchange="window.updateTopico('${t.id}', 'nome', this.value)"
+                            placeholder="Nome do tópico"
+                        >
+                    </td>
+                    <td>
+                        <input 
+                            type="number" 
+                            value="${t.qtd}" 
+                            min="0"
+                            onchange="window.updateTopico('${t.id}', 'qtd', this.value)"
+                            aria-label="Quantidade para ${t.nome}"
+                        >
+                    </td>
+                    <td style="text-align: center;">
+                        <button 
+                            type="button" 
+                            class="btn-icon" 
+                            onclick="window.removeTopico('${t.id}')"
+                            aria-label="Remover ${t.nome}"
+                        >
+                            <span class="material-icons">delete</span>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        window.addLinhaHabilidade = function () {
+            habilidadeCounter++;
+            const novaHab = {
+                id: 'hab-' + habilidadeCounter,
+                codigo: 'EF0' + habilidadeCounter,
+                qtd: 0
+            };
+            window.batchState.distribuicao.habilidades.push(novaHab);
+            renderTabelaHabilidades();
+            updateValidationStatus();
+        };
+
+        window.removeHabilidade = function (id) {
+            window.batchState.distribuicao.habilidades = window.batchState.distribuicao.habilidades.filter(h => h.id !== id);
+            renderTabelaHabilidades();
+            updateValidationStatus();
+        };
+
+        window.updateHabilidade = function (id, campo, valor) {
+            const hab = window.batchState.distribuicao.habilidades.find(h => h.id === id);
+            if (hab) {
+                if (campo === 'codigo') {
+                    hab.codigo = valor;
+                } else if (campo === 'qtd') {
+                    hab.qtd = parseInt(valor) || 0;
+                }
+                updateValidationStatus();
+            }
+        };
+
+        function renderTabelaHabilidades() {
+            const tbody = document.getElementById('habilidades-tbody');
+            if (!tbody) return;
+
+            if (window.batchState.distribuicao.habilidades.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="3" style="text-align: center; color: #6e6b7b; padding: 20px;">
+                            Nenhuma habilidade adicionada ainda
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = window.batchState.distribuicao.habilidades.map(h => `
+                <tr>
+                    <td>
+                        <input 
+                            type="text" 
+                            value="${h.codigo}" 
+                            onchange="window.updateHabilidade('${h.id}', 'codigo', this.value)"
+                            placeholder="Código da habilidade"
+                        >
+                    </td>
+                    <td>
+                        <input 
+                            type="number" 
+                            value="${h.qtd}" 
+                            min="0"
+                            onchange="window.updateHabilidade('${h.id}', 'qtd', this.value)"
+                            aria-label="Quantidade para ${h.codigo}"
+                        >
+                    </td>
+                    <td style="text-align: center;">
+                        <button 
+                            type="button" 
+                            class="btn-icon" 
+                            onclick="window.removeHabilidade('${h.id}')"
+                            aria-label="Remover ${h.codigo}"
+                        >
+                            <span class="material-icons">delete</span>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        window.updateImagens = function (campo, valor) {
+            if (campo === 'porQuestao') {
+                valor = parseInt(valor) || 0;
+            }
+            window.batchState.imagens[campo] = valor;
+
+            // Mostrar/ocultar seletor de estratégia
+            const container = document.getElementById('imagem-estrategia-container');
+            if (container) {
+                if (window.batchState.imagens.porQuestao > 0) {
+                    container.style.display = 'block';
+                } else {
+                    container.style.display = 'none';
+                }
+            }
+
+            updateValidationStatus();
+            console.info('[lote] imagensChanged', window.batchState.imagens);
+        };
+
+        window.salvarRascunho = function () {
+            console.info('[lote] Salvando rascunho...', window.batchState);
+            alert('Rascunho salvo com sucesso! (mock)');
+        };
+
+        window.prosseguirGeracao = function () {
+            const totalDiff = somaDiff();
+            const totalBloom = somaBloom();
+            const total = window.batchState.totalQuestoes;
+
+            if (totalDiff !== total || totalBloom !== total) {
+                alert('As somas de Dificuldade e Bloom precisam bater o total antes de prosseguir.');
+                return;
+            }
+
+            console.info('[lote] Prosseguindo para geração com estado:', window.batchState);
+            // window.location.assign('/backoffice/geracao-ia');
+            alert('Prosseguindo para Geração por IA... (mock)\n\nEstado salvo no console.');
+        };
+
+        // ===== SUPORTE A TECLADO =====
+        document.addEventListener('keydown', function (e) {
+            if (e.target.type === 'number' && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
+                const step = e.shiftKey ? 5 : 1;
+                const currentVal = parseInt(e.target.value) || 0;
+                const newVal = e.key === 'ArrowUp' ? currentVal + step : Math.max(0, currentVal - step);
+                e.target.value = newVal;
+                e.target.dispatchEvent(new Event('change'));
+            }
+        });
+
+        // ===== INICIALIZAÇÃO =====
+        window.addEventListener('load', function () {
+            setTimeout(() => {
+                console.info('[lote] Sistema de quantidades inicializado');
+                renderPieChart();
+                updateValidationStatus();
+                renderTabelaTopicos();
+                renderTabelaHabilidades();
+            }, 200);
+        });
     </script>
 </body>
 
