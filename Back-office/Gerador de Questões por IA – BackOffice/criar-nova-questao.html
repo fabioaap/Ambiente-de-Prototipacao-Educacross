@@ -423,42 +423,110 @@
             }
         }
 
+        /* Container do gráfico com destaque visual */
+        .pie-chart-container {
+            background: linear-gradient(135deg, #faf9fc 0%, #ffffff 100%);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #e8e6f0;
+            box-shadow: 0 2px 8px rgba(115, 103, 240, 0.06);
+        }
+
         /* Canvas pizza */
         #pie-dificuldade {
-            max-width: 300px;
+            max-width: 280px;
             height: auto;
             margin: 0 auto;
             display: block;
         }
 
-        /* KPIs grid */
+        /* Legenda melhorada */
+        #pie-legend {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e8e6f0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        #pie-legend>div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            transition: transform 0.2s ease;
+        }
+
+        #pie-legend>div:hover {
+            transform: translateX(4px);
+        }
+
+        #pie-legend>div span:first-child {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #pie-legend>div span:last-child {
+            font-weight: 500;
+            color: #5e5873;
+        }
+
+        /* KPIs grid melhorado */
         .kpis-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 16px;
+            gap: 16px;
+            margin-top: 20px;
         }
 
         .kpi-card {
-            background: #f8f7fa;
-            padding: 12px;
-            border-radius: 6px;
+            background: white;
+            padding: 20px 16px;
+            border-radius: 10px;
             text-align: center;
-            border: 1px solid #e2e2e3;
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
+        }
+
+        .kpi-card:hover {
+            border-color: #7367f0;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(115, 103, 240, 0.15);
         }
 
         .kpi-label {
             font-size: 11px;
-            color: #6e6b7b;
-            margin-bottom: 4px;
+            color: #a8a8a8;
+            margin-bottom: 8px;
             text-transform: uppercase;
-            font-weight: 500;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .kpi-value {
-            font-size: 24px;
-            font-weight: 700;
+            font-size: 32px;
+            font-weight: 800;
             color: #7367f0;
+            line-height: 1;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         /* Badges de status */
@@ -1028,13 +1096,10 @@
                                 Visualização</h3>
 
                             <!-- Canvas do gráfico de pizza -->
-                            <div
-                                style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #e2e2e3;">
+                            <div class="pie-chart-container">
                                 <canvas id="pie-dificuldade" width="300" height="300"
                                     aria-label="Gráfico de distribuição por dificuldade" role="img"></canvas>
-                                <div id="pie-legend"
-                                    style="margin-top: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 12px;">
-                                </div>
+                                <div id="pie-legend"></div>
                             </div>
 
                             <!-- KPIs -->
