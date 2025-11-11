@@ -1102,23 +1102,11 @@
                                 <div id="pie-legend"></div>
                             </div>
 
-                            <!-- KPIs -->
+                            <!-- KPIs (apenas Total) -->
                             <div class="kpis-grid">
                                 <div class="kpi-card">
                                     <div class="kpi-label">Total</div>
                                     <div class="kpi-value" id="kpi-total">20</div>
-                                </div>
-                                <div class="kpi-card">
-                                    <div class="kpi-label">Tópicos</div>
-                                    <div class="kpi-value" id="kpi-topicos">0</div>
-                                </div>
-                                <div class="kpi-card">
-                                    <div class="kpi-label">Habilidades</div>
-                                    <div class="kpi-value" id="kpi-habilidades">0</div>
-                                </div>
-                                <div class="kpi-card">
-                                    <div class="kpi-label">Restante</div>
-                                    <div class="kpi-value" id="kpi-restante">20</div>
                                 </div>
                             </div>
                         </div>
@@ -1128,56 +1116,36 @@
                             <!-- Distribuição por Dificuldade -->
                             <div>
                                 <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px; color: #5e5873;">
-                                    Distribuição por dificuldade
-                                    <span id="diff-status" class="badge-status alerta">⚠ Verificar soma</span>
+                                    Distribuição por dificuldade (%)
+                                    <span id="diff-status" class="badge-status alerta">⚠ Soma: 0% / 100%</span>
                                 </h3>
 
                                 <div class="dist-input-group">
                                     <div class="dist-input-row">
-                                        <label for="diff-muito-facil">Muito fácil</label>
-                                        <input type="number" id="diff-muito-facil" value="4" min="0"
-                                            onchange="window.updateDiff('muitoFacil', parseInt(this.value) || 0)"
-                                            aria-label="Quantidade de questões muito fáceis">
+                                        <label for="pct-facil">Fácil (%)</label>
+                                        <input type="number" id="pct-facil" value="40" min="0" max="100"
+                                            onchange="window.updateDiffPercent('facil', parseInt(this.value) || 0)"
+                                            aria-label="Percentual de questões fáceis">
                                     </div>
                                     <div class="dist-input-row">
-                                        <label for="diff-facil">Fácil</label>
-                                        <input type="number" id="diff-facil" value="4" min="0"
-                                            onchange="window.updateDiff('facil', parseInt(this.value) || 0)"
-                                            aria-label="Quantidade de questões fáceis">
+                                        <label for="pct-medio">Médio (%)</label>
+                                        <input type="number" id="pct-medio" value="40" min="0" max="100"
+                                            onchange="window.updateDiffPercent('medio', parseInt(this.value) || 0)"
+                                            aria-label="Percentual de questões médias">
                                     </div>
                                     <div class="dist-input-row">
-                                        <label for="diff-medio">Médio</label>
-                                        <input type="number" id="diff-medio" value="4" min="0"
-                                            onchange="window.updateDiff('medio', parseInt(this.value) || 0)"
-                                            aria-label="Quantidade de questões médias">
-                                    </div>
-                                    <div class="dist-input-row">
-                                        <label for="diff-dificil">Difícil</label>
-                                        <input type="number" id="diff-dificil" value="4" min="0"
-                                            onchange="window.updateDiff('dificil', parseInt(this.value) || 0)"
-                                            aria-label="Quantidade de questões difíceis">
-                                    </div>
-                                    <div class="dist-input-row">
-                                        <label for="diff-muito-dificil">Muito difícil</label>
-                                        <input type="number" id="diff-muito-dificil" value="4" min="0"
-                                            onchange="window.updateDiff('muitoDificil', parseInt(this.value) || 0)"
-                                            aria-label="Quantidade de questões muito difíceis">
+                                        <label for="pct-dificil">Difícil (%)</label>
+                                        <input type="number" id="pct-dificil" value="20" min="0" max="100"
+                                            onchange="window.updateDiffPercent('dificil', parseInt(this.value) || 0)"
+                                            aria-label="Percentual de questões difíceis">
                                     </div>
                                 </div>
 
-                                <!-- Presets de Dificuldade -->
+                                <!-- Ação: Distribuição Automática -->
                                 <div class="preset-buttons">
-                                    <button class="btn btn-outline btn-preset" id="btn-diff-a"
-                                        onclick="window.applyPreset('diffA')">
-                                        Preset A (20/20/20/20/20)
-                                    </button>
-                                    <button class="btn btn-outline btn-preset" id="btn-diff-b"
-                                        onclick="window.applyPreset('diffB')">
-                                        Preset B (10/20/40/20/10)
-                                    </button>
-                                    <button class="btn btn-outline btn-preset" id="btn-equalizar"
-                                        onclick="window.applyPreset('equalizar')">
-                                        Equalizar
+                                    <button class="btn btn-outline btn-preset" id="btn-auto-dist"
+                                        onclick="window.autoDistrib()">
+                                        Gerar Distribuição Automática (50/30/20)
                                     </button>
                                 </div>
                             </div>
@@ -1232,12 +1200,12 @@
                     <div class="resumo-lote" id="resumo-lote" role="status" aria-live="polite">
                         <strong>Resumo do lote:</strong>
                         Total <strong id="resumo-total">20</strong> questões •
-                        Dificuldade: MF<strong id="resumo-muito-facil">4</strong>, F<strong
-                            id="resumo-facil">4</strong>, M<strong id="resumo-medio">4</strong>, D<strong
-                            id="resumo-dificil">4</strong>, MD<strong id="resumo-muito-dificil">4</strong> •
-                        Bloom: L<strong id="resumo-lembrar">20</strong> C<strong id="resumo-compreender">30</strong>
-                        A<strong id="resumo-aplicar">30</strong> N<strong id="resumo-analisar">25</strong> V<strong
-                            id="resumo-avaliar">10</strong> Cr<strong id="resumo-criar">5</strong>
+                        Dificuldade: F<strong id="resumo-facil">8</strong> ( <span id="resumo-facil-perc">40%</span> ),
+                        M<strong id="resumo-medio">8</strong> ( <span id="resumo-medio-perc">40%</span> ), D<strong
+                            id="resumo-dificil">4</strong> ( <span id="resumo-dificil-perc">20%</span> ) •
+                        Bloom: L<strong id="resumo-lembrar">4</strong> C<strong id="resumo-compreender">5</strong>
+                        A<strong id="resumo-aplicar">5</strong> N<strong id="resumo-analisar">3</strong> V<strong
+                            id="resumo-avaliar">2</strong> Cr<strong id="resumo-criar">1</strong>
                         <span id="resumo-imagens"> • Sem imagens</span>
                     </div>
 
@@ -1460,8 +1428,10 @@
         window.batchState = {
             totalQuestoes: 20,
             distribuicao: {
-                dificuldade: { muitoFacil: 4, facil: 4, medio: 4, dificil: 4, muitoDificil: 4 },
-                bloom: { lembrar: 20, compreender: 30, aplicar: 30, analisar: 25, avaliar: 10, criar: 5 },
+                // dificuldade será sempre derivada dos percentuais (muitoFacil e muitoDificil desativados neste layout)
+                dificuldade: { muitoFacil: 0, facil: 8, medio: 8, dificil: 4, muitoDificil: 0 },
+                // bloom inicial será escalado para o total (percentuais base: 20/25/25/15/10/5)
+                bloom: { lembrar: 0, compreender: 0, aplicar: 0, analisar: 0, avaliar: 0, criar: 0 },
                 topicos: [],
                 habilidades: []
             },
@@ -1470,6 +1440,32 @@
                 estrategia: "gerar"
             }
         };
+        // Percentuais para interface nova (Fácil/Médio/Difícil)
+        window.batchState.percentualDificuldade = { facil: 40, medio: 40, dificil: 20 };
+        // Percentuais base Bloom
+        const BLOOM_PERCENT_BASE = { lembrar: 20, compreender: 25, aplicar: 25, analisar: 15, avaliar: 10, criar: 5 };
+        function recalcularBloomParaTotal() {
+            const total = window.batchState.totalQuestoes;
+            // Converter percentuais em contagens inteiras mantendo soma = total
+            const itens = Object.keys(BLOOM_PERCENT_BASE).map(k => ({ key: k, p: BLOOM_PERCENT_BASE[k] }));
+            // Ordenar por percentual apenas para estabilidade
+            const calc = itens.map(it => {
+                const raw = (total * it.p) / 100;
+                const floor = Math.floor(raw);
+                return { key: it.key, floor, frac: raw - floor };
+            });
+            let soma = calc.reduce((a, c) => a + c.floor, 0);
+            let resto = total - soma;
+            calc.sort((a, b) => b.frac - a.frac);
+            for (let i = 0; i < resto; i++) {
+                calc[i % calc.length].floor += 1;
+            }
+            const novoBloom = {};
+            calc.forEach(c => novoBloom[c.key] = c.floor);
+            window.batchState.distribuicao.bloom = novoBloom;
+        }
+        // Inicializa bloom já proporcional ao total
+        recalcularBloomParaTotal();
 
         // ===== VARIÁVEIS GLOBAIS PARA GRÁFICO =====
         let pieCanvas = null;
@@ -1520,9 +1516,9 @@
             return temp;
         }
 
-        function somaDiff() {
-            const d = window.batchState.distribuicao.dificuldade;
-            return d.muitoFacil + d.facil + d.medio + d.dificil + d.muitoDificil;
+        function somaPercent() {
+            const p = window.batchState.percentualDificuldade || { facil: 0, medio: 0, dificil: 0 };
+            return p.facil + p.medio + p.dificil;
         }
 
         function somaBloom() {
@@ -1538,6 +1534,33 @@
             return window.batchState.distribuicao.habilidades.reduce((acc, h) => acc + h.qtd, 0);
         }
 
+        // Converte percentuais (F/M/D) para contagens inteiras que somam o total
+        function percentToCounts() {
+            const total = window.batchState.totalQuestoes;
+            const p = window.batchState.percentualDificuldade;
+            const items = [
+                { key: 'facil', p: p.facil },
+                { key: 'medio', p: p.medio },
+                { key: 'dificil', p: p.dificil }
+            ];
+            // valores brutos
+            const calc = items.map(it => {
+                const raw = (total * it.p) / 100;
+                const floor = Math.floor(raw);
+                return { key: it.key, floor, frac: raw - floor };
+            });
+            let soma = calc.reduce((a, c) => a + c.floor, 0);
+            let resto = total - soma;
+            // distribuir restos pelos maiores restos fracionários
+            calc.sort((a, b) => b.frac - a.frac);
+            for (let i = 0; i < resto; i++) {
+                calc[i % calc.length].floor += 1;
+            }
+            const resultado = { facil: 0, medio: 0, dificil: 0 };
+            calc.forEach(c => { resultado[c.key] = c.floor; });
+            return resultado;
+        }
+
         // ===== RENDERIZAÇÃO DE GRÁFICO =====
         function renderPieChart() {
             if (!pieCanvas) {
@@ -1546,15 +1569,14 @@
                 pieCtx = pieCanvas.getContext('2d');
             }
 
-            const d = window.batchState.distribuicao.dificuldade;
-            const total = somaDiff();
+            // Usar percentuais (F/M/D) — pizza baseada em 100%
+            const p = window.batchState.percentualDificuldade;
             const dados = [
-                { label: 'Muito fácil', valor: d.muitoFacil, cor: '#00d25b' },
-                { label: 'Fácil', valor: d.facil, cor: '#28c76f' },
-                { label: 'Médio', valor: d.medio, cor: '#ff9f43' },
-                { label: 'Difícil', valor: d.dificil, cor: '#ea5455' },
-                { label: 'Muito difícil', valor: d.muitoDificil, cor: '#8b0000' }
+                { label: 'Fácil', valor: p.facil, cor: '#28c76f' },
+                { label: 'Médio', valor: p.medio, cor: '#ff9f43' },
+                { label: 'Difícil', valor: p.dificil, cor: '#ea5455' }
             ];
+            const totalPerc = Math.max(1, somaPercent());
 
             // Limpar canvas
             pieCtx.clearRect(0, 0, pieCanvas.width, pieCanvas.height);
@@ -1566,7 +1588,7 @@
             const radius = Math.min(centerX, centerY) - 20;
 
             dados.forEach(item => {
-                const sliceAngle = (item.valor / total) * 2 * Math.PI;
+                const sliceAngle = (item.valor / totalPerc) * 2 * Math.PI;
 
                 pieCtx.beginPath();
                 pieCtx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
@@ -1581,11 +1603,13 @@
             });
 
             // Atualizar legenda
+            const totalQuestoes = window.batchState.totalQuestoes;
             const legendHTML = dados.map(item => {
-                const perc = total > 0 ? Math.round((item.valor / total) * 100) : 0;
+                const qtd = Math.round((item.valor / 100) * totalQuestoes);
+                const perc = Math.round((item.valor / totalPerc) * 100);
                 return `<div style="display:flex;align-items:center;gap:8px;">
                     <span style="width:12px;height:12px;background:${item.cor};border-radius:2px;"></span>
-                    <span>${item.label}: ${item.valor} (${perc}%)</span>
+                    <span>${item.label}: ${perc}% (${qtd})</span>
                 </div>`;
             }).join('');
 
@@ -1596,18 +1620,18 @@
         // ===== ATUALIZAÇÃO DE STATUS =====
         function updateValidationStatus() {
             const totalQuestoes = window.batchState.totalQuestoes;
-            const totalDiff = somaDiff();
+            const totalPerc = somaPercent();
             const totalBloom = somaBloom();
 
             // Status Dificuldade
             const diffEl = document.getElementById('diff-status');
             if (diffEl) {
-                if (totalDiff === totalQuestoes) {
+                if (totalPerc === 100) {
                     diffEl.className = 'badge-status ok';
-                    diffEl.innerHTML = '✓ OK';
+                    diffEl.innerHTML = '✓ Soma OK';
                 } else {
                     diffEl.className = 'badge-status alerta';
-                    diffEl.innerHTML = `⚠ Soma: ${totalDiff}/${totalQuestoes}`;
+                    diffEl.innerHTML = `⚠ Soma: ${totalPerc}% / 100%`;
                 }
             }
 
@@ -1625,26 +1649,30 @@
 
             // KPIs
             const kpiTotal = document.getElementById('kpi-total');
-            const kpiTopicos = document.getElementById('kpi-topicos');
-            const kpiHab = document.getElementById('kpi-habilidades');
-            const kpiRest = document.getElementById('kpi-restante');
-
             if (kpiTotal) kpiTotal.textContent = totalQuestoes;
-            if (kpiTopicos) kpiTopicos.textContent = somaTopicos();
-            if (kpiHab) kpiHab.textContent = somaHabilidades();
-            if (kpiRest) kpiRest.textContent = totalQuestoes - somaTopicos();
 
-            // Progress bars
-            updateProgressBar('topicos', somaTopicos(), totalQuestoes);
-            updateProgressBar('habilidades', somaHabilidades(), totalQuestoes);
+            // Removidos progressos de tópicos/habilidades nesta seção
 
             // Resumo
+            // Atualizar contagens de dificuldade a partir dos percentuais para refletir no resumo
+            try {
+                const counts = percentToCounts();
+                window.batchState.distribuicao.dificuldade = {
+                    muitoFacil: 0,
+                    facil: counts.facil,
+                    medio: counts.medio,
+                    dificil: counts.dificil,
+                    muitoDificil: 0
+                };
+            } catch (e) {
+                console.warn('[lote] Falha ao converter percentuais para contagens', e);
+            }
             updateResumo();
 
             // Botão Prosseguir
             const btnProsseguir = document.getElementById('btn-prosseguir');
             if (btnProsseguir) {
-                if (totalDiff === totalQuestoes && totalBloom === totalQuestoes) {
+                if (totalPerc === 100 && totalBloom === totalQuestoes) {
                     btnProsseguir.disabled = false;
                     btnProsseguir.style.opacity = '1';
                 } else {
@@ -1668,15 +1696,17 @@
 
         function updateResumo() {
             const state = window.batchState;
-            const d = state.distribuicao.dificuldade;
-            const b = state.distribuicao.bloom;
-
+            const dCounts = percentToCounts();
             document.getElementById('resumo-total').textContent = state.totalQuestoes;
-            document.getElementById('resumo-muito-facil').textContent = d.muitoFacil;
-            document.getElementById('resumo-facil').textContent = d.facil;
-            document.getElementById('resumo-medio').textContent = d.medio;
-            document.getElementById('resumo-dificil').textContent = d.dificil;
-            document.getElementById('resumo-muito-dificil').textContent = d.muitoDificil;
+            // Dificuldade
+            document.getElementById('resumo-facil').textContent = dCounts.facil;
+            document.getElementById('resumo-medio').textContent = dCounts.medio;
+            document.getElementById('resumo-dificil').textContent = dCounts.dificil;
+            document.getElementById('resumo-facil-perc').textContent = window.batchState.percentualDificuldade.facil + '%';
+            document.getElementById('resumo-medio-perc').textContent = window.batchState.percentualDificuldade.medio + '%';
+            document.getElementById('resumo-dificil-perc').textContent = window.batchState.percentualDificuldade.dificil + '%';
+            // Bloom
+            const b = state.distribuicao.bloom;
             document.getElementById('resumo-lembrar').textContent = b.lembrar;
             document.getElementById('resumo-compreender').textContent = b.compreender;
             document.getElementById('resumo-aplicar').textContent = b.aplicar;
@@ -1709,39 +1739,31 @@
             }
 
             window.batchState.totalQuestoes = novoTotal;
-
-            // Redistribuir proporcionalmente
-            const newDiff = distribuirProporcional(novoTotal, window.batchState.distribuicao.dificuldade);
-            window.batchState.distribuicao.dificuldade = newDiff;
-
-            const newBloom = distribuirProporcional(novoTotal, window.batchState.distribuicao.bloom);
-            window.batchState.distribuicao.bloom = newBloom;
-
-            // Atualizar inputs
-            document.getElementById('diff-muito-facil').value = newDiff.muitoFacil;
-            document.getElementById('diff-facil').value = newDiff.facil;
-            document.getElementById('diff-medio').value = newDiff.medio;
-            document.getElementById('diff-dificil').value = newDiff.dificil;
-            document.getElementById('diff-muito-dificil').value = newDiff.muitoDificil;
-
-            document.getElementById('bloom-lembrar').value = newBloom.lembrar;
-            document.getElementById('bloom-compreender').value = newBloom.compreender;
-            document.getElementById('bloom-aplicar').value = newBloom.aplicar;
-            document.getElementById('bloom-analisar').value = newBloom.analisar;
-            document.getElementById('bloom-avaliar').value = newBloom.avaliar;
-            document.getElementById('bloom-criar').value = newBloom.criar;
-
+            // Recalcular Bloom primeiro para refletir corretamente na validação
+            recalcularBloomParaTotal();
             renderPieChart();
             updateValidationStatus();
             console.info('[lote] Total alterado para', novoTotal);
         };
 
-        window.updateDiff = function (nivel, valor) {
+        window.updateDiffPercent = function (nivel, valor) {
             if (valor < 0 || isNaN(valor)) valor = 0;
-            window.batchState.distribuicao.dificuldade[nivel] = valor;
+            if (valor > 100) valor = 100;
+            window.batchState.percentualDificuldade[nivel] = valor;
             renderPieChart();
             updateValidationStatus();
-            console.info('[lote] diffChanged', window.batchState.distribuicao.dificuldade);
+            console.info('[lote] diffPercentChanged', window.batchState.percentualDificuldade);
+        };
+
+        window.autoDistrib = function () {
+            window.batchState.percentualDificuldade = { facil: 50, medio: 30, dificil: 20 };
+            // Atualizar campos visuais
+            const f = document.getElementById('pct-facil'); if (f) f.value = 50;
+            const m = document.getElementById('pct-medio'); if (m) m.value = 30;
+            const d = document.getElementById('pct-dificil'); if (d) d.value = 20;
+            renderPieChart();
+            updateValidationStatus();
+            console.info('[lote] Auto distribuição aplicada');
         };
 
         window.updateBloom = function (nivel, valor) {
@@ -1991,12 +2013,12 @@
         };
 
         window.prosseguirGeracao = function () {
-            const totalDiff = somaDiff();
+            const totalPerc = somaPercent();
             const totalBloom = somaBloom();
             const total = window.batchState.totalQuestoes;
 
-            if (totalDiff !== total || totalBloom !== total) {
-                alert('As somas de Dificuldade e Bloom precisam bater o total antes de prosseguir.');
+            if (totalPerc !== 100 || totalBloom !== total) {
+                alert('Valide os dados antes de prosseguir:\n- Dificuldade deve somar 100%\n- Bloom deve somar o total de questões');
                 return;
             }
 
