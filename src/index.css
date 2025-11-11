@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 225 40% 96%;
+    --foreground: 224 15% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 15% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 15% 15%;
+    --primary: 249 63% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 259 100% 95%;
+    --secondary-foreground: 249 63% 40%;
+    --muted: 222 14% 92%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 259 100% 95%;
+    --accent-foreground: 249 63% 40%;
+    --destructive: 350 84% 57%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 14% 90%;
+    --input: 220 14% 90%;
+    --ring: 249 63% 54%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 213 31% 91%;
+    --primary: 249 63% 60%;
+    --primary-foreground: 224 71% 4%;
+    --secondary: 215 27% 16%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 215 27% 16%;
+    --muted-foreground: 217 20% 65%;
+    --accent: 215 27% 16%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 215 27% 16%;
+    --input: 215 27% 16%;
+    --ring: 249 63% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply min-h-screen bg-background font-sans text-foreground antialiased;
+    color-scheme: light;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+}
+
+/* Custom protótipo styles (progress table) */
+.cards{display:flex;gap:16px;margin-bottom:20px}
+.card{background:rgb(var(--card));padding:16px;border-radius:8px;flex:1;box-shadow:0 1px 2px rgba(0,0,0,0.03)}
+.card-title{font-size:13px;color:rgb(var(--muted-foreground));margin-bottom:8px}
+.card-body{font-size:18px;font-weight:600}
+
+.missions{margin-top:12px}
+.missions-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.missions table{width:100%;border-collapse:collapse}
+.missions thead th{background:transparent;text-align:left;padding:12px 12px;color:rgb(var(--muted-foreground));font-size:13px;letter-spacing:1px}
+.mission-row{background:rgb(var(--card));border-bottom:8px solid rgba(0,0,0,0.03)}
+.mission-row td{padding:12px;vertical-align:middle}
+.m-title{width:60%}
+.mission-name{color:rgb(var(--foreground));font-size:14px}
+.m-usage{width:160px;color:rgb(var(--muted-foreground));font-size:13px}
+.progress-cell{display:flex;flex-direction:column;gap:8px}
+.status-label{display:none}
+.progress-row{display:flex;align-items:center;gap:12px}
+.progress-row .progress-wrap{flex:1}
+.m-action{text-align:right;width:40px;color:rgb(var(--primary));font-size:18px}
+.progress-wrap{background:#eef3f8;border-radius:8px;height:12px;overflow:hidden}
+.progress-bar{height:100%;background:linear-gradient(90deg,#6b5cff,#9f8bff);transition:width 300ms ease}
+.progress-bar.finalizado{background:#1fb26a}
+.progress-bar.critico{background:#ff5c7c}
+.progress-bar.moderado{background:#f2a74b}
+.progress-bar.nao-iniciado{background:#d6dde6}

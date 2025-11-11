@@ -1,0 +1,15 @@
+{
+  "name": "your-repo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "lint": "echo 'configure eslint' && exit 0",
+    "typecheck": "echo 'configure tsc' && exit 0",
+    "test": "echo 'configure vitest/jest' && exit 0",
+    "build": "npm run -w packages/ui build-storybook",
+    "storybook": "npm run -w packages/ui storybook"
+  }
+}

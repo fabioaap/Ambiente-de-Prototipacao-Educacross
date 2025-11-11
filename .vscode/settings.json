@@ -1,0 +1,20 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "typescriptreact"
+  ],
+  "typescript.tsserver.maxTsServerMemory": 4096,
+  "editor.formatOnSave": true,
+  "files.associations": {
+    "*.md": "markdown"
+  },
+  "github.copilot.enable": {
+    "*": true
+  },
+  "github.copilot.inlineSuggest.enable": true,
+  "liveServer.settings.port": 5502
+}
