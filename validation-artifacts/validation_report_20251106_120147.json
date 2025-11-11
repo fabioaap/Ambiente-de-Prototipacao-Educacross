@@ -1,0 +1,606 @@
+{
+  "metadata": {
+    "validator_version": "1.0.0",
+    "timestamp": "2025-11-06T12:01:03.082025",
+    "root_path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação"
+  },
+  "project_structure": {
+    "root_path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação",
+    "scan_timestamp": "2025-11-06T12:01:03.083407",
+    "areas": {
+      "front_office": {
+        "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\Front-office",
+        "prototypes": [
+          {
+            "name": "Adicionar modal de visualizaçãoaprovação no Banco de Questões",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\Front-office\\Adicionar modal de visualizaçãoaprovação no Banco de Questões",
+            "relative_path": "Front-office\\Adicionar modal de visualizaçãoaprovação no Banco de Questões",
+            "files": {
+              "html": [
+                "Index.html",
+                "modal-questao-aprovacao.html",
+                "prototipo-jornada.html",
+                "teste-modal.html"
+              ],
+              "css": [
+                "modal-questao-aprovacao.css",
+                "style.css"
+              ],
+              "js": [
+                "app.js",
+                "modal-questao-aprovacao.js"
+              ]
+            },
+            "file_count": 8
+          },
+          {
+            "name": "Adicionar modal de visualização",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\Front-office\\Adicionar modal de visualizaçãoaprovação no Banco de Questões\\Adicionar modal de visualização\\Adicionar modal de visualização",
+            "relative_path": "Front-office\\Adicionar modal de visualizaçãoaprovação no Banco de Questões\\Adicionar modal de visualização\\Adicionar modal de visualização",
+            "files": {
+              "html": [
+                "Modal Leitura de Questões.html"
+              ],
+              "css": [],
+              "js": []
+            },
+            "file_count": 1
+          }
+        ]
+      },
+      "back_office": {
+        "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\Back-office",
+        "prototypes": []
+      },
+      "game": {
+        "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\Game",
+        "prototypes": []
+      },
+      "components": {
+        "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src",
+        "files": [
+          {
+            "name": "App.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\App.tsx",
+            "relative_path": "src\\App.tsx",
+            "type": "react",
+            "size": 41146
+          },
+          {
+            "name": "main.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\main.tsx",
+            "relative_path": "src\\main.tsx",
+            "type": "react",
+            "size": 253
+          },
+          {
+            "name": "Dashboard.stories.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\Dashboard.stories.tsx",
+            "relative_path": "src\\components\\Dashboard.stories.tsx",
+            "type": "react",
+            "size": 1072
+          },
+          {
+            "name": "Dashboard.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\Dashboard.tsx",
+            "relative_path": "src\\components\\Dashboard.tsx",
+            "type": "react",
+            "size": 3286
+          },
+          {
+            "name": "Header.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\Header.tsx",
+            "relative_path": "src\\components\\Header.tsx",
+            "type": "react",
+            "size": 415
+          },
+          {
+            "name": "Sidebar.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\Sidebar.tsx",
+            "relative_path": "src\\components\\Sidebar.tsx",
+            "type": "react",
+            "size": 467
+          },
+          {
+            "name": "ClassSelector.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\MissionBatch\\ClassSelector.tsx",
+            "relative_path": "src\\components\\MissionBatch\\ClassSelector.tsx",
+            "type": "react",
+            "size": 1673
+          },
+          {
+            "name": "DateRangePicker.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\MissionBatch\\DateRangePicker.tsx",
+            "relative_path": "src\\components\\MissionBatch\\DateRangePicker.tsx",
+            "type": "react",
+            "size": 2795
+          },
+          {
+            "name": "MissionBatchWizard.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\MissionBatch\\MissionBatchWizard.tsx",
+            "relative_path": "src\\components\\MissionBatch\\MissionBatchWizard.tsx",
+            "type": "react",
+            "size": 12088
+          },
+          {
+            "name": "MissionCatalog.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\MissionBatch\\MissionCatalog.tsx",
+            "relative_path": "src\\components\\MissionBatch\\MissionCatalog.tsx",
+            "type": "react",
+            "size": 6088
+          },
+          {
+            "name": "ProgressBar.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\MissionBatch\\ProgressBar.tsx",
+            "relative_path": "src\\components\\MissionBatch\\ProgressBar.tsx",
+            "type": "react",
+            "size": 1978
+          },
+          {
+            "name": "ReviewModal.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\MissionBatch\\ReviewModal.tsx",
+            "relative_path": "src\\components\\MissionBatch\\ReviewModal.tsx",
+            "type": "react",
+            "size": 4184
+          },
+          {
+            "name": "SuccessNotification.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\MissionBatch\\SuccessNotification.tsx",
+            "relative_path": "src\\components\\MissionBatch\\SuccessNotification.tsx",
+            "type": "react",
+            "size": 3055
+          },
+          {
+            "name": "avatar.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\avatar.tsx",
+            "relative_path": "src\\components\\ui\\avatar.tsx",
+            "type": "react",
+            "size": 1405
+          },
+          {
+            "name": "Badge.stories.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\Badge.stories.tsx",
+            "relative_path": "src\\components\\ui\\Badge.stories.tsx",
+            "type": "react",
+            "size": 1340
+          },
+          {
+            "name": "badge.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\badge.tsx",
+            "relative_path": "src\\components\\ui\\badge.tsx",
+            "type": "react",
+            "size": 1076
+          },
+          {
+            "name": "breadcrumb.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\breadcrumb.tsx",
+            "relative_path": "src\\components\\ui\\breadcrumb.tsx",
+            "type": "react",
+            "size": 1756
+          },
+          {
+            "name": "Button.stories.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\Button.stories.tsx",
+            "relative_path": "src\\components\\ui\\Button.stories.tsx",
+            "type": "react",
+            "size": 1871
+          },
+          {
+            "name": "button.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\button.tsx",
+            "relative_path": "src\\components\\ui\\button.tsx",
+            "type": "react",
+            "size": 1860
+          },
+          {
+            "name": "Card.stories.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\Card.stories.tsx",
+            "relative_path": "src\\components\\ui\\Card.stories.tsx",
+            "type": "react",
+            "size": 1839
+          },
+          {
+            "name": "card.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\card.tsx",
+            "relative_path": "src\\components\\ui\\card.tsx",
+            "type": "react",
+            "size": 1875
+          },
+          {
+            "name": "checkbox.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\checkbox.tsx",
+            "relative_path": "src\\components\\ui\\checkbox.tsx",
+            "type": "react",
+            "size": 978
+          },
+          {
+            "name": "dialog.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\dialog.tsx",
+            "relative_path": "src\\components\\ui\\dialog.tsx",
+            "type": "react",
+            "size": 3114
+          },
+          {
+            "name": "input.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\input.tsx",
+            "relative_path": "src\\components\\ui\\input.tsx",
+            "type": "react",
+            "size": 824
+          },
+          {
+            "name": "label.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\label.tsx",
+            "relative_path": "src\\components\\ui\\label.tsx",
+            "type": "react",
+            "size": 436
+          },
+          {
+            "name": "progress.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\progress.tsx",
+            "relative_path": "src\\components\\ui\\progress.tsx",
+            "type": "react",
+            "size": 859
+          },
+          {
+            "name": "scroll-area.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\scroll-area.tsx",
+            "relative_path": "src\\components\\ui\\scroll-area.tsx",
+            "type": "react",
+            "size": 1632
+          },
+          {
+            "name": "select.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\select.tsx",
+            "relative_path": "src\\components\\ui\\select.tsx",
+            "type": "react",
+            "size": 3976
+          },
+          {
+            "name": "sheet.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\sheet.tsx",
+            "relative_path": "src\\components\\ui\\sheet.tsx",
+            "type": "react",
+            "size": 3287
+          },
+          {
+            "name": "table.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\table.tsx",
+            "relative_path": "src\\components\\ui\\table.tsx",
+            "type": "react",
+            "size": 2738
+          },
+          {
+            "name": "tabs.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\tabs.tsx",
+            "relative_path": "src\\components\\ui\\tabs.tsx",
+            "type": "react",
+            "size": 1936
+          },
+          {
+            "name": "Dashboard.test.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\__tests__\\Dashboard.test.tsx",
+            "relative_path": "src\\components\\__tests__\\Dashboard.test.tsx",
+            "type": "react",
+            "size": 476
+          },
+          {
+            "name": "index.ts",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\MissionBatch\\index.ts",
+            "relative_path": "src\\components\\MissionBatch\\index.ts",
+            "type": "javascript",
+            "size": 363
+          },
+          {
+            "name": "utils.ts",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\lib\\utils.ts",
+            "relative_path": "src\\lib\\utils.ts",
+            "type": "javascript",
+            "size": 166
+          },
+          {
+            "name": "mission-batch.ts",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\mocks\\mission-batch.ts",
+            "relative_path": "src\\mocks\\mission-batch.ts",
+            "type": "javascript",
+            "size": 9987
+          },
+          {
+            "name": "missions.ts",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\mocks\\missions.ts",
+            "relative_path": "src\\mocks\\missions.ts",
+            "type": "javascript",
+            "size": 1923
+          },
+          {
+            "name": "missionBatchStore.ts",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\stores\\missionBatchStore.ts",
+            "relative_path": "src\\stores\\missionBatchStore.ts",
+            "type": "javascript",
+            "size": 6086
+          },
+          {
+            "name": "setup.ts",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\test\\setup.ts",
+            "relative_path": "src\\test\\setup.ts",
+            "type": "javascript",
+            "size": 42
+          },
+          {
+            "name": "mission-batch.ts",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\types\\mission-batch.ts",
+            "relative_path": "src\\types\\mission-batch.ts",
+            "type": "javascript",
+            "size": 5723
+          },
+          {
+            "name": "Welcome.stories.mdx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\Welcome.stories.mdx",
+            "relative_path": "src\\Welcome.stories.mdx",
+            "type": "storybook",
+            "size": 6110
+          },
+          {
+            "name": "Dashboard.stories.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\Dashboard.stories.tsx",
+            "relative_path": "src\\components\\Dashboard.stories.tsx",
+            "type": "react",
+            "size": 1072
+          },
+          {
+            "name": "Badge.stories.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\Badge.stories.tsx",
+            "relative_path": "src\\components\\ui\\Badge.stories.tsx",
+            "type": "react",
+            "size": 1340
+          },
+          {
+            "name": "Button.stories.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\Button.stories.tsx",
+            "relative_path": "src\\components\\ui\\Button.stories.tsx",
+            "type": "react",
+            "size": 1871
+          },
+          {
+            "name": "Card.stories.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\src\\components\\ui\\Card.stories.tsx",
+            "relative_path": "src\\components\\ui\\Card.stories.tsx",
+            "type": "react",
+            "size": 1839
+          },
+          {
+            "name": "App.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\prototype-react\\src\\App.tsx",
+            "relative_path": "prototype-react\\src\\App.tsx",
+            "type": "react",
+            "size": 190
+          },
+          {
+            "name": "Dashboard.tsx",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\prototype-react\\src\\components\\Dashboard.tsx",
+            "relative_path": "prototype-react\\src\\components\\Dashboard.tsx",
+            "type": "react",
+            "size": 62
+          },
+          {
+            "name": "missions.ts",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\prototype-react\\src\\mocks\\missions.ts",
+            "relative_path": "prototype-react\\src\\mocks\\missions.ts",
+            "type": "javascript",
+            "size": 46
+          },
+          {
+            "name": "check-mocks.js",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\prototype-react\\scripts\\check-mocks.js",
+            "relative_path": "prototype-react\\scripts\\check-mocks.js",
+            "type": "javascript",
+            "size": 303
+          },
+          {
+            "name": "main.ts",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\.storybook\\main.ts",
+            "relative_path": ".storybook\\main.ts",
+            "type": "javascript",
+            "size": 801
+          },
+          {
+            "name": "preview.ts",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\.storybook\\preview.ts",
+            "relative_path": ".storybook\\preview.ts",
+            "type": "javascript",
+            "size": 145
+          }
+        ]
+      },
+      "docs": {
+        "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs",
+        "files": [
+          {
+            "name": "DAILY_OPERATIONS.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\DAILY_OPERATIONS.md",
+            "relative_path": "docs\\DAILY_OPERATIONS.md",
+            "size": 7647
+          },
+          {
+            "name": "GIT_WORKFLOW.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\GIT_WORKFLOW.md",
+            "relative_path": "docs\\GIT_WORKFLOW.md",
+            "size": 9077
+          },
+          {
+            "name": "INDEX.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\INDEX.md",
+            "relative_path": "docs\\INDEX.md",
+            "size": 10286
+          },
+          {
+            "name": "JOURNEYS_GUIDE.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\JOURNEYS_GUIDE.md",
+            "relative_path": "docs\\JOURNEYS_GUIDE.md",
+            "size": 7843
+          },
+          {
+            "name": "PLANO-APRIMORAMENTO-WIZARD.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\PLANO-APRIMORAMENTO-WIZARD.md",
+            "relative_path": "docs\\PLANO-APRIMORAMENTO-WIZARD.md",
+            "size": 9404
+          },
+          {
+            "name": "sistema-de-ensino-legado.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\sistema-de-ensino-legado.md",
+            "relative_path": "docs\\sistema-de-ensino-legado.md",
+            "size": 10219
+          },
+          {
+            "name": "STATUS_REPORT.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\STATUS_REPORT.md",
+            "relative_path": "docs\\STATUS_REPORT.md",
+            "size": 9325
+          },
+          {
+            "name": "STORYBOOK_GUIDE.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\STORYBOOK_GUIDE.md",
+            "relative_path": "docs\\STORYBOOK_GUIDE.md",
+            "size": 8691
+          },
+          {
+            "name": "ADR-0000-template.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\adr\\ADR-0000-template.md",
+            "relative_path": "docs\\adr\\ADR-0000-template.md",
+            "size": 357
+          },
+          {
+            "name": "ADR-0004-adocao-estetica-vuexy.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\adr\\ADR-0004-adocao-estetica-vuexy.md",
+            "relative_path": "docs\\adr\\ADR-0004-adocao-estetica-vuexy.md",
+            "size": 3186
+          },
+          {
+            "name": "ADR-0006-unified-prototyping-platform.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\adr\\ADR-0006-unified-prototyping-platform.md",
+            "relative_path": "docs\\adr\\ADR-0006-unified-prototyping-platform.md",
+            "size": 9193
+          },
+          {
+            "name": "01-professor-frontend.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\journeys\\01-professor-frontend.md",
+            "relative_path": "docs\\journeys\\01-professor-frontend.md",
+            "size": 4110
+          },
+          {
+            "name": "02-admin-backoffice.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\journeys\\02-admin-backoffice.md",
+            "relative_path": "docs\\journeys\\02-admin-backoffice.md",
+            "size": 4851
+          },
+          {
+            "name": "03-student-games-platform.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\journeys\\03-student-games-platform.md",
+            "relative_path": "docs\\journeys\\03-student-games-platform.md",
+            "size": 5440
+          },
+          {
+            "name": "DESIGN-opcoes-envio-lote.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\journeys\\DESIGN-opcoes-envio-lote.md",
+            "relative_path": "docs\\journeys\\DESIGN-opcoes-envio-lote.md",
+            "size": 17885
+          },
+          {
+            "name": "JOURNEY-envio-missoes-em-lote.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\journeys\\JOURNEY-envio-missoes-em-lote.md",
+            "relative_path": "docs\\journeys\\JOURNEY-envio-missoes-em-lote.md",
+            "size": 28616
+          },
+          {
+            "name": "RESUMO-EXECUTIVO-envio-lote.md",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\docs\\journeys\\RESUMO-EXECUTIVO-envio-lote.md",
+            "relative_path": "docs\\journeys\\RESUMO-EXECUTIVO-envio-lote.md",
+            "size": 8133
+          }
+        ]
+      },
+      "config": {
+        "files": [
+          {
+            "name": "package-lock.json",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\package-lock.json",
+            "relative_path": "package-lock.json",
+            "type": "config",
+            "size": 559820
+          },
+          {
+            "name": "package.json",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\package.json",
+            "relative_path": "package.json",
+            "type": "npm",
+            "size": 2302
+          },
+          {
+            "name": "tsconfig.json",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\tsconfig.json",
+            "relative_path": "tsconfig.json",
+            "type": "config",
+            "size": 675
+          },
+          {
+            "name": "universal_validator_config.json",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\universal_validator_config.json",
+            "relative_path": "universal_validator_config.json",
+            "type": "config",
+            "size": 6621
+          },
+          {
+            "name": "postcss.config.js",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\postcss.config.js",
+            "relative_path": "postcss.config.js",
+            "type": "build",
+            "size": 80
+          },
+          {
+            "name": "tailwind.config.js",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\tailwind.config.js",
+            "relative_path": "tailwind.config.js",
+            "type": "build",
+            "size": 2021
+          },
+          {
+            "name": "vite.config.ts",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\vite.config.ts",
+            "relative_path": "vite.config.ts",
+            "type": "build",
+            "size": 523
+          },
+          {
+            "name": ".gitignore",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\.gitignore",
+            "relative_path": ".gitignore",
+            "type": "dotfile",
+            "size": 27
+          },
+          {
+            "name": ".cursorrules",
+            "path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação\\.cursorrules",
+            "relative_path": ".cursorrules",
+            "type": "dotfile",
+            "size": 2331
+          }
+        ]
+      }
+    },
+    "totals": {
+      "html_files": 5,
+      "css_files": 2,
+      "js_files": 2,
+      "react_files": 38,
+      "config_files": 9
+    }
+  },
+  "validation_results": {},
+  "summary": {
+    "total_files_validated": 0,
+    "total_tests_run": 0,
+    "total_passed": 0,
+    "total_failed": 0,
+    "areas_validated": [],
+    "overall_percentage": 0
+  }
+}

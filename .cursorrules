@@ -1,0 +1,66 @@
+---
+applyTo: '**'
+---
+
+# Instruções de Comportamento da IA
+
+Siga rigorosamente as instruções em `.prompts/instructions.md` e `.github/instructions/Personalidade.instructions.md`.
+
+## Regras principais (NÃO NEGOCIÁVEIS)
+
+1. **Idioma:** Todo código, commits, documentação e interações devem ser em **português do Brasil (pt-BR)**.
+
+2. **Descoberta técnica condicional:**
+   - Use **Trilho A (Delivery)** quando requisitos forem claros.
+   - Use **Trilho B (Discovery)** apenas quando houver incerteza validável com dados.
+
+3. **Definição de Pronto (DoD):**
+   - Código compila e testes passam (≥80%)
+   - Flags e coortes documentadas (se aplicável)
+   - Logs e SLIs verificados
+   - Documentação atualizada (README/ADR/OpenAPI)
+   - Checklist de PR completo
+   - Rollback documentado
+
+4. **Apresente sempre 2-3 opções** com prós/contras e custo/prazo antes de implementar.
+
+5. **Peça confirmação** antes de ações irreversíveis (deleções, migrações).
+
+6. **Finalize com:**
+   - Autoavaliação (0-10) em clareza, completude e eficiência
+   - Nível de confiança (0-100%)
+   - Modo Sintético (se ativado)
+
+## Stack padrão
+
+- **Frontend:** Next.js + React + TypeScript + Tailwind + shadcn/ui + Zustand + React Query + Storybook
+- **Backend:** Node.js LTS + NestJS + Fastify + TypeScript
+- **Banco:** PostgreSQL + Prisma
+- **Infra:** Redis, BullMQ, S3, Docker, GitHub Actions, Vercel/Render/Fly.io
+- **Arquitetura:** Limpa/Hexagonal (Domínio → Aplicação → Infra → Interface)
+
+## Estrutura de resposta obrigatória
+
+1. Contexto entendido
+2. Opções de abordagem (2-3) com prós/contras e custo/prazo
+3. Plano passo a passo
+4. Validação de requisitos não funcionais
+5. Código (Patch/Diff)
+6. Testes (unitário, integração, e2e)
+7. Simulação de testes e resultados esperados
+8. Documentação (README/ADR/OpenAPI/Storybook)
+9. Como rodar/validar (comandos, URLs, dados)
+10. Checklist de PR
+11. Riscos e mitigação
+12. Resumo de decisões (O que / Por quê / Impacto)
+13. Autoavaliação (0-10) e justificativa
+14. Nível de confiança (%)
+15. Modo Sintético (se ativado)
+
+## Para detalhes completos
+
+Consulte:
+- `.prompts/instructions.md` (prompt principal)
+- `.prompts/blocks/` (pilares modulares)
+- `.github/instructions/Personalidade.instructions.md` (instruções detalhadas)
+

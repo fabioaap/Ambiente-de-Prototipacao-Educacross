@@ -1,0 +1,333 @@
+{
+    "validator_config": {
+        "version": "1.0.0",
+        "project_name": "Educacross - Ambiente de Prototipação",
+        "description": "Configuração para validação universal do ambiente de prototipação",
+        "encoding": "utf-8"
+    },
+    "areas": {
+        "front_office": {
+            "enabled": true,
+            "path_patterns": [
+                "Front-office",
+                "front-office",
+                "frontend"
+            ],
+            "file_types": [
+                "html",
+                "css",
+                "js"
+            ],
+            "validations": {
+                "html_structure": true,
+                "css_quality": true,
+                "js_quality": true,
+                "integration": true,
+                "accessibility": true,
+                "brazilian_localization": true
+            },
+            "thresholds": {
+                "min_css_variables": 5,
+                "min_js_functions_descriptive_ratio": 0.7,
+                "max_var_usage": 0
+            }
+        },
+        "back_office": {
+            "enabled": true,
+            "path_patterns": [
+                "Back-office",
+                "back-office",
+                "backend"
+            ],
+            "file_types": [
+                "html",
+                "css",
+                "js"
+            ],
+            "validations": {
+                "html_structure": true,
+                "css_quality": true,
+                "js_quality": true,
+                "integration": true,
+                "accessibility": true,
+                "brazilian_localization": true
+            },
+            "thresholds": {
+                "min_css_variables": 3,
+                "min_js_functions_descriptive_ratio": 0.6,
+                "max_var_usage": 0
+            }
+        },
+        "game": {
+            "enabled": true,
+            "path_patterns": [
+                "Game",
+                "games",
+                "gaming"
+            ],
+            "file_types": [
+                "html",
+                "css",
+                "js",
+                "ts"
+            ],
+            "validations": {
+                "html_structure": true,
+                "css_quality": true,
+                "js_quality": true,
+                "integration": true,
+                "performance": true,
+                "brazilian_localization": true
+            },
+            "thresholds": {
+                "min_css_variables": 10,
+                "min_js_functions_descriptive_ratio": 0.8,
+                "max_var_usage": 0
+            }
+        },
+        "components": {
+            "enabled": true,
+            "path_patterns": [
+                "src",
+                "components",
+                "prototype-react",
+                ".storybook"
+            ],
+            "file_types": [
+                "tsx",
+                "jsx",
+                "ts",
+                "js",
+                "vue",
+                "stories"
+            ],
+            "validations": {
+                "typescript_quality": true,
+                "react_best_practices": true,
+                "storybook_coverage": true,
+                "component_documentation": true
+            }
+        },
+        "docs": {
+            "enabled": true,
+            "path_patterns": [
+                "docs",
+                "documentation"
+            ],
+            "file_types": [
+                "md",
+                "mdx"
+            ],
+            "validations": {
+                "markdown_quality": true,
+                "link_validation": true,
+                "brazilian_content": true
+            }
+        },
+        "config": {
+            "enabled": true,
+            "essential_files": [
+                "package.json",
+                ".gitignore",
+                "tsconfig.json",
+                "tailwind.config.js",
+                "postcss.config.js",
+                "vite.config.ts"
+            ],
+            "validations": {
+                "syntax_validation": true,
+                "dependency_analysis": true
+            }
+        }
+    },
+    "quality_gates": {
+        "overall_threshold": 85.0,
+        "area_threshold": 70.0,
+        "critical_threshold": 95.0
+    },
+    "html_validations": {
+        "required_meta_tags": [
+            {
+                "name": "charset",
+                "pattern": "UTF-8",
+                "description": "Encoding obrigatório"
+            },
+            {
+                "name": "viewport",
+                "pattern": "viewport",
+                "description": "Responsividade"
+            },
+            {
+                "name": "lang",
+                "pattern": "pt-BR",
+                "description": "Idioma brasileiro"
+            }
+        ],
+        "required_structure": [
+            {
+                "name": "DOCTYPE",
+                "pattern": "<!DOCTYPE html>",
+                "description": "HTML5 DOCTYPE"
+            },
+            {
+                "name": "title",
+                "pattern": "<title>.*\\w.*</title>",
+                "description": "Título não vazio"
+            }
+        ],
+        "forbidden_patterns": [
+            {
+                "pattern": "lorem ipsum",
+                "description": "Texto placeholder deve ser removido"
+            },
+            {
+                "pattern": "TODO|FIXME",
+                "description": "TODOs devem ser resolvidos"
+            }
+        ]
+    },
+    "css_validations": {
+        "modern_properties": [
+            "display: flex",
+            "display: grid",
+            "var(--",
+            "@media",
+            "transform"
+        ],
+        "discouraged_properties": [
+            "float: left",
+            "float: right",
+            "table-cell"
+        ],
+        "design_tokens": {
+            "colors": true,
+            "spacing": true,
+            "typography": true,
+            "breakpoints": true
+        }
+    },
+    "js_validations": {
+        "modern_syntax": {
+            "required": [
+                "const",
+                "let",
+                "=>",
+                "..."
+            ],
+            "discouraged": [
+                "var"
+            ],
+            "es6_features": true
+        },
+        "function_naming": {
+            "min_length": 4,
+            "camelCase": true,
+            "descriptive_ratio": 0.7
+        },
+        "brazilian_localization": {
+            "error_messages_portuguese": true,
+            "variable_names_portuguese": false,
+            "comment_portuguese": true
+        }
+    },
+    "accessibility_validations": {
+        "required_attributes": [
+            {
+                "element": "img",
+                "attribute": "alt"
+            },
+            {
+                "element": "input",
+                "attribute": "label"
+            },
+            {
+                "element": "button",
+                "attribute": "aria-label"
+            }
+        ],
+        "color_contrast": true,
+        "keyboard_navigation": true,
+        "screen_reader_support": true
+    },
+    "integration_validations": {
+        "css_linking": true,
+        "js_loading": true,
+        "asset_existence": true,
+        "relative_paths": true
+    },
+    "reporting": {
+        "formats": [
+            "console",
+            "json",
+            "html"
+        ],
+        "output_directory": "validation-reports",
+        "include_suggestions": true,
+        "include_examples": true,
+        "severity_levels": [
+            "critical",
+            "warning",
+            "info"
+        ],
+        "group_by": "area"
+    },
+    "ci_cd": {
+        "fail_on_critical": true,
+        "fail_threshold": 70.0,
+        "generate_artifacts": true,
+        "send_notifications": false
+    },
+    "exclusions": {
+        "directories": [
+            "node_modules",
+            ".git",
+            "dist",
+            "build",
+            ".storybook-static",
+            "coverage"
+        ],
+        "files": [
+            "*.min.js",
+            "*.min.css",
+            "vendor.*",
+            "legacy.*"
+        ],
+        "patterns": [
+            "test/**/*",
+            "**/*.test.*",
+            "**/*.spec.*"
+        ]
+    },
+    "prototype_specific": {
+        "wizard_validation": {
+            "required_steps": [
+                "turma",
+                "missoes",
+                "configuracao",
+                "revisao",
+                "sucesso"
+            ],
+            "state_management": true,
+            "localStorage_usage": true,
+            "step_navigation": true
+        },
+        "modal_validation": {
+            "overlay_behavior": true,
+            "escape_key_handling": true,
+            "focus_management": true,
+            "animation_performance": true
+        },
+        "gamification": {
+            "points_system": true,
+            "badge_system": true,
+            "progress_tracking": true,
+            "level_progression": true
+        }
+    },
+    "educational_context": {
+        "brazilian_educational_standards": true,
+        "age_appropriate_content": true,
+        "pedagogical_alignment": true,
+        "teacher_workflow_optimization": true
+    }
+}
