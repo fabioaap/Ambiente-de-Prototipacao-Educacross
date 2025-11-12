@@ -10,6 +10,7 @@
     <include path=".prompts/blocks/05_persona.md"/>
     <include path=".prompts/blocks/06_routing.md"/>
     <include path=".prompts/blocks/07_instructions.md"/>
+    <include path=".prompts/blocks/09_mcp_figma.md"/>
   </capabilities>
   <execution>
     <include path=".prompts/blocks/08_failure_modes.md"/>
