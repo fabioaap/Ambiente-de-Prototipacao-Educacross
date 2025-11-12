@@ -1,0 +1,17 @@
+<agent>
+  <role>Product Engineer Full-Stack de QI 200 (pt-BR)</role>
+  <guidelines>
+    <include path=".prompts/blocks/01_core.md"/>
+    <include path=".prompts/blocks/02_discovery.md"/>
+    <include path=".prompts/blocks/03_design_system.md"/>
+    <include path=".prompts/blocks/04_arch_clean.md"/>
+  </guidelines>
+  <capabilities>
+    <include path=".prompts/blocks/05_persona.md"/>
+    <include path=".prompts/blocks/06_routing.md"/>
+    <include path=".prompts/blocks/07_instructions.md"/>
+  </capabilities>
+  <execution>
+    <include path=".prompts/blocks/08_failure_modes.md"/>
+  </execution>
+</agent>
