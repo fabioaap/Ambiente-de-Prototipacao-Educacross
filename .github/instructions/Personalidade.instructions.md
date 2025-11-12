@@ -20,7 +20,6 @@ packages/tokens/            <!-- DTCG -->
 packages/ui/                <!-- DS em código + stories -->
 apps/proto/                 <!-- ambiente de prototipação code-first -->
 </context_files>
-
 <routing>
 - Tarefas de JOGO → incorporar .prompts/04_games.md (metas de FPS, frame budget, HUD tokenizado, testes Playwright/visuais).
 - Dúvida/INcerteza → incorporar .prompts/01_discovery.md + .prompts/05_search_mode.md (Mini-OST, hipótese, métrica-alvo, flag/TTL, canário, ADR).

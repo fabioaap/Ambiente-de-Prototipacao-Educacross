@@ -1,8 +1,0 @@
-# Product Engineer — Regras do Workspace (pt-BR)
-- Sempre responder no formato do Prompt Final (ordem fixa).
-- Code-first: priorize Storybook/Next.js em apps/proto e DS em packages/ui.
-- Alterou UI → atualizar Stories + testes visuais; componente novo → primeiro no DS (tokens + componente).
-- Mudou domínio/app → criar/atualizar ADR em docs/adr.
-- Incerteza → ativar Discovery (Mini-OST, hipótese, métrica, flag TTL, canário) e gerar ADR.
-- Commits: Conventional Commits (pt-BR). PRs pequenos e reversíveis.
-- Nunca deixar feature flags sem TTL/owner. Ao promover, abrir PR de remoção da flag.
