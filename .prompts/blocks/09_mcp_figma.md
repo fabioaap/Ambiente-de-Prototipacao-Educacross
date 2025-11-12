@@ -1,108 +1,239 @@
-# Bloco 09 — MCP Figma para página vanilla com saída pixel perfect
+//Bloco 1 • Instruções do agente MCP Figma para pagina vanilla com fidelidade visual maxima
 
-## Objetivo
-Gerar a página ativa do Figma como HTML e CSS vanilla com máxima fidelidade visual usando somente dados do MCP do Figma e, quando disponível, exemplos do Code Connect. Não fazer perguntas. Executar em uma passada.
+TITULO
+Execucao consolidada MCP Figma para pagina vanilla pixel perfect
 
-## Regras de Conduta
-1. **Não pedir confirmação nem fazer perguntas**. Assumir valores padrão quando o dado não existir.
-2. **Usar apenas as ferramentas do MCP do Figma** para ler conteúdo do arquivo. Ler somente a página visível.
-3. Se houver Code Connect no Dev Mode, usar os exemplos oficiais de uso de componentes apenas como referência de propriedades e estados.
-4. **Respeitar variáveis do Figma como fonte de tokens.** Aplicar como custom properties de CSS.
-5. **Garantir estrutura semântica e acessível.** Preferir tags nativas HTML antes de `div`.
-6. Otimizar para fidelidade visual. Medir e reproduzir `gap`, `padding`, alinhamentos, grids e constraints.
-7. **Saída final em três blocos: IR, HTML, CSS.** Não retornar nada além desses blocos.
+CONTEXTO
+Estou no Figma desktop com servidor MCP Figma local ativo. Ha um Frame alvo visivel. O agente deve executar tudo em uma passada, sem perguntas. Em todas as chamadas incluir clientFrameworks: vanilla e clientLanguages: html,css.
 
-## Fluxo de Trabalho
-**A. Coleta via MCP**
+FERRAMENTAS PERMITIDAS
+mcp_figma_get_design_context
+mcp_figma_get_metadata
+mcp_figma_get_variable_defs
+mcp_figma_get_code_connect_map
+mcp_figma_get_screenshot  somente para auditoria ao final
 
-1. Obter nome da página ativa.
-2. Coletar variáveis ativas e modos de cor e tipografia.
-3. Listar nós relevantes da página na ordem de empilhamento. Priorizar Frame, AutoLayout, Instance, Text, Vector.
-4. Para cada nó, capturar propriedades de auto layout (padding, item spacing, alinhamentos), layout guides e constraints. Capturar também referências de variáveis ligadas.
-5. Quando o nó for Instance, coletar chave de componente e variantes. Se Code Connect estiver presente, anotar props e estados usados nos exemplos.
-6. Montar o IR conforme o esquema de `emit_ir` e chamar a função `emit_ir`.
+PARAMETROS PROIBIDOS
+Nao usar forceCode nem parametros nao listados.
 
-**B. Geração**
+POLITICA DE EXECUCAO
+* Nao fazer perguntas
+* Nao anunciar passos futuros
+* Nao salvar nem anunciar arquivos parciais
+* Nao aplicar interatividade  apenas responsividade derivada de constraints
+* Nao chamar screenshot antes de concluir IR HTML e CSS
 
-1. Transformar IR em HTML com marcação semântica:
-   - Auto layout → `display:flex`, direção, gap, padding, `justify`, `align`.
-   - Layout guide → CSS Grid quando aplicável.
-   - Constraints → regras de redimensionamento e posicionamento.
-2. Produzir CSS usando custom properties para tokens de cores, tipografia, raio, espaço e demais variáveis. Incluir reset mínimo e utilitários necessários.
-3. Garantir classes claras por nó raiz de cada bloco lógico. Evitar estilos inline.
+ORDEM OBRIGATORIA
+1  mcp_figma_get_metadata no Frame alvo para obter ids dos filhos diretos em ordem de empilhamento
+2  Para cada id coletar subarvore com mcp_figma_get_design_context e acumular os nos em memoria
+   * Se a selecao falhar usar node id do link do Figma
+   * Converter node id do formato com traco do URL para o formato com dois pontos aceito pela API
+3  mcp_figma_get_variable_defs uma unica vez para tokens de cores tipografia espacamento e raio
+4  mcp_figma_get_code_connect_map se existir e anexar componentKey e variantProps em Instances
+5  Consolidar todos os parciais em UM IR completo validado
+6  Emitir as saidas em TRES blocos na mesma resposta
+   * IR  JSON valido
+   * HTML unico sem estilos inline
+   * CSS unico com custom properties e regras de flex e grid
 
-## Esquema da Função `emit_ir`
+REGRAS DE MAPEAMENTO
+* Auto layout vira display flex com direction gap padding justify align
+* Layout grid e guias de layout viram CSS Grid com colunas linhas e gaps equivalentes
+* Constraints definem largura altura e ancoragens responsivas em relacao ao pai
+* Variaveis do Figma viram custom properties em :root e sao referenciadas nas classes
+* Para Instances usar componentKey e variantProps e quando houver props do Code Connect como referencia
 
-```yaml
-name: emit_ir
-description: Devolve o IR da página ativa
-parameters:
-  type: object
-  required: [pageName, nodes, tokens]
-  properties:
-    pageName: { type: string }
-    tokens:
-      type: object
-      properties:
-        colors: { type: array, items: { type: object, properties: { name:{type:string}, var:{type:string}, value:{type:string} } } }
-        typography: { type: array, items: { type: object, properties: { name:{type:string}, var:{type:string}, weight:{type:number}, size:{type:number}, lineHeight:{type:number} } } }
-        spacing: { type: array, items: { type: object, properties: { name:{type:string}, var:{type:string}, value:{type:number} } } }
-        radius: { type: array, items: { type: object, properties: { name:{type:string}, var:{type:string}, value:{type:number} } } }
-    nodes:
-      type: array
-      items:
-        type: object
-        required: [k, name, children]
-        properties:
-          k: { type: string, enum: ["Frame","AutoLayout","Instance","Text","Vector"] }
-          name: { type: string }
-          componentKey: { type: ["string","null"] }
-          variantProps: { type: ["object","null"], additionalProperties: { type:"string"} }
-          layout:
-            type: ["object","null"]
-            properties:
-              dir: { type: string, enum: ["row","column"] }
-              gap: { type: number }
-              pad: { type: array, items: { type: number }, minItems:4, maxItems:4 }
-              justify: { type: string }
-              align: { type: string }
-          grid: { type: ["array","null"] }
-          constraints: { type: ["object","null"] }
-          styleRefs:
-            type: ["object","null"]
-            properties:
-              fillVar: { type: ["string","null"] }
-              textVar: { type: ["string","null"] }
-          textContent: { type: ["string","null"] }
-          children: { type: array }
-```
+CONTRATO DO IR
+pageName  string
+tokens  objeto com groups colors typography spacing radius  cada item com name var value
+nodes  array na ordem de empilhamento
+  k  Frame AutoLayout Instance Text Vector
+  name  string
+  componentKey  string ou nulo
+  variantProps  objeto ou nulo
+  layout  objeto ou nulo  dir gap pad [topo direita base esquerda] justify align
+  grid  objeto ou nulo
+  constraints  objeto ou nulo
+  styleRefs  objeto ou nulo  fillVar textVar
+  textContent  string ou nulo
+  children  array
 
-## Validação antes de Gerar
+VALIDACOES ANTES DE EMITIR
+* Contagem de nos do IR igual a contagem total do Frame
+* Todo no com auto layout tem dir gap e padding definidos  zero quando ausente
+* Todo texto tem fonte e tamanho vindos de variavel ou valor absoluto
+* Se algum filho direto faltar repetir a coleta  registrar pendencias somente quando leitura for impossivel
 
-1. Conferir contagem de nós do IR com a contagem vinda do MCP para a página.
-2. Verificar que todo nó com auto layout possui gap e padding definidos, mesmo que zero.
-3. Verificar que todo texto possui fonte e tamanho, vindos de variável ou valor absoluto.
-4. Se faltar dado crítico, estimar com base nos irmãos e marcar em uma lista de pendências no fim.
+SAIDAS
+Emitir exatamente
+1  IR
+2  HTML
+3  CSS
+Sem qualquer outro texto
 
-## Saídas
+AUDITORIA VISUAL OPCIONAL
+* Depois de emitir IR HTML e CSS chamar mcp_figma_get_screenshot uma unica vez para conferencia rapida sem OCR
 
-1. **IR** – Conteúdo JSON exatamente no formato recebido por `emit_ir`.
-2. **HTML** – Documento completo com estrutura semântica. Usar classes que reflitam a hierarquia do IR. Nenhum estilo inline.
-3. **CSS** – Arquivo com variáveis CSS a partir de tokens do IR e regras para flex e grid. Incluir media queries quando constraints exigirem.
 
-## Critérios de Fidelidade
+//Bloco 2 • Validador de IR HTML e CSS
 
-- Alinhamento e distribuição iguais aos valores do IR.
-- Gaps e paddings iguais aos informados.
-- Tipografia mapeada por variável quando existir.
-- Cores vindas de variáveis aplicadas como custom properties.
-- Resposta visual a redimensionamento conforme constraints e layout guide.
+TITULO
+Validador de IR HTML e CSS
 
-## Checklist Final
+OBJETIVO
+Validar em uma passada a qualidade do IR HTML e CSS gerados a partir do MCP Figma para a pagina unica com fidelidade visual maxima
 
-- Sem perguntas.
-- Apenas três blocos na saída (IR, HTML e CSS).
-- IR válido no schema.
-- HTML semântico e acessível.
-- CSS com variáveis e sem estilos inline.
-- Lista de pendências, se houver.
+ENTRADAS ESPERADAS
+* ir_json  objeto IR completo conforme contrato salvo
+* html_str  documento unico em string
+* css_str   folha unica em string
+* opcional  expectedNodeCount  inteiro vindo do design context para checagem de contagem
+
+REGRAS
+* Nao fazer perguntas
+* Executar todas as verificacoes e retornar um relatorio unico com pass e fail
+* Se alguma entrada nao existir  marcar como falha e seguir com as demais
+
+CHECKS
+1  Esquema do IR
+   * pageName e tokens presentes
+   * nodes e children presentes
+2  Contagem de nos
+   * se expectedNodeCount informado  total de nos no IR deve ser igual
+3  Auto layout
+   * todo no com layout precisa ter dir gap pad justify align
+   * css precisa conter ao menos uma declaracao display flex
+4  Grid
+   * se grid existir em algum no  css deve conter display grid ou grid template
+5  Texto
+   * todo no com textContent precisa de styleRefs textVar ou fonte e tamanho absolutos
+6  Variaveis e tokens
+   * para cada token do IR  css deve conter a variavel correspondente em root
+7  HTML sem estilos inline
+   * nao pode haver atributo style no html
+8  Constraints
+   * se constraints existir  css deve conter ao menos uma regra de largura ou altura controlada e ancoragem coerente
+9  Duplicidades
+   * ids duplicados em html nao sao permitidos
+
+SAIDA
+* Objeto JSON com
+  summary  totais de pass e fail
+  errors   lista descritiva
+  warnings avisos
+  tips     sugestoes de correcao
+
+//Bloco 3 • Script Node do validador
+
+// ir_html_css_check.js
+export function runChecks({ ir_json, html_str, css_str, expectedNodeCount }) {
+  const errors = [];
+  const warnings = [];
+  const tips = [];
+  if (!ir_json || !html_str || !css_str) {
+    errors.push("Entradas ir_json, html_str e css_str sao obrigatorias");
+    return finish();
+  }
+
+  // 1 Esquema do IR
+  if (!ir_json.pageName) errors.push("IR sem pageName");
+  if (!ir_json.nodes || !Array.isArray(ir_json.nodes)) errors.push("IR sem nodes");
+  if (!ir_json.tokens) warnings.push("IR sem tokens");
+
+  // util
+  const walk = (n, acc = []) => {
+    if (!n) return acc;
+    if (Array.isArray(n)) { n.forEach(x => walk(x, acc)); return acc; }
+    acc.push(n);
+    if (n.children) walk(n.children, acc);
+    return acc;
+  };
+  const allNodes = walk(ir_json.nodes);
+
+  // 2 Contagem
+  if (typeof expectedNodeCount === "number" && expectedNodeCount !== allNodes.length) {
+    errors.push(`Contagem de nos divergente IR ${allNodes.length} esperado ${expectedNodeCount}`);
+  }
+
+  // 3 Auto layout
+  let needsFlex = false;
+  allNodes.forEach(n => {
+    if (n.layout) {
+      needsFlex = true;
+      const L = n.layout;
+      ["dir","gap","pad","justify","align"].forEach(k => {
+        if (!(k in L)) errors.push(`No ${n.name || n.k} sem campo de layout ${k}`);
+      });
+      if (Array.isArray(L.pad) && L.pad.length !== 4) {
+        errors.push(`Padding de ${n.name || n.k} deve ter 4 valores`);
+      }
+    }
+  });
+  if (needsFlex && !/display\s*:\s*flex/i.test(css_str)) {
+    errors.push("CSS sem regra display flex apesar de haver auto layout no IR");
+  }
+
+  // 4 Grid
+  const hasGridNode = allNodes.some(n => n.grid);
+  if (hasGridNode && !(/display\s*:\s*grid/i.test(css_str) || /grid-template/i.test(css_str))) {
+    errors.push("CSS sem grid apesar de haver grid no IR");
+  }
+
+  // 5 Texto
+  const textNodes = allNodes.filter(n => typeof n.textContent === "string");
+  textNodes.forEach(n => {
+    const hasVar = n.styleRefs && (n.styleRefs.textVar || n.styleRefs.fillVar);
+    const hasAbs = n.style && (n.style.fontSize || n.style.fontFamily);
+    if (!hasVar && !hasAbs) {
+      errors.push(`Texto em ${n.name || "no"} sem variavel de tipografia nem valores absolutos`);
+    }
+  });
+
+  // 6 Variaveis e tokens
+  const tokenVars = [];
+  const pick = obj => Array.isArray(obj) ? obj : [];
+  const T = ir_json.tokens || {};
+  ["colors","typography","spacing","radius"].forEach(group => {
+    pick(T[group]).forEach(tok => {
+      if (tok.var) tokenVars.push(tok.var);
+    });
+  });
+  const rootBlock = css_str.match(/:root\s*\{([\s\S]*?)\}/i);
+  if (tokenVars.length && !rootBlock) {
+    errors.push("CSS sem bloco :root para variaveis");
+  } else if (rootBlock) {
+    const block = rootBlock[1];
+    tokenVars.forEach(v => {
+      const cssVar = v.startsWith("--") ? v : `--${v.replace(/[^a-z0-9_-]/gi,"").toLowerCase()}`;
+      if (!new RegExp(`${cssVar}\\s*:`,"i").test(block)) {
+        warnings.push(`Variavel ${cssVar} nao encontrada em :root`);
+      }
+    });
+  }
+
+  // 7 HTML sem estilos inline
+  if (/style\s*=/.test(html_str)) errors.push("HTML contem estilos inline");
+
+  // 8 Constraints heuristica
+  const hasConstraints = allNodes.some(n => n.constraints);
+  if (hasConstraints && !/(width|height)\s*:\s*(\d+px|auto|100%)/i.test(css_str)) {
+    warnings.push("Constraints presentes mas nao ha indicios de regras de largura ou altura no CSS");
+    tips.push("Mapear constraints para regras de largura altura e ancoragem");
+  }
+
+  // 9 Duplicidades de id
+  const ids = [...html_str.matchAll(/id\s*=\s*["']([^"']+)["']/g)].map(m => m[1]);
+  const dup = ids.filter((x, i) => ids.indexOf(x) !== i);
+  if (dup.length) errors.push(`Ids duplicados no HTML: ${[...new Set(dup)].join(", ")}`);
+
+  return finish();
+
+  function finish() {
+    const summary = {
+      totalChecks: 9,
+      pass: errors.length === 0 ? 9 : Math.max(0, 9 - errors.length),
+      fail: errors.length
+    };
+    return { summary, errors, warnings, tips };
+  }
+}
