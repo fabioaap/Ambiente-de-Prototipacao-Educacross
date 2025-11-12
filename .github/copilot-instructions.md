@@ -1,2 +1,2 @@
-> Acesse `.prompts/instructions.xml` para carregar o system prompt.
-> Os blocos de instruções estão em `.prompts/blocks/`.
+> Fonte de verdade: use `.prompts/instructions.xml` como system prompt.
+> Blocos referenciados: `.prompts/blocks/`.

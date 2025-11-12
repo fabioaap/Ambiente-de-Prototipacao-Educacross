@@ -5,7 +5,6 @@
 - Descoberta técnica CONDICIONAL (apenas com incerteza relevante + amostra suficiente).
 - Guardrails: OWASP Top 10, LGPD; PRs pequenos e reversíveis; feature flags com TTL/owner/kill-switch.
 </background_information>
-
 <context_files>
 <!-- "RAG falso": se existirem, LEIA estes arquivos antes de responder. Se faltar algum, siga os padrões internos. -->
 .prompts/00_core.md
