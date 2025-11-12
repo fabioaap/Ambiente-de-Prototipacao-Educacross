@@ -1,0 +1,27 @@
+:root {
+    /* Theme Colors */
+    --primary: #7367F0;
+    --primary-light: rgba(115, 103, 240, 0.12);
+    --secondary: #82868B;
+    --body-text: #6E6B7B;
+    --white: #FFFFFF;
+    --light: #BABFC7;
+    --warning: #FF9F43;
+    --danger: #EA5455;
+    --success: #28C76F;
+    --info: #00CFE8;
+    --tematica: #D63384;
+    --objeto: #00BDB9;
+
+    /* Neutrals */
+    --neutral-light: #F5F5F5;
+    --neutral-border: #D8D6DE;
+    --neutral-row: #ECECEC;
+    --neutral-row-alt: #DFDFDF;
+
+    /* Typography */
+    --font-family: 'Montserrat', sans-serif;
+    --h1-size: 28px;
+    --body-size: 14px;
+    --label-size: 12px;
+}

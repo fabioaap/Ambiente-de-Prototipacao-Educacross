@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./tokens.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" />
+
+</head>
+
+<body>
+
+    <div class="banco-de-questes-em-reviso" style="width: 100vw; min-height: 100vh; overflow-x: auto;">
+        <!-- Sidebar -->
+        <aside class="menu-backoffice">
+            <div class="menu-backoffice"
+                style="background: var(--sidebar-bg, #283046); display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 48px 20px 32px 20px; font-family: 'Montserrat', sans-serif; width: 265px; min-height: 100vh; border-radius: 0 10px 10px 0; box-sizing: border-box;">
+                <div style="margin-bottom: 24px;">
+                    <img src="http://localhost:3845/assets/fc350196eeccad1c31f74003168667ff2738f230.svg" alt="Logo"
+                        style="width: 50px; height: 32px;" />
+                </div>
+                <div
+                    style="width: 250px; background: #7367f0; border-radius: 4px; display: flex; align-items: center; padding: 12px 16px; margin-bottom: 10px;">
+                    <img src="http://localhost:3845/assets/2ca9569a7d4f485fd3c33847ea82a97004715cc8.svg"
+                        alt="Banco de Questões" style="width: 20px; height: 20px; margin-right: 10px;" />
+                    <span style="font-weight: 600; color: var(--sidebar-active-text, #fff); font-size: 15px;">Banco de
+                        Questões</span>
+                </div>
+                <div
+                    style="width: 250px; background: #283046; border-radius: 4px; display: flex; align-items: center; padding: 12px 16px; margin-bottom: 10px;">
+                    <img src="http://localhost:3845/assets/2ca9569a7d4f485fd3c33847ea82a97004715cc8.svg"
+                        alt="Banco de Jogos" style="width: 20px; height: 20px; margin-right: 10px;" />
+                    <span style="font-weight: 600; color: var(--sidebar-text, #fff); font-size: 15px;">Banco de
+                        Jogos</span>
+                </div>
+                <div
+                    style="width: 250px; background: #283046; border-radius: 4px; display: flex; align-items: center; padding: 12px 16px; margin-bottom: 10px;">
+                    <img src="http://localhost:3845/assets/6717dc006cf7cb9471033846a4c7cb5b1c427cf8.svg"
+                        alt="Gestão de Escolas" style="width: 20px; height: 20px; margin-right: 10px;" />
+                    <span style="font-weight: 600; color: #fff; font-size: 15px;">Gestão de Escolas</span>
+                </div>
+                <div
+                    style="width: 250px; background: #283046; border-radius: 4px; display: flex; align-items: center; padding: 12px 16px; margin-bottom: 10px;">
+                    <img src="http://localhost:3845/assets/89bdeeb65269946d7ded20f1a84d51f217859cb0.svg"
+                        alt="Gestão de Acessos" style="width: 20px; height: 20px; margin-right: 10px;" />
+                    <span style="font-weight: 600; color: #fff; font-size: 15px;">Gestão de Acessos</span>
+                </div>
+                <div
+                    style="width: 250px; background: #283046; border-radius: 4px; display: flex; align-items: center; padding: 12px 16px; margin-bottom: 10px;">
+                    <img src="http://localhost:3845/assets/927ec6bb4c4c2d85365dbb514c771c0902c255f7.svg" alt="Eventos"
+                        style="width: 20px; height: 20px; margin-right: 10px;" />
+                    <span style="font-weight: 600; color: #fff; font-size: 15px;">Eventos</span>
+                </div>
+                <div
+                    style="width: 250px; background: #283046; border-radius: 4px; display: flex; align-items: center; padding: 12px 16px; margin-bottom: 10px;">
+                    <img src="http://localhost:3845/assets/fd4d0ebd2439e4f604b7590094cb52c94fe52519.svg"
+                        alt="Gestão Pedagógica" style="width: 20px; height: 20px; margin-right: 10px;" />
+                    <span style="font-weight: 600; color: #fff; font-size: 15px;">Gestão Pedagógica</span>
+                </div>
+                <div
+                    style="width: 250px; background: #283046; border-radius: 4px; display: flex; align-items: center; padding: 12px 16px; margin-bottom: 10px;">
+                    <img src="http://localhost:3845/assets/3a94cf894bd354583ce297d872cd3cc6edf24725.svg"
+                        alt="Sistema de Ensino" style="width: 20px; height: 20px; margin-right: 10px;" />
+                    <span style="font-weight: 600; color: #fff; font-size: 15px;">Sistema de Ensino</span>
+                </div>
+                <div
+                    style="width: 250px; background: #283046; border-radius: 4px; display: flex; align-items: center; padding: 12px 16px; margin-bottom: 10px;">
+                    <img src="http://localhost:3845/assets/299a25971f290a19be475e4c884e7531056f2c99.svg"
+                        alt="Biblioteca" style="width: 20px; height: 20px; margin-right: 10px;" />
+                    <span style="font-weight: 600; color: #fff; font-size: 15px;">Biblioteca</span>
+                </div>
+                <div
+                    style="width: 250px; background: #283046; border-radius: 4px; display: flex; align-items: center; padding: 12px 16px; margin-bottom: 10px;">
+                    <img src="http://localhost:3845/assets/d63a1f3efa343a253445adb8e4099ed13b4c6179.svg"
+                        alt="Expedição Leitura" style="width: 20px; height: 20px; margin-right: 10px;" />
+                    <span style="font-weight: 600; color: #fff; font-size: 15px;">Expedição Leitura</span>
+                </div>
+                <div
+                    style="width: 250px; background: #283046; border-radius: 4px; display: flex; align-items: center; padding: 12px 16px; margin-bottom: 10px;">
+                    <img src="http://localhost:3845/assets/f7209ab7d192043960e12c508d3b8054b7bc5cfc.svg"
+                        alt="Relatórios" style="width: 20px; height: 20px; margin-right: 10px;" />
+                    <span style="font-weight: 600; color: #fff; font-size: 15px;">Relatórios</span>
+                </div>
+            </div>
+        </aside>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="global-header">
+                <div class="global-header"
+                    style="background: var(--header-bg, #fff); border: 1px solid var(--header-border, #e2e2e3); border-radius: 10px; display: flex; align-items: center; justify-content: space-between; padding: 24px 32px; font-family: 'Montserrat', sans-serif; box-sizing: border-box;">
+                    <div style="display: flex; align-items: center;">
+                        <img src="http://localhost:3845/assets/1ccf14f7b01e579cfd2bb8872a20758954d7f87f.svg" alt="Logo"
+                            style="width: 22px; height: 18px; margin-right: 37px; margin-top: 10px; opacity: 0;" />
+                        <span style="font-weight: 600; color: var(--primary, #7367f0); font-size: 16px;">Escola Arte do
+                            Aprender</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <span
+                            style="font-weight: 500; color: var(--header-user-text, #6e6b7b); font-size: 14px; margin-right: 12px;">Usuário
+                            do
+                            backoffice</span>
+                        <span style="display: flex; align-items: center; gap: 4px;">
+                            <span
+                                style="width: 42px; height: 42px; background: #7367f0; border-radius: 100px; display: flex; align-items: center; justify-content: center; position: relative;">
+                                <span
+                                    style="color: var(--avatar-text, #fff); font-weight: 600; font-size: 20px; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">A</span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <!-- Breadcrumbs -->
+            <nav class="banco-de-questes-em-reviso-inner">
+                <!-- ...existing code... -->
+            </nav>
+            <!-- Conteúdo principal -->
+            <section class="frame-group">
+                <!-- Bloco principal refatorado -->
+                <div
+                    style="font-family: 'Montserrat', sans-serif; padding: 0 16px; max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box;">
+                    <!-- Bloco de título e ação -->
+                    <div
+                        style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+                        <span
+                            style="font-weight: 600; color: var(--primary, #7367f0); font-size: 28px; letter-spacing: -0.5px;">Todas
+                            as questões</span>
+                        <button
+                            style="border: 1px solid var(--primary, #7367f0); border-radius: 6px; height: 44px; display: flex; align-items: center; gap: 8px; padding: 0 28px; background: var(--bg-white, #fff); color: var(--primary, #7367f0); font-weight: 500; font-size: 15px; box-shadow: 0 2px 8px rgba(115,103,240,0.08); transition: background 0.2s, color 0.2s; outline: none;"
+                            onmouseover="this.style.background='#7367f0';this.style.color='#fff'"
+                            onmouseout="this.style.background='#fff';this.style.color='#7367f0'"
+                            onfocus="this.style.boxShadow='0 0 0 2px #7367f0'"
+                            onblur="this.style.boxShadow='0 2px 8px rgba(115,103,240,0.08)'">
+                            Ver importações
+                        </button>
+                    </div>
+                    alt="Banco de Jogos" style="width: 24px; height: 24px; margin-right: 10px; fill: var(--sidebar-icon,
+                    #fff);" />
+                    <div style="display: flex; gap: 0; border-bottom: 2px solid #7367f0; margin-bottom: 16px;">
+                        <button
+                            style="background: none; border: none; color: var(--tab-text, #6e6b7b); font-size: 15px; font-weight: 500; height: 45px; width: 140px; border-radius: 6px 6px 0 0; cursor: pointer; transition: background 0.2s, color 0.2s; outline: none;"
+                            onmouseover="this.style.background='#f8f8ff';"
+                            onfocus="this.style.boxShadow='0 0 0 2px #7367f0'" onblur="this.style.boxShadow='none'">Em
+                            correção</button>
+                        <button
+                            style="background: none; border: none; color: var(--tab-text, #6e6b7b); font-size: 15px; font-weight: 500; height: 45px; width: 140px; border-radius: 6px 6px 0 0; cursor: pointer; transition: background 0.2s, color 0.2s; outline: none;"
+                            onmouseover="this.style.background='#f8f8ff';"
+                            onfocus="this.style.boxShadow='0 0 0 2px #7367f0'"
+                            onblur="this.style.boxShadow='none'">Aprovadas</button>
+                        <button
+                            style="background: var(--primary, #7367f0); color: #fff; font-size: 15px; font-weight: 600; height: 45px; width: 140px; border: none; border-radius: 6px 6px 0 0; box-shadow: 0 2px 8px rgba(115,103,240,0.08); cursor: pointer; outline: none;"
+                            onfocus="this.style.boxShadow='0 0 0 2px #7367f0'"
+                            onblur="this.style.boxShadow='0 2px 8px rgba(115,103,240,0.08)'">Em revisão</button>
+                        <!-- Filtros -->
+                        <div style="display: flex; gap: 16px; margin-bottom: 18px;">
+                            <div style="display: flex; flex-direction: column; gap: 4px; min-width: 160px;">
+                                <label style="font-size: 13px; color: #6e6b7b; font-weight: 500;">Área de
+                                    Conhecimento</label>
+                                <select
+                                    style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 8px 12px; font-size: 14px; color: #6e6b7b; background: #fff; font-family: 'Montserrat', sans-serif;">
+                                    <option>Matemática</option>
+                                    <option>Português</option>
+                                </select>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 4px;">
+                                <label style="font-size: 13px; color: #6e6b7b; font-weight: 500;">Ano Escolar</label>
+                                <select
+                                    style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 8px 12px; font-size: 14px; color: #6e6b7b; background: #fff; font-family: 'Montserrat', sans-serif;">
+                                    <option>6º ano</option>
+                                    <option>7º ano</option>
+                                    <option>8º ano</option>
+                                </select>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 4px;">
+                                <label style="font-size: 13px; color: #6e6b7b; font-weight: 500;">Dificuldade</label>
+                                <select
+                                    style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 8px 12px; font-size: 14px; color: #6e6b7b; background: #fff; font-family: 'Montserrat', sans-serif;">
+                                    <option>Fácil</option>
+                                    <option>Médio</option>
+                                    <option>Difícil</option>
+                                </select>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 4px;">
+                                <label style="font-size: 13px; color: #6e6b7b; font-weight: 500;">Habilidade</label>
+                                <select
+                                    style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 8px 12px; font-size: 14px; color: #6e6b7b; background: #fff; font-family: 'Montserrat', sans-serif;">
+                                    <option>Todas</option>
+                                </select>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 4px;">
+                                <label style="font-size: 13px; color: #6e6b7b; font-weight: 500;">Autor</label>
+                                <select
+                                    style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 8px 12px; font-size: 14px; color: #6e6b7b; background: #fff; font-family: 'Montserrat', sans-serif;">
+                                    <option>Todos</option>
+                                </select>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 4px;">
+                                <label style="font-size: 13px; color: #6e6b7b; font-weight: 500;">Pesquisar</label>
+                                <input type="text" placeholder="Código ou conteúdo"
+                                    style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 8px 12px; font-size: 14px; color: #6e6b7b; background: #fff; font-family: 'Montserrat', sans-serif;" />
+                            </div>
+                        </div>
+                        <!-- Resumo e ações -->
+                        <div
+                            style="display: flex; align-items: center; gap: 32px; background: rgba(115,103,240,0.12); border-radius: 6px; padding: 18px 20px; margin-bottom: 18px;">
+                            <span style="color: var(--primary, #7367f0); font-size: 15px; font-weight: 600;">Total de
+                                Questões:</span>
+                            <span style="color: var(--primary, #7367f0); font-size: 15px; font-weight: 500;">1</span>
+                            <button
+                                style="background: var(--primary, #7367f0); color: #fff; border-radius: 6px; padding: 10px 28px; font-weight: 600; font-size: 15px; border: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(115,103,240,0.08); transition: background 0.2s;"
+                                onmouseover="this.style.background='#5e50ee'"
+                                onmouseout="this.style.background='#7367f0'">
+                                <img src="http://localhost:3845/assets/0232c1206001605bfc304213c412952bcd5fd04f.svg"
+                                    alt="Importar" style="width: 24px; height: 24px;" />
+                                Importar questões
+                            </button>
+                            <button
+                                style="background: #7367f0; color: #fff; border-radius: 6px; padding: 10px 20px; font-weight: 600; font-size: 15px; border: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(115,103,240,0.08);">
+                                <img src="http://localhost:3845/assets/299e9ce5a28beefe759f43f6c5623dbcbec7e9d1.svg"
+                                    alt="Exportar" style="width: 24px; height: 24px;" />
+                                Exportar questões
+                            </button>
+                            <button
+                                style="background: #7367f0; color: #fff; border-radius: 6px; padding: 10px 20px; font-weight: 600; font-size: 15px; border: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(115,103,240,0.08);">
+                                <img src="http://localhost:3845/assets/5476fe41833f67fb73ae70b2b76fa9ddf3a10101.svg"
+                                    alt="Nova questão" style="width: 24px; height: 24px;" />
+                                Nova questão
+                            </button>
+                        </div>
+                        <!-- Tabela de questões -->
+                        <div
+                            style="background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(115,103,240,0.08); padding: 0 0 24px 0;">
+                            <table
+                                style="width: 100%; border-collapse: separate; border-spacing: 0; font-family: 'Montserrat', sans-serif; margin-top: 8px; table-layout: auto; overflow-x: auto;">
+                                <style>
+                                    @media (max-width: 900px) {
+                                        .menu-backoffice {
+                                            width: 60px !important;
+                                            padding: 24px 4px 16px 4px !important;
+                                        }
+
+                                        .main-content {
+                                            padding-left: 60px !important;
+                                        }
+
+                                        .frame-group>div {
+                                            padding: 0 4px !important;
+                                        }
+
+                                        table th,
+                                        table td {
+                                            font-size: 12px !important;
+                                            padding: 8px 4px !important;
+                                        }
+                                    }
+
+                                    @media (max-width: 600px) {
+                                        .menu-backoffice {
+                                            display: none !important;
+                                        }
+
+                                        .main-content {
+                                            padding-left: 0 !important;
+                                        }
+
+                                        .frame-group>div {
+                                            padding: 0 2px !important;
+                                        }
+
+                                        table th,
+                                        table td {
+                                            font-size: 10px !important;
+                                            padding: 4px 2px !important;
+                                        }
+                                    }
+                                </style>
+                                <thead>
+                                    <tr style="background: #f8f8ff;">
+                                        <th
+                                            style="padding: 14px 10px; color: var(--primary, #7367f0); font-size: 14px; font-weight: 600; text-align: left; border-bottom: 1px solid var(--table-border, #e2e2e3);">
+                                            Ano</th>
+                                        <th
+                                            style="padding: 14px 10px; color: var(--primary, #7367f0); font-size: 14px; font-weight: 600; text-align: left; border-bottom: 1px solid var(--table-border, #e2e2e3);">
+                                            Habilidade</th>
+                                        <th
+                                            style="padding: 14px 10px; color: var(--primary, #7367f0); font-size: 14px; font-weight: 600; text-align: left; border-bottom: 1px solid var(--table-border, #e2e2e3);">
+                                            Conteúdo</th>
+                                        <th
+                                            style="padding: 14px 10px; color: var(--primary, #7367f0); font-size: 14px; font-weight: 600; text-align: left; border-bottom: 1px solid var(--table-border, #e2e2e3);">
+                                            Tipo</th>
+                                        <th
+                                            style="padding: 14px 10px; color: var(--primary, #7367f0); font-size: 14px; font-weight: 600; text-align: left; border-bottom: 1px solid var(--table-border, #e2e2e3);">
+                                            <b class="dashboard-analytics">8º ano</b>
+                                        </th>
+                        </div>
+                        <div class="status-mission4">
+                            <b class="dashboard-analytics">9º
+                                ano</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="banco-de-questes-em-reviso-wbourtonesakurane-parent">
+                    <div class="wbourtonesakurane6">
+                        1.1.1.3
+                    </div>
+                    <div class="wbourtonesakurane7">
+                        Números
+                        irracionais
+                        na
+                        reta
+                        numérica
+                    </div>
+                </div>
+                <div class="status-mission-wrapper">
+                    <div class="status-mission8">
+                        <b class="label">Quiz</b>
+                    </div>
+                </div>
+                <div class="wbourtonesakurane-wrapper">
+                    <div class="wbourtonesakurane7">
+                        Canoas
+                    </div>
+                </div>
+                <div class="x32-wrapper">
+                    <div class="x32">
+                        <img class="shape-icon" alt="">
+
+                        <div class="mask">
+                            MC
+                        </div>
+                    </div>
+                </div>
+                <div class="x32-container">
+                    <div class="x32">
+                        <img class="shape-icon" alt="">
+
+                        <div class="banco-de-questes-em-reviso-mask">
+                            RF
+                        </div>
+                    </div>
+                </div>
+                <div class="text-wrapper">
+                    <div class="banco-de-questes-em-reviso-text">
+                        27/05/2025
+                        12:00:42
+                    </div>
+                </div>
+                <img class="table-row-child" alt="">
+
+    </div>
+    </div>
+    <div class="showing-1-to-7-of-10-parent">
+        <div class="showing-1-to-container">
+            <span>Exibindo
+            </span>
+            <b>1.047</b>
+            <span>
+                entradas</span>
+        </div>
+        <div class="paginao-vrias">
+            <img class="left-icon" alt="">
+
+            <div class="numbers">
+                <div class="rectangle">
+                </div>
+                <div class="background2">
+                    <div class="background3">
+                    </div>
+                </div>
+                <div class="banco-de-questes-em-reviso-div">
+                    7
+                </div>
+                <div class="div2">
+                    6
+                </div>
+                <div class="div3">
+                    5
+                </div>
+                <div class="div4">
+                    3
+                </div>
+                <div class="div5">
+                    2
+                </div>
+                <div class="div6">
+                    4
+                </div>
+                <div class="div7">
+                    1
+                </div>
+            </div>
+            <img class="left-icon" alt="">
+
+        </div>
+        <div class="paginao-1-pgina">
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="banco-de-questes-em-reviso-inner">
+        <div class="icon-parent">
+            <img class="icon21" alt="">
+
+            <img class="icon22" alt="">
+
+            <div class="value">
+                Gestão
+                de
+                Atividades
+            </div>
+            <img class="icon22" alt="">
+
+            <div class="banco-de-questes-em-reviso-value" id="valueText1">
+                Banco
+                de
+                Questões
+            </div>
+            <img class="icon22" alt="">
+
+            <div class="value2">
+                Todas
+                as
+                questões
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
+    <script>
+        var questesContainer = document.getElementById("questesContainer");
+        if (questesContainer) {
+            questesContainer.addEventListener("click", function (e) {
+                // Add your code here
+            });
+        }
+
+        var questesContainer1 = document.getElementById("questesContainer1");
+        if (questesContainer1) {
+            questesContainer1.addEventListener("click", function (e) {
+                // Add your code here
+            });
+        }
+
+        var valueText1 = document.getElementById("valueText1");
+        if (valueText1) {
+            valueText1.addEventListener("click", function (e) {
+                // Add your code here
+            });
+        }</script>
+</body>
+
+</html>
