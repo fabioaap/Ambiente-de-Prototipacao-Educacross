@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Template base para Back-office - Educacross">
+  <title>Back-office - Educacross</title>
+  
+  <style>
+    /* ============================================
+       🎨 VUEXY DESIGN SYSTEM - CSS VARIABLES
+       Base: packages/tokens/tokens.json
+    ============================================ */
+    :root {
+      /* Cores principais Vuexy */
+      --vuexy-primary: #7367ef;
+      --vuexy-secondary: #8592a3;
+      --vuexy-success: #28c76f;
+      --vuexy-warning: #ff9f43;
+      --vuexy-danger: #ea5455;
+      --vuexy-info: #00cfe8;
+      --vuexy-dark: #283046;
+      --vuexy-light: #f6f6f9;
+
+      /* Estados */
+      --vuexy-primary-hover: #6159cc;
+      --vuexy-success-hover: #24b364;
+      --vuexy-danger-hover: #ce3f40;
+
+      /* Backgrounds */
+      --vuexy-bg-primary: #f8f8f8;
+      --vuexy-bg-secondary: #ffffff;
+      --vuexy-bg-card: #ffffff;
+
+      /* Borders */
+      --vuexy-border: #ebe9f1;
+      --vuexy-border-radius: 0.357rem;
+
+      /* Shadows */
+      --vuexy-shadow-sm: 0 2px 6px 0 rgba(115, 103, 240, 0.08);
+      --vuexy-shadow-md: 0 4px 24px 0 rgba(34, 41, 47, 0.1);
+      --vuexy-shadow-lg: 0 6px 30px 0 rgba(34, 41, 47, 0.15);
+
+      /* Tipografia */
+      --vuexy-font-family: 'Montserrat', 'Segoe UI', Tahoma, sans-serif;
+      --vuexy-font-size-base: 1rem;
+      --vuexy-font-size-sm: 0.857rem;
+      --vuexy-font-size-lg: 1.14rem;
+    }
+
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--vuexy-font-family);
+      font-size: var(--vuexy-font-size-base);
+      color: var(--vuexy-dark);
+      background-color: var(--vuexy-bg-primary);
+      line-height: 1.5;
+    }
+
+    /* Layout: Sidebar + Main */
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 260px;
+      background: white;
+      box-shadow: var(--vuexy-shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--vuexy-border);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--vuexy-primary);
+    }
+
+    .sidebar-menu {
+      flex: 1;
+      padding: 1rem 0;
+    }
+
+    .menu-item {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      color: var(--vuexy-secondary);
+      text-decoration: none;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+    }
+
+    .menu-item:hover {
+      background: var(--vuexy-light);
+      color: var(--vuexy-primary);
+      border-left-color: var(--vuexy-primary);
+    }
+
+    .menu-item.active {
+      background: rgba(115, 103, 240, 0.08);
+      color: var(--vuexy-primary);
+      border-left-color: var(--vuexy-primary);
+      font-weight: 500;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      background: white;
+      box-shadow: var(--vuexy-shadow-sm);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--vuexy-dark);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    /* Content Area */
+    .content {
+      flex: 1;
+      padding: 2rem;
+    }
+
+    /* Botões */
+    .btn {
+      display: inline-block;
+      padding: 0.786rem 1.5rem;
+      font-size: var(--vuexy-font-size-base);
+      font-weight: 500;
+      line-height: 1;
+      text-align: center;
+      text-decoration: none;
+      border: 1px solid transparent;
+      border-radius: var(--vuexy-border-radius);
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      font-family: var(--vuexy-font-family);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--vuexy-shadow-md);
+    }
+
+    .btn-sm {
+      padding: 0.5rem 1rem;
+      font-size: var(--vuexy-font-size-sm);
+    }
+
+    .btn-primary {
+      background-color: var(--vuexy-primary);
+      color: white;
+      border-color: var(--vuexy-primary);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--vuexy-primary-hover);
+    }
+
+    .btn-success {
+      background-color: var(--vuexy-success);
+      color: white;
+      border-color: var(--vuexy-success);
+    }
+
+    .btn-danger {
+      background-color: var(--vuexy-danger);
+      color: white;
+      border-color: var(--vuexy-danger);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--vuexy-bg-card);
+      border-radius: var(--vuexy-border-radius);
+      box-shadow: var(--vuexy-shadow-sm);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      margin-bottom: 2rem;
+    }
+
+    .card-header {
+      padding: 1.5rem;
+      background: var(--vuexy-bg-card);
+      border-bottom: 1px solid var(--vuexy-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--vuexy-dark);
+      margin: 0;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    /* Tabelas */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table thead th {
+      padding: 1rem;
+      background: var(--vuexy-light);
+      border-bottom: 2px solid var(--vuexy-border);
+      text-align: left;
+      font-weight: 600;
+      color: var(--vuexy-dark);
+    }
+
+    .table tbody td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--vuexy-border);
+    }
+
+    .table tbody tr:hover {
+      background: var(--vuexy-light);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.65rem;
+      font-size: 0.857rem;
+      font-weight: 500;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+      border-radius: 0.25rem;
+    }
+
+    .badge-success {
+      background-color: rgba(40, 199, 111, 0.12);
+      color: var(--vuexy-success);
+    }
+
+    .badge-warning {
+      background-color: rgba(255, 159, 67, 0.12);
+      color: var(--vuexy-warning);
+    }
+
+    .badge-danger {
+      background-color: rgba(234, 84, 85, 0.12);
+      color: var(--vuexy-danger);
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: var(--vuexy-border-radius);
+      box-shadow: var(--vuexy-shadow-lg);
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--vuexy-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--vuexy-dark);
+      margin: 0;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--vuexy-secondary);
+      cursor: pointer;
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close:hover {
+      color: var(--vuexy-danger);
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .modal-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--vuexy-border);
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+    }
+
+    /* Formulários */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--vuexy-dark);
+    }
+
+    .form-control {
+      display: block;
+      width: 100%;
+      padding: 0.786rem 1rem;
+      font-size: var(--vuexy-font-size-base);
+      font-family: var(--vuexy-font-family);
+      line-height: 1.45;
+      color: var(--vuexy-dark);
+      background-color: white;
+      border: 1px solid var(--vuexy-border);
+      border-radius: var(--vuexy-border-radius);
+      transition: all 0.2s ease-in-out;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--vuexy-primary);
+      box-shadow: 0 3px 10px 0 rgba(115, 103, 240, 0.1);
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        left: -260px;
+        z-index: 999;
+        transition: left 0.3s;
+      }
+
+      .sidebar.open {
+        left: 0;
+      }
+
+      .header-title {
+        font-size: 1.2rem;
+      }
+
+      .content {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">🏢 Admin Panel</div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="#dashboard" class="menu-item active">📊 Dashboard</a>
+        <a href="#questoes" class="menu-item">📝 Banco de Questões</a>
+        <a href="#missoes" class="menu-item">🎯 Missões</a>
+        <a href="#escolas" class="menu-item">🏫 Escolas</a>
+        <a href="#professores" class="menu-item">👨‍🏫 Professores</a>
+        <a href="#alunos" class="menu-item">👨‍🎓 Alunos</a>
+        <a href="#relatorios" class="menu-item">📈 Relatórios</a>
+        <a href="#configuracoes" class="menu-item">⚙️ Configurações</a>
+      </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <!-- HEADER -->
+      <header class="header">
+        <h1 class="header-title">Banco de Questões</h1>
+        <div class="header-actions">
+          <button class="btn btn-primary" onclick="abrirModal('modal-nova-questao')">
+            ➕ Nova Questão
+          </button>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <div class="content">
+        <!-- Stats Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+          <div class="card">
+            <div class="card-body" style="text-align: center;">
+              <div style="font-size: 2rem; color: var(--vuexy-primary); margin-bottom: 0.5rem;">150</div>
+              <div style="color: var(--vuexy-secondary);">Questões Aprovadas</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body" style="text-align: center;">
+              <div style="font-size: 2rem; color: var(--vuexy-warning); margin-bottom: 0.5rem;">25</div>
+              <div style="color: var(--vuexy-secondary);">Aguardando Revisão</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body" style="text-align: center;">
+              <div style="font-size: 2rem; color: var(--vuexy-success); margin-bottom: 0.5rem;">320</div>
+              <div style="color: var(--vuexy-secondary);">Total de Questões</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabela de Questões -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Questões Recentes</h2>
+            <div>
+              <button class="btn btn-sm btn-primary" onclick="filtrarQuestoes('todas')">Todas</button>
+              <button class="btn btn-sm" onclick="filtrarQuestoes('pendentes')">Pendentes</button>
+            </div>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Título</th>
+                  <th>Disciplina</th>
+                  <th>Dificuldade</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-questoes">
+                <tr>
+                  <td>#Q001</td>
+                  <td>Equação do 2º Grau</td>
+                  <td>Matemática</td>
+                  <td>Média</td>
+                  <td><span class="badge badge-success">Aprovada</span></td>
+                  <td>
+                    <button class="btn btn-sm btn-primary" onclick="visualizarQuestao('Q001')">👁️ Ver</button>
+                    <button class="btn btn-sm btn-danger" onclick="deletarQuestao('Q001')">🗑️ Deletar</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>#Q002</td>
+                  <td>Funções Trigonométricas</td>
+                  <td>Matemática</td>
+                  <td>Difícil</td>
+                  <td><span class="badge badge-warning">Em Revisão</span></td>
+                  <td>
+                    <button class="btn btn-sm btn-success" onclick="aprovarQuestao('Q002')">✅ Aprovar</button>
+                    <button class="btn btn-sm btn-danger" onclick="rejeitarQuestao('Q002')">❌ Rejeitar</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>#Q003</td>
+                  <td>Geometria Espacial</td>
+                  <td>Matemática</td>
+                  <td>Fácil</td>
+                  <td><span class="badge badge-success">Aprovada</span></td>
+                  <td>
+                    <button class="btn btn-sm btn-primary" onclick="visualizarQuestao('Q003')">👁️ Ver</button>
+                    <button class="btn btn-sm btn-danger" onclick="deletarQuestao('Q003')">🗑️ Deletar</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Nova Questão -->
+  <div class="modal" id="modal-nova-questao">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">➕ Nova Questão</h3>
+        <button class="modal-close" onclick="fecharModal('modal-nova-questao')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="titulo-questao">Título</label>
+          <input type="text" id="titulo-questao" class="form-control" placeholder="Ex: Equação do 2º Grau">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="disciplina-questao">Disciplina</label>
+          <select id="disciplina-questao" class="form-control">
+            <option value="">Selecione...</option>
+            <option value="matematica">Matemática</option>
+            <option value="portugues">Português</option>
+            <option value="ciencias">Ciências</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="enunciado-questao">Enunciado</label>
+          <textarea id="enunciado-questao" class="form-control" rows="4" placeholder="Digite o enunciado da questão..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" onclick="salvarNovaQuestao()">Salvar</button>
+        <button class="btn" onclick="fecharModal('modal-nova-questao')">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /**
+     * 🎯 JAVASCRIPT VANILLA - 100% pt-BR
+     * Back-office Admin Panel
+     */
+
+    // Estado da aplicação
+    const estado = {
+      questoes: [],
+      filtroAtivo: 'todas',
+      modalAberto: null
+    }
+
+    /**
+     * Abre um modal
+     */
+    function abrirModal(modalId) {
+      const modal = document.getElementById(modalId)
+      if (modal) {
+        modal.classList.add('active')
+        estado.modalAberto = modalId
+      }
+    }
+
+    /**
+     * Fecha um modal
+     */
+    function fecharModal(modalId) {
+      const modal = document.getElementById(modalId)
+      if (modal) {
+        modal.classList.remove('active')
+        estado.modalAberto = null
+      }
+    }
+
+    /**
+     * Visualiza uma questão
+     */
+    function visualizarQuestao(questaoId) {
+      console.log('👁️ Visualizar questão:', questaoId)
+      alert(`Visualizando questão ${questaoId}`)
+    }
+
+    /**
+     * Aprova uma questão
+     */
+    function aprovarQuestao(questaoId) {
+      console.log('✅ Aprovar questão:', questaoId)
+      if (confirm(`Deseja aprovar a questão ${questaoId}?`)) {
+        alert(`Questão ${questaoId} aprovada!`)
+        // Aqui você faria a requisição para o backend
+      }
+    }
+
+    /**
+     * Rejeita uma questão
+     */
+    function rejeitarQuestao(questaoId) {
+      console.log('❌ Rejeitar questão:', questaoId)
+      if (confirm(`Deseja rejeitar a questão ${questaoId}?`)) {
+        alert(`Questão ${questaoId} rejeitada!`)
+        // Aqui você faria a requisição para o backend
+      }
+    }
+
+    /**
+     * Deleta uma questão
+     */
+    function deletarQuestao(questaoId) {
+      console.log('🗑️ Deletar questão:', questaoId)
+      if (confirm(`Deseja realmente deletar a questão ${questaoId}? Esta ação não pode ser desfeita.`)) {
+        alert(`Questão ${questaoId} deletada!`)
+        // Aqui você faria a requisição para o backend
+      }
+    }
+
+    /**
+     * Filtra questões
+     */
+    function filtrarQuestoes(filtro) {
+      console.log('🔍 Filtrar questões:', filtro)
+      estado.filtroAtivo = filtro
+      alert(`Filtrando: ${filtro}`)
+      // Aqui você recarregaria a tabela com o filtro
+    }
+
+    /**
+     * Salva nova questão
+     */
+    function salvarNovaQuestao() {
+      const titulo = document.getElementById('titulo-questao').value
+      const disciplina = document.getElementById('disciplina-questao').value
+      const enunciado = document.getElementById('enunciado-questao').value
+
+      // Validação
+      if (!titulo || !disciplina || !enunciado) {
+        alert('⚠️ Preencha todos os campos')
+        return
+      }
+
+      console.log('💾 Salvar questão:', { titulo, disciplina, enunciado })
+      
+      // Aqui você faria a requisição para o backend
+      alert('✅ Questão salva com sucesso!')
+      
+      fecharModal('modal-nova-questao')
+      
+      // Limpar formulário
+      document.getElementById('titulo-questao').value = ''
+      document.getElementById('disciplina-questao').value = ''
+      document.getElementById('enunciado-questao').value = ''
+    }
+
+    /**
+     * Toggle sidebar em mobile
+     */
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar')
+      sidebar.classList.toggle('open')
+    }
+
+    /**
+     * Fecha modal ao clicar fora
+     */
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('modal')) {
+        fecharModal(estado.modalAberto)
+      }
+    })
+
+    /**
+     * Inicialização
+     */
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('✅ Template Back-office carregado!')
+      console.log('📚 Vuexy Design System ativo')
+    })
+  </script>
+</body>
+</html>

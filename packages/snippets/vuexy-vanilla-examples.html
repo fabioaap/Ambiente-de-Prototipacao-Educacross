@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exemplos Vuexy Design System - Vanilla JS</title>
+  <style>
+    /* ============================================
+       🎨 VUEXY DESIGN SYSTEM - VANILLA JS
+       ============================================
+       Tokens de design baseados no Vuexy theme
+       Uso: Front-office e Back-office
+    ============================================ */
+
+    /* 🎨 Tokens de Cor */
+    :root {
+      /* Cores principais Vuexy */
+      --vuexy-primary: #7367ef;
+      --vuexy-secondary: #8592a3;
+      --vuexy-success: #28c76f;
+      --vuexy-warning: #ff9f43;
+      --vuexy-danger: #ea5455;
+      --vuexy-info: #00cfe8;
+      --vuexy-dark: #283046;
+      --vuexy-light: #f6f6f9;
+
+      /* Estados */
+      --vuexy-primary-hover: #6159cc;
+      --vuexy-success-hover: #24b364;
+      --vuexy-danger-hover: #ce3f40;
+
+      /* Backgrounds */
+      --vuexy-bg-primary: #f8f8f8;
+      --vuexy-bg-secondary: #ffffff;
+      --vuexy-bg-card: #ffffff;
+
+      /* Borders */
+      --vuexy-border: #ebe9f1;
+      --vuexy-border-radius: 0.357rem;
+
+      /* Shadows */
+      --vuexy-shadow-sm: 0 2px 6px 0 rgba(115, 103, 240, 0.08);
+      --vuexy-shadow-md: 0 4px 24px 0 rgba(34, 41, 47, 0.1);
+      --vuexy-shadow-lg: 0 6px 30px 0 rgba(34, 41, 47, 0.15);
+
+      /* Tipografia */
+      --vuexy-font-family: 'Montserrat', 'Segoe UI', Tahoma, sans-serif;
+      --vuexy-font-size-base: 1rem;
+      --vuexy-font-size-sm: 0.857rem;
+      --vuexy-font-size-lg: 1.14rem;
+    }
+
+    /* 📄 Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--vuexy-font-family);
+      font-size: var(--vuexy-font-size-base);
+      color: var(--vuexy-dark);
+      background-color: var(--vuexy-bg-primary);
+      padding: 2rem;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: var(--vuexy-primary);
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    h2 {
+      color: var(--vuexy-dark);
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      border-bottom: 2px solid var(--vuexy-border);
+      padding-bottom: 0.5rem;
+    }
+
+    .section {
+      background: var(--vuexy-bg-card);
+      padding: 2rem;
+      border-radius: var(--vuexy-border-radius);
+      box-shadow: var(--vuexy-shadow-sm);
+      margin-bottom: 2rem;
+    }
+
+    .component-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .code-example {
+      background: #2b2d3a;
+      color: #a6accd;
+      padding: 1rem;
+      border-radius: var(--vuexy-border-radius);
+      margin-top: 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+
+    /* ============================================
+       🎯 COMPONENTES VUEXY
+    ============================================ */
+
+    /* 🔘 BOTÕES */
+    .btn {
+      display: inline-block;
+      padding: 0.786rem 1.5rem;
+      font-size: var(--vuexy-font-size-base);
+      font-weight: 500;
+      line-height: 1;
+      text-align: center;
+      text-decoration: none;
+      border: 1px solid transparent;
+      border-radius: var(--vuexy-border-radius);
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      font-family: var(--vuexy-font-family);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--vuexy-shadow-md);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      background-color: var(--vuexy-primary);
+      color: white;
+      border-color: var(--vuexy-primary);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--vuexy-primary-hover);
+      border-color: var(--vuexy-primary-hover);
+    }
+
+    .btn-success {
+      background-color: var(--vuexy-success);
+      color: white;
+      border-color: var(--vuexy-success);
+    }
+
+    .btn-success:hover {
+      background-color: var(--vuexy-success-hover);
+      border-color: var(--vuexy-success-hover);
+    }
+
+    .btn-danger {
+      background-color: var(--vuexy-danger);
+      color: white;
+      border-color: var(--vuexy-danger);
+    }
+
+    .btn-danger:hover {
+      background-color: var(--vuexy-danger-hover);
+      border-color: var(--vuexy-danger-hover);
+    }
+
+    .btn-outline-primary {
+      background-color: transparent;
+      color: var(--vuexy-primary);
+      border-color: var(--vuexy-primary);
+    }
+
+    .btn-outline-primary:hover {
+      background-color: var(--vuexy-primary);
+      color: white;
+    }
+
+    .btn-sm {
+      padding: 0.5rem 1rem;
+      font-size: var(--vuexy-font-size-sm);
+    }
+
+    .btn-lg {
+      padding: 1rem 2rem;
+      font-size: var(--vuexy-font-size-lg);
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* 🃏 CARDS */
+    .card {
+      background: var(--vuexy-bg-card);
+      border-radius: var(--vuexy-border-radius);
+      box-shadow: var(--vuexy-shadow-sm);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: var(--vuexy-shadow-md);
+      transform: translateY(-4px);
+    }
+
+    .card-header {
+      padding: 1.5rem;
+      background: var(--vuexy-bg-card);
+      border-bottom: 1px solid var(--vuexy-border);
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--vuexy-dark);
+      margin: 0;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    .card-footer {
+      padding: 1rem 1.5rem;
+      background: var(--vuexy-light);
+      border-top: 1px solid var(--vuexy-border);
+    }
+
+    /* 🏷️ BADGES */
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.65rem;
+      font-size: 0.857rem;
+      font-weight: 500;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+      border-radius: 0.25rem;
+    }
+
+    .badge-primary {
+      background-color: rgba(115, 103, 240, 0.12);
+      color: var(--vuexy-primary);
+    }
+
+    .badge-success {
+      background-color: rgba(40, 199, 111, 0.12);
+      color: var(--vuexy-success);
+    }
+
+    .badge-warning {
+      background-color: rgba(255, 159, 67, 0.12);
+      color: var(--vuexy-warning);
+    }
+
+    .badge-danger {
+      background-color: rgba(234, 84, 85, 0.12);
+      color: var(--vuexy-danger);
+    }
+
+    .badge-info {
+      background-color: rgba(0, 207, 232, 0.12);
+      color: var(--vuexy-info);
+    }
+
+    /* 📝 INPUTS */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--vuexy-dark);
+    }
+
+    .form-control {
+      display: block;
+      width: 100%;
+      padding: 0.786rem 1rem;
+      font-size: var(--vuexy-font-size-base);
+      font-family: var(--vuexy-font-family);
+      line-height: 1.45;
+      color: var(--vuexy-dark);
+      background-color: white;
+      border: 1px solid var(--vuexy-border);
+      border-radius: var(--vuexy-border-radius);
+      transition: all 0.2s ease-in-out;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--vuexy-primary);
+      box-shadow: 0 3px 10px 0 rgba(115, 103, 240, 0.1);
+    }
+
+    .form-control:disabled {
+      background-color: var(--vuexy-light);
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* 📊 ALERTAS */
+    .alert {
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: var(--vuexy-border-radius);
+      border-left: 4px solid;
+    }
+
+    .alert-success {
+      background-color: rgba(40, 199, 111, 0.12);
+      border-left-color: var(--vuexy-success);
+      color: var(--vuexy-success);
+    }
+
+    .alert-warning {
+      background-color: rgba(255, 159, 67, 0.12);
+      border-left-color: var(--vuexy-warning);
+      color: var(--vuexy-warning);
+    }
+
+    .alert-danger {
+      background-color: rgba(234, 84, 85, 0.12);
+      border-left-color: var(--vuexy-danger);
+      color: var(--vuexy-danger);
+    }
+
+    .alert-info {
+      background-color: rgba(0, 207, 232, 0.12);
+      border-left-color: var(--vuexy-info);
+      color: var(--vuexy-info);
+    }
+
+    /* 📋 TABELAS */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+    }
+
+    .table thead th {
+      padding: 1rem;
+      background: var(--vuexy-light);
+      border-bottom: 2px solid var(--vuexy-border);
+      text-align: left;
+      font-weight: 600;
+      color: var(--vuexy-dark);
+    }
+
+    .table tbody td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--vuexy-border);
+    }
+
+    .table tbody tr:hover {
+      background: var(--vuexy-light);
+    }
+
+    /* 🔄 LOADING SPINNER */
+    .spinner {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(115, 103, 240, 0.2);
+      border-top-color: var(--vuexy-primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* 📱 RESPONSIVIDADE */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      .section {
+        padding: 1rem;
+      }
+
+      .component-group {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎨 Vuexy Design System - Vanilla JS</h1>
+    <p style="color: var(--vuexy-secondary); margin-bottom: 3rem;">
+      Exemplos de componentes para Front-office e Back-office usando apenas HTML + CSS + JavaScript
+    </p>
+
+    <!-- BOTÕES -->
+    <h2>🔘 Botões</h2>
+    <div class="section">
+      <div class="component-group">
+        <button class="btn btn-primary">Primário</button>
+        <button class="btn btn-success">Sucesso</button>
+        <button class="btn btn-danger">Perigo</button>
+        <button class="btn btn-outline-primary">Contorno</button>
+        <button class="btn btn-primary" disabled>Desabilitado</button>
+      </div>
+
+      <div class="component-group">
+        <button class="btn btn-primary btn-sm">Pequeno</button>
+        <button class="btn btn-primary">Normal</button>
+        <button class="btn btn-primary btn-lg">Grande</button>
+      </div>
+
+      <div class="code-example">
+&lt;button class="btn btn-primary"&gt;Enviar Missão&lt;/button&gt;
+&lt;button class="btn btn-success"&gt;Aprovar&lt;/button&gt;
+&lt;button class="btn btn-danger"&gt;Rejeitar&lt;/button&gt;
+&lt;button class="btn btn-outline-primary"&gt;Cancelar&lt;/button&gt;
+      </div>
+    </div>
+
+    <!-- CARDS -->
+    <h2>🃏 Cards</h2>
+    <div class="section">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Turma 7º Ano A</h3>
+          </div>
+          <div class="card-body">
+            <p>30 alunos matriculados</p>
+            <p>5 missões ativas</p>
+            <span class="badge badge-success">Ativa</span>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-primary btn-sm">Ver Detalhes</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Missão: Álgebra Básica</h3>
+          </div>
+          <div class="card-body">
+            <p>Dificuldade: Média</p>
+            <p>Pontos: 100</p>
+            <span class="badge badge-warning">Em Andamento</span>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-success btn-sm">Enviar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-example">
+&lt;div class="card"&gt;
+  &lt;div class="card-header"&gt;
+    &lt;h3 class="card-title"&gt;Título do Card&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;div class="card-body"&gt;
+    &lt;p&gt;Conteúdo do card&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="card-footer"&gt;
+    &lt;button class="btn btn-primary btn-sm"&gt;Ação&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+      </div>
+    </div>
+
+    <!-- BADGES -->
+    <h2>🏷️ Badges</h2>
+    <div class="section">
+      <div class="component-group">
+        <span class="badge badge-primary">Primário</span>
+        <span class="badge badge-success">Sucesso</span>
+        <span class="badge badge-warning">Aviso</span>
+        <span class="badge badge-danger">Perigo</span>
+        <span class="badge badge-info">Info</span>
+      </div>
+
+      <div class="code-example">
+&lt;span class="badge badge-success"&gt;Aprovado&lt;/span&gt;
+&lt;span class="badge badge-warning"&gt;Pendente&lt;/span&gt;
+&lt;span class="badge badge-danger"&gt;Rejeitado&lt;/span&gt;
+      </div>
+    </div>
+
+    <!-- FORMULÁRIOS -->
+    <h2>📝 Formulários</h2>
+    <div class="section">
+      <div class="form-group">
+        <label class="form-label" for="nome-turma">Nome da Turma</label>
+        <input type="text" id="nome-turma" class="form-control" placeholder="Ex: 7º Ano A">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="data-inicio">Data de Início</label>
+        <input type="date" id="data-inicio" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="observacoes">Observações</label>
+        <textarea id="observacoes" class="form-control" rows="3" placeholder="Adicione observações..."></textarea>
+      </div>
+
+      <button class="btn btn-primary">Salvar</button>
+
+      <div class="code-example">
+&lt;div class="form-group"&gt;
+  &lt;label class="form-label" for="nome"&gt;Nome&lt;/label&gt;
+  &lt;input type="text" id="nome" class="form-control" placeholder="Digite..."&gt;
+&lt;/div&gt;
+      </div>
+    </div>
+
+    <!-- ALERTAS -->
+    <h2>📊 Alertas</h2>
+    <div class="section">
+      <div class="alert alert-success">✅ Missão enviada com sucesso para 30 alunos!</div>
+      <div class="alert alert-warning">⚠️ 5 alunos ainda não completaram a missão anterior</div>
+      <div class="alert alert-danger">❌ Erro ao enviar missão. Tente novamente.</div>
+      <div class="alert alert-info">ℹ️ Esta turma tem 3 missões agendadas para esta semana</div>
+
+      <div class="code-example">
+&lt;div class="alert alert-success"&gt;Operação concluída!&lt;/div&gt;
+&lt;div class="alert alert-danger"&gt;Erro ao processar&lt;/div&gt;
+      </div>
+    </div>
+
+    <!-- TABELAS -->
+    <h2>📋 Tabelas</h2>
+    <div class="section">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Aluno</th>
+            <th>Turma</th>
+            <th>Progresso</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>João Silva</td>
+            <td>7º Ano A</td>
+            <td>85%</td>
+            <td><span class="badge badge-success">Completo</span></td>
+          </tr>
+          <tr>
+            <td>Maria Santos</td>
+            <td>7º Ano B</td>
+            <td>60%</td>
+            <td><span class="badge badge-warning">Em Andamento</span></td>
+          </tr>
+          <tr>
+            <td>Pedro Costa</td>
+            <td>8º Ano A</td>
+            <td>20%</td>
+            <td><span class="badge badge-danger">Atrasado</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="code-example">
+&lt;table class="table"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Coluna 1&lt;/th&gt;&lt;th&gt;Coluna 2&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Dado 1&lt;/td&gt;&lt;td&gt;Dado 2&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+      </div>
+    </div>
+
+    <!-- LOADING SPINNER -->
+    <h2>🔄 Loading</h2>
+    <div class="section">
+      <div class="component-group" style="align-items: center;">
+        <div class="spinner"></div>
+        <span style="color: var(--vuexy-secondary);">Carregando...</span>
+      </div>
+
+      <div class="code-example">
+&lt;div class="spinner"&gt;&lt;/div&gt;
+      </div>
+    </div>
+
+    <!-- EXEMPLO INTERATIVO -->
+    <h2>🎯 Exemplo Interativo: Enviar Missão</h2>
+    <div class="section">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Enviar Missão em Lote</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label" for="selecionar-turma">Selecionar Turma</label>
+            <select id="selecionar-turma" class="form-control">
+              <option value="">Escolha uma turma...</option>
+              <option value="7a">7º Ano A - 30 alunos</option>
+              <option value="7b">7º Ano B - 28 alunos</option>
+              <option value="8a">8º Ano A - 32 alunos</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="selecionar-missao">Selecionar Missão</label>
+            <select id="selecionar-missao" class="form-control">
+              <option value="">Escolha uma missão...</option>
+              <option value="m1">Álgebra Básica - 100 pts</option>
+              <option value="m2">Geometria Espacial - 150 pts</option>
+              <option value="m3">Funções - 200 pts</option>
+            </select>
+          </div>
+
+          <div id="resultado-envio"></div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary" onclick="enviarMissao()">Enviar Missão</button>
+          <button class="btn btn-outline-primary" onclick="limparFormulario()">Limpar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 🎯 EXEMPLO DE JAVASCRIPT VANILLA
+    // 100% pt-BR - nomes de variáveis, funções e comentários
+
+    function enviarMissao() {
+      const turma = document.getElementById('selecionar-turma').value
+      const missao = document.getElementById('selecionar-missao').value
+      const resultado = document.getElementById('resultado-envio')
+
+      // Validação
+      if (!turma || !missao) {
+        resultado.innerHTML = '<div class="alert alert-warning">⚠️ Por favor, selecione uma turma e uma missão</div>'
+        return
+      }
+
+      // Simular envio (loading)
+      resultado.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 1rem; margin-top: 1rem;">
+          <div class="spinner"></div>
+          <span>Enviando missão...</span>
+        </div>
+      `
+
+      // Simular resposta do servidor após 2 segundos
+      setTimeout(() => {
+        const turmaTexto = document.getElementById('selecionar-turma').selectedOptions[0].text
+        const missaoTexto = document.getElementById('selecionar-missao').selectedOptions[0].text
+
+        resultado.innerHTML = `
+          <div class="alert alert-success" style="margin-top: 1rem;">
+            ✅ Missão "${missaoTexto}" enviada com sucesso para "${turmaTexto}"!
+          </div>
+        `
+      }, 2000)
+    }
+
+    function limparFormulario() {
+      document.getElementById('selecionar-turma').value = ''
+      document.getElementById('selecionar-missao').value = ''
+      document.getElementById('resultado-envio').innerHTML = ''
+    }
+
+    // Exemplo de event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('✅ Vuexy Design System carregado!')
+
+      // Adicionar animação aos cards
+      const cards = document.querySelectorAll('.card')
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-4px)'
+        })
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)'
+        })
+      })
+    })
+  </script>
+</body>
+</html>

@@ -1,7 +1,8 @@
 # 📋 Operação Diária - Plataforma de Prototipagem
 
-## ⚡ Quick Start (5 minutos)
+## ⚡ Quick Start por Produto
 
+### 🎮 Games (React + Vite)
 ```powershell
 # 1. Clonar repo (primeira vez)
 git clone <repo> && cd <repo>
@@ -16,28 +17,57 @@ npm run storybook
 http://localhost:6006
 ```
 
+### 🎓 Front-office / 🏢 Back-office (Vanilla JS)
+```powershell
+# 1. Abrir pasta do produto
+cd Front-office/  # ou cd Back-office/
+
+# 2. Iniciar servidor local
+python -m http.server 8080
+
+# 3. Abrir navegador
+http://localhost:8080
+```
+
 ---
 
-## 🎯 Tarefas Diárias por Papel
+## 🎯 Tarefas Diárias por Papel & Produto
 
 ### 👨‍🎨 **Designer**
 
 #### Manhã (30 min)
+
+**Para Games (React):**
 - [ ] Abrir Storybook: `npm run storybook`
 - [ ] Verificar **Docs > Components** para mudanças overnight
 - [ ] Se houver novos componentes, validar com specs
 
+**Para Front/Back-office (Vanilla JS):**
+- [ ] Abrir HTMLs em `python -m http.server 8080`
+- [ ] Verificar protótipos em `Front-office/` e `Back-office/`
+- [ ] Comparar com designs no Figma
+
 #### Desenvolvimento (2 horas)
+
+**Games (React):**
 - [ ] Criar mockups no Figma
 - [ ] Documentar em Storybook Controls:
-  - Cor primária
+  - Cor primária (var(--primary))
   - Tamanho da fonte
   - Padding/Margin
   - Estados (hover, active, disabled)
 
+**Front/Back-office (Vanilla JS):**
+- [ ] Criar mockups no Figma
+- [ ] Documentar CSS vars necessárias:
+  - `--vuexy-primary: #7367ef`
+  - `--vuexy-success: #28c76f`
+  - Estados em `:hover`, `:active`, `:disabled`
+- [ ] Referência: `packages/snippets/vuexy-vanilla-examples.html`
+
 #### Validação (1 hora)
 - [ ] Comparar com Figma design
-- [ ] Testar variações
+- [ ] Testar variações (cores, tamanhos, estados)
 - [ ] Aprovar ou solicitar ajustes no Slack
 
 ---
@@ -45,6 +75,8 @@ http://localhost:6006
 ### 💻 **Developer Frontend**
 
 #### Setup (1ª vez)
+
+**Games (React):**
 ```powershell
 # Clonar
 git clone <repo> && cd <repo>
@@ -56,8 +88,21 @@ npm install
 npm run check-env
 
 # Iniciar dev
-npm run dev          # App
-npm run storybook    # Em outra aba
+npm run dev          # App em http://localhost:5173
+npm run storybook    # Storybook em http://localhost:6006
+```
+
+**Front/Back-office (Vanilla JS):**
+```powershell
+# Clonar
+git clone <repo> && cd <repo>
+
+# Abrir VS Code com LiveServer extension
+code Front-office/   # ou code Back-office/
+
+# OU usar Python
+python -m http.server 8080
+# Abrir: http://localhost:8080/Front-office/
 ```
 
 #### Daily Tasks
@@ -65,11 +110,12 @@ npm run storybook    # Em outra aba
 **Antes de começar:**
 ```powershell
 git pull origin main
-npm install  # Se package.json mudou
+npm install  # Se package.json mudou (Games apenas)
 ```
 
-**Implementar Componente:**
-1. Leia a jornada em `docs/journeys/XX-*.md`
+**Implementar Componente (Games - React):**
+
+1. Leia a jornada em `docs/journeys/03-student-games-platform.md`
 2. Identifique componentes necessários
 3. Crie componente em `src/components/`
 
@@ -140,7 +186,91 @@ export const Empty: Story = {
 5. Teste no Storybook
 6. Commit e push
 
+**Implementar Feature (Front/Back-office - Vanilla JS):**
+
+1. Leia a jornada em `docs/journeys/01-professor-frontend.md` ou `02-admin-backoffice.md`
+2. Abra `packages/snippets/vuexy-vanilla-examples.html` para referência
+3. Crie/edite HTML em `Front-office/` ou `Back-office/`
+
+**Exemplo: Criar Formulário de Envio de Missão**
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Enviar Missão - Front-office</title>
+  <style>
+    /* Copiar CSS vars de packages/snippets/vuexy-vanilla-examples.html */
+    :root {
+      --vuexy-primary: #7367ef;
+      --vuexy-success: #28c76f;
+      --vuexy-danger: #ea5455;
+      /* ... */
+    }
+    /* Copiar classes: .btn, .card, .form-control, etc. */
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card-header">
+      <h3>Enviar Missão em Lote</h3>
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <label class="form-label" for="turma">Turma</label>
+        <select id="turma" class="form-control">
+          <option value="">Selecione...</option>
+          <option value="7a">7º Ano A</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" onclick="enviarMissao()">Enviar</button>
+    </div>
+  </div>
+
+  <script>
+    function enviarMissao() {
+      const turmaId = document.getElementById('turma').value
+      if (!turmaId) {
+        alert('Selecione uma turma')
+        return
+      }
+      console.log('Enviando para turma:', turmaId)
+      // Lógica de envio...
+    }
+  </script>
+</body>
+</html>
+```
+
+4. Salvar e ver auto-refresh (LiveServer) ou F5
+5. Validar com `python universal_validator.py --path=Front-office`
+6. Commit e push
+
 **Verificações Antes de Push:**
+
+**Games (React):**
+```powershell
+# Testes
+npm run test
+
+# Type check
+npm run check-types
+
+# Mock check
+npm run check-mocks
+
+# Build (valida tudo)
+npm run build
+```
+
+**Front/Back-office (Vanilla JS):**
+```powershell
+# Validar HTML
+python universal_validator.py --path=Front-office --type=html
+python universal_validator.py --path=Back-office --type=html
+```
+
+**Games (React):**
 ```powershell
 # Testes
 npm run test

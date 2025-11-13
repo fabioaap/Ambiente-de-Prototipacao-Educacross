@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Template base para Front-office - Educacross">
+  <title>Front-office - Educacross</title>
+  
+  <style>
+    /* ============================================
+       🎨 VUEXY DESIGN SYSTEM - CSS VARIABLES
+       Base: packages/tokens/tokens.json
+    ============================================ */
+    :root {
+      /* Cores principais Vuexy */
+      --vuexy-primary: #7367ef;
+      --vuexy-secondary: #8592a3;
+      --vuexy-success: #28c76f;
+      --vuexy-warning: #ff9f43;
+      --vuexy-danger: #ea5455;
+      --vuexy-info: #00cfe8;
+      --vuexy-dark: #283046;
+      --vuexy-light: #f6f6f9;
+
+      /* Estados */
+      --vuexy-primary-hover: #6159cc;
+      --vuexy-success-hover: #24b364;
+      --vuexy-danger-hover: #ce3f40;
+
+      /* Backgrounds */
+      --vuexy-bg-primary: #f8f8f8;
+      --vuexy-bg-secondary: #ffffff;
+      --vuexy-bg-card: #ffffff;
+
+      /* Borders */
+      --vuexy-border: #ebe9f1;
+      --vuexy-border-radius: 0.357rem;
+
+      /* Shadows */
+      --vuexy-shadow-sm: 0 2px 6px 0 rgba(115, 103, 240, 0.08);
+      --vuexy-shadow-md: 0 4px 24px 0 rgba(34, 41, 47, 0.1);
+      --vuexy-shadow-lg: 0 6px 30px 0 rgba(34, 41, 47, 0.15);
+
+      /* Tipografia */
+      --vuexy-font-family: 'Montserrat', 'Segoe UI', Tahoma, sans-serif;
+      --vuexy-font-size-base: 1rem;
+      --vuexy-font-size-sm: 0.857rem;
+      --vuexy-font-size-lg: 1.14rem;
+    }
+
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--vuexy-font-family);
+      font-size: var(--vuexy-font-size-base);
+      color: var(--vuexy-dark);
+      background-color: var(--vuexy-bg-primary);
+      line-height: 1.5;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Header */
+    .header {
+      background: white;
+      box-shadow: var(--vuexy-shadow-sm);
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--vuexy-primary);
+    }
+
+    .nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav a {
+      color: var(--vuexy-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav a:hover {
+      color: var(--vuexy-primary);
+    }
+
+    /* Botões */
+    .btn {
+      display: inline-block;
+      padding: 0.786rem 1.5rem;
+      font-size: var(--vuexy-font-size-base);
+      font-weight: 500;
+      line-height: 1;
+      text-align: center;
+      text-decoration: none;
+      border: 1px solid transparent;
+      border-radius: var(--vuexy-border-radius);
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      font-family: var(--vuexy-font-family);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--vuexy-shadow-md);
+    }
+
+    .btn-primary {
+      background-color: var(--vuexy-primary);
+      color: white;
+      border-color: var(--vuexy-primary);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--vuexy-primary-hover);
+    }
+
+    .btn-success {
+      background-color: var(--vuexy-success);
+      color: white;
+      border-color: var(--vuexy-success);
+    }
+
+    .btn-outline-primary {
+      background-color: transparent;
+      color: var(--vuexy-primary);
+      border-color: var(--vuexy-primary);
+    }
+
+    .btn-outline-primary:hover {
+      background-color: var(--vuexy-primary);
+      color: white;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--vuexy-bg-card);
+      border-radius: var(--vuexy-border-radius);
+      box-shadow: var(--vuexy-shadow-sm);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: var(--vuexy-shadow-md);
+      transform: translateY(-4px);
+    }
+
+    .card-header {
+      padding: 1.5rem;
+      background: var(--vuexy-bg-card);
+      border-bottom: 1px solid var(--vuexy-border);
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--vuexy-dark);
+      margin: 0;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    .card-footer {
+      padding: 1rem 1.5rem;
+      background: var(--vuexy-light);
+      border-top: 1px solid var(--vuexy-border);
+    }
+
+    /* Formulários */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--vuexy-dark);
+    }
+
+    .form-control {
+      display: block;
+      width: 100%;
+      padding: 0.786rem 1rem;
+      font-size: var(--vuexy-font-size-base);
+      font-family: var(--vuexy-font-family);
+      line-height: 1.45;
+      color: var(--vuexy-dark);
+      background-color: white;
+      border: 1px solid var(--vuexy-border);
+      border-radius: var(--vuexy-border-radius);
+      transition: all 0.2s ease-in-out;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--vuexy-primary);
+      box-shadow: 0 3px 10px 0 rgba(115, 103, 240, 0.1);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.65rem;
+      font-size: 0.857rem;
+      font-weight: 500;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+      border-radius: 0.25rem;
+    }
+
+    .badge-primary {
+      background-color: rgba(115, 103, 240, 0.12);
+      color: var(--vuexy-primary);
+    }
+
+    .badge-success {
+      background-color: rgba(40, 199, 111, 0.12);
+      color: var(--vuexy-success);
+    }
+
+    .badge-warning {
+      background-color: rgba(255, 159, 67, 0.12);
+      color: var(--vuexy-warning);
+    }
+
+    /* Alertas */
+    .alert {
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: var(--vuexy-border-radius);
+      border-left: 4px solid;
+    }
+
+    .alert-success {
+      background-color: rgba(40, 199, 111, 0.12);
+      border-left-color: var(--vuexy-success);
+      color: var(--vuexy-success);
+    }
+
+    .alert-danger {
+      background-color: rgba(234, 84, 85, 0.12);
+      border-left-color: var(--vuexy-danger);
+      color: var(--vuexy-danger);
+    }
+
+    /* Loading Spinner */
+    .spinner {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(115, 103, 240, 0.2);
+      border-top-color: var(--vuexy-primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">🎓 Educacross</div>
+      <nav class="nav">
+        <a href="#turmas">Minhas Turmas</a>
+        <a href="#missoes">Missões</a>
+        <a href="#relatorios">Relatórios</a>
+        <a href="#perfil">Perfil</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <h1 style="margin-bottom: 2rem; color: var(--vuexy-dark);">
+      Bem-vindo, Professor! 👋
+    </h1>
+
+    <!-- EXEMPLO: Card de Ação -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <div class="card-header">
+        <h2 class="card-title">Enviar Missão em Lote</h2>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label class="form-label" for="turma-select">Selecionar Turma</label>
+          <select id="turma-select" class="form-control">
+            <option value="">Escolha uma turma...</option>
+            <option value="7a">7º Ano A - 30 alunos</option>
+            <option value="7b">7º Ano B - 28 alunos</option>
+            <option value="8a">8º Ano A - 32 alunos</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="missao-select">Selecionar Missão</label>
+          <select id="missao-select" class="form-control">
+            <option value="">Escolha uma missão...</option>
+            <option value="m1">Álgebra Básica - 100 pts</option>
+            <option value="m2">Geometria Espacial - 150 pts</option>
+            <option value="m3">Funções - 200 pts</option>
+          </select>
+        </div>
+
+        <div id="mensagem-resultado"></div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary" onclick="enviarMissao()">
+          Enviar Missão
+        </button>
+        <button class="btn btn-outline-primary" onclick="limparFormulario()">
+          Limpar
+        </button>
+      </div>
+    </div>
+
+    <!-- EXEMPLO: Grid de Cards -->
+    <h2 style="margin-bottom: 1.5rem; color: var(--vuexy-dark);">
+      Minhas Turmas
+    </h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">7º Ano A</h3>
+        </div>
+        <div class="card-body">
+          <p style="margin-bottom: 0.5rem;">📚 30 alunos</p>
+          <p style="margin-bottom: 1rem;">📊 5 missões ativas</p>
+          <span class="badge badge-success">Ativa</span>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary btn-sm">Ver Detalhes</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">7º Ano B</h3>
+        </div>
+        <div class="card-body">
+          <p style="margin-bottom: 0.5rem;">📚 28 alunos</p>
+          <p style="margin-bottom: 1rem;">📊 3 missões ativas</p>
+          <span class="badge badge-success">Ativa</span>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary btn-sm">Ver Detalhes</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">8º Ano A</h3>
+        </div>
+        <div class="card-body">
+          <p style="margin-bottom: 0.5rem;">📚 32 alunos</p>
+          <p style="margin-bottom: 1rem;">📊 4 missões ativas</p>
+          <span class="badge badge-warning">Em Revisão</span>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary btn-sm">Ver Detalhes</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    /**
+     * 🎯 JAVASCRIPT VANILLA - 100% pt-BR
+     * Convenções:
+     * - Nomes de variáveis em português
+     * - Nomes de funções em português
+     * - Comentários em português
+     */
+
+    // Estado da aplicação
+    const estado = {
+      turmaSelecionada: null,
+      missaoSelecionada: null,
+      carregando: false
+    }
+
+    /**
+     * Envia missão para a turma selecionada
+     */
+    function enviarMissao() {
+      const turmaId = document.getElementById('turma-select').value
+      const missaoId = document.getElementById('missao-select').value
+      const mensagemDiv = document.getElementById('mensagem-resultado')
+
+      // Validação
+      if (!turmaId || !missaoId) {
+        mensagemDiv.innerHTML = '<div class="alert alert-danger">⚠️ Por favor, selecione uma turma e uma missão</div>'
+        return
+      }
+
+      // Atualizar estado
+      estado.turmaSelecionada = turmaId
+      estado.missaoSelecionada = missaoId
+      estado.carregando = true
+
+      // Mostrar loading
+      mensagemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 1rem; margin-top: 1rem;">
+          <div class="spinner"></div>
+          <span>Enviando missão...</span>
+        </div>
+      `
+
+      // Simular chamada API
+      setTimeout(() => {
+        estado.carregando = false
+        
+        const turmaTexto = document.getElementById('turma-select').selectedOptions[0].text
+        const missaoTexto = document.getElementById('missao-select').selectedOptions[0].text
+
+        mensagemDiv.innerHTML = `
+          <div class="alert alert-success">
+            ✅ Missão "${missaoTexto}" enviada com sucesso para "${turmaTexto}"!
+          </div>
+        `
+
+        console.log('✅ Missão enviada:', { turmaId, missaoId })
+      }, 2000)
+    }
+
+    /**
+     * Limpa o formulário
+     */
+    function limparFormulario() {
+      document.getElementById('turma-select').value = ''
+      document.getElementById('missao-select').value = ''
+      document.getElementById('mensagem-resultado').innerHTML = ''
+      
+      estado.turmaSelecionada = null
+      estado.missaoSelecionada = null
+      
+      console.log('🧹 Formulário limpo')
+    }
+
+    /**
+     * Inicialização quando DOM estiver pronto
+     */
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('✅ Template Front-office carregado!')
+      console.log('📚 Vuexy Design System ativo')
+      
+      // Exemplo: adicionar event listeners
+      const cards = document.querySelectorAll('.card')
+      console.log(`📦 ${cards.length} cards encontrados`)
+    })
+
+    /**
+     * Exemplo de função auxiliar para fazer requisições
+     */
+    async function fazerRequisicao(url, metodo = 'GET', dados = null) {
+      try {
+        const opcoes = {
+          method: metodo,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+
+        if (dados && metodo !== 'GET') {
+          opcoes.body = JSON.stringify(dados)
+        }
+
+        const resposta = await fetch(url, opcoes)
+        
+        if (!resposta.ok) {
+          throw new Error(`Erro HTTP: ${resposta.status}`)
+        }
+
+        return await resposta.json()
+      } catch (erro) {
+        console.error('❌ Erro na requisição:', erro)
+        throw erro
+      }
+    }
+  </script>
+</body>
+</html>
