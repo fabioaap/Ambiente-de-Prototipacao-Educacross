@@ -1,0 +1,94 @@
+<!-- 
+    TEMPLATE: Header Global do Back-office Educacross (PIXEL PERFECT - FIGMA)
+    Fonte: Node 10021:53487 no Figma
+    Uso: Copiar e colar este bloco em todas as páginas do back-office
+    
+    ⚠️ MEDIDAS EXATAS DO FIGMA:
+    - Background: white
+    - Border: 1px solid #e2e2e3
+    - Border-radius: 10px
+    - Padding: 16px
+    - Gap entre elementos: 12px
+    - Avatar: 42px, background #7367f0
+    - User name: Montserrat Medium 14px, color #6e6b7b, letter-spacing 0.4px
+-->
+
+<!-- CSS DO HEADER -->
+<style>
+    /* ========== HEADER GLOBAL BACKOFFICE (PIXEL PERFECT) ========== */
+    .global-header {
+        background: white;
+        border: 1px solid #e2e2e3;
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 24px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .user-name {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        color: #6e6b7b;
+        letter-spacing: 0.4px;
+        line-height: normal;
+    }
+
+    .user-avatar {
+        width: 42px;
+        height: 42px;
+        background: #7367f0;
+        border-radius: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        flex-shrink: 0;
+    }
+
+    .user-avatar:hover {
+        background: #5f59d1;
+    }
+</style>
+
+<!-- HTML DO HEADER -->
+<header class="global-header">
+    <div class="user-info">
+        <span class="user-name">Usuário do backoffice</span>
+        <div class="user-avatar">A</div>
+    </div>
+</header>
+
+<!-- 
+    INSTRUÇÕES DE USO:
+    
+    1. Copie CSS + HTML para sua página
+    2. Substitua "Usuário do backoffice" pelo nome do usuário logado
+    3. Substitua "A" pela inicial do nome do usuário
+    4. Para múltiplas iniciais: use "AB" para "Ana Beatriz"
+    
+    EXEMPLO COM JAVASCRIPT DINÂMICO:
+    
+    <script>
+        // Obter nome do usuário (exemplo com localStorage)
+        const nomeUsuario = localStorage.getItem('nomeUsuario') || 'Usuário do backoffice';
+        const inicial = nomeUsuario.charAt(0).toUpperCase();
+        
+        // Atualizar no DOM
+        document.querySelector('.user-name').textContent = nomeUsuario;
+        document.querySelector('.user-avatar').textContent = inicial;
+    </script>
+-->

@@ -1,0 +1,103 @@
+<!-- 
+    TEMPLATE: Breadcrumb do Back-office Educacross (PIXEL PERFECT - FIGMA)
+    Fonte: Node 10021:53498 no Figma
+    Uso: Copiar e colar este bloco para navegação em todas as páginas
+    
+    ⚠️ MEDIDAS EXATAS DO FIGMA:
+    - Gap entre elementos: 8px
+    - Ícone home: 14px, color #7367f0
+    - Ícone chevron: 14px, color #6e6b7b
+    - Link text: Montserrat Regular 14px, line-height 24px, color #6e6b7b
+    - Current page: Montserrat Regular 14px, color #5e5873
+-->
+
+<!-- CSS DO BREADCRUMB -->
+<style>
+    /* ========== BREADCRUMB BACKOFFICE (PIXEL PERFECT) ========== */
+    .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    .breadcrumb .material-icons {
+        font-size: 14px;
+    }
+
+    .breadcrumb .material-icons.home {
+        color: #7367f0;
+    }
+
+    .breadcrumb .material-icons.chevron_right {
+        color: #6e6b7b;
+    }
+
+    .breadcrumb a {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #6e6b7b;
+        text-decoration: none;
+        transition: color 0.2s;
+        white-space: nowrap;
+    }
+
+    .breadcrumb a:hover {
+        color: #7367f0;
+    }
+
+    .breadcrumb-current {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #5e5873;
+        white-space: nowrap;
+    }
+</style>
+
+<!-- HTML DO BREADCRUMB -->
+<!-- Exemplo 1: Breadcrumb simples (2 níveis) -->
+<nav class="breadcrumb">
+    <span class="material-icons home">home</span>
+    <span class="material-icons chevron_right">chevron_right</span>
+    <span class="breadcrumb-current">Dashboard</span>
+</nav>
+
+<!-- Exemplo 2: Breadcrumb com 3 níveis -->
+<nav class="breadcrumb">
+    <span class="material-icons home">home</span>
+    <span class="material-icons chevron_right">chevron_right</span>
+    <a href="gestao-atividades.html">Gestão de Atividades</a>
+    <span class="material-icons chevron_right">chevron_right</span>
+    <span class="breadcrumb-current">Banco de Questões</span>
+</nav>
+
+<!-- Exemplo 3: Breadcrumb com 4 níveis -->
+<nav class="breadcrumb">
+    <span class="material-icons home">home</span>
+    <span class="material-icons chevron_right">chevron_right</span>
+    <a href="gestao-atividades.html">Gestão de Atividades</a>
+    <span class="material-icons chevron_right">chevron_right</span>
+    <a href="banco-de-questoes.html">Banco de Questões</a>
+    <span class="material-icons chevron_right">chevron_right</span>
+    <span class="breadcrumb-current">Nova Questão</span>
+</nav>
+
+<!-- 
+    INSTRUÇÕES DE USO:
+    
+    1. Escolha o exemplo que corresponde ao nível de profundidade da sua página
+    2. Substitua os textos e links conforme a hierarquia
+    3. O último item sempre deve usar class="breadcrumb-current" (sem link)
+    4. Sempre comece com o ícone "home"
+    5. Use "chevron_right" como separador
+    
+    PADRÕES DE NOMENCLATURA:
+    - Home (raiz)
+    - [Seção Principal] (ex: Gestão de Atividades)
+    - [Página/Recurso] (ex: Banco de Questões)
+    - [Ação/Detalhe] (ex: Nova Questão, Editar Questão)
+-->

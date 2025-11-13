@@ -1,0 +1,270 @@
+<!-- 
+    TEMPLATE: Botões do Back-office Educacross
+    Uso: Copiar os estilos e usar os exemplos HTML conforme necessário
+    
+    Tipos de Botões:
+    - Primary (roxo) - Ações principais (Adicionar, Salvar, Enviar)
+    - Outline (branco/transparente) - Ações secundárias (Cancelar, Voltar)
+    - Icon (apenas ícone) - Ações compactas (Editar, Excluir, Mais opções)
+-->
+
+<!-- CSS DOS BOTÕES -->
+<style>
+    /* ========== BOTÕES BACKOFFICE ========== */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 22px;
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: 500;
+        font-family: 'Montserrat', sans-serif;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s;
+        text-decoration: none;
+        white-space: nowrap;
+        height: 44px;
+    }
+
+    /* Botão Primary (roxo) */
+    .btn.primary {
+        background: #7367f0;
+        color: white;
+    }
+
+    .btn.primary:hover {
+        background: #6258cc;
+        box-shadow: 0 4px 8px rgba(115, 103, 240, 0.4);
+    }
+
+    .btn.primary:active {
+        background: #5a4fc5;
+        transform: translateY(1px);
+    }
+
+    /* Botão Outline (transparente com borda) */
+    .btn.outline {
+        background: transparent;
+        color: #7367f0;
+        border: 1.5px solid #7367f0;
+    }
+
+    .btn.outline:hover {
+        background: rgba(115, 103, 240, 0.08);
+    }
+
+    .btn.outline:active {
+        background: rgba(115, 103, 240, 0.16);
+        transform: translateY(1px);
+    }
+
+    /* Botão Icon (apenas ícone, sem fundo) */
+    .btn.icon {
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        background: transparent;
+        color: #4b4b4b;
+    }
+
+    .btn.icon:hover {
+        background: rgba(75, 75, 75, 0.08);
+        border-radius: 50%;
+    }
+
+    .btn.icon:active {
+        background: rgba(75, 75, 75, 0.16);
+        transform: scale(0.95);
+    }
+
+    /* Botão Success (verde) */
+    .btn.success {
+        background: #28c76f;
+        color: white;
+    }
+
+    .btn.success:hover {
+        background: #24b263;
+        box-shadow: 0 4px 8px rgba(40, 199, 111, 0.4);
+    }
+
+    /* Botão Danger (vermelho) */
+    .btn.danger {
+        background: #ea5455;
+        color: white;
+    }
+
+    .btn.danger:hover {
+        background: #d24b4c;
+        box-shadow: 0 4px 8px rgba(234, 84, 85, 0.4);
+    }
+
+    /* Botão desabilitado */
+    .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .btn:disabled:hover {
+        background: inherit;
+        box-shadow: none;
+        transform: none;
+    }
+
+    /* Ícones dentro de botões */
+    .btn .material-icons {
+        font-size: 20px;
+    }
+
+    /* Botão pequeno (32px) */
+    .btn.small {
+        height: 32px;
+        padding: 6px 16px;
+        font-size: 13px;
+    }
+
+    .btn.small .material-icons {
+        font-size: 18px;
+    }
+
+    /* Botão grande (52px) */
+    .btn.large {
+        height: 52px;
+        padding: 14px 28px;
+        font-size: 16px;
+    }
+
+    .btn.large .material-icons {
+        font-size: 24px;
+    }
+</style>
+
+<!-- EXEMPLOS DE USO -->
+
+<!-- Botão Primary com ícone -->
+<button class="btn primary">
+    <span class="material-icons">add</span>
+    <span>Adicionar Questão</span>
+</button>
+
+<!-- Botão Primary sem ícone -->
+<button class="btn primary">
+    <span>Salvar</span>
+</button>
+
+<!-- Botão Outline com ícone -->
+<button class="btn outline">
+    <span class="material-icons">cancel</span>
+    <span>Cancelar</span>
+</button>
+
+<!-- Botão Outline sem ícone -->
+<button class="btn outline">
+    <span>Voltar</span>
+</button>
+
+<!-- Botão Icon (apenas ícone) -->
+<button class="btn icon">
+    <span class="material-icons">edit</span>
+</button>
+
+<button class="btn icon">
+    <span class="material-icons">delete</span>
+</button>
+
+<button class="btn icon">
+    <span class="material-icons">more_vert</span>
+</button>
+
+<!-- Botão Success -->
+<button class="btn success">
+    <span class="material-icons">check</span>
+    <span>Aprovar</span>
+</button>
+
+<!-- Botão Danger -->
+<button class="btn danger">
+    <span class="material-icons">delete</span>
+    <span>Excluir</span>
+</button>
+
+<!-- Botão desabilitado -->
+<button class="btn primary" disabled>
+    <span class="material-icons">send</span>
+    <span>Enviar (desabilitado)</span>
+</button>
+
+<!-- Botões de diferentes tamanhos -->
+<button class="btn primary small">
+    <span>Pequeno</span>
+</button>
+
+<button class="btn primary">
+    <span>Normal (padrão)</span>
+</button>
+
+<button class="btn primary large">
+    <span>Grande</span>
+</button>
+
+<!-- Grupo de botões alinhados -->
+<div style="display: flex; gap: 12px;">
+    <button class="btn outline">
+        <span>Cancelar</span>
+    </button>
+    <button class="btn primary">
+        <span>Confirmar</span>
+    </button>
+</div>
+
+<!-- Botões com onclick -->
+<button class="btn primary" onclick="salvarQuestao()">
+    <span class="material-icons">save</span>
+    <span>Salvar Questão</span>
+</button>
+
+<button class="btn icon" onclick="abrirMenu()">
+    <span class="material-icons">more_vert</span>
+</button>
+
+<!-- 
+    INSTRUÇÕES DE USO:
+    
+    1. Escolha o tipo de botão conforme a hierarquia:
+       - primary: ação principal da página (apenas 1 por seção)
+       - outline: ações secundárias (cancelar, voltar)
+       - icon: ações em tabelas, cards, headers
+       - success: confirmações positivas (aprovar, publicar)
+       - danger: ações destrutivas (excluir, rejeitar)
+    
+    2. Adicione ícones quando melhorar clareza:
+       - Ações principais: sempre com ícone
+       - Ações secundárias: opcional
+       - Botões icon: obrigatório (é o único elemento)
+    
+    3. Use tamanhos apropriados:
+       - small: toolbars, filtros compactos
+       - default: uso geral (44px)
+       - large: CTAs importantes, finais de formulários
+    
+    4. Grupos de botões:
+       - Use display: flex com gap: 12px
+       - Outline à esquerda, Primary à direita
+    
+    ÍCONES MATERIAL ICONS COMUNS:
+    - add: adicionar
+    - save: salvar
+    - edit: editar
+    - delete: excluir
+    - check: confirmar/aprovar
+    - cancel: cancelar
+    - search: pesquisar
+    - filter_list: filtros
+    - more_vert: mais opções (vertical)
+    - more_horiz: mais opções (horizontal)
+    - arrow_back: voltar
+    - send: enviar
+-->

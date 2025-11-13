@@ -1,0 +1,162 @@
+<!-- 
+    TEMPLATE: Badges do Back-office Educacross
+    Uso: Copiar os estilos e usar os exemplos HTML conforme necessário
+    
+    Tipos de Badges:
+    - Primary (roxo) - Informações gerais, questões, totais
+    - Pink (rosa) - Tags temáticas, categorias
+    - Warning (laranja) - Alertas, contadores zerados
+    - Success (verde) - Status positivos, aprovados
+    - Danger (vermelho) - Erros, rejeitados
+-->
+
+<!-- CSS DOS BADGES -->
+<style>
+    /* ========== BADGES BACKOFFICE ========== */
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 9px;
+        border-radius: 17px;
+        font-size: 12px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .badge.primary {
+        background: rgba(115, 103, 240, 0.12);
+        color: #7367f0;
+    }
+
+    .badge.pink {
+        background: rgba(214, 51, 132, 0.12);
+        color: #d63384;
+    }
+
+    .badge.warning {
+        background: rgba(255, 159, 67, 0.12);
+        color: #ff9f43;
+    }
+
+    .badge.success {
+        background: rgba(40, 199, 111, 0.12);
+        color: #28c76f;
+    }
+
+    .badge.danger {
+        background: rgba(234, 84, 85, 0.12);
+        color: #ea5455;
+    }
+
+    .badge .material-icons {
+        font-size: 16px;
+    }
+
+    /* Ícone AI customizado */
+    .icon-ai {
+        width: 16px;
+        height: 16px;
+        background: #7367f0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 8px;
+        color: white;
+        font-weight: 700;
+        font-style: normal;
+    }
+
+    .icon-ai::before {
+        content: 'AI';
+    }
+</style>
+
+<!-- EXEMPLOS DE USO -->
+
+<!-- Badge Primary com ícone Material Icons -->
+<div class="badge primary">
+    <span class="material-icons">quiz</span>
+    <span>330</span>
+</div>
+
+<!-- Badge Primary com ícone AI -->
+<div class="badge primary">
+    <span class="icon-ai"></span>
+    <span>165</span>
+</div>
+
+<!-- Badge Primary com ícone de documento -->
+<div class="badge primary">
+    <span class="material-icons">article</span>
+    <span>165</span>
+</div>
+
+<!-- Badge Pink - Temática -->
+<div class="badge pink">Temática</div>
+
+<!-- Badge Pink - Categoria -->
+<div class="badge pink">Matemática</div>
+
+<!-- Badge Warning - Sem questões -->
+<div class="badge warning">
+    <span class="material-icons">quiz</span>
+    <span>0 questões</span>
+</div>
+
+<!-- Badge Warning - Pendente -->
+<div class="badge warning">Pendente</div>
+
+<!-- Badge Success - Aprovado -->
+<div class="badge success">
+    <span class="material-icons">check_circle</span>
+    <span>Aprovado</span>
+</div>
+
+<!-- Badge Danger - Rejeitado -->
+<div class="badge danger">
+    <span class="material-icons">cancel</span>
+    <span>Rejeitado</span>
+</div>
+
+<!-- Badge apenas com texto -->
+<div class="badge primary">1º Ano</div>
+
+<!-- Badge com ícone personalizado (SVG inline) -->
+<div class="badge primary">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <rect x="4" y="2" width="8" height="12" rx="1" stroke="currentColor" stroke-width="1.5" />
+        <line x1="5" y1="6" x2="11" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        <line x1="5" y1="9" x2="11" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </svg>
+    <span>Manual</span>
+</div>
+
+<!-- 
+    INSTRUÇÕES DE USO:
+    
+    1. Escolha o tipo de badge conforme a função:
+       - primary: informações neutras, contadores
+       - pink: categorias, tags, temas
+       - warning: alertas, ausência de dados
+       - success: aprovações, status positivos
+       - danger: erros, rejeições
+    
+    2. Adicione ícones quando necessário:
+       - Material Icons: <span class="material-icons">nome_icone</span>
+       - Ícone AI: <span class="icon-ai"></span>
+       - SVG: use viewBox e currentColor para cor automática
+    
+    3. Mantenha textos curtos (máx 20 caracteres)
+    
+    ÍCONES MATERIAL ICONS COMUNS:
+    - quiz: questões
+    - article: documentos
+    - check_circle: aprovado
+    - cancel: rejeitado
+    - error: erro
+    - info: informação
+    - star: favorito
+    - schedule: tempo
+-->

@@ -13,7 +13,10 @@
     "*.md": "markdown"
   },
   "github.copilot.enable": {
-    "*": true
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false
   },
   "github.copilot.inlineSuggest.enable": true,
   "liveServer.settings.port": 5502

@@ -1,0 +1,322 @@
+<!-- 
+    TEMPLATE: Sidebar do Back-office Educacross (PIXEL PERFECT - FIGMA)
+    Fonte: Node 10021:53499 no Figma
+    Uso: Copiar e colar este bloco completo em todas as páginas do back-office
+    
+    ⚠️ MEDIDAS EXATAS DO FIGMA:
+    - Largura fixa: 265px
+    - Cor de fundo: #283046 (sólido, sem gradiente)
+    - Padding vertical: 40px (topo/fundo)
+    - Gap entre itens: 10px
+    - Item ativo: #7367f0
+    - Font: Montserrat SemiBold 15px, line-height 24px
+-->
+
+<!-- CSS DA SIDEBAR -->
+<style>
+    /* ========== SIDEBAR BACKOFFICE (PIXEL PERFECT) ========== */
+    .sidebar {
+        width: 265px;
+        background: #283046;
+        position: fixed;
+        height: 100vh;
+        overflow-y: auto;
+        padding: 40px 16px;
+        left: 0;
+        top: 0;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .sidebar-logo {
+        margin-bottom: 14px;
+        /* 40px padding - 26px height = ~14px */
+        text-align: center;
+    }
+
+    .sidebar-logo img {
+        height: 35px;
+        width: auto;
+    }
+
+    .sidebar-menu-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        cursor: pointer;
+        transition: background 0.2s;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    .sidebar-menu-item:hover {
+        background: rgba(186, 191, 199, 0.12);
+    }
+
+    .sidebar-menu-item.active {
+        background: #7367f0;
+        border-radius: 4px;
+    }
+
+    .sidebar-menu-item .material-icons {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+    }
+
+    .sidebar-menu-item-text {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 1;
+    }
+
+    .sidebar-menu-group {
+        position: relative;
+    }
+
+    .sidebar-menu-group.expanded {
+        background: rgba(186, 191, 199, 0.12);
+        border-radius: 4px;
+    }
+
+    .sidebar-submenu {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .sidebar-submenu.visible {
+        display: flex;
+    }
+
+    .sidebar-submenu-item {
+        padding: 12px 16px 12px 48px;
+        /* 48px = 16px + 12px icon + 20px */
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        cursor: pointer;
+        transition: background 0.2s;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .sidebar-submenu-item:hover {
+        background: rgba(186, 191, 199, 0.12);
+    }
+
+    .sidebar-submenu-item.active {
+        background: #7367f0;
+    }
+
+    /* Ícone de expansão */
+    .sidebar-expand-icon {
+        margin-left: auto;
+        font-size: 16px !important;
+        transition: transform 0.3s;
+    }
+
+    .sidebar-expand-icon.expanded {
+        transform: rotate(180deg);
+    }
+</style>
+
+<!-- HTML DA SIDEBAR -->
+<aside class="sidebar">
+    <!-- Logo -->
+    <div class="sidebar-logo">educac</div>
+
+    <!-- Menu: Home -->
+    <a href="index.html" class="sidebar-menu-item">
+        <span class="material-icons">home</span>
+        <span>Home</span>
+    </a>
+
+    <!-- Menu: Gestão de Atividades (com submenu) -->
+    <div class="sidebar-menu-group expanded">
+        <div class="sidebar-menu-item" onclick="toggleSidebarSubmenu('gestao-atividades')">
+            <span class="material-icons">sports_esports</span>
+            <span>Gestão de Atividades</span>
+            <span class="material-icons sidebar-expand-icon expanded">expand_more</span>
+        </div>
+        <div id="gestao-atividades" class="sidebar-submenu visible">
+            <a href="banco-de-jogos.html" class="sidebar-submenu-item">● Banco de Jogos</a>
+            <a href="banco-de-questoes.html" class="sidebar-submenu-item active">● Banco de Questões</a>
+        </div>
+    </div>
+
+    <!-- Menu: Gestão Pedagógica -->
+    <div class="sidebar-menu-group">
+        <div class="sidebar-menu-item" onclick="toggleSidebarSubmenu('gestao-pedagogica')">
+            <span class="material-icons">menu_book</span>
+            <span>Gestão Pedagógica</span>
+            <span class="material-icons sidebar-expand-icon">chevron_right</span>
+        </div>
+        <div id="gestao-pedagogica" class="sidebar-submenu">
+            <!-- Adicionar submenu items aqui -->
+        </div>
+    </div>
+
+    <!-- Menu: Gestão de Escolas -->
+    <div class="sidebar-menu-group">
+        <div class="sidebar-menu-item" onclick="toggleSidebarSubmenu('gestao-escolas')">
+            <span class="material-icons">school</span>
+            <span>Gestão de Escolas</span>
+            <span class="material-icons sidebar-expand-icon">chevron_right</span>
+        </div>
+        <div id="gestao-escolas" class="sidebar-submenu">
+            <!-- Adicionar submenu items aqui -->
+        </div>
+    </div>
+
+    <!-- Menu: Gestão de Acessos -->
+    <div class="sidebar-menu-group">
+        <div class="sidebar-menu-item" onclick="toggleSidebarSubmenu('gestao-acessos')">
+            <span class="material-icons">person</span>
+            <span>Gestão de Acessos</span>
+            <span class="material-icons sidebar-expand-icon">expand_more</span>
+        </div>
+        <div id="gestao-acessos" class="sidebar-submenu">
+            <!-- Adicionar submenu items aqui -->
+        </div>
+    </div>
+
+    <!-- Menu: Eventos -->
+    <a href="eventos.html" class="sidebar-menu-item">
+        <span class="material-icons">event</span>
+        <span>Eventos</span>
+    </a>
+
+    <!-- Menu: Sistema de Ensino -->
+    <div class="sidebar-menu-group">
+        <div class="sidebar-menu-item" onclick="toggleSidebarSubmenu('sistema-ensino')">
+            <span class="material-icons">auto_stories</span>
+            <span>Sistema de Ensino</span>
+            <span class="material-icons sidebar-expand-icon">chevron_right</span>
+        </div>
+        <div id="sistema-ensino" class="sidebar-submenu">
+            <!-- Adicionar submenu items aqui -->
+        </div>
+    </div>
+
+    <!-- Menu: Biblioteca -->
+    <a href="biblioteca.html" class="sidebar-menu-item">
+        <span class="material-icons">local_library</span>
+        <span>Biblioteca</span>
+    </a>
+
+    <!-- Menu: Expedição Leitura -->
+    <a href="expedicao-leitura.html" class="sidebar-menu-item">
+        <span class="material-icons">book</span>
+        <span>Expedição Leitura</span>
+    </a>
+
+    <!-- Menu: Relatórios -->
+    <div class="sidebar-menu-group">
+        <div class="sidebar-menu-item" onclick="toggleSidebarSubmenu('relatorios')">
+            <span class="material-icons">pie_chart</span>
+            <span>Relatórios</span>
+            <span class="material-icons sidebar-expand-icon">chevron_right</span>
+        </div>
+        <div id="relatorios" class="sidebar-submenu">
+            <!-- Adicionar submenu items aqui -->
+        </div>
+    </div>
+</aside>
+
+<!-- JAVASCRIPT DA SIDEBAR -->
+<script>
+    /**
+     * Toggle submenu da sidebar
+     * @param {string} menuId - ID do submenu a ser expandido/recolhido
+     */
+    function toggleSidebarSubmenu(menuId) {
+        const submenu = document.getElementById(menuId);
+        const menuGroup = submenu.parentElement;
+        const icon = menuGroup.querySelector('.sidebar-expand-icon');
+
+        if (submenu.classList.contains('visible')) {
+            // Recolher
+            submenu.classList.remove('visible');
+            menuGroup.classList.remove('expanded');
+            icon.textContent = 'chevron_right';
+            icon.classList.remove('expanded');
+        } else {
+            // Expandir
+            submenu.classList.add('visible');
+            menuGroup.classList.add('expanded');
+            icon.textContent = 'expand_more';
+            icon.classList.add('expanded');
+        }
+    }
+</script>
+
+<!-- 
+    INSTRUÇÕES DE USO:
+    
+    1. Copie todo este arquivo (CSS + HTML + JavaScript) para sua página
+    2. Ajuste os links (href) conforme necessário
+    3. Marque o item ativo com class="active" no submenu-item correspondente
+    4. Marque o grupo expandido com class="expanded" no menu-group
+    5. Adicione class="visible" no submenu que deve aparecer expandido
+    
+    EXEMPLO DE PÁGINA COM SIDEBAR:
+    
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <title>Minha Página | Educacross</title>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Montserrat', sans-serif;
+                margin: 0;
+                background: #efefef;
+            }
+            .layout {
+                display: flex;
+                min-height: 100vh;
+            }
+            .main-content {
+                margin-left: 180px;
+                flex: 1;
+                padding: 24px;
+            }
+        </style>
+        
+        <!-- INCLUIR CSS DA SIDEBAR AQUI -->
+
+</head>
+
+<body>
+    <div class="layout">
+
+        <!-- INCLUIR HTML DA SIDEBAR AQUI -->
+
+        <main class="main-content">
+            <!-- Seu conteúdo aqui -->
+        </main>
+    </div>
+
+    <!-- INCLUIR JAVASCRIPT DA SIDEBAR AQUI -->
+
+</body>
+
+</html>
+-->
