@@ -19,7 +19,16 @@
     "check-deps": "node -e \"console.log('✅ Dependências instaladas')\"",
     "check-types": "tsc --noEmit",
     "verify": "npm run check-env",
-    "validate": "node scripts/validate_latest.js"
+    "validate": "node scripts/validate_latest.js",
+    "pixel:install": "npx playwright install --with-deps",
+    "pixel:serve": "python -m http.server 8080",
+    "pixel:test": "playwright test",
+    "pixel:update": "playwright test --update-snapshots",
+    "pixel:ci": "playwright test --reporter=dot",
+    "pixel:report": "npx playwright show-report validation-artifacts/pixel/report",
+    "pixel:extract-tokens": "node scripts/figma-tokens-extractor.cjs --node-id=10021:53486",
+    "pixel:validate-structure": "node scripts/validate-pixel-perfect.cjs --html=\"Back-office/Gerador de Questões por IA – BackOffice/banco-questoes-pixel-perfect.html\" --tokens=figma-tokens.json --threshold=1",
+    "pixel:validate-all": "npm run pixel:extract-tokens && npm run pixel:validate-structure"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",
@@ -39,6 +48,7 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.49.0",
     "@storybook/addon-docs": "^8.6.14",
     "@storybook/addon-essentials": "^8.6.14",
     "@storybook/addon-interactions": "^8.6.14",

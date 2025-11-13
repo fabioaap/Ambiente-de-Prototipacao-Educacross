@@ -26,7 +26,7 @@
             min-height: 100vh;
         }
 
-        /* SIDEBAR - Pixel Perfect (Figma: 265px, #283046, padding 40/16) */
+        /* SIDEBAR - Pixel Perfect from Figma (node: 10021:53499) */
         .sidebar {
             width: 265px;
             background: #283046;
@@ -37,13 +37,18 @@
             left: 0;
             top: 0;
             z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .logo {
-            padding: 0 16px 24px;
-            font-size: 18px;
-            font-weight: 700;
-            color: #00d4ff;
+            margin-bottom: 14px;
+            /* gap de 10px entre logo e primeiro item, considerando estrutura */
+        }
+
+        .menu-item-wrapper {
+            width: 250px;
         }
 
         .menu-item {
@@ -52,13 +57,15 @@
             justify-content: space-between;
             padding: 12px 16px;
             color: white;
+            font-family: 'Montserrat', sans-serif;
             font-size: 15px;
             line-height: 24px;
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s;
-            position: relative;
             border-radius: 4px;
+            box-sizing: border-box;
+            width: 250px;
         }
 
         .menu-item:hover {
@@ -71,23 +78,38 @@
 
         .menu-item .material-icons {
             font-size: 20px;
+            width: 20px;
+            height: 20px;
         }
 
-        .menu-item .text {
+        .menu-item-content {
             display: flex;
             align-items: center;
             gap: 10px;
             flex: 1;
         }
 
-        .submenu {
-            padding: 4px 0;
+        .menu-item-chevron {
+            width: 16px;
+            height: 16px;
+            font-size: 16px;
+        }
+
+        .menu-group {
+            background: rgba(186, 191, 199, 0.12);
+            border-radius: 4px;
+            width: 250px;
+        }
+
+        .menu-group .menu-item {
+            background: transparent;
         }
 
         .submenu-item {
-            padding: 12px 16px 12px 48px;
-            /* 48px seguindo Figma */
+            padding: 12px 16px;
+            padding-left: 48px;
             color: white;
+            font-family: 'Montserrat', sans-serif;
             font-size: 15px;
             line-height: 24px;
             font-weight: 600;
@@ -97,6 +119,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            width: 250px;
+            box-sizing: border-box;
         }
 
         .submenu-item:hover {
@@ -105,6 +129,12 @@
 
         .submenu-item.active {
             background: #7367f0;
+        }
+
+        .submenu-item-icon {
+            width: 12px;
+            height: 12px;
+            font-size: 12px;
         }
 
         /* MAIN CONTENT */
@@ -200,33 +230,46 @@
         }
 
         .tab {
-            padding: 12px 0;
+            height: 45px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 131px;
-            text-align: center;
             font-size: 14px;
             font-weight: 700;
+            line-height: 21px;
+            font-family: 'Montserrat', sans-serif;
             border: none;
             background: none;
             cursor: pointer;
             color: #6e6b7b;
+            position: relative;
         }
 
         .tab.active {
             background: #7367f0;
-            color: white;
+            color: #ffffff;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .tab.active::after {
+            display: none;
         }
 
         .stats-bar {
             background: rgba(115, 103, 240, 0.12);
             border-radius: 6px;
-            padding: 12px 20px;
+            padding: 0 20px;
+            height: 44px;
             margin-bottom: 16px;
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 8px;
         }
 
         .stats-label {
+            line-height: 21px;
             font-size: 14px;
             font-weight: 700;
             color: #7367f0;
@@ -235,9 +278,10 @@
         .badge {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            padding: 2px 9px;
+            gap: 3px;
+            padding: 1px 9px;
             border-radius: 17px;
+            line-height: 18px;
             font-size: 12px;
             font-weight: 700;
         }
@@ -315,6 +359,11 @@
             font-size: 14px;
         }
 
+        .select-box .material-icons {
+            font-size: 18px;
+            color: #6e6b7b;
+        }
+
         .subject-icon {
             width: 26px;
             height: 26px;
@@ -337,7 +386,7 @@
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
             white-space: nowrap;
         }
 
@@ -356,6 +405,19 @@
             font-size: 24px;
         }
 
+        .icon-ai-lg {
+            width: 24px;
+            height: 24px;
+            background: #7367f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: white;
+            font-weight: 700;
+        }
+
         .search-box {
             border: 1px solid #d8d6de;
             border-radius: 5px;
@@ -363,6 +425,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 42px;
         }
 
         .search-box input {
@@ -376,6 +439,12 @@
         .search-box input::placeholder {
             color: #babfc7;
             font-weight: 700;
+            line-height: 21px;
+        }
+
+        .search-box .material-icons {
+            font-size: 18px;
+            color: #82868b;
         }
 
         .table-card {
@@ -386,7 +455,7 @@
         }
 
         .table-row {
-            padding: 12px 20px;
+            padding: 10px 20px;
             display: flex;
             gap: 20px;
             border-bottom: 1px solid #ebe9f1;
@@ -398,11 +467,11 @@
         }
 
         .table-row.header:hover {
-            background: #f5f5f5;
+            background: #f8f8f8;
         }
 
         .table-row.content {
-            background: #f5f5f5;
+            background: #f8f8f8;
             cursor: default;
         }
 
@@ -422,7 +491,7 @@
         }
 
         .row-number {
-            width: 80px;
+            width: 83px;
             flex-shrink: 0;
             font-size: 14px;
             font-weight: 700;
@@ -439,7 +508,7 @@
         .row-header {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
             flex-wrap: wrap;
         }
 
@@ -452,7 +521,7 @@
         .row-text {
             font-size: 14px;
             color: #6e6b7b;
-            line-height: 1.6;
+            line-height: 24px;
         }
 
         .row-actions {
@@ -466,8 +535,12 @@
         }
 
         .action-btn .material-icons {
-            font-size: 24px;
+            font-size: 20px;
             color: #7367f0;
+        }
+
+        .action-btn:hover .material-icons {
+            opacity: 0.8;
         }
 
         .hidden {
@@ -475,7 +548,7 @@
         }
 
         .pagination {
-            padding: 12px 20px;
+            padding: 10px 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -485,16 +558,23 @@
         .page-btn {
             width: 28px;
             height: 28px;
-            border-radius: 50%;
+            border-radius: 29px;
             border: none;
-            background: #f5f5f5;
+            background: #f3f2f7;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .page-btn.active {
             background: #7367f0;
             color: white;
             font-weight: 600;
+        }
+
+        .page-btn:hover:not(.active) {
+            background: rgba(115, 103, 240, 0.12);
         }
 
         .page-btn .material-icons {
@@ -509,69 +589,104 @@
         <aside class="sidebar">
             <div class="logo">educac</div>
 
+            <!-- Home -->
             <div class="menu-item">
-                <span class="material-icons">home</span>
-                <span>Home</span>
-            </div>
-
-            <div style="background: rgba(186, 191, 199, 0.12);">
-                <div class="menu-item">
+                <div class="menu-item-content">
                     <span class="material-icons">home</span>
-                    <span>Gestão de Atividades</span>
-                    <span class="material-icons" style="margin-left: auto; font-size: 16px;">expand_more</span>
-                </div>
-                <div class="submenu">
-                    <div class="submenu-item">● Banco de Jogos</div>
-                    <div class="submenu-item active">● Banco de Questões</div>
+                    <span>Home</span>
                 </div>
             </div>
 
-            <div class="menu-item">
-                <span class="material-icons">menu_book</span>
-                <span>Gestão Pedagógica</span>
-                <span class="material-icons" style="margin-left: auto; font-size: 16px;">chevron_right</span>
+            <!-- Gestão de Atividades (expandido) -->
+            <div class="menu-group">
+                <div class="menu-item">
+                    <div class="menu-item-content">
+                        <span class="material-icons">sports_esports</span>
+                        <span>Gestão de Atividades</span>
+                    </div>
+                    <span class="material-icons menu-item-chevron"
+                        style="transform: rotate(90deg);">chevron_right</span>
+                </div>
+                <div class="submenu-item">
+                    <span class="submenu-item-icon">●</span>
+                    <span>Banco de Jogos</span>
+                </div>
+                <div class="submenu-item active">
+                    <span class="submenu-item-icon">●</span>
+                    <span>Banco de Questões</span>
+                </div>
             </div>
 
+            <!-- Gestão Pedagógica -->
             <div class="menu-item">
-                <span class="material-icons">school</span>
-                <span>Gestão de Escolas</span>
-                <span class="material-icons" style="margin-left: auto; font-size: 16px;">chevron_right</span>
+                <div class="menu-item-content">
+                    <span class="material-icons">menu_book</span>
+                    <span>Gestão Pedagógica</span>
+                </div>
+                <span class="material-icons menu-item-chevron">chevron_right</span>
             </div>
 
+            <!-- Gestão de Escolas -->
             <div class="menu-item">
-                <span class="material-icons">person</span>
-                <span>Gestão de Acessos</span>
-                <span class="material-icons" style="margin-left: auto; font-size: 16px;">expand_more</span>
+                <div class="menu-item-content">
+                    <span class="material-icons">school</span>
+                    <span>Gestão de Escolas</span>
+                </div>
+                <span class="material-icons menu-item-chevron">chevron_right</span>
             </div>
 
+            <!-- Gestão de Acessos -->
             <div class="menu-item">
-                <span class="material-icons">event</span>
-                <span>Eventos</span>
-                <span class="material-icons" style="margin-left: auto; font-size: 16px;">chevron_right</span>
+                <div class="menu-item-content">
+                    <span class="material-icons">person</span>
+                    <span>Gestão de Acessos</span>
+                </div>
+                <span class="material-icons menu-item-chevron" style="transform: rotate(270deg);">expand_more</span>
             </div>
 
+            <!-- Eventos -->
             <div class="menu-item">
-                <span class="material-icons">auto_stories</span>
-                <span>Sistema de Ensino</span>
-                <span class="material-icons" style="margin-left: auto; font-size: 16px;">chevron_right</span>
+                <div class="menu-item-content">
+                    <span class="material-icons">event</span>
+                    <span>Eventos</span>
+                </div>
+                <span class="material-icons menu-item-chevron">chevron_right</span>
             </div>
 
+            <!-- Sistema de Ensino -->
             <div class="menu-item">
-                <span class="material-icons">local_library</span>
-                <span>Biblioteca</span>
-                <span class="material-icons" style="margin-left: auto; font-size: 16px;">chevron_right</span>
+                <div class="menu-item-content">
+                    <span class="material-icons">auto_stories</span>
+                    <span>Sistema de Ensino</span>
+                </div>
+                <span class="material-icons menu-item-chevron">chevron_right</span>
             </div>
 
+            <!-- Biblioteca -->
             <div class="menu-item">
-                <span class="material-icons">book</span>
-                <span>Expedição Leitura</span>
-                <span class="material-icons" style="margin-left: auto; font-size: 16px;">chevron_right</span>
+                <div class="menu-item-content">
+                    <span class="material-icons">local_library</span>
+                    <span>Biblioteca</span>
+                </div>
+                <span class="material-icons menu-item-chevron">chevron_right</span>
             </div>
 
+            <!-- Expedição Leitura -->
             <div class="menu-item">
-                <span class="material-icons">pie_chart</span>
-                <span>Relatórios</span>
-                <span class="material-icons" style="margin-left: auto; font-size: 16px;">chevron_right</span>
+                <div class="menu-item-content">
+                    <span class="material-icons">book</span>
+                    <span>Expedição Leitura</span>
+                </div>
+                <span class="material-icons menu-item-chevron">chevron_right</span>
+            </div>
+
+            <!-- Relatórios -->
+            <div class="menu-item">
+                <div class="menu-item-content">
+                    <span class="material-icons">pie_chart</span>
+                    <span>Relatórios</span>
+                </div>
+                <span class="material-icons menu-item-chevron">chevron_right</span>
             </div>
         </aside>
 
@@ -605,7 +720,7 @@
                         <span class="material-icons">quiz</span>
                         <span>330</span>
                     </div>
-                    <div style="width: 1px; height: 20px; background: #ebe9f1; transform: rotate(90deg);"></div>
+                    <div style="width: 1px; height: 20px; background: #ebe9f1;"></div>
                     <div class="badge primary">
                         <span class="icon-ai">AI</span>
                         <span>165</span>
@@ -642,7 +757,7 @@
                         Nova questão
                     </button>
                     <button class="btn btn-primary">
-                        <span class="icon-ai">AI</span>
+                        <span class="icon-ai-lg">AI</span>
                         Nova questão IA
                     </button>
                 </div>

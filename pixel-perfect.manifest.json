@@ -1,0 +1,26 @@
+{
+    "pages": [
+        {
+            "id": "backoffice-banco-questoes",
+            "name": "Banco de Questões - Habilidades",
+            "path": "Back-office/Gerador de Questões por IA – BackOffice/banco-questoes-pixel-perfect.html",
+            "url": "http://localhost:8080/Back-office/Gerador de Questões por IA – BackOffice/banco-questoes-pixel-perfect.html",
+            "figma": {
+                "nodeId": "10021:53486"
+            },
+            "viewport": {
+                "width": 1440,
+                "height": 900
+            },
+            "dprs": [
+                1,
+                2
+            ],
+            "thresholds": {
+                "maxDiffPixelRatio": 0.005
+            },
+            "waitUntil": "networkidle",
+            "masks": []
+        }
+    ]
+}

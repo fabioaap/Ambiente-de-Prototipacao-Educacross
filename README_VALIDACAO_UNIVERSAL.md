@@ -138,6 +138,22 @@ python ci_validator.py --mode=ci --threshold=85 --output=artifacts/
 # Gera: relatórios JSON, HTML, badges SVG, métricas
 ```
 
+### 🖼️ Validação Visual (Pixel-Perfect) — Back-office
+```powershell
+# Instalar browsers do Playwright
+npm run pixel:install
+
+# Rodar testes visuais (usa python -m http.server 8080)
+npm run pixel:test
+
+# Primeira execução: gerar baseline (após revisão de design)
+npm run pixel:update
+
+# Abrir relatório HTML
+npm run pixel:report
+```
+Artefatos são gerados em `validation-artifacts/pixel/report`. O `ci_validator.py` detecta Playwright e copia o relatório para a pasta de artefatos do CI (`--output`).
+
 ## ⚙️ **Configuração Avançada**
 
 ### 📝 **Editar Configuração**

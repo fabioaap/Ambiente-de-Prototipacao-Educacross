@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Teste de Validação Pixel-Perfect - COM DESVIOS</title>
+    <style>
+        /* TESTE: Desvios propositais para validar detector */
+
+        /* ❌ CRÍTICO: Sidebar width errada (260px vs 265px esperado) */
+        .sidebar {
+            width: 260px;
+            /* Figma: 265px */
+            background: #283046;
+            /* ✅ Correto */
+            padding: 40px 16px;
+            /* ✅ Correto */
+        }
+
+        /* ❌ CRÍTICO: Header border errada (#ddd vs #e2e2e3 esperado) */
+        .header {
+            background: white;
+            border-bottom: 1px solid #dddddd;
+            /* Figma: #e2e2e3 */
+            padding: 16px;
+            /* ✅ Correto */
+        }
+
+        /* ⚠️ AVISO: Breadcrumb gap errado (10px vs 8px esperado) */
+        .breadcrumb {
+            display: flex;
+            gap: 10px;
+            /* Figma: 8px */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">Menu</div>
+    <div class="main">
+        <div class="header">Cabeçalho</div>
+        <div class="breadcrumb">
+            <span>Home</span>
+            <span>Banco</span>
+        </div>
+    </div>
+</body>
+
+</html>

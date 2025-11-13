@@ -1,0 +1,59 @@
+<!-- DEV-ONLY: Overlay para comparação rápida com baseline (substitua a URL da imagem) -->
+<style>
+    #devOverlayToggle {
+        position: fixed;
+        bottom: 16px;
+        right: 16px;
+        z-index: 99999;
+    }
+
+    #devOverlayImg {
+        position: fixed;
+        inset: 0;
+        margin: auto;
+        pointer-events: none;
+        opacity: 0.4;
+        display: none;
+        z-index: 99998;
+    }
+
+    #devOverlayPanel {
+        position: fixed;
+        bottom: 64px;
+        right: 16px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 8px;
+        display: none;
+        z-index: 99999;
+    }
+
+    #devOverlayPanel label {
+        font: 13px/20px Montserrat, sans-serif;
+    }
+</style>
+<button id="devOverlayToggle">Overlay</button>
+<div id="devOverlayPanel">
+    <label> Opacidade: <input id="devOverlayOpacity" type="range" min="0" max="1" step="0.05" value="0.4" /></label>
+</div>
+<img id="devOverlayImg" alt="Overlay baseline" src="/__COLOQUE_AQUI_URL_DA_IMAGEM_BASELINE__.png" />
+<script>
+    (function () {
+        const btn = document.getElementById('devOverlayToggle');
+        const img = document.getElementById('devOverlayImg');
+        const panel = document.getElementById('devOverlayPanel');
+        const range = document.getElementById('devOverlayOpacity');
+        if (!btn || !img || !panel || !range) return;
+        btn.addEventListener('click', () => {
+            const isOpen = img.style.display === 'block';
+            img.style.display = isOpen ? 'none' : 'block';
+            panel.style.display = isOpen ? 'none' : 'block';
+        });
+        range.addEventListener('input', () => { img.style.opacity = String(range.value); });
+        // Atalho: Ctrl+Shift+O
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'o') { btn.click(); }
+        });
+    })();
+</script>

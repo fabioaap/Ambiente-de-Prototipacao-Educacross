@@ -24,6 +24,7 @@ from typing import Dict, List, Any, Optional, Tuple
 from datetime import datetime
 import argparse
 import hashlib
+import shutil
 
 class Colors:
     """Cores para output"""
@@ -87,6 +88,17 @@ class CIValidator:
         
         # 2. Analisar resultados
         results = self._analyze_validation_results(validation_result)
+
+        # 2.1. Executar testes visuais (Playwright), se disponíveis
+        print(f"\n{Colors.BLUE}🖼️ Executando validação visual (Playwright), se configurada...{Colors.END}")
+        pixel_status = self._run_pixel_tests()
+        if pixel_status is not None:
+            results.setdefault('aux', {})['pixel_tests'] = pixel_status
+            # Copiar artefatos do relatório visual, se houver
+            try:
+                self._collect_pixel_artifacts()
+            except Exception as e:
+                print(f"{Colors.YELLOW}⚠️ Falha ao coletar artefatos de pixel: {e}{Colors.END}")
         
         # 3. Gerar artefatos
         if self.artifacts_dir:
@@ -100,6 +112,50 @@ class CIValidator:
         self._print_ci_summary(results, duration, exit_code)
         
         return exit_code
+
+    def _run_pixel_tests(self) -> Optional[Dict[str, Any]]:
+        """Executa testes de regressão visual (Playwright), se configurados.
+
+        Retorna um dicionário com status e caminhos de relatório, ou None se não aplicável.
+        """
+        try:
+            config = self.root_path / 'playwright.config.ts'
+            tests_dir = self.root_path / 'tests' / 'pixel'
+            if not config.exists() or not tests_dir.exists():
+                print("  ℹ️ Playwright não configurado (playwright.config.ts ou tests/pixel ausentes). Pulando.")
+                return None
+
+            print("  ▶️ Rodando: npm run pixel:ci")
+            result = subprocess.run(['npm', 'run', 'pixel:ci'], cwd=self.root_path, capture_output=True, text=True, encoding='utf-8')
+            passed = (result.returncode == 0)
+            if not passed:
+                print(f"  {Colors.YELLOW}⚠️ Pixel tests retornaram código {result.returncode}{Colors.END}")
+                if result.stdout:
+                    print(result.stdout[-1000:])
+                if result.stderr:
+                    print(result.stderr[-1000:])
+
+            report_dir = self.root_path / 'validation-artifacts' / 'pixel' / 'report'
+            return {
+                'configured': True,
+                'passed': passed,
+                'report_dir': str(report_dir) if report_dir.exists() else None
+            }
+        except Exception as e:
+            print(f"  {Colors.YELLOW}⚠️ Erro ao executar pixel tests: {e}{Colors.END}")
+            return {'configured': True, 'passed': False, 'error': str(e)}
+
+    def _collect_pixel_artifacts(self) -> None:
+        """Copia artefatos do relatório visual para a pasta de artefatos do CI."""
+        if not self.artifacts_dir:
+            return
+        src = self.root_path / 'validation-artifacts' / 'pixel' / 'report'
+        if src.exists():
+            dst = self.artifacts_dir / 'pixel-report'
+            if dst.exists():
+                shutil.rmtree(dst, ignore_errors=True)
+            shutil.copytree(src, dst)
+            print(f"  {Colors.GREEN}📸 Relatório visual copiado para: {dst}{Colors.END}")
     
     def run_dev_mode(self, watch: bool = False, auto_fix: bool = False) -> None:
         """Executa validação em modo desenvolvimento"""

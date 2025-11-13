@@ -1,0 +1,193 @@
+{
+  "metadata": {
+    "source": "Figma MCP",
+    "nodeId": "10021:53486",
+    "extractedAt": "2025-11-13T19:50:03.435Z",
+    "version": "1.0.0"
+  },
+  "tokens": {
+    "colors": {
+      "menu-backoffice-bg": "#283046",
+      "global-header-border": "#e2e2e3",
+      "home-icon-bg": "#7367f0",
+      "page-title-bg": "#7367f0",
+      "tabs-border": "#ebe9f1",
+      "tab-bg": "#6e6b7b",
+      "stats-bar-bg": "#7367f0",
+      "select-box-border": "#d8d6de",
+      "search-box-border": "#d8d6de",
+      "row-number-bg": "#7367f0",
+      "row-text-bg": "#6e6b7b",
+      "page-btn-bg": "#f5f5f5"
+    },
+    "typography": {},
+    "spacing": {
+      "menu-backoffice-padding-left": "16px",
+      "menu-backoffice-padding-right": "16px",
+      "menu-backoffice-padding-top": "40px",
+      "menu-backoffice-padding-bottom": "40px",
+      "menu-backoffice-gap": "10px",
+      "global-header-padding-left": "16px",
+      "global-header-padding-right": "16px",
+      "global-header-padding-top": "16px",
+      "global-header-padding-bottom": "16px",
+      "breadcrumb-gap": "8px",
+      "tab-padding-top": "12px",
+      "tab-padding-bottom": "12px",
+      "stats-bar-padding-left": "16px",
+      "stats-bar-padding-right": "16px",
+      "stats-bar-padding-top": "12px",
+      "stats-bar-padding-bottom": "12px",
+      "stats-bar-gap": "16px",
+      "badge-padding-left": "9px",
+      "badge-padding-right": "9px",
+      "badge-padding-top": "2px",
+      "badge-padding-bottom": "2px",
+      "badge-gap": "4px",
+      "select-box-padding-left": "12px",
+      "select-box-padding-right": "12px",
+      "select-box-padding-top": "10px",
+      "select-box-padding-bottom": "10px",
+      "btn-padding-left": "20px",
+      "btn-padding-right": "20px",
+      "btn-gap": "8px",
+      "search-box-padding-left": "16px",
+      "search-box-padding-right": "16px",
+      "search-box-padding-top": "12px",
+      "search-box-padding-bottom": "12px",
+      "pagination-padding-left": "20px",
+      "pagination-padding-right": "20px",
+      "pagination-padding-top": "12px",
+      "pagination-padding-bottom": "12px",
+      "pagination-gap": "8px"
+    },
+    "dimensions": {
+      "banco-de-questes---habilidades-width": "1440px",
+      "banco-de-questes---habilidades-height": "900px",
+      "menu-backoffice-width": "265px",
+      "global-header-border-width": "1px",
+      "global-header-border-radius": "10px",
+      "home-icon-width": "14px",
+      "home-icon-height": "14px",
+      "tabs-border-width": "2px",
+      "tab-width": "131px",
+      "stats-bar-border-radius": "6px",
+      "badge-border-radius": "17px",
+      "select-box-border-width": "1px",
+      "select-box-height": "44px",
+      "select-box-border-radius": "6px",
+      "btn-height": "44px",
+      "btn-border-radius": "6px",
+      "search-box-border-width": "1px",
+      "search-box-border-radius": "5px",
+      "row-number-width": "64px",
+      "page-btn-width": "32px",
+      "page-btn-height": "32px"
+    },
+    "effects": {},
+    "hierarchy": {
+      "banco-de-questes---habilidades": {
+        "type": "FRAME",
+        "name": "Banco de Questões - Habilidades",
+        "cssClass": "banco-de-questes---habilidades",
+        "children": 15
+      },
+      "banco-de-questes---habilidades > menu-backoffice": {
+        "type": "FRAME",
+        "name": "menu-backoffice",
+        "cssClass": "menu-backoffice",
+        "children": 0
+      },
+      "banco-de-questes---habilidades > global-header": {
+        "type": "FRAME",
+        "name": "global-header",
+        "cssClass": "global-header",
+        "children": 0
+      },
+      "banco-de-questes---habilidades > breadcrumb": {
+        "type": "FRAME",
+        "name": "breadcrumb",
+        "cssClass": "breadcrumb",
+        "children": 1
+      },
+      "banco-de-questes---habilidades > breadcrumb > home-icon": {
+        "type": "INSTANCE",
+        "name": "home-icon",
+        "cssClass": "home-icon",
+        "children": 0
+      },
+      "banco-de-questes---habilidades > page-title": {
+        "type": "TEXT",
+        "name": "page-title",
+        "cssClass": "page-title",
+        "children": 0
+      },
+      "banco-de-questes---habilidades > tabs": {
+        "type": "FRAME",
+        "name": "tabs",
+        "cssClass": "tabs",
+        "children": 0
+      },
+      "banco-de-questes---habilidades > tab": {
+        "type": "FRAME",
+        "name": "tab",
+        "cssClass": "tab",
+        "children": 0
+      },
+      "banco-de-questes---habilidades > stats-bar": {
+        "type": "FRAME",
+        "name": "stats-bar",
+        "cssClass": "stats-bar",
+        "children": 0
+      },
+      "banco-de-questes---habilidades > badge": {
+        "type": "FRAME",
+        "name": "badge",
+        "cssClass": "badge",
+        "children": 0
+      },
+      "banco-de-questes---habilidades > select-box": {
+        "type": "FRAME",
+        "name": "select-box",
+        "cssClass": "select-box",
+        "children": 0
+      },
+      "banco-de-questes---habilidades > btn": {
+        "type": "FRAME",
+        "name": "btn",
+        "cssClass": "btn",
+        "children": 0
+      },
+      "banco-de-questes---habilidades > search-box": {
+        "type": "FRAME",
+        "name": "search-box",
+        "cssClass": "search-box",
+        "children": 0
+      },
+      "banco-de-questes---habilidades > row-number": {
+        "type": "TEXT",
+        "name": "row-number",
+        "cssClass": "row-number",
+        "children": 0
+      },
+      "banco-de-questes---habilidades > row-text": {
+        "type": "TEXT",
+        "name": "row-text",
+        "cssClass": "row-text",
+        "children": 0
+      },
+      "banco-de-questes---habilidades > pagination": {
+        "type": "FRAME",
+        "name": "pagination",
+        "cssClass": "pagination",
+        "children": 0
+      },
+      "banco-de-questes---habilidades > page-btn": {
+        "type": "FRAME",
+        "name": "page-btn",
+        "cssClass": "page-btn",
+        "children": 0
+      }
+    }
+  }
+}
