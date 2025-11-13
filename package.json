@@ -18,7 +18,8 @@
     "check-env": "node check-env.cjs",
     "check-deps": "node -e \"console.log('✅ Dependências instaladas')\"",
     "check-types": "tsc --noEmit",
-    "verify": "npm run check-env"
+    "verify": "npm run check-env",
+    "validate": "node scripts/validate_latest.js"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",

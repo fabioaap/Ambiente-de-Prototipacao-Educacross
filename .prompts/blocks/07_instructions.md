@@ -15,3 +15,13 @@
 - Resumo de decisões
 - Autoavaliação (0-10) e nível de confiança (%)
 - Modo sintético, se solicitado
+
+## Etapa final obrigatória
+
+Após emitir os três blocos (IR, HTML e CSS), execute o comando abaixo na raiz do projeto para validar o resultado e exibir o relatório JSON:
+
+```shell
+npm run validate
+```
+
+Isso garante que o agente MCP sempre rode o validador (`node scripts/validate_latest.js`) ao final do fluxo de geração, exibindo o relatório de erros/avisos automaticamente.

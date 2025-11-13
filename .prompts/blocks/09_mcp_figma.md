@@ -74,7 +74,6 @@ Sem qualquer outro texto
 AUDITORIA VISUAL OPCIONAL
 * Depois de emitir IR HTML e CSS chamar mcp_figma_get_screenshot uma unica vez para conferencia rapida sem OCR
 
-
 //Bloco 2 • Validador de IR HTML e CSS
 
 TITULO
@@ -205,7 +204,7 @@ export function runChecks({ ir_json, html_str, css_str, expectedNodeCount }) {
     const block = rootBlock[1];
     tokenVars.forEach(v => {
       const cssVar = v.startsWith("--") ? v : `--${v.replace(/[^a-z0-9_-]/gi,"").toLowerCase()}`;
-      if (!new RegExp(`${cssVar}\\s*:`,"i").test(block)) {
+      if (!new RegExp(`${cssVar}\\s*:`, "i").test(block)) {
         warnings.push(`Variavel ${cssVar} nao encontrada em :root`);
       }
     });
@@ -222,7 +221,7 @@ export function runChecks({ ir_json, html_str, css_str, expectedNodeCount }) {
   }
 
   // 9 Duplicidades de id
-  const ids = [...html_str.matchAll(/id\s*=\s*["']([^"']+)["']/g)].map(m => m[1]);
+  const ids = [...html_str.matchAll(/id\s*=\s*['\"]([^'\"]+)['\"]/g)].map(m => m[1]);
   const dup = ids.filter((x, i) => ids.indexOf(x) !== i);
   if (dup.length) errors.push(`Ids duplicados no HTML: ${[...new Set(dup)].join(", ")}`);
 
@@ -237,3 +236,81 @@ export function runChecks({ ir_json, html_str, css_str, expectedNodeCount }) {
     return { summary, errors, warnings, tips };
   }
 }
+
+//Bloco 4 • Coleta MCP por blocos e armazenamento em memória
+
+TITULO
+Coleta MCP por blocos com IR HTML CSS em memoria
+
+CONTEXTO
+Estou no Figma desktop com servidor MCP local ativo. Existe um Frame alvo visivel. Toda chamada deve incluir clientFrameworks: vanilla e clientLanguages: html,css. Nao fazer perguntas. Nao salvar arquivos nem anunciar resultados parciais.
+
+FERRAMENTAS PERMITIDAS
+mcp_figma_get_metadata
+mcp_figma_get_design_context
+mcp_figma_get_variable_defs
+mcp_figma_get_code_connect_map
+
+POLITICA
+• Nao salvar arquivos ainda
+• Trabalhar com buffers em memoria para IR, HTML e CSS de cada bloco
+• Apenas ao final sinalizar “OK blocos em memoria e prontos para montagem” com estatisticas de contagem de nos por bloco e total geral
+
+PASSOS
+1 • Chamar mcp_figma_get_metadata no Frame alvo para listar os ids dos filhos diretos em ordem de empilhamento
+2 • Para cada id chamar mcp_figma_get_design_context e produzir IR parcial daquele subframe
+   • Mapear auto layout para flex (direction, gap, padding, justify, align)
+   • Mapear layout grid para CSS Grid quando existir
+   • Preencher constraints coerentes com o pai
+3 • Guardar para cada bloco:
+   • ir_parcial
+   • html_parcial com classes locais de escopo (ex.: prefixo .blkX)
+   • css_parcial que usa apenas variaveis do Figma
+4 • Ao terminar todos os blocos chamar mcp_figma_get_variable_defs uma vez e normalizar tokens para custom properties em :root
+5 • Se existir Code Connect chamar mcp_figma_get_code_connect_map e anotar componentKey e variantProps nas Instances; se nao existir, tratar Instances como blocos genericos nomeando classes pelo nome da instancia
+6 • Responder somente uma mensagem: “OK blocos em memoria e prontos para montagem” e incluir estatisticas de nos por bloco e no total
+
+//Bloco 5 • Montagem final unica a partir de blocos MCP em memoria
+
+TITULO
+Montagem final unica a partir de blocos MCP em memoria
+
+OBJETIVO
+Unificar todos os blocos coletados no Bloco 4 em uma pagina unica HTML e CSS vanilla com fidelidade maxima. Nao fazer perguntas.
+
+ENTRADAS
+• Buffers em memoria criados no Bloco 4: ir_parcial, html_parcial, css_parcial
+• Tokens normalizados de mcp_figma_get_variable_defs
+• Mapa do Code Connect se existir (componentKey e variantProps nas Instances)
+
+REGRAS DE CONSOLIDACAO
+1 • IR
+   • Unir todos os ir_parcial em um IR unico na ordem de empilhamento do metadata
+   • Validar que a contagem de nos no IR final corresponde à soma das contagens parciais
+2 • HTML
+   • Criar esqueleto com tags semanticas (header, nav, main, footer) de acordo com a hierarquia do Frame
+   • Injetar cada html_parcial no local correto, preservando os prefixos de classe de cada bloco
+   • Nao usar estilo inline
+3 • CSS
+   • Criar :root com todos os tokens provenientes de variaveis do Figma, removendo duplicatas
+   • Concatenar css_parcial na ordem dos blocos
+   • Resolver conflitos por precedencia: tokens primeiro, estilos base, blocos em sequencia
+   • Incluir regras de flex e grid derivadas do IR consolidado
+   • Incluir apenas responsividade derivada de constraints
+4 • Instances
+   • Se houver Code Connect, usar componentKey e variantProps para nomear classes e estados
+   • Se nao houver, usar o nome normalizado da instancia e variantProps como modificadores de classe
+
+SAIDA
+Emitir exatamente tres blocos nesta ordem:
+1 • IR  JSON completo consolidado
+2 • HTML  unico com toda a pagina
+3 • CSS  unico com :root e regras para flex e grid
+Depois disso, nao adicionar mais nada além de “pagina montada” se for necessario indicar conclusao
+
+CHECKLIST RAPIDO
+• Sem estilos inline
+• :root presente com variaveis usadas
+• Pelo menos uma regra display flex se o IR tiver auto layout
+• Grid presente no CSS quando o IR tiver grid
+• Contagem de nos do IR confere com o total
