@@ -2,6 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
     testDir: 'tests/pixel',
+    testMatch: ['**/*.e2e.ts'],
     /* Mais tempo para fontes e assets externos */
     timeout: 60_000,
     retries: 0,

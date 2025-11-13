@@ -1,0 +1,55 @@
+name: backoffice-pixel-gate
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  pixel-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Verificar tipos TS
+        run: npm run check-types
+
+      - name: Testes unitários (Vitest)
+        run: npm test -- --run
+
+      - name: Validar estrutura pixel-perfect
+        run: npm run pixel:validate-structure
+
+      - name: Instalar browsers Playwright
+        run: npm run pixel:install
+
+      - name: Testes visuais Playwright (CI)
+        run: npm run pixel:ci
+
+      - name: Publicar relatório visual
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pixel-report
+          path: validation-artifacts/pixel/report
+
+    permissions:
+      contents: read
+      checks: write
+      actions: read
+
+# Regras de falha:
+# - Qualquer etapa com exit code != 0 bloqueia merge
+# - pixel:validate-structure garante tokens + HTML dentro do threshold
+# - pixel:ci gera screenshots comparando snapshots; dif > limites falha

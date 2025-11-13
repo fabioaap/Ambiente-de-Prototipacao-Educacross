@@ -1,4 +1,6 @@
-# Ambiente de Prototipação Educacross
+# Ambiente de Prototipação Educacross 
+
+![Status Pixel Gate](https://img.shields.io/badge/pixel--gate-pending-lightgrey)
 
 Este repositório contém protótipos e páginas HTML para o projeto Educacross.
 
