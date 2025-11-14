@@ -46,6 +46,10 @@
     "visual:compare": "node scripts/visual-regression.cjs --manifest=validation/mcp-figma.manifest.json --mode=compare --out=validation-artifacts/screenshots/visual-regression-report.json",
     "visual:update": "node scripts/visual-regression.cjs --manifest=validation/mcp-figma.manifest.json --mode=update --out=validation-artifacts/screenshots/visual-regression-report.json",
     "validate:interactive": "node scripts/validate-interactive-states.cjs --manifest=validation/mcp-figma.manifest.json --out=validation-artifacts/interactive/interactive-states-report.json",
+    "tokens:sync": "node scripts/sync-design-tokens.cjs --file-id=REPLACE_ME --tokens=packages/tokens/tokens.json --out=validation-artifacts/tokens/sync-report.json",
+    "tokens:sync-update": "node scripts/sync-design-tokens.cjs --file-id=REPLACE_ME --tokens=packages/tokens/tokens.json --update",
+    "assets:download": "node scripts/download-figma-assets.cjs --manifest=validation/mcp-figma.manifest.json --format=svg --out-dir=validation-artifacts/assets/svg",
+    "assets:download-png": "node scripts/download-figma-assets.cjs --manifest=validation/mcp-figma.manifest.json --format=png --scale=2 --out-dir=validation-artifacts/assets/png",
     "serve:static": "node scripts/serve-static.cjs"
   },
   "dependencies": {
