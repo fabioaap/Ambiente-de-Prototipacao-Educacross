@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-14T12:13:31.280Z",
+  "timestamp": "2025-11-14T13:38:32.162Z",
   "validators": {
     "mcp": {
       "nome": "MCP Validator",
@@ -34,13 +34,13 @@
     "gate": {
       "nome": "MCP Gate",
       "tipo": "ci-cd-gate",
-      "success": true,
-      "exitCode": 0
+      "success": false,
+      "exitCode": 1
     }
   },
   "consolidado": {
     "total": 3,
-    "passed": 3,
-    "failed": 0
+    "passed": 2,
+    "failed": 1
   }
 }

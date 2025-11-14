@@ -20,6 +20,8 @@
     "check-types": "tsc --noEmit",
     "verify": "npm run check-env",
     "validate": "node scripts/validate_latest.js",
+    "mcp:check": "node scripts/check-mcp-figma.cjs",
+    "mcp:recover": "node scripts/check-mcp-figma.cjs --auto-recover",
     "pixel:install": "npx playwright install --with-deps",
     "pixel:serve": "python -m http.server 8080",
     "pixel:test": "playwright test",

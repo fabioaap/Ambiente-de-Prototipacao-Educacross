@@ -1,7 +1,7 @@
 {
-  "url": "http://localhost:8081/Back-office/Gerador%20de%20Quest%C3%B5es%20por%20IA%20%E2%80%93%20BackOffice/banco-questoes-pixel-perfect.html",
+  "url": "http://localhost:8081/Back-office/Gerador%20de%20Quest%C3%B5es%20por%20IA%20%E2%80%93%20BackOffice/banco-de-questoes-pixel-perfect.html",
   "browser": "chromium",
-  "timestamp": "2025-11-14T11:38:22.451Z",
+  "timestamp": "2025-11-14T13:07:30.879Z",
   "fontes": {
     "carregadas": [
       {
@@ -34,20 +34,15 @@
       }
     ],
     "faltando": [],
-    "fallback": [
-      {
-        "fontFamily": "Arial",
-        "alerta": "Usando fonte de fallback sem Montserrat no stack"
-      }
-    ],
+    "fallback": [],
     "total": 4
   },
   "status": "PASSED",
-  "warnings": 1,
+  "warnings": 0,
   "summary": {
     "total": 4,
     "carregadas": 4,
     "faltando": 0,
-    "fallback": 1
+    "fallback": 0
   }
 }

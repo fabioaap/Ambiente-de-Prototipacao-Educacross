@@ -215,17 +215,21 @@
 
         /* STATS BAR */
         div[data-role="stats-bar"] {
-            background: rgba(115, 103, 240, 0.12);
+            background: #7367f0;
+            /* Figma token: stats-bar-bg (SÓLIDO) */
             border-radius: 6px;
-            padding: 0 20px;
+            padding: 12px 16px;
+            /* Figma token: stats-bar-padding (era 0 20px) */
             height: 44px;
             display: flex;
             align-items: center;
-            gap: 65px;
+            gap: 16px;
+            /* Figma token: stats-bar-gap (era 65px) */
         }
 
         .stats-label {
-            color: #7367f0;
+            color: #ffffff;
+            /* Branco para contrastar com bg #7367f0 */
             font-size: 14px;
             font-weight: 700;
             line-height: 21px;
@@ -246,10 +250,12 @@
         .badge {
             background: rgba(115, 103, 240, 0.12);
             border-radius: 17px;
-            padding: 1px 9px;
+            padding: 2px 9px;
+            /* Figma token: badge-padding (era 1px 9px) */
             display: inline-flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
+            /* Figma token: badge-gap (era 3px) */
             font-size: 12px;
             font-weight: 700;
             line-height: 18px;
@@ -309,7 +315,8 @@
         .filter-select {
             background: white;
             border: 1px solid #d8d6de;
-            border-radius: 5px;
+            border-radius: 6px;
+            /* Figma token: select-border-radius (era 5px) */
             padding: 10px;
             height: 44px;
             display: flex;
@@ -350,7 +357,8 @@
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            /* Figma token: btn-gap (era 5px) */
             white-space: nowrap;
         }
 
@@ -486,7 +494,8 @@
             background: white;
             border-top: 1px solid #ebe9f1;
             border-radius: 0 0 6px 6px;
-            padding: 10px 20px;
+            padding: 12px 20px;
+            /* Figma token: pagination-padding (era 10px 20px) */
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -499,8 +508,10 @@
         }
 
         .pagination-button {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            /* Figma token: pagination-btn-size (era 28px) */
+            height: 32px;
+            /* Figma token: pagination-btn-size (era 28px) */
             border-radius: 29px;
             background: #f3f2f7;
             border: none;
@@ -528,10 +539,8 @@
     <!-- SIDEBAR -->
     <aside data-role="sidebar">
         <div class="sidebar-logo">
-            <img src="http://localhost:3845/assets/b0ad2d7766519f25b183f71972c018517c4238c1.svg" alt="Educacross Icon"
-                class="sidebar-logo-icon">
-            <img src="http://localhost:3845/assets/d5b233d31729e205ae6dadb67a031280983ec9a2.svg" alt="Educacross"
-                class="sidebar-logo-text">
+            <img src="assets/logo-icon-real.svg" alt="Educacross Icon" class="sidebar-logo-icon">
+            <img src="assets/logo-text-real.svg" alt="Educacross" class="sidebar-logo-text">
         </div>
         <nav class="sidebar-menu">
             <a href="#" class="menu-item">

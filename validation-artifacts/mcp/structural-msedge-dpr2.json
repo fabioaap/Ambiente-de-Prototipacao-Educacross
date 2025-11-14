@@ -148,7 +148,7 @@
         "height": 44
       },
       "obtido": {
-        "background-color": "rgba(115, 103, 240, 0.12)",
+        "background-color": "rgb(115, 103, 240)",
         "color": "rgb(0, 0, 0)",
         "font-family": "Montserrat, sans-serif",
         "font-size": "16px",
@@ -174,17 +174,17 @@
         "min-width": "auto",
         "max-height": "none",
         "max-width": "none",
-        "padding-top": "0px",
-        "padding-right": "20px",
-        "padding-bottom": "0px",
-        "padding-left": "20px",
+        "padding-top": "12px",
+        "padding-right": "16px",
+        "padding-bottom": "12px",
+        "padding-left": "16px",
         "margin-top": "0px",
         "margin-right": "0px",
         "margin-bottom": "0px",
         "margin-left": "0px",
-        "gap": "65px",
-        "row-gap": "65px",
-        "column-gap": "65px",
+        "gap": "16px",
+        "row-gap": "16px",
+        "column-gap": "16px",
         "border-radius": "6px",
         "border-top-color": "rgb(0, 0, 0)",
         "border-top-width": "0px",
@@ -206,7 +206,12 @@
         "overflow-y": "visible",
         "cursor": "auto"
       },
-      "diffs": {}
+      "diffs": {
+        "background-color": {
+          "esperado": "rgba(115, 103, 240, 0.12)",
+          "obtido": "#7367f0"
+        }
+      }
     }
   ]
 }

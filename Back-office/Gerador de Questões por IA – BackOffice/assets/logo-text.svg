@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="174" height="45" viewBox="0 0 174 45" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Educacross Text">
+  <title>educacross</title>
+  <!-- Texto "educa" em verde -->
+  <text x="0" y="32" font-family="Montserrat, Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="0.5" fill="#28C76F">educa</text>
+  <!-- Texto "cross" em vermelho -->
+  <text x="78" y="32" font-family="Montserrat, Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="0.5" fill="#EA5455">cross</text>
+</svg>
