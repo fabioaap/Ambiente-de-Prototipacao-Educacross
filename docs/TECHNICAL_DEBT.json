@@ -1,15 +1,15 @@
 {
     "p0": 0,
-    "p1": 3,
-    "p2": 7,
-    "effortHours": 2.5,
-    "recoveryRate": 78,
+    "p1": 2,
+    "p2": 8,
+    "effortHours": 2.25,
+    "recoveryRate": 80,
     "status": "healthy",
-    "lastUpdate": "2025-11-14T13:30:00Z",
+    "lastUpdate": "2025-11-14T14:45:00Z",
     "details": [
         {
-            "id": "P1-001",
-            "priority": "P1",
+            "id": "P1-001-RESOLVED",
+            "priority": "P2",
             "title": "Consolidar diretórios duplicados no Back-office",
             "impact": "Confusão de caminhos ao salvar assets (SVG logos)",
             "workaround": "Copiar manualmente SVGs para ambos os diretórios",
@@ -18,10 +18,13 @@
             "recurrences": 2,
             "firstSeen": "2025-11-13T14:20:00Z",
             "lastSeen": "2025-11-14T10:15:00Z",
+            "resolvedAt": "2025-11-14T14:45:00Z",
+            "resolution": "Diretório duplicado deletado. SVGs com preserveAspectRatio corrigido e CSS height: auto aplicado.",
             "tags": [
                 "path-conflict",
                 "assets",
-                "backoffice"
+                "backoffice",
+                "resolved"
             ]
         },
         {

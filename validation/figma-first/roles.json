@@ -1,0 +1,7 @@
+{
+    "roles": {
+        "statsBar": "Barra de estatísticas (topo)",
+        "badges": "Badges de contagem e temáticas",
+        "icons": "Ícones SVG usados na página"
+    }
+}

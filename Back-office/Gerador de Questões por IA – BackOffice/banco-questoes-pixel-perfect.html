@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/basis.css">
     <style>
         * {
             margin: 0;
@@ -17,15 +17,25 @@
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background: #f8f8f8;
+            font-family: var(--font-sans);
+            background: var(--bg);
             display: flex;
             min-height: 100vh;
         }
 
+        /* ÍCONES (via CSS mask com currentColor) */
+        .icon {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            background-color: currentColor;
+            -webkit-mask: var(--icon) no-repeat center / contain;
+            mask: var(--icon) no-repeat center / contain;
+        }
+
         /* SIDEBAR */
         aside[data-role="sidebar"] {
-            background: #283046;
+            background: var(--sidebar-bg);
             width: 265px;
             min-height: 100vh;
             display: flex;
@@ -49,7 +59,7 @@
             left: 0;
             top: 4px;
             width: 51px;
-            height: 51px;
+            height: auto;
         }
 
         .sidebar-logo-text {
@@ -57,7 +67,7 @@
             left: 56px;
             top: 0;
             width: 174px;
-            height: 45px;
+            height: auto;
         }
 
         .sidebar-menu {
@@ -80,12 +90,12 @@
         }
 
         .menu-item:hover {
-            background: rgba(115, 103, 240, 0.1);
+            background: var(--primary-12);
             color: #fff;
         }
 
         .menu-item.active {
-            background: #7367f0;
+            background: var(--primary);
             color: #fff;
         }
 
@@ -93,36 +103,69 @@
             font-size: 20px;
         }
 
+        .menu-icon {
+            width: 20px;
+            height: 20px;
+            color: #d0d2d6;
+            transition: color 0.2s;
+        }
+
+        .menu-item:hover .menu-icon,
+        .menu-item.active .menu-icon {
+            color: var(--primary);
+        }
+
         /* MAIN CONTENT */
         main {
             margin-left: 265px;
             flex: 1;
             padding: 20px;
+            padding-top: 98px;
             display: flex;
             flex-direction: column;
             gap: 20px;
+            position: relative;
         }
 
         /* HEADER */
         header[data-role="header"] {
-            background: white;
-            border: 1px solid #e2e2e3;
-            border-radius: 10px;
-            padding: 16px;
+            background: var(--surface);
+            border: 1px solid var(--divider);
+            border-radius: var(--radius-10);
+            padding: var(--space-16);
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            gap: 12px;
+            gap: var(--space-12);
+            position: fixed;
+            top: var(--space-20);
+            left: 285px;
+            right: var(--space-20);
+            z-index: var(--z-header);
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Bloqueio de conteúdo atrás do header */
+        main::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 265px;
+            right: 0;
+            height: 98px;
+            background: var(--bg);
+            z-index: var(--z-header-blocker);
+            pointer-events: none;
         }
 
         .header-user {
-            color: #6e6b7b;
+            color: var(--text-body);
             font-size: 14px;
             font-weight: 400;
         }
 
         .header-avatar {
-            background: #7367f0;
+            background: var(--primary);
             color: white;
             width: 42px;
             height: 42px;
@@ -151,27 +194,33 @@
 
         .breadcrumb-item .material-icons {
             font-size: 14px;
-            color: #7367f0;
+            color: var(--primary);
+        }
+
+        .breadcrumb-item .icon {
+            width: 14px;
+            height: 14px;
+            color: var(--primary);
         }
 
         .breadcrumb-separator .material-icons {
             font-size: 14px;
-            color: #6e6b7b;
+            color: var(--text-body);
         }
 
         .breadcrumb-text {
-            color: #6e6b7b;
+            color: var(--text-body);
             font-weight: 400;
         }
 
         .breadcrumb-text.active {
-            color: #5e5873;
+            color: var(--text-strong);
             font-weight: 400;
         }
 
         /* PAGE TITLE */
         h1[data-role="page-title"] {
-            color: #7367f0;
+            color: var(--primary);
             font-size: 28px;
             font-weight: 500;
             line-height: normal;
@@ -181,26 +230,26 @@
         div[data-role="tabs"] {
             display: flex;
             gap: 0;
-            border-bottom: 2px solid #7367f0;
+            border-bottom: 2px solid var(--primary);
             position: relative;
         }
 
         .tab {
-            padding: 12px 20px;
+            padding: var(--space-12) var(--space-20);
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             border: none;
             background: transparent;
             position: relative;
-            color: #6e6b7b;
+            color: var(--text-body);
             transition: color 0.2s;
         }
 
         .tab.active {
             color: #fff;
-            background: #7367f0;
-            border-radius: 6px 6px 0 0;
+            background: var(--primary);
+            border-radius: var(--radius-6) var(--radius-6) 0 0;
         }
 
         .tab.active::after {
@@ -210,26 +259,22 @@
             left: 0;
             right: 0;
             height: 2px;
-            background: #7367f0;
+            background: var(--primary);
         }
 
         /* STATS BAR */
         div[data-role="stats-bar"] {
-            background: #7367f0;
-            /* Figma token: stats-bar-bg (SÓLIDO) */
-            border-radius: 6px;
-            padding: 12px 16px;
-            /* Figma token: stats-bar-padding (era 0 20px) */
+            background: var(--primary-12);
+            border-radius: var(--radius-6);
+            padding: var(--space-12) var(--space-16);
             height: 44px;
             display: flex;
             align-items: center;
-            gap: 16px;
-            /* Figma token: stats-bar-gap (era 65px) */
+            gap: var(--space-16);
         }
 
         .stats-label {
-            color: #ffffff;
-            /* Branco para contrastar com bg #7367f0 */
+            color: var(--primary);
             font-size: 14px;
             font-weight: 700;
             line-height: 21px;
@@ -244,36 +289,36 @@
         .stats-divider {
             width: 1px;
             height: 20px;
-            background: #d8d6de;
+            background: var(--divider);
         }
 
         .badge {
-            background: rgba(115, 103, 240, 0.12);
+            background: var(--primary-12);
             border-radius: 17px;
             padding: 2px 9px;
-            /* Figma token: badge-padding (era 1px 9px) */
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            /* Figma token: badge-gap (era 3px) */
+            gap: var(--space-3);
             font-size: 12px;
             font-weight: 700;
             line-height: 18px;
-            color: #7367f0;
+            font-family: var(--font-sans);
+            color: var(--primary);
         }
 
         .badge.pink {
-            background: rgba(214, 51, 132, 0.12);
-            color: #d63384;
+            background: var(--pink-12);
+            color: var(--pink);
+        }
+
+        .badge.cyan {
+            background: var(--cyan-12);
+            color: var(--cyan);
         }
 
         .badge.warning {
-            background: rgba(255, 159, 67, 0.12);
-            color: #ff9f43;
-        }
-
-        .badge .material-icons {
-            font-size: 16px;
+            background: var(--warning-12);
+            color: var(--warning);
         }
 
         .badge img {
@@ -281,12 +326,17 @@
             height: 16px;
         }
 
+        .badge .icon {
+            width: 16px;
+            height: 16px;
+        }
+
         /* FILTERS CARD */
         div[data-role="filters-card"] {
-            background: white;
-            border-radius: 6px;
+            background: var(--surface);
+            border-radius: var(--radius-6);
             box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.06);
-            padding: 20px;
+            padding: var(--space-20);
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -306,29 +356,28 @@
         }
 
         .filter-label {
-            color: #6e6b7b;
+            color: var(--text-body);
             font-size: 12px;
             font-weight: 700;
             line-height: normal;
         }
 
         .filter-select {
-            background: white;
-            border: 1px solid #d8d6de;
-            border-radius: 6px;
-            /* Figma token: select-border-radius (era 5px) */
-            padding: 10px;
+            background: var(--surface);
+            border: 1px solid var(--divider);
+            border-radius: var(--radius-6);
+            padding: var(--space-10);
             height: 44px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
             font-size: 14px;
-            color: #6e6b7b;
+            color: var(--text-body);
         }
 
         .filter-select.selected {
-            color: #7367f0;
+            color: var(--primary);
         }
 
         .filter-select-content {
@@ -342,34 +391,39 @@
             height: 26px;
         }
 
+        .filter-select .icon {
+            width: 18px;
+            height: 18px;
+            color: var(--text-body);
+        }
+
         .filter-select .material-icons {
             font-size: 18px;
-            color: #6e6b7b;
+            color: var(--text-body);
         }
 
         .filter-button {
             height: 44px;
-            padding: 10px 20px;
-            border-radius: 6px;
+            padding: var(--space-10) var(--space-20);
+            border-radius: var(--radius-6);
             font-size: 14px;
             font-weight: 700;
             line-height: 21px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
-            /* Figma token: btn-gap (era 5px) */
+            gap: var(--space-8);
             white-space: nowrap;
         }
 
         .filter-button.outline {
             background: transparent;
-            border: 1px solid #7367f0;
-            color: #7367f0;
+            border: 1px solid var(--primary);
+            color: var(--primary);
         }
 
         .filter-button.primary {
-            background: #7367f0;
+            background: var(--primary);
             border: none;
             color: white;
         }
@@ -379,10 +433,10 @@
         }
 
         .search-input {
-            background: white;
-            border: 1px solid #d8d6de;
+            background: var(--surface);
+            border: 1px solid var(--divider);
             border-radius: 5px;
-            padding: 12px 16px;
+            padding: var(--space-12) var(--space-16);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -394,8 +448,8 @@
             flex: 1;
             font-size: 14px;
             font-weight: 700;
-            color: #babfc7;
-            font-family: 'Montserrat', sans-serif;
+            color: var(--text-muted);
+            font-family: var(--font-sans);
         }
 
         .search-input .material-icons {
@@ -403,19 +457,25 @@
             color: #82868b;
         }
 
+        .search-input .icon {
+            width: 18px;
+            height: 18px;
+            color: #82868b;
+        }
+
         /* TABLE CARD */
         div[data-role="table-card"] {
-            background: white;
-            border-radius: 6px;
+            background: var(--surface);
+            border-radius: var(--radius-6);
             box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.16);
             display: flex;
             flex-direction: column;
         }
 
         .table-row {
-            border-top: 1px solid #ebe9f1;
-            border-bottom: 1px solid #ebe9f1;
-            padding: 10px 20px;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: var(--space-10) var(--space-20);
             display: flex;
             align-items: center;
             gap: 20px;
@@ -423,18 +483,17 @@
         }
 
         .table-row.expandable {
-            background: white;
+            background: var(--surface);
         }
 
         .table-row.child {
-            background: #f5f5f5;
-            padding-left: 60px;
+            background: var(--bg-alt);
         }
 
         .table-expand-icon {
             cursor: pointer;
             font-size: 24px;
-            color: #7367f0;
+            color: var(--primary);
         }
 
         .table-expand-icon.rotate {
@@ -442,60 +501,104 @@
         }
 
         .table-number {
-            color: #7367f0;
+            color: var(--primary);
             font-size: 14px;
             font-weight: 700;
             line-height: 24px;
-            width: 83px;
+            width: calc(83px + var(--indent, 0px));
+            padding-left: var(--indent, 0px);
         }
 
         .table-content {
             flex: 1;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 5px;
+            min-width: 0;
         }
 
         .table-title {
-            color: #7367f0;
+            color: var(--primary);
             font-size: 14px;
             font-weight: 700;
             line-height: 24px;
+            flex: none;
         }
 
         .table-description {
             flex: 1;
-            color: #6e6b7b;
+            color: var(--text-body);
             font-size: 14px;
             font-weight: 400;
-            line-height: normal;
+            line-height: 20px;
+            min-width: 0;
         }
 
         .table-badges {
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-shrink: 0;
         }
 
         .table-actions {
             display: flex;
             align-items: center;
             gap: 10px;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        /* Utilitárias para hierarquia (Tópicos) */
+        .indent-0 {
+            --indent: 0px;
+        }
+
+        .indent-1 {
+            --indent: 40px;
+        }
+
+        .indent-2 {
+            --indent: 80px;
+        }
+
+        .bg-depth-0 {
+            background: #ffffff;
+        }
+
+        .bg-depth-1 {
+            background: #ececec;
+        }
+
+        .bg-depth-2 {
+            background: #dfdfdf;
+        }
+
+        .gap-root {
+            gap: 5px;
+        }
+
+        .gap-child {
+            gap: 10px;
         }
 
         .action-icon {
             cursor: pointer;
-            color: #7367f0;
+            color: var(--primary);
             font-size: 24px;
+        }
+
+        .action-icon.icon {
+            width: 24px;
+            height: 24px;
         }
 
         /* PAGINATION */
         div[data-role="pagination"] {
-            background: white;
-            border-top: 1px solid #ebe9f1;
-            border-radius: 0 0 6px 6px;
-            padding: 12px 20px;
-            /* Figma token: pagination-padding (era 10px 20px) */
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-radius: 0 0 var(--radius-6) var(--radius-6);
+            padding: var(--space-10) var(--space-20);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -508,22 +611,30 @@
         }
 
         .pagination-button {
-            width: 32px;
-            /* Figma token: pagination-btn-size (era 28px) */
-            height: 32px;
-            /* Figma token: pagination-btn-size (era 28px) */
+            width: var(--space-28);
+            height: var(--space-28);
             border-radius: 29px;
-            background: #f3f2f7;
+            background: var(--surface-weak);
             border: none;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: #6e6b7b;
+            color: var(--text-body);
+            transition: all 0.2s;
+        }
+
+        .pagination-button:hover:not(:disabled):not(.active) {
+            background: #e8e7f0;
+        }
+
+        .pagination-button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
         }
 
         .pagination-button.active {
-            background: #7367f0;
+            background: var(--primary);
             color: white;
             font-size: 14px;
             font-weight: 600;
@@ -531,6 +642,11 @@
 
         .pagination-button .material-icons {
             font-size: 16px;
+        }
+
+        .pagination-button .icon {
+            width: 16px;
+            height: 16px;
         }
     </style>
 </head>
@@ -544,46 +660,46 @@
         </div>
         <nav class="sidebar-menu">
             <a href="#" class="menu-item">
-                <span class="material-icons">home</span>
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-home.svg');"></span>
                 <span>Dashboard</span>
             </a>
             <a href="#" class="menu-item">
-                <span class="material-icons">sports_esports</span>
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-games.svg');"></span>
                 <span>Games</span>
             </a>
             <a href="#" class="menu-item active">
-                <span class="material-icons">menu_book</span>
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-gestao.svg');"></span>
                 <span>Gestão de Atividades</span>
             </a>
             <a href="#" class="menu-item" style="padding-left: 42px;">
                 <span>Banco de Questões</span>
             </a>
             <a href="#" class="menu-item">
-                <span class="material-icons">school</span>
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-escolas.svg');"></span>
                 <span>Escolas</span>
             </a>
             <a href="#" class="menu-item">
-                <span class="material-icons">person</span>
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-usuarios.svg');"></span>
                 <span>Usuários</span>
             </a>
             <a href="#" class="menu-item">
-                <span class="material-icons">event</span>
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-calendario.svg');"></span>
                 <span>Calendário</span>
             </a>
             <a href="#" class="menu-item">
-                <span class="material-icons">auto_stories</span>
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-biblioteca.svg');"></span>
                 <span>Biblioteca</span>
             </a>
             <a href="#" class="menu-item">
-                <span class="material-icons">screen_search_desktop</span>
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-analises.svg');"></span>
                 <span>Análises</span>
             </a>
             <a href="#" class="menu-item">
-                <span class="material-icons">import_contacts</span>
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-relatorios.svg');"></span>
                 <span>Relatórios</span>
             </a>
             <a href="#" class="menu-item">
-                <span class="material-icons">pie_chart</span>
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-estatisticas.svg');"></span>
                 <span>Estatísticas</span>
             </a>
         </nav>
@@ -600,7 +716,7 @@
         <!-- BREADCRUMB -->
         <div data-role="breadcrumb">
             <div class="breadcrumb-item">
-                <span class="material-icons">home</span>
+                <span class="icon" style="--icon: url('assets/icons/icon-home.svg'); width: 14px; height: 14px;"></span>
             </div>
             <div class="breadcrumb-separator">
                 <span class="material-icons">chevron_right</span>
@@ -621,260 +737,302 @@
 
         <!-- TABS -->
         <div data-role="tabs">
-            <button class="tab active">Habilidades</button>
-            <button class="tab">Tópicos</button>
+            <button class="tab active" data-tab="habilidades">Habilidades</button>
+            <button class="tab" data-tab="topicos">Tópicos</button>
         </div>
 
-        <!-- STATS BAR -->
-        <div data-role="stats-bar">
-            <div>
-                <span class="stats-label">Total de Questões:</span>
-            </div>
-            <div class="stats-badges">
-                <span class="badge">
-                    <span class="material-icons">quiz</span>
-                    330
-                </span>
-                <div class="stats-divider"></div>
-                <span class="badge">
-                    <span class="material-icons">psychology</span>
-                    165
-                </span>
-                <span class="badge">
-                    <span class="material-icons">emoji_objects</span>
-                    165
-                </span>
-            </div>
-        </div>
-
-        <!-- FILTERS CARD -->
-        <div data-role="filters-card">
-            <div class="filters-row">
-                <div class="filter-group">
-                    <label class="filter-label">Área de Conhecimento</label>
-                    <div class="filter-select selected">
-                        <div class="filter-select-content">
-                            <span style="font-size: 20px;">🔢</span>
-                            <span>Matemática</span>
-                        </div>
-                        <span class="material-icons">keyboard_arrow_down</span>
-                    </div>
+        <!-- REMOVIDO: stats-bar, filters-card e table-card duplicados fora das abas -->
+        <!-- CONTEÚDO DAS ABAS -->
+        <div id="tab-habilidades" class="tab-content">
+            <!-- STATS BAR -->
+            <div data-role="stats-bar">
+                <div>
+                    <span class="stats-label">Total de Questões:</span>
                 </div>
-                <div class="filter-group">
-                    <label class="filter-label">Ano Escolar</label>
-                    <div class="filter-select selected">
-                        <span>Todos os anos escolares</span>
-                        <span class="material-icons">keyboard_arrow_down</span>
-                    </div>
-                </div>
-                <button class="filter-button outline">
-                    Todas as questões
-                </button>
-                <button class="filter-button primary">
-                    <span class="material-icons">add_circle</span>
-                    <span>Nova questão</span>
-                </button>
-                <button class="filter-button primary">
-                    <span class="material-icons">psychology</span>
-                    <span>Nova questão IA</span>
-                </button>
-            </div>
-            <div class="search-input">
-                <input type="text" placeholder="Pesquisar por tópico">
-                <span class="material-icons">search</span>
-            </div>
-        </div>
-
-        <!-- TABLE CARD -->
-        <div data-role="table-card">
-            <!-- Row: Números (Expanded) -->
-            <div class="table-row expandable">
-                <span class="material-icons table-expand-icon rotate">keyboard_arrow_down</span>
-                <div class="table-number">1</div>
-                <div class="table-content">
-                    <span class="table-title">Números</span>
-                    <span class="badge pink">Temática</span>
+                <div class="stats-badges">
                     <span class="badge">
-                        <span class="material-icons">psychology</span>
-                        165
-                    </span>
-                    <span class="badge">
-                        <span class="material-icons">emoji_objects</span>
-                        165
-                    </span>
-                    <span class="badge">
-                        <span class="material-icons">quiz</span>
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
                         330
                     </span>
-                </div>
-            </div>
-
-            <!-- Child Row: EF01MA01 -->
-            <div class="table-row child">
-                <div class="table-number">EF01MA01</div>
-                <div class="table-content">
-                    <span class="table-description">Utilizar números naturais como indicador de quantidade ou de ordem
-                        em diferentes situações cotidianas e reconhecer situações em que os números não indicam contagem
-                        nem ordem, mas sim código de identificação.</span>
-                    <div class="table-badges">
-                        <span class="badge">
-                            <span class="material-icons">psychology</span>
-                            165
-                        </span>
-                        <span class="badge">
-                            <span class="material-icons">emoji_objects</span>
-                            165
-                        </span>
-                        <span class="badge">
-                            <span class="material-icons">quiz</span>
-                            330
-                        </span>
-                    </div>
-                    <div class="table-actions">
-                        <span class="material-icons action-icon">add_circle</span>
-                        <span class="material-icons action-icon">psychology</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Child Row: EF01MA02 -->
-            <div class="table-row child">
-                <div class="table-number">EF01MA02</div>
-                <div class="table-content">
-                    <span class="table-description">Contar de maneira exata ou aproximada, utilizando diferentes
-                        estratégias como o pareamento e outros agrupamentos.</span>
-                    <div class="table-badges">
-                        <span class="badge">
-                            <span class="material-icons">psychology</span>
-                            165
-                        </span>
-                        <span class="badge">
-                            <span class="material-icons">emoji_objects</span>
-                            165
-                        </span>
-                        <span class="badge">
-                            <span class="material-icons">quiz</span>
-                            330
-                        </span>
-                    </div>
-                    <div class="table-actions">
-                        <span class="material-icons action-icon">add_circle</span>
-                        <span class="material-icons action-icon">psychology</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Child Row: EF01MA03 -->
-            <div class="table-row child">
-                <div class="table-number">EF01MA03</div>
-                <div class="table-content">
-                    <span class="table-description">Estimar e comparar quantidades de objetos de dois conjuntos (em
-                        torno de 20 elementos), por estimativa e/ou por correspondência (um a um, dois a dois) para
-                        indicar "tem mais", "tem menos" ou "tem a mesma quantidade".</span>
-                    <div class="table-badges">
-                        <span class="badge">
-                            <span class="material-icons">psychology</span>
-                            165
-                        </span>
-                        <span class="badge">
-                            <span class="material-icons">emoji_objects</span>
-                            165
-                        </span>
-                        <span class="badge">
-                            <span class="material-icons">quiz</span>
-                            330
-                        </span>
-                    </div>
-                    <div class="table-actions">
-                        <span class="material-icons action-icon">add_circle</span>
-                        <span class="material-icons action-icon">psychology</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Child Row: EF01MA02 (duplicate) -->
-            <div class="table-row child">
-                <div class="table-number">EF01MA02</div>
-                <div class="table-content">
-                    <span class="table-description">Contar a quantidade de objetos de coleções até 100 unidades e
-                        apresentar o resultado por registros verbais e simbólicos, em situações de seu interesse, como
-                        jogos, brincadeiras, materiais da sala de aula, entre outros.</span>
-                    <div class="table-badges">
-                        <span class="badge">
-                            <span class="material-icons">psychology</span>
-                            165
-                        </span>
-                        <span class="badge">
-                            <span class="material-icons">emoji_objects</span>
-                            165
-                        </span>
-                        <span class="badge">
-                            <span class="material-icons">quiz</span>
-                            330
-                        </span>
-                    </div>
-                    <div class="table-actions">
-                        <span class="material-icons action-icon">add_circle</span>
-                        <span class="material-icons action-icon">psychology</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Row: Geometria (Collapsed) -->
-            <div class="table-row expandable">
-                <span class="material-icons table-expand-icon">keyboard_arrow_down</span>
-                <div class="table-number">2</div>
-                <div class="table-content">
-                    <span class="table-title">Geometria</span>
-                    <span class="badge pink">Temática</span>
+                    <div class="stats-divider"></div>
                     <span class="badge">
-                        <span class="material-icons">psychology</span>
-                        229
-                    </span>
-                    <span class="badge">
-                        <span class="material-icons">emoji_objects</span>
-                        229
-                    </span>
-                    <span class="badge">
-                        <span class="material-icons">quiz</span>
-                        458
-                    </span>
-                </div>
-            </div>
-
-            <!-- Row: Grandezas e Medidas (Collapsed) -->
-            <div class="table-row expandable">
-                <span class="material-icons table-expand-icon">keyboard_arrow_down</span>
-                <div class="table-number">3</div>
-                <div class="table-content">
-                    <span class="table-title">Grandezas e Medidas</span>
-                    <span class="badge pink">Temática</span>
-                    <span class="badge">
-                        <span class="material-icons">psychology</span>
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-psychology.svg'); width: 16px; height: 16px;"></span>
                         165
                     </span>
                     <span class="badge">
-                        <span class="material-icons">emoji_objects</span>
-                        35
-                    </span>
-                    <span class="badge">
-                        <span class="material-icons">quiz</span>
-                        200
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-emoji-objects.svg'); width: 16px; height: 16px;"></span>
+                        165
                     </span>
                 </div>
             </div>
+            <!-- FILTERS CARD -->
+            <div data-role="filters-card">
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label class="filter-label">Área de Conhecimento</label>
+                        <div class="filter-select selected">
+                            <div class="filter-select-content">
+                                <span style="font-size: 20px;">🔢</span>
+                                <span>Matemática</span>
+                            </div>
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 18px; height: 18px;"></span>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Ano Escolar</label>
+                        <div class="filter-select selected">
+                            <span>Todos os anos escolares</span>
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 18px; height: 18px;"></span>
+                        </div>
+                    </div>
+                    <button class="filter-button outline">Todas as questões</button>
+                    <button class="filter-button primary">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-add-circle.svg'); width: 24px; height: 24px;"></span>
+                        <span>Nova questão</span>
+                    </button>
+                    <button class="filter-button primary">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-psychology.svg'); width: 24px; height: 24px;"></span>
+                        <span>Nova questão IA</span>
+                    </button>
+                </div>
+                <div class="search-input">
+                    <input type="text" placeholder="Pesquisar por tópico">
+                    <span class="icon"
+                        style="--icon: url('assets/icons/icon-search.svg'); width: 18px; height: 18px;"></span>
+                </div>
+            </div>
+            <!-- TABLE CARD -->
+            <div data-role="table-card">
+                <!-- Row: Números (Expanded) -->
+                <div class="table-row expandable">
+                    <span class="table-expand-icon icon rotate"
+                        style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 24px; height: 24px;"></span>
+                    <div class="table-number">1</div>
+                    <div class="table-content">
+                        <span class="table-title">Números</span>
+                        <span class="badge pink">Temática</span>
+                        <span class="badge">
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-psychology.svg'); width: 16px; height: 16px;"></span>
+                            165
+                        </span>
+                        <span class="badge">
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-emoji-objects.svg'); width: 16px; height: 16px;"></span>
+                            165
+                        </span>
+                        <span class="badge">
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                            330
+                        </span>
+                    </div>
+                </div>
 
-            <!-- Row: Probabilidade e Estatística (Collapsed) -->
-            <div class="table-row expandable">
-                <span class="material-icons table-expand-icon">keyboard_arrow_down</span>
-                <div class="table-number">4</div>
-                <div class="table-content">
-                    <span class="table-title">Probabilidade e Estatística</span>
-                    <span class="badge pink">Temática</span>
-                    <span class="badge warning">
-                        <span class="material-icons">quiz</span>
-                        0 questões
-                    </span>
+                <!-- Child Row: EF01MA01 -->
+                <div class="table-row child">
+                    <div class="table-number">EF01MA01</div>
+                    <div class="table-content">
+                        <span class="table-description">Utilizar números naturais como indicador de quantidade ou de
+                            ordem em diferentes situações cotidianas e reconhecer situações em que os números não
+                            indicam contagem nem ordem, mas sim código de identificação.</span>
+                        <div class="table-badges">
+                            <span class="badge">
+                                <span class="icon"
+                                    style="--icon: url('assets/icons/icon-psychology.svg'); width: 16px; height: 16px;"></span>
+                                165
+                            </span>
+                            <span class="badge">
+                                <span class="icon"
+                                    style="--icon: url('assets/icons/icon-emoji-objects.svg'); width: 16px; height: 16px;"></span>
+                                165
+                            </span>
+                            <span class="badge">
+                                <span class="icon"
+                                    style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                                330
+                            </span>
+                        </div>
+                        <div class="table-actions">
+                            <span class="action-icon icon"
+                                style="--icon: url('assets/icons/icon-add-circle.svg');"></span>
+                            <span class="action-icon icon"
+                                style="--icon: url('assets/icons/icon-psychology.svg');"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Child Row: EF01MA02 -->
+                <div class="table-row child">
+                    <div class="table-number">EF01MA02</div>
+                    <div class="table-content">
+                        <span class="table-description">Contar de maneira exata ou aproximada, utilizando diferentes
+                            estratégias como o pareamento e outros agrupamentos.</span>
+                        <div class="table-badges">
+                            <span class="badge">
+                                <span class="icon"
+                                    style="--icon: url('assets/icons/icon-psychology.svg'); width: 16px; height: 16px;"></span>
+                                165
+                            </span>
+                            <span class="badge">
+                                <span class="icon"
+                                    style="--icon: url('assets/icons/icon-emoji-objects.svg'); width: 16px; height: 16px;"></span>
+                                165
+                            </span>
+                            <span class="badge">
+                                <span class="icon"
+                                    style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                                330
+                            </span>
+                        </div>
+                        <div class="table-actions">
+                            <span class="action-icon icon"
+                                style="--icon: url('assets/icons/icon-add-circle.svg');"></span>
+                            <span class="action-icon icon"
+                                style="--icon: url('assets/icons/icon-psychology.svg');"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Child Row: EF01MA03 -->
+                <div class="table-row child">
+                    <div class="table-number">EF01MA03</div>
+                    <div class="table-content">
+                        <span class="table-description">Estimar e comparar quantidades de objetos de dois conjuntos (em
+                            torno de 20 elementos), por estimativa e/ou por correspondência (um a um, dois a dois) para
+                            indicar "tem mais", "tem menos" ou "tem a mesma quantidade".</span>
+                        <div class="table-badges">
+                            <span class="badge">
+                                <span class="icon"
+                                    style="--icon: url('assets/icons/icon-psychology.svg'); width: 16px; height: 16px;"></span>
+                                165
+                            </span>
+                            <span class="badge">
+                                <span class="icon"
+                                    style="--icon: url('assets/icons/icon-emoji-objects.svg'); width: 16px; height: 16px;"></span>
+                                165
+                            </span>
+                            <span class="badge">
+                                <span class="icon"
+                                    style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                                330
+                            </span>
+                        </div>
+                        <div class="table-actions">
+                            <span class="action-icon icon"
+                                style="--icon: url('assets/icons/icon-add-circle.svg');"></span>
+                            <span class="action-icon icon"
+                                style="--icon: url('assets/icons/icon-psychology.svg');"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Child Row: EF01MA04 -->
+                <div class="table-row child">
+                    <div class="table-number">EF01MA04</div>
+                    <div class="table-content">
+                        <span class="table-description">Contar a quantidade de objetos de coleções até 100 unidades e
+                            apresentar o resultado por registros verbais e simbólicos, em situações de seu interesse,
+                            como jogos, brincadeiras, materiais da sala de aula, entre outros.</span>
+                        <div class="table-badges">
+                            <span class="badge">
+                                <span class="icon"
+                                    style="--icon: url('assets/icons/icon-psychology.svg'); width: 16px; height: 16px;"></span>
+                                165
+                            </span>
+                            <span class="badge">
+                                <span class="icon"
+                                    style="--icon: url('assets/icons/icon-emoji-objects.svg'); width: 16px; height: 16px;"></span>
+                                165
+                            </span>
+                            <span class="badge">
+                                <span class="icon"
+                                    style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                                330
+                            </span>
+                        </div>
+                        <div class="table-actions">
+                            <span class="action-icon icon"
+                                style="--icon: url('assets/icons/icon-add-circle.svg');"></span>
+                            <span class="action-icon icon"
+                                style="--icon: url('assets/icons/icon-psychology.svg');"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row: Geometria (Collapsed) -->
+                <div class="table-row expandable">
+                    <span class="table-expand-icon icon"
+                        style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 24px; height: 24px;"></span>
+                    <div class="table-number">2</div>
+                    <div class="table-content">
+                        <span class="table-title">Geometria</span>
+                        <span class="badge pink">Temática</span>
+                        <span class="badge">
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-psychology.svg'); width: 16px; height: 16px;"></span>
+                            229
+                        </span>
+                        <span class="badge">
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-emoji-objects.svg'); width: 16px; height: 16px;"></span>
+                            229
+                        </span>
+                        <span class="badge">
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                            458
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Row: Grandezas e Medidas (Collapsed) -->
+                <div class="table-row expandable">
+                    <span class="table-expand-icon icon"
+                        style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 24px; height: 24px;"></span>
+                    <div class="table-number">3</div>
+                    <div class="table-content">
+                        <span class="table-title">Grandezas e Medidas</span>
+                        <span class="badge pink">Temática</span>
+                        <span class="badge">
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-psychology.svg'); width: 16px; height: 16px;"></span>
+                            165
+                        </span>
+                        <span class="badge">
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-emoji-objects.svg'); width: 16px; height: 16px;"></span>
+                            35
+                        </span>
+                        <span class="badge">
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                            200
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Row: Probabilidade e Estatística (Collapsed) -->
+                <div class="table-row expandable">
+                    <span class="table-expand-icon icon"
+                        style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 24px; height: 24px;"></span>
+                    <div class="table-number">4</div>
+                    <div class="table-content">
+                        <span class="table-title">Probabilidade e Estatística</span>
+                        <span class="badge pink">Temática</span>
+                        <span class="badge warning">
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                            0 questões
+                        </span>
+                    </div>
                 </div>
             </div>
 
@@ -882,11 +1040,126 @@
             <div data-role="pagination">
                 <div class="pagination-controls">
                     <button class="pagination-button">
-                        <span class="material-icons">chevron_left</span>
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-chevron-left.svg'); width: 16px; height: 16px;"></span>
                     </button>
                     <button class="pagination-button active">1</button>
                     <button class="pagination-button">
-                        <span class="material-icons">chevron_right</span>
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-chevron-right.svg'); width: 16px; height: 16px;"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-topicos" class="tab-content" style="display:none">
+            <!-- STATS BAR (Tópicos) -->
+            <div data-role="stats-bar">
+                <div>
+                    <span class="stats-label">Total de tópicos:</span>
+                </div>
+                <div class="stats-badges">
+                    <span class="badge">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                        15
+                    </span>
+                    <div class="stats-divider"></div>
+                    <span class="badge">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-psychology.svg'); width: 16px; height: 16px;"></span>
+                        5
+                    </span>
+                    <span class="badge">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-emoji-objects.svg'); width: 16px; height: 16px;"></span>
+                        10
+                    </span>
+                </div>
+            </div>
+            <!-- FILTERS CARD (Tópicos) -->
+            <div data-role="filters-card">
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label class="filter-label">Área de Conhecimento</label>
+                        <div class="filter-select selected">
+                            <div class="filter-select-content">
+                                <span style="font-size: 20px;">🔢</span>
+                                <span>Matemática</span>
+                            </div>
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 18px; height: 18px;"></span>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Ano Escolar</label>
+                        <div class="filter-select selected">
+                            <span>Todos os anos escolares</span>
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 18px; height: 18px;"></span>
+                        </div>
+                    </div>
+                    <button class="filter-button outline">Todos os tópicos</button>
+                    <button class="filter-button primary">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-add-circle.svg'); width: 24px; height: 24px;"></span>
+                        <span>Novo tópico</span>
+                    </button>
+                </div>
+                <div class="search-input">
+                    <input type="text" placeholder="Pesquisar por tópico">
+                    <span class="icon"
+                        style="--icon: url('assets/icons/icon-search.svg'); width: 18px; height: 18px;"></span>
+                </div>
+            </div>
+            <!-- TABLE CARD (Tópicos) -->
+            <div data-role="table-card">
+                <!-- Exemplo de linha de tópico -->
+                <div class="table-row expandable">
+                    <span class="table-expand-icon icon"
+                        style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 24px; height: 24px;"></span>
+                    <div class="table-number">1</div>
+                    <div class="table-content">
+                        <span class="table-title">Números Naturais</span>
+                        <span class="badge pink">Temática</span>
+                        <span class="badge">
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                            4 questões
+                        </span>
+                    </div>
+                </div>
+                <div class="table-row child">
+                    <div class="table-number">T1</div>
+                    <div class="table-content">
+                        <span class="table-description">Compreender o conceito de número natural e suas aplicações em
+                            situações cotidianas.</span>
+                        <div class="table-badges">
+                            <span class="badge">
+                                <span class="icon"
+                                    style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                                4 questões
+                            </span>
+                        </div>
+                        <div class="table-actions">
+                            <span class="action-icon icon"
+                                style="--icon: url('assets/icons/icon-add-circle.svg');"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Adicione mais linhas conforme o frame do Figma -->
+            </div>
+            <!-- PAGINATION (Tópicos) -->
+            <div data-role="pagination">
+                <div class="pagination-controls">
+                    <button class="pagination-button">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-chevron-left.svg'); width: 16px; height: 16px;"></span>
+                    </button>
+                    <button class="pagination-button active">1</button>
+                    <button class="pagination-button">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-chevron-right.svg'); width: 16px; height: 16px;"></span>
                     </button>
                 </div>
             </div>
@@ -894,20 +1167,433 @@
     </main>
 
     <script>
-        // Toggle expand/collapse on table rows
-        document.querySelectorAll('.table-expand-icon').forEach(icon => {
-            icon.addEventListener('click', function () {
-                this.classList.toggle('rotate');
-                // Aqui você implementaria a lógica para mostrar/ocultar as child rows
-            });
-        });
+        // =========================
+        // DADOS FICTÍCIOS
+        // =========================
+        const dadosHabilidades = [
+            {
+                id: 1,
+                titulo: 'Números',
+                tematica: true,
+                ia: 165,
+                professor: 165,
+                total: 330,
+                filhos: [
+                    { codigo: 'EF01MA01', descricao: 'Utilizar números naturais como indicador de quantidade ou de ordem em diferentes situações cotidianas e reconhecer situações em que os números não indicam contagem nem ordem, mas sim código de identificação.', ia: 55, professor: 55, total: 110 },
+                    { codigo: 'EF01MA02', descricao: 'Contar de maneira exata ou aproximada, utilizando diferentes estratégias como o pareamento e outros agrupamentos.', ia: 35, professor: 35, total: 70 },
+                    { codigo: 'EF01MA03', descricao: 'Estimar e comparar quantidades de objetos de dois conjuntos (em torno de 20 elementos), por estimativa e/ou por correspondência (um a um, dois a dois) para indicar "tem mais", "tem menos" ou "tem a mesma quantidade".', ia: 40, professor: 40, total: 80 },
+                    { codigo: 'EF01MA04', descricao: 'Contar a quantidade de objetos de coleções até 100 unidades e apresentar o resultado por registros verbais e simbólicos, em situações de seu interesse, como jogos, brincadeiras, materiais da sala de aula, entre outros.', ia: 35, professor: 35, total: 70 }
+                ]
+            },
+            {
+                id: 2,
+                titulo: 'Geometria',
+                tematica: true,
+                ia: 229,
+                professor: 229,
+                total: 458,
+                filhos: [
+                    { codigo: 'EF01MA11', descricao: 'Descrever a localização de pessoas e de objetos no espaço em relação à sua própria posição, utilizando termos como à direita, à esquerda, em frente, atrás.', ia: 75, professor: 75, total: 150 },
+                    { codigo: 'EF01MA12', descricao: 'Descrever a localização de pessoas e de objetos no espaço segundo um dado ponto de referência, compreendendo que, para a utilização de termos que se referem à posição, como direita, esquerda, em cima, embaixo, é necessário explicitar-se o referencial.', ia: 80, professor: 80, total: 160 },
+                    { codigo: 'EF01MA13', descricao: 'Relacionar figuras geométricas espaciais (cones, cilindros, esferas e blocos retangulares) a objetos familiares do mundo físico.', ia: 74, professor: 74, total: 148 }
+                ]
+            },
+            {
+                id: 3,
+                titulo: 'Grandezas e Medidas',
+                tematica: true,
+                ia: 165,
+                professor: 35,
+                total: 200,
+                filhos: [
+                    { codigo: 'EF01MA15', descricao: 'Comparar comprimentos, capacidades ou massas, utilizando termos como mais alto, mais baixo, mais comprido, mais curto, mais grosso, mais fino, mais largo, mais pesado, mais leve, cabe mais, cabe menos, entre outros, para ordenar objetos de uso quotidiano.', ia: 90, professor: 20, total: 110 },
+                    { codigo: 'EF01MA16', descricao: 'Relatar em linguagem verbal ou não verbal sequência de acontecimentos relativos a um dia, utilizando, quando possível, os horários dos eventos.', ia: 75, professor: 15, total: 90 }
+                ]
+            },
+            {
+                id: 4,
+                titulo: 'Probabilidade e Estatística',
+                tematica: true,
+                ia: 0,
+                professor: 0,
+                total: 0,
+                filhos: []
+            },
+            {
+                id: 5,
+                titulo: 'Álgebra',
+                tematica: true,
+                ia: 120,
+                professor: 95,
+                total: 215,
+                filhos: [
+                    { codigo: 'EF01MA09', descricao: 'Organizar e ordenar objetos familiares ou representações por figuras, por meio de atributos, tais como cor, forma e medida.', ia: 60, professor: 45, total: 105 },
+                    { codigo: 'EF01MA10', descricao: 'Descrever, após o reconhecimento e a explicitação de um padrão (ou regularidade), os elementos ausentes em sequências recursivas de números naturais, objetos ou figuras.', ia: 60, professor: 50, total: 110 }
+                ]
+            }
+        ];
 
-        // Tab switching
+        const dadosTopicos = [
+            {
+                id: 1,
+                numero: '1',
+                titulo: 'Análise linguística/semiótica - CIE',
+                tematica: true,
+                ia: 40,
+                professor: 135,
+                total: 165,
+                filhos: [
+                    {
+                        numero: '1.1',
+                        titulo: 'Morfologia',
+                        objetoConhecimento: true,
+                        ia: 40,
+                        professor: 135,
+                        total: 45,
+                        filhos: [
+                            { numero: '1.1.1', titulo: 'Substantivos', ia: 40, professor: 135, total: 2 },
+                            { numero: '1.2', titulo: 'Adjetivos e locução adjetivas', ia: 40, professor: 135, total: 17 }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 2,
+                numero: '2',
+                titulo: 'Escrita - CIE',
+                tematica: true,
+                ia: 320,
+                professor: 138,
+                total: 458,
+                filhos: []
+            },
+            {
+                id: 3,
+                numero: '3',
+                titulo: 'Leitura - CIE',
+                tematica: true,
+                ia: 280,
+                professor: 95,
+                total: 375,
+                filhos: [
+                    {
+                        numero: '3.1',
+                        titulo: 'Estratégias de leitura',
+                        objetoConhecimento: true,
+                        ia: 150,
+                        professor: 50,
+                        total: 200,
+                        filhos: [
+                            { numero: '3.1.1', titulo: 'Localização de informações', ia: 80, professor: 25, total: 105 },
+                            { numero: '3.1.2', titulo: 'Inferência', ia: 70, professor: 25, total: 95 }
+                        ]
+                    },
+                    {
+                        numero: '3.2',
+                        titulo: 'Compreensão textual',
+                        objetoConhecimento: true,
+                        ia: 130,
+                        professor: 45,
+                        total: 175,
+                        filhos: []
+                    }
+                ]
+            },
+            {
+                id: 4,
+                numero: '4',
+                titulo: 'Oralidade - CIE',
+                tematica: true,
+                ia: 90,
+                professor: 60,
+                total: 150,
+                filhos: []
+            },
+            {
+                id: 5,
+                numero: '5',
+                titulo: 'Produção textual',
+                tematica: true,
+                ia: 200,
+                professor: 110,
+                total: 310,
+                filhos: [
+                    {
+                        numero: '5.1',
+                        titulo: 'Gêneros textuais',
+                        objetoConhecimento: true,
+                        ia: 120,
+                        professor: 70,
+                        total: 190,
+                        filhos: [
+                            { numero: '5.1.1', titulo: 'Narrativos', ia: 60, professor: 35, total: 95 },
+                            { numero: '5.1.2', titulo: 'Descritivos', ia: 35, professor: 20, total: 55 },
+                            { numero: '5.1.3', titulo: 'Argumentativos', ia: 25, professor: 15, total: 40 }
+                        ]
+                    },
+                    {
+                        numero: '5.2',
+                        titulo: 'Coesão e coerência',
+                        objetoConhecimento: true,
+                        ia: 80,
+                        professor: 40,
+                        total: 120,
+                        filhos: []
+                    }
+                ]
+            }
+        ];
+
+        // =========================
+        // ESTADO DA APLICAÇÃO
+        // =========================
+        let paginaAtualHabilidades = 1;
+        let paginaAtualTopicos = 1;
+        const itensPorPagina = 3;
+
+        // =========================
+        // FUNÇÕES DE RENDERIZAÇÃO
+        // =========================
+        function renderizarHabilidades(pagina) {
+            const inicio = (pagina - 1) * itensPorPagina;
+            const fim = inicio + itensPorPagina;
+            const dadosPagina = dadosHabilidades.slice(inicio, fim);
+
+            const tableCard = document.querySelector('#tab-habilidades [data-role="table-card"]');
+            tableCard.innerHTML = '';
+
+            dadosPagina.forEach(item => {
+                // Row pai
+                const rowPai = document.createElement('div');
+                rowPai.className = 'table-row expandable';
+                rowPai.dataset.itemId = item.id;
+
+                rowPai.innerHTML = `
+                    <span class="table-expand-icon icon ${item.id === 1 ? 'rotate' : ''}"
+                        style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 24px; height: 24px;"></span>
+                    <div class="table-number indent-0">${item.id}</div>
+                    <div class="table-content gap-root" style="flex: 1;">
+                        <span class="table-title">${item.titulo}</span>
+                        ${item.tematica ? '<span class="badge pink">Temática</span>' : ''}
+                        <span class="badge">
+                            <span class="icon" style="--icon: url('assets/icons/icon-psychology.svg'); width: 16px; height: 16px;"></span>
+                            ${item.ia}
+                        </span>
+                        <span class="badge">
+                            <span class="icon" style="--icon: url('assets/icons/icon-emoji-objects.svg'); width: 16px; height: 16px;"></span>
+                            ${item.professor}
+                        </span>
+                        <span class="badge ${item.total === 0 ? 'warning' : ''}">
+                            <span class="icon" style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                            ${item.total === 0 ? '0 questões' : item.total}
+                        </span>
+                    </div>
+                `;
+                tableCard.appendChild(rowPai);
+
+                // Rows filhos
+                item.filhos.forEach(filho => {
+                    const rowFilho = document.createElement('div');
+                    rowFilho.className = 'table-row child bg-depth-1';
+                    rowFilho.dataset.parentId = item.id;
+                    rowFilho.style.display = item.id === 1 ? '' : 'none';
+
+                    rowFilho.innerHTML = `
+                        <span style="width: 24px; display: inline-block;"></span>
+                        <div class="table-number indent-1">${filho.codigo}</div>
+                        <div class="table-content gap-child" style="flex: 1;">
+                            <span class="table-description">${filho.descricao}</span>
+                            <div class="table-badges">
+                                <span class="badge">
+                                    <span class="icon" style="--icon: url('assets/icons/icon-psychology.svg'); width: 16px; height: 16px;"></span>
+                                    ${filho.ia}
+                                </span>
+                                <span class="badge">
+                                    <span class="icon" style="--icon: url('assets/icons/icon-emoji-objects.svg'); width: 16px; height: 16px;"></span>
+                                    ${filho.professor}
+                                </span>
+                                <span class="badge">
+                                    <span class="icon" style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                                    ${filho.total}
+                                </span>
+                            </div>
+                            <div class="table-actions">
+                                <span class="action-icon icon" style="--icon: url('assets/icons/icon-add-circle.svg');"></span>
+                                <span class="action-icon icon" style="--icon: url('assets/icons/icon-psychology.svg');"></span>
+                            </div>
+                        </div>
+                    `;
+                    tableCard.appendChild(rowFilho);
+                });
+            });
+
+            // Reativar listeners de expansão
+            ativarExpansaoLinhas();
+
+            // Atualizar paginação
+            atualizarPaginacao('habilidades', pagina, Math.ceil(dadosHabilidades.length / itensPorPagina));
+        }
+
+        function renderizarTopicos(pagina) {
+            const inicio = (pagina - 1) * itensPorPagina;
+            const fim = inicio + itensPorPagina;
+            const dadosPagina = dadosTopicos.slice(inicio, fim);
+
+            const tableCard = document.querySelector('#tab-topicos [data-role="table-card"]');
+            tableCard.innerHTML = '';
+
+            // Função recursiva para renderizar hierarquia
+            function renderizarNivel(itens, nivel = 0, parentId = null) {
+                itens.forEach(item => {
+                    const rowPai = document.createElement('div');
+                    rowPai.className = nivel > 0 ? 'table-row child' : 'table-row expandable';
+                    rowPai.dataset.itemId = item.id || item.numero;
+                    if (parentId) {
+                        rowPai.dataset.parentId = parentId;
+                        rowPai.style.display = 'none';
+                    }
+                    if (item.filhos && item.filhos.length > 0) {
+                        rowPai.classList.add('expandable');
+                    }
+
+                    // Cor de fundo por profundidade via classe
+                    rowPai.classList.add(`bg-depth-${Math.min(nivel, 2)}`);
+
+                    const hasChildren = item.filhos && item.filhos.length > 0;
+
+                    // Gap por nível via classe
+                    const gapClass = nivel === 0 ? 'gap-root' : 'gap-child';
+
+                    // Mostrar ações apenas em linhas de nível 2 (mais profundo) sem filhos
+                    const mostrarAcoes = nivel === 2 && (!item.filhos || item.filhos.length === 0);
+
+                    rowPai.innerHTML = `
+                        ${hasChildren ? '<span class="table-expand-icon icon" style="--icon: url(\'assets/icons/icon-keyboard-arrow-down.svg\'); width: 24px; height: 24px;"></span>' : '<span style="width: 24px; display: inline-block;"></span>'}
+                        <div class="table-number indent-${nivel}">${item.numero}</div>
+                        <div class="table-content ${gapClass}" style="flex: 1;">
+                            <span class="${nivel === 0 ? 'table-title' : 'table-description'}">${item.titulo}</span>
+                            ${item.tematica ? '<span class="badge pink">Temática</span>' : ''}
+                            ${item.objetoConhecimento ? '<span class="badge cyan">Objeto do Conhecimento</span>' : ''}
+                            ${item.ia !== undefined ? `<span class="badge"><span class="icon" style="--icon: url('assets/icons/icon-psychology.svg'); width: 16px; height: 16px;"></span>${item.ia}</span>` : ''}
+                            ${item.professor !== undefined ? `<span class="badge"><span class="icon" style="--icon: url('assets/icons/icon-emoji-objects.svg'); width: 16px; height: 16px;"></span>${item.professor}</span>` : ''}
+                            <span class="badge">
+                                <span class="icon" style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                                ${item.total}
+                            </span>
+                            ${mostrarAcoes ? '<div class="table-actions"><span class="action-icon icon" style="--icon: url(\'assets/icons/icon-add-circle.svg\');"></span><span class="action-icon icon" style="--icon: url(\'assets/icons/icon-psychology.svg\');"></span></div>' : ''}
+                        </div>
+                    `;
+                    tableCard.appendChild(rowPai);
+
+                    // Renderizar filhos recursivamente
+                    if (item.filhos && item.filhos.length > 0) {
+                        renderizarNivel(item.filhos, nivel + 1, item.numero);
+                    }
+                });
+            }
+
+            renderizarNivel(dadosPagina);
+
+            // Reativar listeners de expansão
+            ativarExpansaoLinhas();
+
+            // Atualizar paginação
+            atualizarPaginacao('topicos', pagina, Math.ceil(dadosTopicos.length / itensPorPagina));
+        }
+
+        function atualizarPaginacao(tipo, paginaAtual, totalPaginas) {
+            const tab = tipo === 'habilidades' ? '#tab-habilidades' : '#tab-topicos';
+            const paginationControls = document.querySelector(`${tab} .pagination-controls`);
+
+            paginationControls.innerHTML = '';
+
+            // Botão anterior
+            const btnAnterior = document.createElement('button');
+            btnAnterior.className = 'pagination-button';
+            btnAnterior.disabled = paginaAtual === 1;
+            btnAnterior.innerHTML = '<span class="icon" style="--icon: url(\'assets/icons/icon-chevron-left.svg\'); width: 16px; height: 16px;"></span>';
+            btnAnterior.onclick = () => {
+                if (tipo === 'habilidades') {
+                    paginaAtualHabilidades--;
+                    renderizarHabilidades(paginaAtualHabilidades);
+                } else {
+                    paginaAtualTopicos--;
+                    renderizarTopicos(paginaAtualTopicos);
+                }
+            };
+            paginationControls.appendChild(btnAnterior);
+
+            // Botões de página
+            for (let i = 1; i <= totalPaginas; i++) {
+                const btnPagina = document.createElement('button');
+                btnPagina.className = `pagination-button ${i === paginaAtual ? 'active' : ''}`;
+                btnPagina.textContent = i;
+                btnPagina.onclick = () => {
+                    if (tipo === 'habilidades') {
+                        paginaAtualHabilidades = i;
+                        renderizarHabilidades(i);
+                    } else {
+                        paginaAtualTopicos = i;
+                        renderizarTopicos(i);
+                    }
+                };
+                paginationControls.appendChild(btnPagina);
+            }
+
+            // Botão próximo
+            const btnProximo = document.createElement('button');
+            btnProximo.className = 'pagination-button';
+            btnProximo.disabled = paginaAtual === totalPaginas;
+            btnProximo.innerHTML = '<span class="icon" style="--icon: url(\'assets/icons/icon-chevron-right.svg\'); width: 16px; height: 16px;"></span>';
+            btnProximo.onclick = () => {
+                if (tipo === 'habilidades') {
+                    paginaAtualHabilidades++;
+                    renderizarHabilidades(paginaAtualHabilidades);
+                } else {
+                    paginaAtualTopicos++;
+                    renderizarTopicos(paginaAtualTopicos);
+                }
+            };
+            paginationControls.appendChild(btnProximo);
+        }
+
+        function ativarExpansaoLinhas() {
+            document.querySelectorAll('.table-expand-icon').forEach(icon => {
+                icon.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    this.classList.toggle('rotate');
+
+                    const row = this.closest('.table-row');
+                    const itemId = row.dataset.itemId;
+                    const childRows = document.querySelectorAll(`[data-parent-id="${itemId}"]`);
+
+                    childRows.forEach(childRow => {
+                        childRow.style.display = childRow.style.display === 'none' ? '' : 'none';
+                    });
+                });
+            });
+        }
+
+        // =========================
+        // ALTERNÂNCIA DE ABAS
+        // =========================
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function () {
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
+                const tabKey = this.getAttribute('data-tab');
+                document.querySelectorAll('.tab-content').forEach(tc => tc.style.display = 'none');
+                document.getElementById('tab-habilidades').style.display = tabKey === 'habilidades' ? '' : 'none';
+                document.getElementById('tab-topicos').style.display = tabKey === 'topicos' ? '' : 'none';
             });
+        });
+
+        // =========================
+        // INICIALIZAÇÃO
+        // =========================
+        document.addEventListener('DOMContentLoaded', function () {
+            renderizarHabilidades(1);
+            renderizarTopicos(1);
         });
     </script>
 </body>

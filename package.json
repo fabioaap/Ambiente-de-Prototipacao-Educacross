@@ -57,7 +57,10 @@
     "tokens:sync-update": "node scripts/sync-design-tokens.cjs --file-id=REPLACE_ME --tokens=packages/tokens/tokens.json --update",
     "assets:download": "node scripts/download-figma-assets.cjs --manifest=validation/mcp-figma.manifest.json --format=svg --out-dir=validation-artifacts/assets/svg",
     "assets:download-png": "node scripts/download-figma-assets.cjs --manifest=validation/mcp-figma.manifest.json --format=png --scale=2 --out-dir=validation-artifacts/assets/png",
-    "serve:static": "node scripts/serve-static.cjs"
+    "serve:static": "node scripts/serve-static.cjs",
+    "figma:first": "node scripts/figma-first/check.cjs",
+    "figma:first:strict": "node scripts/figma-first/check.cjs --strict",
+    "figma:first:open": "node scripts/figma-first/check.cjs && node scripts/figma-first/open-latest.cjs"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",

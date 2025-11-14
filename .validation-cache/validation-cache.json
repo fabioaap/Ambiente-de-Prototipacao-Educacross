@@ -1,0 +1,1332 @@
+{
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.github\\copilot-instructions.md": {
+    "hash": "9f1a7b21dfbca5a315ab5331bdf162a2",
+    "validated_at": "2025-11-14T12:12:41.086124",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.github\\PULL_REQUEST_TEMPLATE.md": {
+    "hash": "59351fe047be418ac34ceb34c37e2f34",
+    "validated_at": "2025-11-14T12:12:41.099055",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.prompts\\blocks\\00_core.md": {
+    "hash": "2ea5a8b5c1017e98b2d7369aa16b0af0",
+    "validated_at": "2025-11-14T12:12:41.111736",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.prompts\\blocks\\01_core.md": {
+    "hash": "a581ed115562f3a93a34126ef2f48270",
+    "validated_at": "2025-11-14T12:12:41.121768",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.prompts\\blocks\\01_discovery.md": {
+    "hash": "240be5fd220139ca543ed9c5930df237",
+    "validated_at": "2025-11-14T12:12:41.133820",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.prompts\\blocks\\02_design_system.md": {
+    "hash": "47ae2dc4cd1e33b6871968b0dcfc7c45",
+    "validated_at": "2025-11-14T12:12:41.151542",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.prompts\\blocks\\02_discovery.md": {
+    "hash": "bbba972eda023deb3def3b9597a857e9",
+    "validated_at": "2025-11-14T12:12:41.165346",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.prompts\\blocks\\03_arch_clean.md": {
+    "hash": "519993f4d9778c033686b299f092165a",
+    "validated_at": "2025-11-14T12:12:41.177426",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.prompts\\blocks\\03_design_system.md": {
+    "hash": "cd2aa3132253851a6454060a0829b9b9",
+    "validated_at": "2025-11-14T12:12:41.188464",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.prompts\\blocks\\04_arch_clean.md": {
+    "hash": "2e6760b945abae0a035aed011fb9d75f",
+    "validated_at": "2025-11-14T12:12:41.198030",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.prompts\\blocks\\05_persona.md": {
+    "hash": "c66515964b84f70941bbe25e6b3d44b4",
+    "validated_at": "2025-11-14T12:12:41.207432",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.prompts\\blocks\\06_routing.md": {
+    "hash": "36df80b64708e8403a70dbe68228f2e0",
+    "validated_at": "2025-11-14T12:12:41.216748",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.prompts\\blocks\\07_instructions.md": {
+    "hash": "cc1ae00cb2a3a714270a7d5f7d991783",
+    "validated_at": "2025-11-14T12:12:41.229609",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.prompts\\blocks\\08_failure_modes.md": {
+    "hash": "30e37ec043e4d233a2d87cf3e24e2735",
+    "validated_at": "2025-11-14T12:12:41.240835",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.prompts\\blocks\\09_figma_first.md": {
+    "hash": "e831a136ef1956df93841954ff0a47eb",
+    "validated_at": "2025-11-14T12:12:41.263512",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.storybook\\main.ts": {
+    "hash": "2d5a0cc82fccf7680b0479eec4e8d393",
+    "validated_at": "2025-11-14T12:12:41.272983",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.storybook\\preview.ts": {
+    "hash": "0a4d6e81e991c12082267d81d8aa096c",
+    "validated_at": "2025-11-14T12:12:41.286408",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.storybook\\tsconfig.json": {
+    "hash": "7f1ecc2520cd6474650f92ad75154517",
+    "validated_at": "2025-11-14T12:12:41.297459",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\404.html": {
+    "hash": "a4d642559350e2e36df81bd27b6ec314",
+    "validated_at": "2025-11-14T12:12:41.314296",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\adjustments_vscode\\.github\\PULL_REQUEST_TEMPLATE.md": {
+    "hash": "da6b66984b71736eff24a93b6c5f023b",
+    "validated_at": "2025-11-14T12:12:41.326820",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\adjustments_vscode\\.prompts\\instructions.md": {
+    "hash": "1a891f4d715dc98dc5aa679bf2fb8645",
+    "validated_at": "2025-11-14T12:12:41.338880",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\adjustments_vscode\\README_PROMPTS.md": {
+    "hash": "f88dca4f3ea411ef957c71b779979fa1",
+    "validated_at": "2025-11-14T12:12:41.351441",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\apps\\proto\\package.json": {
+    "hash": "14cefd715b2a54b255053d289aa05f36",
+    "validated_at": "2025-11-14T12:12:41.363853",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\apps\\proto\\tsconfig.json": {
+    "hash": "d4e4d2f88831f55b99b929ddad19b252",
+    "validated_at": "2025-11-14T12:12:41.376280",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\assets\\logo-educacross.svg": {
+    "hash": "5ed12181a057d168ea74d3fb9d2cb374",
+    "validated_at": "2025-11-14T12:12:41.388693",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\Back-office\\Gerador de Quest\u00f5es por IA \u2013 BackOffice\\banco-questoes-pixel-perfect.html": {
+    "hash": "751b9c0da91d8d03b431777d9bc64122",
+    "validated_at": "2025-11-14T12:12:41.390731",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\Back-office\\universal_validation_report.json": {
+    "hash": "d9d88b6431456b29c2742185c03e1eb5",
+    "validated_at": "2025-11-14T12:12:41.401384",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\adr\\ADR-0000-template.md": {
+    "hash": "22248a015f7ea6330d931220924b5b5c",
+    "validated_at": "2025-11-14T12:12:41.414750",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\adr\\ADR-0004-adocao-estetica-vuexy.md": {
+    "hash": "e438d9e57394af0f1e4dc28e8a0a32e6",
+    "validated_at": "2025-11-14T12:12:41.429907",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\adr\\ADR-0006-unified-prototyping-platform.md": {
+    "hash": "c15f24cd1285de8377edd732ada1fb06",
+    "validated_at": "2025-11-14T12:12:41.444832",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\adr\\ADR-0007-vanilla-js-for-frontoffice-backoffice.md": {
+    "hash": "c10da4658db1adbb09821935e6937d51",
+    "validated_at": "2025-11-14T12:12:41.463154",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\backlog\\EPIC-pixel-perfect-garantia-backoffice.md": {
+    "hash": "ac7a8d028854c8b92f727cfaad8de5e3",
+    "validated_at": "2025-11-14T12:12:41.475927",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\backlog\\STORY-baseline-templates-pixel-perfect-backoffice.md": {
+    "hash": "824154cf589cb0a3778d53608db376b0",
+    "validated_at": "2025-11-14T12:12:41.491300",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\backlog\\STORY-ci-gate-pixel-perfect-backoffice-v1.md": {
+    "hash": "c3b50d48694d79ef24df492622261daa",
+    "validated_at": "2025-11-14T12:12:41.503778",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\backlog\\STORY-ci-gate-pixel-perfect-backoffice.md": {
+    "hash": "40ef5d435557c5aa8cdf9b98bdc378eb",
+    "validated_at": "2025-11-14T12:12:41.516175",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\backlog\\STORY-dev-ux-checklist-validacao-pixel-perfect.md": {
+    "hash": "4eb27ff0ce3d8d8be02a3a0ff897c54d",
+    "validated_at": "2025-11-14T12:12:41.531786",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\backlog\\STORY-governanca-dod-pixel-perfect-backoffice.md": {
+    "hash": "4775c55322f050e237b63c8ea146fee7",
+    "validated_at": "2025-11-14T12:12:41.542122",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\backlog\\STORY-setup-figma-mcp-e-fontes-backoffice.md": {
+    "hash": "ffbbfdc5d4b3ed787d29127ad76c304e",
+    "validated_at": "2025-11-14T12:12:41.553416",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\backlog\\TASK-aplicar-templates-na-pagina-banco-questoes.md": {
+    "hash": "10e8a599d28dec73f3d8b662983333ff",
+    "validated_at": "2025-11-14T12:12:41.565481",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\backlog\\TASK-atualizar-status-report-e-rastreabilidade.md": {
+    "hash": "7c8cd35a6bea4789b27503eee53fb61f",
+    "validated_at": "2025-11-14T12:12:41.577149",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\backlog\\TASK-inventario-arquivos-backoffice-e-templates.md": {
+    "hash": "afb9990f7366dc837202c14061a11f8f",
+    "validated_at": "2025-11-14T12:12:41.588161",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\backlog\\TECH-pipeline-storybook-figma-vue.md": {
+    "hash": "dfeb4951b38db6e482fdb11338b39e55",
+    "validated_at": "2025-11-14T12:12:41.603926",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\BACKLOG.md": {
+    "hash": "0066e86cc3fc5d66d7af775eccb1e294",
+    "validated_at": "2025-11-14T12:12:41.617003",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\BACKLOG_ZERADO.md": {
+    "hash": "2944106ab69f9901f2a6f3e0d4bbcc92",
+    "validated_at": "2025-11-14T12:12:41.631682",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\DAILY_OPERATIONS.md": {
+    "hash": "632bc423d5ab36ff91521ebfe6b21dc0",
+    "validated_at": "2025-11-14T12:12:41.648079",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\GIT_WORKFLOW.md": {
+    "hash": "35f4dda9bde243f31367370f32acf0e1",
+    "validated_at": "2025-11-14T12:12:41.663186",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\GUIA-RAPIDO-VALIDACAO-ESTRUTURAL.md": {
+    "hash": "777d88bb9fbe02bb0d558168fe1c074a",
+    "validated_at": "2025-11-14T12:12:41.682871",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\INDEX.md": {
+    "hash": "5b628955d4f391a6507ca5c7dc375c2b",
+    "validated_at": "2025-11-14T12:12:41.696948",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\journeys\\01-professor-frontend.md": {
+    "hash": "fec798fb8c7931a4e4d9c11a942018ca",
+    "validated_at": "2025-11-14T12:12:41.709815",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\journeys\\02-admin-backoffice.md": {
+    "hash": "51708419aadc22297b9add3e52c58896",
+    "validated_at": "2025-11-14T12:12:41.720098",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\journeys\\03-student-games-platform.md": {
+    "hash": "aba78d6eb606111eadca3f7919f2ef13",
+    "validated_at": "2025-11-14T12:12:41.733381",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\journeys\\DESIGN-opcoes-envio-lote.md": {
+    "hash": "2ac60fa8c796e06caf7bacd213e1e80c",
+    "validated_at": "2025-11-14T12:12:41.745447",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\journeys\\JOURNEY-envio-missoes-em-lote.md": {
+    "hash": "56208cd8bbb4ad7823e5aff37200a7ec",
+    "validated_at": "2025-11-14T12:12:41.769242",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\journeys\\RESUMO-EXECUTIVO-envio-lote.md": {
+    "hash": "5bf1490aebf9e0192b384b1bd8de0a3c",
+    "validated_at": "2025-11-14T12:12:41.865571",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\JOURNEYS_GUIDE.md": {
+    "hash": "fd757d40672b06296d01ed2d86de3836",
+    "validated_at": "2025-11-14T12:12:41.882135",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\MCP_VALIDATION_GUIDE.md": {
+    "hash": "7f03399325fede7ea28cc41f6d8f072e",
+    "validated_at": "2025-11-14T12:12:41.899815",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\PLANO-APRIMORAMENTO-WIZARD.md": {
+    "hash": "230e0f20df7ba75209cba33c49189164",
+    "validated_at": "2025-11-14T12:12:41.916121",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\POC-VALIDACAO-ESTRUTURAL-FIGMA-MCP.md": {
+    "hash": "f321242b6f1f62f096f1a5a3f64717b3",
+    "validated_at": "2025-11-14T12:12:41.933073",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\sistema-de-ensino-legado.md": {
+    "hash": "98b83645e2bc21d5372a00d07489aac4",
+    "validated_at": "2025-11-14T12:12:41.947190",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\SPRINT3-I1-DUAL-VALIDATOR.md": {
+    "hash": "0ce7c68a3d05c48cfb48250469a7d7e1",
+    "validated_at": "2025-11-14T12:12:41.965544",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\STATUS_REPORT.md": {
+    "hash": "c40b6f72b43f3e6c4ced53c3eb34f00d",
+    "validated_at": "2025-11-14T12:12:41.982488",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\STORYBOOK_GUIDE.md": {
+    "hash": "9a98036c8b441c4f4b89fd67034c0196",
+    "validated_at": "2025-11-14T12:12:42.004327",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\TECHNICAL_DEBT.json": {
+    "hash": "8a51cb0ea9b6eed349cabd25f3ee7215",
+    "validated_at": "2025-11-14T12:12:42.017033",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\docs\\TECHNICAL_DEBT.md": {
+    "hash": "de8fd51c00a3a222c8ad580bc7147352",
+    "validated_at": "2025-11-14T12:12:42.037967",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\dual-validation-report.json": {
+    "hash": "a892b1ee657608d5b672385e80406fb2",
+    "validated_at": "2025-11-14T12:12:42.050065",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\enviar_missoes_em_lote_html_com_drawer_assistente_v5.1.html": {
+    "hash": "97707526e894e97eb9d471469b6bafd9",
+    "validated_at": "2025-11-14T12:12:42.052047",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\figma-tokens.json": {
+    "hash": "0d1a1b1d36b992726b012421b16a7d82",
+    "validated_at": "2025-11-14T12:12:42.065064",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\GETTING_STARTED.md": {
+    "hash": "633ddaed55785ebd80bd2d433871619c",
+    "validated_at": "2025-11-14T12:12:42.081258",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\index.html": {
+    "hash": "7a6a4e6334eb67716608b0668a4a54ea",
+    "validated_at": "2025-11-14T12:12:42.117066",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\JORNADA-ENTREGAVEIS.md": {
+    "hash": "97b50e7d64ec5e120f04eb88f33ae07a",
+    "validated_at": "2025-11-14T12:12:42.129889",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\JORNADA-RESUMO-VISUAL.md": {
+    "hash": "787e1f23f35f89ad855abadc5247c134",
+    "validated_at": "2025-11-14T12:12:42.143308",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\logs\\README.md": {
+    "hash": "2cc3beb134b9e56aec2f4d1f8ca09f4f",
+    "validated_at": "2025-11-14T12:12:42.156364",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\package-lock.json": {
+    "hash": "a56c4a02a7e1c8fad15f34a471348d00",
+    "validated_at": "2025-11-14T12:12:42.178190",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\package.json": {
+    "hash": "c36fd9890130d9c2fe43e87fe4f3bfbd",
+    "validated_at": "2025-11-14T12:12:42.179200",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\packages\\snippets\\vuexy-vanilla-examples.html": {
+    "hash": "ac577755b9235ebba5f0f734b8a52d24",
+    "validated_at": "2025-11-14T12:12:42.217884",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\packages\\templates\\back-office-template.html": {
+    "hash": "d895ef80187878586440c146a1e1b85d",
+    "validated_at": "2025-11-14T12:12:42.257204",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\packages\\templates\\backoffice-badges.html": {
+    "hash": "c7398b964e6c3a8b7107f54d4b7453aa",
+    "validated_at": "2025-11-14T12:12:42.269474",
+    "result": {
+      "valid": false,
+      "errors": [
+        "Faltando <!DOCTYPE html>",
+        "Faltando tag <html>",
+        "Faltando tag <head>",
+        "Faltando tag <body>"
+      ],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\packages\\templates\\backoffice-breadcrumb.html": {
+    "hash": "c12d91695b965a580f5ff250f9490d42",
+    "validated_at": "2025-11-14T12:12:42.283382",
+    "result": {
+      "valid": false,
+      "errors": [
+        "Faltando <!DOCTYPE html>",
+        "Faltando tag <html>",
+        "Faltando tag <head>",
+        "Faltando tag <body>"
+      ],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\packages\\templates\\backoffice-buttons.html": {
+    "hash": "aeb1815945b0ddae8efcb3d487253bf5",
+    "validated_at": "2025-11-14T12:12:42.296809",
+    "result": {
+      "valid": false,
+      "errors": [
+        "Faltando <!DOCTYPE html>",
+        "Faltando tag <html>",
+        "Faltando tag <head>",
+        "Faltando tag <body>"
+      ],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\packages\\templates\\backoffice-header.html": {
+    "hash": "275ce7efbb6d29c0466e7e28ff4eb524",
+    "validated_at": "2025-11-14T12:12:42.322692",
+    "result": {
+      "valid": false,
+      "errors": [
+        "Faltando <!DOCTYPE html>",
+        "Faltando tag <html>",
+        "Faltando tag <head>",
+        "Faltando tag <body>"
+      ],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\packages\\templates\\backoffice-sidebar.html": {
+    "hash": "6f2decc64e94b53118f7ca3f6082e951",
+    "validated_at": "2025-11-14T12:12:42.354572",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\packages\\templates\\dev-overlay.html": {
+    "hash": "428b51fc3a472c330b7bdc83cf66647e",
+    "validated_at": "2025-11-14T12:12:42.382431",
+    "result": {
+      "valid": false,
+      "errors": [
+        "Faltando <!DOCTYPE html>",
+        "Faltando tag <html>",
+        "Faltando tag <head>",
+        "Faltando tag <body>"
+      ],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\packages\\templates\\front-office-template.html": {
+    "hash": "ac188f28034018b5ef5b51353d27abc3",
+    "validated_at": "2025-11-14T12:12:42.419599",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\packages\\templates\\README-PIXEL-PERFECT.md": {
+    "hash": "d792f30b931fad4a97428213d1ae5aeb",
+    "validated_at": "2025-11-14T12:12:42.433303",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\packages\\tokens\\style-dictionary.config.json": {
+    "hash": "a85309819e9e999e734cb0afba128173",
+    "validated_at": "2025-11-14T12:12:42.444334",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\packages\\tokens\\tokens.json": {
+    "hash": "9ca0c7a150443de0c78c40287615a388",
+    "validated_at": "2025-11-14T12:12:42.455750",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\packages\\ui\\package.json": {
+    "hash": "ddea495a317987337a0c36aa9031d176",
+    "validated_at": "2025-11-14T12:12:42.464863",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\pixel-perfect-validation-report.json": {
+    "hash": "4449be060ef5fc6e7f1e329a5d53ce86",
+    "validated_at": "2025-11-14T12:12:42.476225",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\pixel-perfect.manifest.json": {
+    "hash": "365d7852dbfedc88df70e9d5e361ac12",
+    "validated_at": "2025-11-14T12:12:42.490241",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\playwright.config.ts": {
+    "hash": "e8b05ae8635482f558106e7c85184469",
+    "validated_at": "2025-11-14T12:12:42.501391",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\postcss.config.js": {
+    "hash": "5b84f4567208c7c747079c0477373231",
+    "validated_at": "2025-11-14T12:12:42.516691",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\prototype-react\\README.md": {
+    "hash": "306b3121d8dbe618417a944fe42cdf5e",
+    "validated_at": "2025-11-14T12:12:42.531281",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\prototype-react\\scripts\\check-mocks.js": {
+    "hash": "47f1fd1d0c8709b5aad182b4447ec263",
+    "validated_at": "2025-11-14T12:12:42.548709",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\prototype-react\\src\\App.tsx": {
+    "hash": "fb4343c192734277d1d1b813c5d4c89c",
+    "validated_at": "2025-11-14T12:12:42.558853",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\prototype-react\\src\\index.css": {
+    "hash": "8486986acca5ba22ee4a4791073d2f6b",
+    "validated_at": "2025-11-14T12:12:42.568967",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\prototype-react\\tsconfig.json": {
+    "hash": "dc535abc0eac761d952add5052e60d8e",
+    "validated_at": "2025-11-14T12:12:42.580130",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\README.md": {
+    "hash": "fcb46121965303119a8434332ebb8f24",
+    "validated_at": "2025-11-14T12:12:42.592985",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\README_VALIDACAO_UNIVERSAL.md": {
+    "hash": "97139709453b9d8ee49d2352d13cd544",
+    "validated_at": "2025-11-14T12:12:42.605133",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\README_VALIDATOR_OPTIMIZED.md": {
+    "hash": "001f7f54d71142da66258ea39c267ac7",
+    "validated_at": "2025-11-14T12:12:42.606128",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\scripts\\ir_html_css_check.js": {
+    "hash": "238b3d375c9b06438f37611f83defe88",
+    "validated_at": "2025-11-14T12:12:42.628679",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\scripts\\learning\\severity-rules.json": {
+    "hash": "b524561871c4d003ee9314824b808418",
+    "validated_at": "2025-11-14T12:12:42.644126",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\scripts\\README-VALIDACAO.md": {
+    "hash": "36a55b7acdcb8eec59537dfeaca78f9d",
+    "validated_at": "2025-11-14T12:12:42.661521",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\scripts\\validate_latest.js": {
+    "hash": "d0beaacdfe821ff86bd7817bb7487351",
+    "validated_at": "2025-11-14T12:12:42.687047",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\src\\App.tsx": {
+    "hash": "70fb9e3e588bd3fa7652432c56b08c2c",
+    "validated_at": "2025-11-14T12:12:42.715203",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\src\\components\\Dashboard.stories.tsx": {
+    "hash": "10b2a17eaeb6b8e767388cef159a6810",
+    "validated_at": "2025-11-14T12:12:42.727556",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\src\\components\\Dashboard.tsx": {
+    "hash": "a669bab2cce43778a1a2b26e0b1b7dd2",
+    "validated_at": "2025-11-14T12:12:42.753089",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\src\\components\\Header.tsx": {
+    "hash": "5f486f9f03e3ac51d9474df7158805fb",
+    "validated_at": "2025-11-14T12:12:42.765013",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\src\\components\\LoteDeQuestoes.tsx": {
+    "hash": "3032ab4c039edaeeb15db5b152b9bf22",
+    "validated_at": "2025-11-14T12:12:42.782720",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\src\\components\\Sidebar.tsx": {
+    "hash": "1ef3f40a79851611a9c45f71cc9297ef",
+    "validated_at": "2025-11-14T12:12:42.795412",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\src\\index.css": {
+    "hash": "8486986acca5ba22ee4a4791073d2f6b",
+    "validated_at": "2025-11-14T12:12:42.796949",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\src\\lib\\utils.ts": {
+    "hash": "6e7a2d4f1fa6b69ad722be7d66f8d57f",
+    "validated_at": "2025-11-14T12:12:42.807203",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\src\\main.tsx": {
+    "hash": "a8ab38bf4fc80b9fafe7a24b93eb277e",
+    "validated_at": "2025-11-14T12:12:42.821577",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\src\\mocks\\mission-batch.ts": {
+    "hash": "06f9bc0c9b409ea345bcf4098665d35e",
+    "validated_at": "2025-11-14T12:12:42.842920",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\src\\mocks\\missions.ts": {
+    "hash": "8f503c3fe51d9d2b370bff17b681f1fb",
+    "validated_at": "2025-11-14T12:12:42.862384",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\src\\stores\\missionBatchStore.ts": {
+    "hash": "447dddd25dadf9363f6edb57513a5a60",
+    "validated_at": "2025-11-14T12:12:42.879538",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\src\\test\\setup.ts": {
+    "hash": "af9dbcf4b2fae32f6c122205bbcab24d",
+    "validated_at": "2025-11-14T12:12:42.887778",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\src\\types\\mission-batch.ts": {
+    "hash": "c711092d0ca79baeb245015c294d5d1c",
+    "validated_at": "2025-11-14T12:12:42.904944",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\start-prototipo.js": {
+    "hash": "00aba06ea263d5d6b815408c00fbd0aa",
+    "validated_at": "2025-11-14T12:12:42.936936",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\STORYBOOK_STATUS.md": {
+    "hash": "a29d659b6ba7d20ce53b3792492599a5",
+    "validated_at": "2025-11-14T12:12:42.948747",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\tailwind.config.js": {
+    "hash": "9315283a8be69eaca055ec7f6863511f",
+    "validated_at": "2025-11-14T12:12:42.965229",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\test-results\\.last-run.json": {
+    "hash": "f196824657d8858bc7fa44eecbba38b1",
+    "validated_at": "2025-11-14T12:12:42.978053",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\tests\\pixel\\pixel.e2e.ts": {
+    "hash": "99c83347e6dc85af0503c3ebaf9b2c08",
+    "validated_at": "2025-11-14T12:12:42.995169",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\tests\\pixel\\pixel.spec.ts": {
+    "hash": "6e986adcd5c86565041cafe31e4b3f4f",
+    "validated_at": "2025-11-14T12:12:43.006177",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\tests\\pixel\\test-com-desvios.html": {
+    "hash": "3ae1da698dbf17fa91b175480e0e7b6c",
+    "validated_at": "2025-11-14T12:12:43.021481",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\tsconfig.json": {
+    "hash": "3ef4aee4c8ef01559473fa983d2e28d6",
+    "validated_at": "2025-11-14T12:12:43.032600",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\universal_validation_report.json": {
+    "hash": "c025d33ffe790020934114ce65b38079",
+    "validated_at": "2025-11-14T12:12:43.049618",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\universal_validator_config.json": {
+    "hash": "b880f686efdc231e79452daccfa856c3",
+    "validated_at": "2025-11-14T12:12:43.063697",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\validation\\figma.spec.generated.json": {
+    "hash": "97d83376ac266854b569376b58411211",
+    "validated_at": "2025-11-14T12:12:43.077157",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\validation\\mcp-figma.manifest.json": {
+    "hash": "55d70f7df9f5c96fa341efd5d114a2e2",
+    "validated_at": "2025-11-14T12:12:43.089459",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\validation-artifacts\\flexbox\\flexbox-validation-report-hidpi.json": {
+    "hash": "5016b8d399c0aca27639ddfbdd9516d0",
+    "validated_at": "2025-11-14T12:12:43.103925",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\validation-artifacts\\flexbox\\flexbox-validation-report.json": {
+    "hash": "552d54bccfd711f891386ba84c4dd01a",
+    "validated_at": "2025-11-14T12:12:43.119035",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\validation-artifacts\\fonts\\font-validation-report.json": {
+    "hash": "210ca9e5227b040c1888e20faf2a40cd",
+    "validated_at": "2025-11-14T12:12:43.133383",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\validation-artifacts\\interactive\\interactive-states-report.json": {
+    "hash": "ec48e5bd2334a35d60e26a80551f6ba3",
+    "validated_at": "2025-11-14T12:12:43.148938",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\validation-artifacts\\mcp\\structural-chromium-dpr1.json": {
+    "hash": "e75261150ce22c3041a1d68f6a892f58",
+    "validated_at": "2025-11-14T12:12:43.163671",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\validation-artifacts\\mcp\\structural-chromium-dpr2.json": {
+    "hash": "ce8cebb5a84b02a7e4d7ba70d94cb5ca",
+    "validated_at": "2025-11-14T12:12:43.178074",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\validation-artifacts\\mcp\\structural-msedge-dpr1.json": {
+    "hash": "455e135120017da277e6a3d230ff1935",
+    "validated_at": "2025-11-14T12:12:43.189074",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\validation-artifacts\\mcp\\structural-msedge-dpr2.json": {
+    "hash": "5791194b297ee3b65c5b28c9aa76d9bf",
+    "validated_at": "2025-11-14T12:12:43.200734",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\validation-artifacts\\mcp-figma-status.json": {
+    "hash": "e3f42b204a32dcd426870629ce13f9cf",
+    "validated_at": "2025-11-14T12:12:43.211045",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\validation-artifacts\\quality_badge.svg": {
+    "hash": "b8ee137434e7fb4e9cd1bc09179125a1",
+    "validated_at": "2025-11-14T12:12:43.221567",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\validation-artifacts\\screenshots\\visual-regression-report.json": {
+    "hash": "6c0e304013bbb81d3a1e6653385de6cb",
+    "validated_at": "2025-11-14T12:12:43.233057",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\validation-artifacts\\validation_report.html": {
+    "hash": "05de5817197a775661922d44fbfd8863",
+    "validated_at": "2025-11-14T12:12:43.249319",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\validation-artifacts\\validation_report_20251106_120147.json": {
+    "hash": "c025d33ffe790020934114ce65b38079",
+    "validated_at": "2025-11-14T12:12:43.262390",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\validation-artifacts\\validation_summary.json": {
+    "hash": "e91e11bf5eb190384671aea221f465f3",
+    "validated_at": "2025-11-14T12:12:43.271005",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\vite.config.ts": {
+    "hash": "b8fde9f6446a5198bc2a9a59e503b3d3",
+    "validated_at": "2025-11-14T12:12:43.281232",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipa\u00e7\u00e3o Educacross\\.validation-cache\\validation-cache.json": {
+    "hash": "1843f680f59b05f915056490363d8a45",
+    "validated_at": "2025-11-14T12:12:53.319266",
+    "result": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  }
+}
