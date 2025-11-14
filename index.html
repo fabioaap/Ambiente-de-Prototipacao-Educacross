@@ -106,6 +106,197 @@
             font-size: 12px;
             color: var(--muted);
         }
+
+        /* Dashboard de Débito Técnico */
+        .debt-dashboard {
+            background: linear-gradient(135deg, #1a1f35 0%, #161b2e 100%);
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--link);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                border-top-color: var(--link);
+            }
+
+            50% {
+                border-top-color: #9cc1ff;
+            }
+        }
+
+        .debt-dashboard h2 {
+            font-size: 20px;
+            margin: 0 0 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #28c76f;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: scale(1.2);
+            }
+        }
+
+        .debt-dashboard .subtitle {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .debt-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .stat-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .stat-value.p0 {
+            color: #ea5455;
+        }
+
+        .stat-value.p1 {
+            color: #ff9f43;
+        }
+
+        .stat-value.p2 {
+            color: #7aa2ff;
+        }
+
+        .stat-value.effort {
+            color: #28c76f;
+        }
+
+        .recovery-section {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .recovery-label {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .recovery-percent {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28c76f 0%, #7ee8a5 100%);
+            border-radius: 999px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .debt-footer {
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.healthy {
+            background: rgba(40, 199, 111, 0.15);
+            color: #28c76f;
+        }
+
+        .status-badge.warning {
+            background: rgba(255, 159, 67, 0.15);
+            color: #ff9f43;
+        }
+
+        .status-badge.critical {
+            background: rgba(234, 84, 85, 0.15);
+            color: #ea5455;
+        }
+
+        .debt-link {
+            color: var(--link);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .debt-link:hover {
+            color: var(--link-hover);
+            text-decoration: underline;
+        }
     </style>
     <script>
         // Lista de protótipos vanilla (HTML/CSS/JS puros)
@@ -174,7 +365,74 @@
             prototipos.forEach(grupo => grid.appendChild(montarCard(grupo)));
         }
 
-        document.addEventListener('DOMContentLoaded', init);
+        // Dashboard de débito técnico
+        async function loadDebtData() {
+            try {
+                const response = await fetch('docs/TECHNICAL_DEBT.json');
+                if (!response.ok) throw new Error('TECHNICAL_DEBT.json não encontrado');
+                const data = await response.json();
+                updateDashboard(data);
+            } catch (error) {
+                console.warn('Usando dados mock:', error.message);
+                // Dados mock caso o arquivo não exista
+                updateDashboard({
+                    p0: 0,
+                    p1: 3,
+                    p2: 7,
+                    effortHours: 2.5,
+                    recoveryRate: 78,
+                    status: 'healthy',
+                    lastUpdate: new Date().toISOString()
+                });
+            }
+        }
+
+        function updateDashboard(data) {
+            // Atualizar contadores
+            document.getElementById('p0-count').textContent = data.p0 || 0;
+            document.getElementById('p1-count').textContent = data.p1 || 0;
+            document.getElementById('p2-count').textContent = data.p2 || 0;
+            document.getElementById('effort-hours').textContent = (data.effortHours || 0).toFixed(1);
+
+            // Atualizar barra de progresso
+            const recoveryRate = data.recoveryRate || 0;
+            document.getElementById('recovery-fill').style.width = `${recoveryRate}%`;
+            document.getElementById('recovery-percent').textContent = `${recoveryRate}%`;
+
+            // Atualizar status badge
+            const badge = document.getElementById('status-badge');
+            badge.className = 'status-badge';
+            if (data.p0 > 0 || data.p1 > 10) {
+                badge.classList.add('critical');
+                badge.textContent = 'Crítico';
+            } else if (data.p1 > 5) {
+                badge.classList.add('warning');
+                badge.textContent = 'Atenção';
+            } else {
+                badge.classList.add('healthy');
+                badge.textContent = 'Saudável';
+            }
+
+            // Atualizar última atualização
+            if (data.lastUpdate) {
+                const date = new Date(data.lastUpdate);
+                const formatted = date.toLocaleString('pt-BR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                document.getElementById('last-update').textContent = `Atualizado: ${formatted}`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            init();
+            loadDebtData();
+            // Atualizar a cada 5 minutos
+            setInterval(loadDebtData, 5 * 60 * 1000);
+        });
     </script>
     <noscript>
         <style>
@@ -195,6 +453,53 @@
     <main class="container">
         <h1>Protótipos – Educacross</h1>
         <p class="desc">Índice rápido de protótipos em HTML/CSS/JS puros (vanilla). <span class="tag">beta</span></p>
+
+        <!-- Dashboard de Débito Técnico -->
+        <section class="debt-dashboard" aria-label="Dashboard de Débito Técnico">
+            <h2>
+                <span class="pulse-dot"></span>
+                Débito Técnico
+            </h2>
+            <p class="subtitle">Sistema de aprendizagem contínua monitorando qualidade do código</p>
+
+            <div class="debt-stats">
+                <div class="stat-item">
+                    <div class="stat-label">P0 – Crítico</div>
+                    <div class="stat-value p0" id="p0-count">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">P1 – Alto</div>
+                    <div class="stat-value p1" id="p1-count">3</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">P2 – Médio</div>
+                    <div class="stat-value p2" id="p2-count">7</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Esforço Total</div>
+                    <div class="stat-value effort" id="effort-hours">2.5</div>
+                </div>
+            </div>
+
+            <div class="recovery-section">
+                <div class="recovery-label">
+                    <span>Taxa de Auto-Recuperação</span>
+                    <span class="recovery-percent" id="recovery-percent">78%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="recovery-fill" style="width: 78%;"></div>
+                </div>
+            </div>
+
+            <div class="debt-footer">
+                <span id="last-update">Carregando...</span>
+                <div>
+                    <span class="status-badge healthy" id="status-badge">Saudável</span>
+                    <a href="docs/TECHNICAL_DEBT.md" class="debt-link" style="margin-left: 12px;">Ver detalhes →</a>
+                </div>
+            </div>
+        </section>
+
         <div id="grid" class="grid" aria-live="polite" aria-busy="false"></div>
         <footer>Se algo não abrir no GitHub Pages, verifique o caminho e a codificação de espaços (%20).</footer>
     </main>

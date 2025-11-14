@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "node scripts/learning/error-watcher.cjs &",
+    "prestorybook": "node scripts/learning/error-watcher.cjs &",
     "dev": "vite",
     "check-mocks": "node ./prototype-react/scripts/check-mocks.cjs",
     "prebuild": "npm run check-mocks",
@@ -22,6 +24,9 @@
     "validate": "node scripts/validate_latest.js",
     "mcp:check": "node scripts/check-mcp-figma.cjs",
     "mcp:recover": "node scripts/check-mcp-figma.cjs --auto-recover",
+    "learning:analyze": "node scripts/learning/triage-issue.cjs --analyze",
+    "learning:watch": "node scripts/learning/error-watcher.cjs",
+    "learning:test": "node scripts/learning/test-learning-system.cjs",
     "pixel:install": "npx playwright install --with-deps",
     "pixel:serve": "python -m http.server 8080",
     "pixel:test": "playwright test",
