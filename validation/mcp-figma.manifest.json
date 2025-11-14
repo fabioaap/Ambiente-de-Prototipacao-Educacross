@@ -1,0 +1,50 @@
+{
+    "$schema": "https://json.schemastore.org/json-schema",
+    "version": 1,
+    "baseURL": "http://localhost:8080",
+    "browsers": [
+        "chromium",
+        "msedge"
+    ],
+    "deviceScaleFactors": [
+        1,
+        2
+    ],
+    "pages": [
+        {
+            "id": "backoffice-banco-questoes",
+            "title": "Backoffice - Banco de Questões",
+            "path": "/Back-office/Gerador%20de%20Quest%C3%B5es%20por%20IA%20%E2%80%93%20BackOffice/banco-questoes-pixel-perfect.html",
+            "viewport": {
+                "width": 1280,
+                "height": 900
+            },
+            "selectors": {
+                "sidebar": "[data-role=sidebar]",
+                "header": "[data-role=header]",
+                "breadcrumb": "[data-role=breadcrumb]",
+                "page-title": "[data-role=page-title]",
+                "tabs": "[data-role=tabs]",
+                "stats-bar": "[data-role=stats-bar]",
+                "filters-card": "[data-role=filters-card]",
+                "table-card": "[data-role=table-card]",
+                "pagination": "[data-role=pagination]",
+                "badge-quiz": "[data-role=stats-bar] .badge:nth-child(1)",
+                "badge-psychology": "[data-role=stats-bar] .badge:nth-child(2)",
+                "badge-lightbulb": "[data-role=stats-bar] .badge:nth-child(3)"
+            },
+            "figma": {
+                "fileId": "REPLACE_ME_FILE_ID",
+                "nodeIds": {
+                    "header": "10021:53487",
+                    "breadcrumb": "10021:53498",
+                    "page-title": "10021:53614",
+                    "tabs": "10021:53621",
+                    "stats-bar": "10021:53628",
+                    "filters-card": "10021:54304",
+                    "table-card": "10021:53724"
+                }
+            }
+        }
+    ]
+}

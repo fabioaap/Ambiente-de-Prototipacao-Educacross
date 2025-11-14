@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="132" height="24" viewBox="0 0 132 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="educacross logo">
+  <title>educacross</title>
+  <rect width="132" height="24" fill="none"/>
+  <g transform="translate(0,17)">
+    <text x="0" y="0" font-family="Montserrat, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="0.2">
+      <tspan fill="#28C76F">educa</tspan>
+      <tspan fill="#EA5455">cross</tspan>
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,95 @@
+{
+  "url": "http://localhost:8080/Back-office/Gerador%20de%20Quest%C3%B5es%20por%20IA%20%E2%80%93%20BackOffice/banco-questoes-pixel-perfect.html",
+  "dpr": 1,
+  "browser": "chromium",
+  "timestamp": "2025-11-14T12:06:03.084Z",
+  "elementos": [
+    {
+      "nome": "tab-ativo",
+      "seletor": "[data-role=tabs] .tab.active",
+      "estados": {
+        "hover": {
+          "inicial": {
+            "background-color": "rgb(115, 103, 240)",
+            "color": "rgb(255, 255, 255)",
+            "border-bottom-color": "rgb(255, 255, 255)",
+            "border-bottom-width": "0px"
+          },
+          "hover": {
+            "background-color": "rgb(115, 103, 240)",
+            "color": "rgb(255, 255, 255)",
+            "border-bottom-color": "rgb(255, 255, 255)",
+            "border-bottom-width": "0px"
+          },
+          "changed": false
+        }
+      }
+    },
+    {
+      "nome": "tab-inativo",
+      "seletor": "[data-role=tabs] .tab:not(.active)",
+      "estados": {
+        "hover": {
+          "inicial": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(110, 107, 123)",
+            "border-bottom-color": "rgb(110, 107, 123)",
+            "border-bottom-width": "0px"
+          },
+          "hover": {
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(110, 107, 123)",
+            "border-bottom-color": "rgb(110, 107, 123)",
+            "border-bottom-width": "0px"
+          },
+          "changed": false
+        }
+      }
+    },
+    {
+      "nome": "filtro-input",
+      "seletor": "[data-role=filters-card] input",
+      "estados": {
+        "focus": {
+          "inicial": {
+            "border-color": "rgb(186, 191, 199)",
+            "outline": "rgb(186, 191, 199) none 0px",
+            "box-shadow": "none"
+          },
+          "focus": {
+            "border-color": "rgb(186, 191, 199)",
+            "outline": "rgb(186, 191, 199) none 0px",
+            "box-shadow": "none"
+          },
+          "changed": false
+        }
+      }
+    },
+    {
+      "nome": "badge",
+      "seletor": "[data-role=stats-bar] .badge",
+      "estados": {
+        "hover": {
+          "inicial": {
+            "background-color": "rgba(115, 103, 240, 0.12)",
+            "transform": "none",
+            "box-shadow": "none"
+          },
+          "hover": {
+            "background-color": "rgba(115, 103, 240, 0.12)",
+            "transform": "none",
+            "box-shadow": "none"
+          },
+          "changed": false
+        }
+      }
+    }
+  ],
+  "summary": {
+    "totalElementos": 4,
+    "comMudanca": 0,
+    "semMudanca": 4,
+    "percentInterativo": "0.0"
+  },
+  "status": "WARNING"
+}

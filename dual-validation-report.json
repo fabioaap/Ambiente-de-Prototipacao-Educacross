@@ -1,0 +1,46 @@
+{
+  "timestamp": "2025-11-14T11:23:02.917Z",
+  "validators": {
+    "mcp": {
+      "nome": "MCP Validator",
+      "tipo": "computed-styles",
+      "ferramentas": [
+        "Playwright",
+        "Chromium",
+        "Edge"
+      ],
+      "propriedades": 56,
+      "dpr": [
+        1,
+        2
+      ],
+      "success": true,
+      "exitCode": 0
+    },
+    "pixelPerfect": {
+      "nome": "Pixel-Perfect Validator",
+      "tipo": "static-css",
+      "ferramentas": [
+        "CSS parser",
+        "Token matcher"
+      ],
+      "propriedades": 61,
+      "dpr": [
+        1
+      ],
+      "success": true,
+      "exitCode": 0
+    },
+    "gate": {
+      "nome": "MCP Gate",
+      "tipo": "ci-cd-gate",
+      "success": true,
+      "exitCode": 0
+    }
+  },
+  "consolidado": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0
+  }
+}

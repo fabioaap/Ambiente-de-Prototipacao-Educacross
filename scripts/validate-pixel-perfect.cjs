@@ -90,7 +90,91 @@ function parseCSSFromHTML(htmlContent) {
     }
 
     return cssRules;
-}// Mapeamento de seletores CSS para tokens Figma
+}
+
+/**
+ * Compara cores com tolerância RGB por canal (mesma lógica do assert-computed.cjs)
+ * @param {string} esperado - Cor esperada (hex, rgb, rgba)
+ * @param {string} obtido - Cor obtida (hex, rgb, rgba)
+ * @param {number} toleranciaRgb - Tolerância por canal RGB (padrão: 2)
+ * @param {number} toleranciaAlpha - Tolerância alpha (padrão: 0.01)
+ * @returns {boolean} true se cores são equivalentes dentro da tolerância
+ */
+function compararCoresComTolerancia(esperado, obtido, toleranciaRgb = 2, toleranciaAlpha = 0.01) {
+    const hexToRgb = (hex) => {
+        hex = hex.replace('#', '');
+        if (hex.length === 3) {
+            hex = hex.split('').map(c => c + c).join('');
+        }
+        const r = parseInt(hex.slice(0, 2), 16);
+        const g = parseInt(hex.slice(2, 4), 16);
+        const b = parseInt(hex.slice(4, 6), 16);
+        return { r, g, b, a: 1 };
+    };
+
+    const parseColor = (str) => {
+        if (!str || typeof str !== 'string') return null;
+        str = str.trim();
+
+        if (str.startsWith('#')) {
+            return hexToRgb(str);
+        }
+
+        const m = /rgba?\(\s*(\d+),\s*(\d+),\s*(\d+)(?:,\s*([0-9.]+))?\s*\)/.exec(str);
+        if (!m) return null;
+
+        const [_, r, g, b, a] = m;
+        return { r: +r, g: +g, b: +b, a: a === undefined ? 1 : +a };
+    };
+
+    const e = parseColor(esperado);
+    const o = parseColor(obtido);
+
+    if (!e || !o) {
+        return esperado?.toLowerCase() === obtido?.toLowerCase();
+    }
+
+    const rDiff = Math.abs(e.r - o.r);
+    const gDiff = Math.abs(e.g - o.g);
+    const bDiff = Math.abs(e.b - o.b);
+    const aDiff = Math.abs(e.a - o.a);
+
+    return rDiff <= toleranciaRgb &&
+        gDiff <= toleranciaRgb &&
+        bDiff <= toleranciaRgb &&
+        aDiff <= toleranciaAlpha;
+}
+
+// Propriedades CSS validadas (56+ propriedades - Sprint 1 P0)
+const PROPRIEDADES_VALIDADAS = [
+    // Cores e backgrounds
+    'background-color', 'color', 'background',
+    // Tipografia
+    'font-family', 'font-size', 'font-weight', 'line-height',
+    'text-align', 'text-decoration', 'text-transform',
+    // Layout e posicionamento
+    'display', 'flex-direction', 'justify-content', 'align-items', 'flex-wrap',
+    'position', 'top', 'left', 'right', 'bottom', 'z-index',
+    // Dimensões
+    'height', 'width', 'min-height', 'min-width', 'max-height', 'max-width',
+    // Espaçamento
+    'padding-top', 'padding-right', 'padding-bottom', 'padding-left',
+    'margin-top', 'margin-right', 'margin-bottom', 'margin-left',
+    'gap', 'row-gap', 'column-gap',
+    // Bordas
+    'border-radius',
+    'border-top-color', 'border-top-width', 'border-top-style',
+    'border-right-color', 'border-right-width', 'border-right-style',
+    'border-bottom-color', 'border-bottom-width', 'border-bottom-style',
+    'border-left-color', 'border-left-width', 'border-left-style',
+    'border', 'border-bottom', 'border-color',
+    // Efeitos visuais
+    'box-shadow', 'opacity', 'transform', 'filter',
+    // Overflow e interação
+    'overflow-x', 'overflow-y', 'cursor'
+];
+
+// Mapeamento de seletores CSS para tokens Figma
 // Formato: { 'selector CSS': { tokenPrefix, properties: { 'cssProperty': 'tokenKey' } } }
 const SELECTOR_TO_TOKEN_MAP = {
     '.sidebar': {
@@ -237,8 +321,10 @@ const SELECTOR_TO_TOKEN_MAP = {
             'background': 'page-btn-bg'
         }
     }
-};// Comparar valor CSS com token Figma
-function compareValues(cssValue, tokenValue, property, threshold = { px: 1, color: 0 }) {
+};
+
+// Comparar valor CSS com token Figma (Sprint 1 P0: tolerâncias configuráveis + RGB±2)
+function compareValues(cssValue, tokenValue, property, threshold = { px: 1, color: { rgb: 2, alpha: 0.01 }, fontWeight: 100, opacity: 0.01 }, dpr = 1) {
     // Normalizar valores
     const normCss = String(cssValue).trim().toLowerCase();
     const normToken = String(tokenValue).trim().toLowerCase();
@@ -247,57 +333,77 @@ function compareValues(cssValue, tokenValue, property, threshold = { px: 1, colo
         return { match: true, diff: 0 };
     }
 
-    // Comparar dimensões (px)
-    if (property.includes('width') || property.includes('height') || property.includes('padding') || property.includes('gap') || property.includes('line-height') || property.includes('margin') || property.includes('radius')) {
-        const cssNum = parseFloat(normCss);
-        const tokenNum = parseFloat(normToken);
-
-        if (!isNaN(cssNum) && !isNaN(tokenNum)) {
-            const diff = Math.abs(cssNum - tokenNum);
-            return {
-                match: diff <= threshold.px,
-                diff,
-                cssValue: `${cssNum}px`,
-                tokenValue: `${tokenNum}px`
-            };
-        }
-    }
-
-    // Comparar font-size
-    if (property.includes('font-size')) {
-        const cssNum = parseFloat(normCss);
-        const tokenNum = parseFloat(normToken);
-
-        if (!isNaN(cssNum) && !isNaN(tokenNum)) {
-            const diff = Math.abs(cssNum - tokenNum);
-            return {
-                match: diff <= threshold.px,
-                diff,
-                cssValue: `${cssNum}px`,
-                tokenValue: `${tokenNum}px`
-            };
-        }
-    }
-
-    // Comparar cores (hex)
-    if (property.includes('color') || property.includes('background')) {
-        // Normalizar hex
-        const cssHex = normCss.replace(/^#/, '').toLowerCase();
-        const tokenHex = normToken.replace(/^#/, '').toLowerCase();
-
-        if (cssHex === tokenHex) {
+    // Comparar cores com RGB±2 por canal
+    if (property.includes('color') || property.includes('background') || property.includes('border-color')) {
+        const match = compararCoresComTolerancia(normToken, normCss, threshold.color.rgb, threshold.color.alpha);
+        if (match) {
             return { match: true, diff: 0 };
         }
-
         return {
             match: false,
             diff: 1,
-            cssValue: `#${cssHex}`,
-            tokenValue: `#${tokenHex}`
+            cssValue: normCss,
+            tokenValue: normToken
         };
     }
 
-    // Comparação literal
+    // Comparar dimensões (px) com tolerância HiDPI aware
+    const pxTolerance = dpr >= 2 ? 0.5 : threshold.px;
+    if (
+        property.includes('width') || property.includes('height') ||
+        property.includes('padding') || property.includes('margin') ||
+        property.includes('gap') || property.includes('line-height') ||
+        property.includes('radius') || property.includes('font-size') ||
+        property.includes('top') || property.includes('left') ||
+        property.includes('right') || property.includes('bottom')
+    ) {
+        const cssNum = parseFloat(normCss);
+        const tokenNum = parseFloat(normToken);
+
+        if (!isNaN(cssNum) && !isNaN(tokenNum)) {
+            const diff = Math.abs(cssNum - tokenNum);
+            return {
+                match: diff <= pxTolerance,
+                diff,
+                cssValue: `${cssNum}px`,
+                tokenValue: `${tokenNum}px`
+            };
+        }
+    }
+
+    // Comparar font-weight com tolerância 100
+    if (property === 'font-weight') {
+        const cssNum = parseFloat(normCss);
+        const tokenNum = parseFloat(normToken);
+
+        if (!isNaN(cssNum) && !isNaN(tokenNum)) {
+            const diff = Math.abs(cssNum - tokenNum);
+            return {
+                match: diff <= threshold.fontWeight,
+                diff,
+                cssValue: cssNum,
+                tokenValue: tokenNum
+            };
+        }
+    }
+
+    // Comparar opacity com tolerância 0.01
+    if (property === 'opacity') {
+        const cssNum = parseFloat(normCss);
+        const tokenNum = parseFloat(normToken);
+
+        if (!isNaN(cssNum) && !isNaN(tokenNum)) {
+            const diff = Math.abs(cssNum - tokenNum);
+            return {
+                match: diff <= threshold.opacity,
+                diff,
+                cssValue: cssNum.toFixed(2),
+                tokenValue: tokenNum.toFixed(2)
+            };
+        }
+    }
+
+    // Comparação literal (display, flex-*, text-align, etc)
     return {
         match: false,
         diff: 1,
@@ -306,18 +412,23 @@ function compareValues(cssValue, tokenValue, property, threshold = { px: 1, colo
     };
 }
 
-// Validar CSS contra tokens Figma
-function validateCSSAgainstTokens(cssRules, figmaTokens, threshold) {
+// Validar CSS contra tokens Figma (Sprint 1 P0: sistema de tolerâncias)
+function validateCSSAgainstTokens(cssRules, figmaTokens, threshold, dpr = 1) {
     const results = {
         total: 0,
         matched: 0,
         deviations: [],
         critical: [],
-        warnings: []
+        warnings: [],
+        config: {
+            threshold,
+            dpr,
+            propriedadesValidadas: PROPRIEDADES_VALIDADAS.length
+        }
     };
 
     // Propriedades críticas que devem ser exatas
-    const criticalProps = ['width', 'height', 'background', 'border', 'border-bottom', 'color'];
+    const criticalProps = ['width', 'height', 'background', 'border', 'border-bottom', 'color', 'display', 'position'];
 
     Object.entries(SELECTOR_TO_TOKEN_MAP).forEach(([selector, config]) => {
         if (!cssRules[selector]) {
@@ -347,7 +458,7 @@ function validateCSSAgainstTokens(cssRules, figmaTokens, threshold) {
             }
 
             results.total++;
-            const comparison = compareValues(cssProps[cssProp], tokenValue, cssProp, threshold);
+            const comparison = compareValues(cssProps[cssProp], tokenValue, cssProp, threshold, dpr);
 
             if (comparison.match) {
                 results.matched++;
@@ -378,21 +489,33 @@ function validateCSSAgainstTokens(cssRules, figmaTokens, threshold) {
     const htmlArg = args.find(arg => arg.startsWith('--html='));
     const tokensArg = args.find(arg => arg.startsWith('--tokens='));
     const thresholdArg = args.find(arg => arg.startsWith('--threshold='));
+    const dprArg = args.find(arg => arg.startsWith('--dpr='));
 
     if (!htmlArg || !tokensArg) {
-        console.error('❌ Uso: node validate-pixel-perfect.js --html=<FILE> --tokens=<TOKENS_JSON> [--threshold=1]');
+        console.error('❌ Uso: node validate-pixel-perfect.js --html=<FILE> --tokens=<TOKENS_JSON> [--threshold=1] [--dpr=1]');
         process.exit(1);
     }
 
     const htmlPath = path.resolve(htmlArg.split('=')[1]);
     const tokensPath = path.resolve(tokensArg.split('=')[1]);
     const thresholdPx = thresholdArg ? parseInt(thresholdArg.split('=')[1]) : 1;
+    const dpr = dprArg ? parseInt(dprArg.split('=')[1]) : 1;
 
-    console.log('🔍 Validador Estrutural Pixel-Perfect');
-    console.log('=====================================');
+    // Sistema de tolerâncias configurável (Sprint 1 P0)
+    const threshold = {
+        px: thresholdPx,
+        color: { rgb: 2, alpha: 0.01 },
+        fontWeight: 100,
+        opacity: 0.01
+    };
+
+    console.log('🔍 Validador Estrutural Pixel-Perfect (Sprint 1 P0)');
+    console.log('===================================================');
     console.log(`📄 HTML: ${path.basename(htmlPath)}`);
     console.log(`🎨 Tokens: ${path.basename(tokensPath)}`);
-    console.log(`📏 Threshold: ±${thresholdPx}px`);
+    console.log(`📏 Threshold PX: ±${thresholdPx}px (DPR ${dpr}: ${dpr >= 2 ? '0.5px' : thresholdPx + 'px'})`);
+    console.log(`🎨 Threshold RGB: ±${threshold.color.rgb} por canal, alpha ±${threshold.color.alpha}`);
+    console.log(`📊 Propriedades: ${PROPRIEDADES_VALIDADAS.length} validadas`);
     console.log('');
 
     // Carregar arquivos
@@ -420,7 +543,7 @@ function validateCSSAgainstTokens(cssRules, figmaTokens, threshold) {
 
     // Validar
     console.log('⚖️  Validando conformidade...');
-    const results = validateCSSAgainstTokens(cssRules, figmaTokens, { px: thresholdPx, color: 0 });
+    const results = validateCSSAgainstTokens(cssRules, figmaTokens, threshold, dpr);
 
     const conformityRate = results.total > 0 ? (results.matched / results.total * 100).toFixed(1) : 0;
 

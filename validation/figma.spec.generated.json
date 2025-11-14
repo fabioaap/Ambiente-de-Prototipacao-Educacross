@@ -1,0 +1,15 @@
+{
+  "origem": "mock",
+  "fileId": "REPLACE_ME_FILE_ID",
+  "nodeIds": {
+    "header": "10021:53487",
+    "breadcrumb": "10021:53498",
+    "page-title": "10021:53614",
+    "tabs": "10021:53621",
+    "stats-bar": "10021:53628",
+    "filters-card": "10021:54304",
+    "table-card": "10021:53724"
+  },
+  "geradoEm": "2025-11-14T11:23:03.512Z",
+  "props": {}
+}

@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Banco de Questões - Habilidades | Educacross</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
@@ -16,278 +18,241 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background: #efefef;
-            color: #6e6b7b;
-            font-size: 14px;
-        }
-
-        .layout {
+            background: #f8f8f8;
             display: flex;
             min-height: 100vh;
         }
 
-        /* SIDEBAR - Pixel Perfect from Figma (node: 10021:53499) */
-        .sidebar {
-            width: 265px;
+        /* SIDEBAR */
+        aside[data-role="sidebar"] {
             background: #283046;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
+            width: 265px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
             padding: 40px 16px;
+            position: fixed;
             left: 0;
             top: 0;
-            z-index: 1000;
+        }
+
+        .sidebar-logo {
+            margin-bottom: 20px;
+            position: relative;
+            width: 230px;
+            height: 55px;
+        }
+
+        .sidebar-logo-icon {
+            position: absolute;
+            left: 0;
+            top: 4px;
+            width: 51px;
+            height: 51px;
+        }
+
+        .sidebar-logo-text {
+            position: absolute;
+            left: 56px;
+            top: 0;
+            width: 174px;
+            height: 45px;
+        }
+
+        .sidebar-menu {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
 
-        .logo {
-            margin-bottom: 14px;
-            /* gap de 10px entre logo e primeiro item, considerando estrutura */
-        }
-
-        .menu-item-wrapper {
-            width: 250px;
-        }
-
         .menu-item {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 12px 16px;
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 15px;
-            line-height: 24px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-            border-radius: 4px;
-            box-sizing: border-box;
-            width: 250px;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 6px;
+            color: #d0d2d6;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            transition: all 0.2s;
         }
 
         .menu-item:hover {
-            background: rgba(186, 191, 199, 0.12);
+            background: rgba(115, 103, 240, 0.1);
+            color: #fff;
         }
 
         .menu-item.active {
             background: #7367f0;
+            color: #fff;
         }
 
         .menu-item .material-icons {
             font-size: 20px;
-            width: 20px;
-            height: 20px;
-        }
-
-        .menu-item-content {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-        }
-
-        .menu-item-chevron {
-            width: 16px;
-            height: 16px;
-            font-size: 16px;
-        }
-
-        .menu-group {
-            background: rgba(186, 191, 199, 0.12);
-            border-radius: 4px;
-            width: 250px;
-        }
-
-        .menu-group .menu-item {
-            background: transparent;
-        }
-
-        .submenu-item {
-            padding: 12px 16px;
-            padding-left: 48px;
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 15px;
-            line-height: 24px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: 250px;
-            box-sizing: border-box;
-        }
-
-        .submenu-item:hover {
-            background: rgba(186, 191, 199, 0.12);
-        }
-
-        .submenu-item.active {
-            background: #7367f0;
-        }
-
-        .submenu-item-icon {
-            width: 12px;
-            height: 12px;
-            font-size: 12px;
         }
 
         /* MAIN CONTENT */
-        .main {
+        main {
             margin-left: 265px;
-            /* Sidebar exata do Figma */
             flex: 1;
-            padding: 24px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .header {
+        /* HEADER */
+        header[data-role="header"] {
             background: white;
             border: 1px solid #e2e2e3;
-            /* Figma */
             border-radius: 10px;
             padding: 16px;
-            /* uniforme */
-            margin-bottom: 24px;
             display: flex;
             justify-content: flex-end;
-            align-items: center;
-        }
-
-        .user-info {
-            display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .user-name {
-            font-size: 14px;
+        .header-user {
             color: #6e6b7b;
-            font-weight: 500;
-            letter-spacing: 0.4px;
-            /* Figma */
+            font-size: 14px;
+            font-weight: 400;
         }
 
-        .avatar {
+        .header-avatar {
+            background: #7367f0;
+            color: white;
             width: 42px;
             height: 42px;
-            background: #7367f0;
             border-radius: 100px;
-            /* Figma usa valor absoluto */
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 600;
         }
 
-        .breadcrumb {
+        /* BREADCRUMB */
+        div[data-role="breadcrumb"] {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            height: 24px;
+        }
+
+        .breadcrumb-item {
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .breadcrumb .material-icons {
             font-size: 14px;
         }
 
-        .breadcrumb .material-icons.home {
+        .breadcrumb-item .material-icons {
+            font-size: 14px;
             color: #7367f0;
         }
 
-        .breadcrumb .material-icons.chevron_right {
-            color: #6e6b7b;
-        }
-
-        .breadcrumb a {
+        .breadcrumb-separator .material-icons {
             font-size: 14px;
-            line-height: 24px;
             color: #6e6b7b;
-            text-decoration: none;
         }
 
-        .breadcrumb-current {
+        .breadcrumb-text {
+            color: #6e6b7b;
+            font-weight: 400;
+        }
+
+        .breadcrumb-text.active {
             color: #5e5873;
+            font-weight: 400;
         }
 
-        .page-title {
+        /* PAGE TITLE */
+        h1[data-role="page-title"] {
+            color: #7367f0;
             font-size: 28px;
             font-weight: 500;
-            color: #7367f0;
-            margin-bottom: 16px;
+            line-height: normal;
         }
 
-        .tabs {
+        /* TABS */
+        div[data-role="tabs"] {
             display: flex;
+            gap: 0;
             border-bottom: 2px solid #7367f0;
-            margin-bottom: 16px;
-        }
-
-        .tab {
-            height: 45px;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 131px;
-            font-size: 14px;
-            font-weight: 700;
-            line-height: 21px;
-            font-family: 'Montserrat', sans-serif;
-            border: none;
-            background: none;
-            cursor: pointer;
-            color: #6e6b7b;
             position: relative;
         }
 
+        .tab {
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            position: relative;
+            color: #6e6b7b;
+            transition: color 0.2s;
+        }
+
         .tab.active {
+            color: #fff;
             background: #7367f0;
-            color: #ffffff;
             border-radius: 6px 6px 0 0;
         }
 
         .tab.active::after {
-            display: none;
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #7367f0;
         }
 
-        .stats-bar {
+        /* STATS BAR */
+        div[data-role="stats-bar"] {
             background: rgba(115, 103, 240, 0.12);
             border-radius: 6px;
             padding: 0 20px;
             height: 44px;
-            margin-bottom: 16px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 65px;
         }
 
         .stats-label {
-            line-height: 21px;
+            color: #7367f0;
             font-size: 14px;
             font-weight: 700;
-            color: #7367f0;
+            line-height: 21px;
+        }
+
+        .stats-badges {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .stats-divider {
+            width: 1px;
+            height: 20px;
+            background: #d8d6de;
         }
 
         .badge {
+            background: rgba(115, 103, 240, 0.12);
+            border-radius: 17px;
+            padding: 1px 9px;
             display: inline-flex;
             align-items: center;
             gap: 3px;
-            padding: 1px 9px;
-            border-radius: 17px;
-            line-height: 18px;
             font-size: 12px;
             font-weight: 700;
-        }
-
-        .badge.primary {
-            background: rgba(115, 103, 240, 0.12);
+            line-height: 18px;
             color: #7367f0;
         }
 
@@ -305,31 +270,25 @@
             font-size: 16px;
         }
 
-        .icon-ai {
+        .badge img {
             width: 16px;
             height: 16px;
-            background: #7367f0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 8px;
-            color: white;
-            font-weight: 700;
         }
 
-        .filters-card {
+        /* FILTERS CARD */
+        div[data-role="filters-card"] {
             background: white;
             border-radius: 6px;
+            box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.06);
             padding: 20px;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .filters-row {
             display: flex;
             gap: 10px;
-            margin-bottom: 10px;
             align-items: flex-end;
         }
 
@@ -341,672 +300,606 @@
         }
 
         .filter-label {
+            color: #6e6b7b;
             font-size: 12px;
             font-weight: 700;
-            color: #6e6b7b;
+            line-height: normal;
         }
 
-        .select-box {
+        .filter-select {
+            background: white;
             border: 1px solid #d8d6de;
             border-radius: 5px;
-            padding: 10px 12px;
+            padding: 10px;
             height: 44px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: white;
             cursor: pointer;
             font-size: 14px;
+            color: #6e6b7b;
         }
 
-        .select-box .material-icons {
+        .filter-select.selected {
+            color: #7367f0;
+        }
+
+        .filter-select-content {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .filter-icon {
+            width: 26px;
+            height: 26px;
+        }
+
+        .filter-select .material-icons {
             font-size: 18px;
             color: #6e6b7b;
         }
 
-        .subject-icon {
-            width: 26px;
-            height: 26px;
-            background: rgba(115, 103, 240, 0.12);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #7367f0;
-            font-weight: 700;
-        }
-
-        .btn {
+        .filter-button {
             height: 44px;
-            padding: 0 20px;
+            padding: 10px 20px;
             border-radius: 6px;
-            border: none;
             font-size: 14px;
             font-weight: 700;
+            line-height: 21px;
             cursor: pointer;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             gap: 5px;
             white-space: nowrap;
         }
 
-        .btn-outline {
+        .filter-button.outline {
             background: transparent;
             border: 1px solid #7367f0;
             color: #7367f0;
         }
 
-        .btn-primary {
+        .filter-button.primary {
             background: #7367f0;
+            border: none;
             color: white;
         }
 
-        .btn .material-icons {
+        .filter-button .material-icons {
             font-size: 24px;
         }
 
-        .icon-ai-lg {
-            width: 24px;
-            height: 24px;
-            background: #7367f0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            color: white;
-            font-weight: 700;
-        }
-
-        .search-box {
+        .search-input {
+            background: white;
             border: 1px solid #d8d6de;
             border-radius: 5px;
             padding: 12px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 42px;
         }
 
-        .search-box input {
+        .search-input input {
             border: none;
             outline: none;
             flex: 1;
             font-size: 14px;
+            font-weight: 700;
+            color: #babfc7;
             font-family: 'Montserrat', sans-serif;
         }
 
-        .search-box input::placeholder {
-            color: #babfc7;
-            font-weight: 700;
-            line-height: 21px;
-        }
-
-        .search-box .material-icons {
+        .search-input .material-icons {
             font-size: 18px;
             color: #82868b;
         }
 
-        .table-card {
+        /* TABLE CARD */
+        div[data-role="table-card"] {
             background: white;
             border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
+            box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.16);
+            display: flex;
+            flex-direction: column;
         }
 
         .table-row {
+            border-top: 1px solid #ebe9f1;
+            border-bottom: 1px solid #ebe9f1;
             padding: 10px 20px;
             display: flex;
+            align-items: center;
             gap: 20px;
-            border-bottom: 1px solid #ebe9f1;
-            cursor: pointer;
+            min-height: 46px;
         }
 
-        .table-row.header {
+        .table-row.expandable {
             background: white;
         }
 
-        .table-row.header:hover {
-            background: #f8f8f8;
+        .table-row.child {
+            background: #f5f5f5;
+            padding-left: 60px;
         }
 
-        .table-row.content {
-            background: #f8f8f8;
-            cursor: default;
-        }
-
-        .row-toggle {
-            width: 24px;
-            flex-shrink: 0;
-        }
-
-        .row-toggle .material-icons {
+        .table-expand-icon {
+            cursor: pointer;
             font-size: 24px;
-            color: #6e6b7b;
-            transition: transform 0.3s;
+            color: #7367f0;
         }
 
-        .row-toggle .material-icons.expanded {
+        .table-expand-icon.rotate {
             transform: rotate(180deg);
         }
 
-        .row-number {
-            width: 83px;
-            flex-shrink: 0;
+        .table-number {
+            color: #7367f0;
             font-size: 14px;
             font-weight: 700;
-            color: #7367f0;
+            line-height: 24px;
+            width: 83px;
         }
 
-        .row-content {
+        .table-content {
             flex: 1;
             display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .row-header {
-            display: flex;
             align-items: center;
-            gap: 5px;
-            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        .row-title {
+        .table-title {
+            color: #7367f0;
             font-size: 14px;
             font-weight: 700;
-            color: #7367f0;
-        }
-
-        .row-text {
-            font-size: 14px;
-            color: #6e6b7b;
             line-height: 24px;
         }
 
-        .row-actions {
+        .table-description {
+            flex: 1;
+            color: #6e6b7b;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: normal;
+        }
+
+        .table-badges {
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .action-btn {
+        .table-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .action-icon {
             cursor: pointer;
-        }
-
-        .action-btn .material-icons {
-            font-size: 20px;
             color: #7367f0;
+            font-size: 24px;
         }
 
-        .action-btn:hover .material-icons {
-            opacity: 0.8;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .pagination {
+        /* PAGINATION */
+        div[data-role="pagination"] {
+            background: white;
+            border-top: 1px solid #ebe9f1;
+            border-radius: 0 0 6px 6px;
             padding: 10px 20px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
+        }
+
+        .pagination-controls {
+            display: flex;
+            align-items: center;
             gap: 5px;
         }
 
-        .page-btn {
+        .pagination-button {
             width: 28px;
             height: 28px;
             border-radius: 29px;
-            border: none;
             background: #f3f2f7;
-            cursor: pointer;
+            border: none;
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+            color: #6e6b7b;
         }
 
-        .page-btn.active {
+        .pagination-button.active {
             background: #7367f0;
             color: white;
+            font-size: 14px;
             font-weight: 600;
         }
 
-        .page-btn:hover:not(.active) {
-            background: rgba(115, 103, 240, 0.12);
-        }
-
-        .page-btn .material-icons {
+        .pagination-button .material-icons {
             font-size: 16px;
-            color: #6e6b7b;
         }
     </style>
 </head>
 
 <body>
-    <div class="layout">
-        <aside class="sidebar">
-            <div class="logo">educac</div>
+    <!-- SIDEBAR -->
+    <aside data-role="sidebar">
+        <div class="sidebar-logo">
+            <img src="http://localhost:3845/assets/b0ad2d7766519f25b183f71972c018517c4238c1.svg" alt="Educacross Icon"
+                class="sidebar-logo-icon">
+            <img src="http://localhost:3845/assets/d5b233d31729e205ae6dadb67a031280983ec9a2.svg" alt="Educacross"
+                class="sidebar-logo-text">
+        </div>
+        <nav class="sidebar-menu">
+            <a href="#" class="menu-item">
+                <span class="material-icons">home</span>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">sports_esports</span>
+                <span>Games</span>
+            </a>
+            <a href="#" class="menu-item active">
+                <span class="material-icons">menu_book</span>
+                <span>Gestão de Atividades</span>
+            </a>
+            <a href="#" class="menu-item" style="padding-left: 42px;">
+                <span>Banco de Questões</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">school</span>
+                <span>Escolas</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">person</span>
+                <span>Usuários</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">event</span>
+                <span>Calendário</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">auto_stories</span>
+                <span>Biblioteca</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">screen_search_desktop</span>
+                <span>Análises</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">import_contacts</span>
+                <span>Relatórios</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">pie_chart</span>
+                <span>Estatísticas</span>
+            </a>
+        </nav>
+    </aside>
 
-            <!-- Home -->
-            <div class="menu-item">
-                <div class="menu-item-content">
-                    <span class="material-icons">home</span>
-                    <span>Home</span>
-                </div>
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- HEADER -->
+        <header data-role="header">
+            <span class="header-user">Usuário do backoffice</span>
+            <div class="header-avatar">A</div>
+        </header>
+
+        <!-- BREADCRUMB -->
+        <div data-role="breadcrumb">
+            <div class="breadcrumb-item">
+                <span class="material-icons">home</span>
             </div>
-
-            <!-- Gestão de Atividades (expandido) -->
-            <div class="menu-group">
-                <div class="menu-item">
-                    <div class="menu-item-content">
-                        <span class="material-icons">sports_esports</span>
-                        <span>Gestão de Atividades</span>
-                    </div>
-                    <span class="material-icons menu-item-chevron"
-                        style="transform: rotate(90deg);">chevron_right</span>
-                </div>
-                <div class="submenu-item">
-                    <span class="submenu-item-icon">●</span>
-                    <span>Banco de Jogos</span>
-                </div>
-                <div class="submenu-item active">
-                    <span class="submenu-item-icon">●</span>
-                    <span>Banco de Questões</span>
-                </div>
+            <div class="breadcrumb-separator">
+                <span class="material-icons">chevron_right</span>
             </div>
-
-            <!-- Gestão Pedagógica -->
-            <div class="menu-item">
-                <div class="menu-item-content">
-                    <span class="material-icons">menu_book</span>
-                    <span>Gestão Pedagógica</span>
-                </div>
-                <span class="material-icons menu-item-chevron">chevron_right</span>
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-text">Gestão de Atividades</span>
             </div>
-
-            <!-- Gestão de Escolas -->
-            <div class="menu-item">
-                <div class="menu-item-content">
-                    <span class="material-icons">school</span>
-                    <span>Gestão de Escolas</span>
-                </div>
-                <span class="material-icons menu-item-chevron">chevron_right</span>
+            <div class="breadcrumb-separator">
+                <span class="material-icons">chevron_right</span>
             </div>
-
-            <!-- Gestão de Acessos -->
-            <div class="menu-item">
-                <div class="menu-item-content">
-                    <span class="material-icons">person</span>
-                    <span>Gestão de Acessos</span>
-                </div>
-                <span class="material-icons menu-item-chevron" style="transform: rotate(270deg);">expand_more</span>
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-text active">Banco de Questões</span>
             </div>
+        </div>
 
-            <!-- Eventos -->
-            <div class="menu-item">
-                <div class="menu-item-content">
-                    <span class="material-icons">event</span>
-                    <span>Eventos</span>
-                </div>
-                <span class="material-icons menu-item-chevron">chevron_right</span>
-            </div>
+        <!-- PAGE TITLE -->
+        <h1 data-role="page-title">Banco de Questões</h1>
 
-            <!-- Sistema de Ensino -->
-            <div class="menu-item">
-                <div class="menu-item-content">
-                    <span class="material-icons">auto_stories</span>
-                    <span>Sistema de Ensino</span>
-                </div>
-                <span class="material-icons menu-item-chevron">chevron_right</span>
-            </div>
+        <!-- TABS -->
+        <div data-role="tabs">
+            <button class="tab active">Habilidades</button>
+            <button class="tab">Tópicos</button>
+        </div>
 
-            <!-- Biblioteca -->
-            <div class="menu-item">
-                <div class="menu-item-content">
-                    <span class="material-icons">local_library</span>
-                    <span>Biblioteca</span>
-                </div>
-                <span class="material-icons menu-item-chevron">chevron_right</span>
-            </div>
-
-            <!-- Expedição Leitura -->
-            <div class="menu-item">
-                <div class="menu-item-content">
-                    <span class="material-icons">book</span>
-                    <span>Expedição Leitura</span>
-                </div>
-                <span class="material-icons menu-item-chevron">chevron_right</span>
-            </div>
-
-            <!-- Relatórios -->
-            <div class="menu-item">
-                <div class="menu-item-content">
-                    <span class="material-icons">pie_chart</span>
-                    <span>Relatórios</span>
-                </div>
-                <span class="material-icons menu-item-chevron">chevron_right</span>
-            </div>
-        </aside>
-
-        <main class="main">
-            <div class="header">
-                <div class="user-info">
-                    <span class="user-name">Usuário do backoffice</span>
-                    <div class="avatar">A</div>
-                </div>
-            </div>
-
-            <div class="breadcrumb">
-                <span class="material-icons home">home</span>
-                <span class="material-icons chevron_right">chevron_right</span>
-                <a href="#">Gestão de Atividades</a>
-                <span class="material-icons chevron_right">chevron_right</span>
-                <span class="breadcrumb-current">Banco de Questões</span>
-            </div>
-
-            <h1 class="page-title">Banco de Questões</h1>
-
-            <div class="tabs">
-                <button class="tab active">Habilidades</button>
-                <button class="tab">Tópicos</button>
-            </div>
-
-            <div class="stats-bar">
+        <!-- STATS BAR -->
+        <div data-role="stats-bar">
+            <div>
                 <span class="stats-label">Total de Questões:</span>
-                <div style="display: flex; gap: 16px; align-items: center;">
-                    <div class="badge primary">
+            </div>
+            <div class="stats-badges">
+                <span class="badge">
+                    <span class="material-icons">quiz</span>
+                    330
+                </span>
+                <div class="stats-divider"></div>
+                <span class="badge">
+                    <span class="material-icons">psychology</span>
+                    165
+                </span>
+                <span class="badge">
+                    <span class="material-icons">emoji_objects</span>
+                    165
+                </span>
+            </div>
+        </div>
+
+        <!-- FILTERS CARD -->
+        <div data-role="filters-card">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label class="filter-label">Área de Conhecimento</label>
+                    <div class="filter-select selected">
+                        <div class="filter-select-content">
+                            <span style="font-size: 20px;">🔢</span>
+                            <span>Matemática</span>
+                        </div>
+                        <span class="material-icons">keyboard_arrow_down</span>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Ano Escolar</label>
+                    <div class="filter-select selected">
+                        <span>Todos os anos escolares</span>
+                        <span class="material-icons">keyboard_arrow_down</span>
+                    </div>
+                </div>
+                <button class="filter-button outline">
+                    Todas as questões
+                </button>
+                <button class="filter-button primary">
+                    <span class="material-icons">add_circle</span>
+                    <span>Nova questão</span>
+                </button>
+                <button class="filter-button primary">
+                    <span class="material-icons">psychology</span>
+                    <span>Nova questão IA</span>
+                </button>
+            </div>
+            <div class="search-input">
+                <input type="text" placeholder="Pesquisar por tópico">
+                <span class="material-icons">search</span>
+            </div>
+        </div>
+
+        <!-- TABLE CARD -->
+        <div data-role="table-card">
+            <!-- Row: Números (Expanded) -->
+            <div class="table-row expandable">
+                <span class="material-icons table-expand-icon rotate">keyboard_arrow_down</span>
+                <div class="table-number">1</div>
+                <div class="table-content">
+                    <span class="table-title">Números</span>
+                    <span class="badge pink">Temática</span>
+                    <span class="badge">
+                        <span class="material-icons">psychology</span>
+                        165
+                    </span>
+                    <span class="badge">
+                        <span class="material-icons">emoji_objects</span>
+                        165
+                    </span>
+                    <span class="badge">
                         <span class="material-icons">quiz</span>
-                        <span>330</span>
+                        330
+                    </span>
+                </div>
+            </div>
+
+            <!-- Child Row: EF01MA01 -->
+            <div class="table-row child">
+                <div class="table-number">EF01MA01</div>
+                <div class="table-content">
+                    <span class="table-description">Utilizar números naturais como indicador de quantidade ou de ordem
+                        em diferentes situações cotidianas e reconhecer situações em que os números não indicam contagem
+                        nem ordem, mas sim código de identificação.</span>
+                    <div class="table-badges">
+                        <span class="badge">
+                            <span class="material-icons">psychology</span>
+                            165
+                        </span>
+                        <span class="badge">
+                            <span class="material-icons">emoji_objects</span>
+                            165
+                        </span>
+                        <span class="badge">
+                            <span class="material-icons">quiz</span>
+                            330
+                        </span>
                     </div>
-                    <div style="width: 1px; height: 20px; background: #ebe9f1;"></div>
-                    <div class="badge primary">
-                        <span class="icon-ai">AI</span>
-                        <span>165</span>
-                    </div>
-                    <div class="badge primary">
-                        <span class="material-icons">article</span>
-                        <span>165</span>
+                    <div class="table-actions">
+                        <span class="material-icons action-icon">add_circle</span>
+                        <span class="material-icons action-icon">psychology</span>
                     </div>
                 </div>
             </div>
 
-            <div class="filters-card">
-                <div class="filters-row">
-                    <div class="filter-group">
-                        <label class="filter-label">Área de Conhecimento</label>
-                        <div class="select-box">
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <div class="subject-icon">M</div>
-                                <span>Matemática</span>
-                            </div>
-                            <span class="material-icons">expand_more</span>
-                        </div>
+            <!-- Child Row: EF01MA02 -->
+            <div class="table-row child">
+                <div class="table-number">EF01MA02</div>
+                <div class="table-content">
+                    <span class="table-description">Contar de maneira exata ou aproximada, utilizando diferentes
+                        estratégias como o pareamento e outros agrupamentos.</span>
+                    <div class="table-badges">
+                        <span class="badge">
+                            <span class="material-icons">psychology</span>
+                            165
+                        </span>
+                        <span class="badge">
+                            <span class="material-icons">emoji_objects</span>
+                            165
+                        </span>
+                        <span class="badge">
+                            <span class="material-icons">quiz</span>
+                            330
+                        </span>
                     </div>
-                    <div class="filter-group">
-                        <label class="filter-label">Ano Escolar</label>
-                        <div class="select-box">
-                            <span style="color: #7367f0;">Todos os anos escolares</span>
-                            <span class="material-icons">expand_more</span>
-                        </div>
+                    <div class="table-actions">
+                        <span class="material-icons action-icon">add_circle</span>
+                        <span class="material-icons action-icon">psychology</span>
                     </div>
-                    <button class="btn btn-outline">Todas as questões</button>
-                    <button class="btn btn-primary">
-                        <span class="material-icons">add_circle</span>
-                        Nova questão
-                    </button>
-                    <button class="btn btn-primary">
-                        <span class="icon-ai-lg">AI</span>
-                        Nova questão IA
-                    </button>
-                </div>
-                <div class="search-box">
-                    <input type="text" placeholder="Pesquisar por tópico">
-                    <span class="material-icons">search</span>
                 </div>
             </div>
 
-            <div class="table-card">
-                <div class="table-row header" onclick="toggleRow(1)">
-                    <div class="row-toggle">
-                        <span class="material-icons expanded" id="toggle-1">expand_more</span>
+            <!-- Child Row: EF01MA03 -->
+            <div class="table-row child">
+                <div class="table-number">EF01MA03</div>
+                <div class="table-content">
+                    <span class="table-description">Estimar e comparar quantidades de objetos de dois conjuntos (em
+                        torno de 20 elementos), por estimativa e/ou por correspondência (um a um, dois a dois) para
+                        indicar "tem mais", "tem menos" ou "tem a mesma quantidade".</span>
+                    <div class="table-badges">
+                        <span class="badge">
+                            <span class="material-icons">psychology</span>
+                            165
+                        </span>
+                        <span class="badge">
+                            <span class="material-icons">emoji_objects</span>
+                            165
+                        </span>
+                        <span class="badge">
+                            <span class="material-icons">quiz</span>
+                            330
+                        </span>
                     </div>
-                    <div class="row-number">1</div>
-                    <div class="row-content">
-                        <div class="row-header">
-                            <span class="row-title">Números</span>
-                            <div class="badge pink">Temática</div>
-                            <div class="badge primary">
-                                <span class="icon-ai">AI</span>
-                                <span>165</span>
-                            </div>
-                            <div class="badge primary">
-                                <span class="material-icons">article</span>
-                                <span>165</span>
-                            </div>
-                            <div class="badge primary">
-                                <span class="material-icons">quiz</span>
-                                <span>330</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="table-row content" id="row-1-1">
-                    <div class="row-toggle"></div>
-                    <div class="row-number" style="padding-left: 20px;">EF01MA01</div>
-                    <div class="row-content">
-                        <div class="row-text">Utilizar números naturais como indicador de quantidade ou de ordem em
-                            diferentes situações cotidianas e reconhecer situações em que os números não indicam
-                            contagem nem ordem, mas sim código de identificação.</div>
-                        <div class="row-actions">
-                            <div class="badge primary">
-                                <span class="icon-ai">AI</span>
-                                <span>165</span>
-                            </div>
-                            <div class="badge primary">
-                                <span class="material-icons">article</span>
-                                <span>165</span>
-                            </div>
-                            <div class="badge primary">
-                                <span class="material-icons">quiz</span>
-                                <span>330</span>
-                            </div>
-                            <div class="action-btn">
-                                <span class="material-icons">add_circle</span>
-                            </div>
-                            <div class="action-btn">
-                                <span class="icon-ai">AI</span>
-                            </div>
-                        </div>
+                    <div class="table-actions">
+                        <span class="material-icons action-icon">add_circle</span>
+                        <span class="material-icons action-icon">psychology</span>
                     </div>
                 </div>
+            </div>
 
-                <div class="table-row content" id="row-1-2">
-                    <div class="row-toggle"></div>
-                    <div class="row-number" style="padding-left: 20px;">EF01MA02</div>
-                    <div class="row-content">
-                        <div class="row-text">Contar de maneira exata ou aproximada, utilizando diferentes estratégias
-                            como o pareamento e outros agrupamentos.</div>
-                        <div class="row-actions">
-                            <div class="badge primary">
-                                <span class="icon-ai">AI</span>
-                                <span>165</span>
-                            </div>
-                            <div class="badge primary">
-                                <span class="material-icons">article</span>
-                                <span>165</span>
-                            </div>
-                            <div class="badge primary">
-                                <span class="material-icons">quiz</span>
-                                <span>330</span>
-                            </div>
-                            <div class="action-btn">
-                                <span class="material-icons">add_circle</span>
-                            </div>
-                            <div class="action-btn">
-                                <span class="icon-ai">AI</span>
-                            </div>
-                        </div>
+            <!-- Child Row: EF01MA02 (duplicate) -->
+            <div class="table-row child">
+                <div class="table-number">EF01MA02</div>
+                <div class="table-content">
+                    <span class="table-description">Contar a quantidade de objetos de coleções até 100 unidades e
+                        apresentar o resultado por registros verbais e simbólicos, em situações de seu interesse, como
+                        jogos, brincadeiras, materiais da sala de aula, entre outros.</span>
+                    <div class="table-badges">
+                        <span class="badge">
+                            <span class="material-icons">psychology</span>
+                            165
+                        </span>
+                        <span class="badge">
+                            <span class="material-icons">emoji_objects</span>
+                            165
+                        </span>
+                        <span class="badge">
+                            <span class="material-icons">quiz</span>
+                            330
+                        </span>
+                    </div>
+                    <div class="table-actions">
+                        <span class="material-icons action-icon">add_circle</span>
+                        <span class="material-icons action-icon">psychology</span>
                     </div>
                 </div>
+            </div>
 
-                <div class="table-row content" id="row-1-3">
-                    <div class="row-toggle"></div>
-                    <div class="row-number" style="padding-left: 20px;">EF01MA03</div>
-                    <div class="row-content">
-                        <div class="row-text">Estimar e comparar quantidades de objetos de dois conjuntos (em torno de
-                            20 elementos), por estimativa e/ou por correspondência (um a um, dois a dois) para indicar
-                            "tem mais", "tem menos" ou "tem a mesma quantidade".</div>
-                        <div class="row-actions">
-                            <div class="badge primary">
-                                <span class="icon-ai">AI</span>
-                                <span>165</span>
-                            </div>
-                            <div class="badge primary">
-                                <span class="material-icons">article</span>
-                                <span>165</span>
-                            </div>
-                            <div class="badge primary">
-                                <span class="material-icons">quiz</span>
-                                <span>330</span>
-                            </div>
-                            <div class="action-btn">
-                                <span class="material-icons">add_circle</span>
-                            </div>
-                            <div class="action-btn">
-                                <span class="icon-ai">AI</span>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Row: Geometria (Collapsed) -->
+            <div class="table-row expandable">
+                <span class="material-icons table-expand-icon">keyboard_arrow_down</span>
+                <div class="table-number">2</div>
+                <div class="table-content">
+                    <span class="table-title">Geometria</span>
+                    <span class="badge pink">Temática</span>
+                    <span class="badge">
+                        <span class="material-icons">psychology</span>
+                        229
+                    </span>
+                    <span class="badge">
+                        <span class="material-icons">emoji_objects</span>
+                        229
+                    </span>
+                    <span class="badge">
+                        <span class="material-icons">quiz</span>
+                        458
+                    </span>
                 </div>
+            </div>
 
-                <div class="table-row content" id="row-1-4">
-                    <div class="row-toggle"></div>
-                    <div class="row-number" style="padding-left: 20px;">EF01MA02</div>
-                    <div class="row-content">
-                        <div class="row-text">Contar a quantidade de objetos de coleções até 100 unidades e apresentar o
-                            resultado por registros verbais e simbólicos, em situações de seu interesse, como jogos,
-                            brincadeiras, materiais da sala de aula, entre outros.</div>
-                        <div class="row-actions">
-                            <div class="badge primary">
-                                <span class="icon-ai">AI</span>
-                                <span>165</span>
-                            </div>
-                            <div class="badge primary">
-                                <span class="material-icons">article</span>
-                                <span>165</span>
-                            </div>
-                            <div class="badge primary">
-                                <span class="material-icons">quiz</span>
-                                <span>330</span>
-                            </div>
-                            <div class="action-btn">
-                                <span class="material-icons">add_circle</span>
-                            </div>
-                            <div class="action-btn">
-                                <span class="icon-ai">AI</span>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Row: Grandezas e Medidas (Collapsed) -->
+            <div class="table-row expandable">
+                <span class="material-icons table-expand-icon">keyboard_arrow_down</span>
+                <div class="table-number">3</div>
+                <div class="table-content">
+                    <span class="table-title">Grandezas e Medidas</span>
+                    <span class="badge pink">Temática</span>
+                    <span class="badge">
+                        <span class="material-icons">psychology</span>
+                        165
+                    </span>
+                    <span class="badge">
+                        <span class="material-icons">emoji_objects</span>
+                        35
+                    </span>
+                    <span class="badge">
+                        <span class="material-icons">quiz</span>
+                        200
+                    </span>
                 </div>
+            </div>
 
-                <div class="table-row header" onclick="toggleRow(2)">
-                    <div class="row-toggle">
-                        <span class="material-icons" id="toggle-2">chevron_right</span>
-                    </div>
-                    <div class="row-number">2</div>
-                    <div class="row-content">
-                        <div class="row-header">
-                            <span class="row-title">Geometria</span>
-                            <div class="badge pink">Temática</div>
-                            <div class="badge primary">
-                                <span class="icon-ai">AI</span>
-                                <span>229</span>
-                            </div>
-                            <div class="badge primary">
-                                <span class="material-icons">article</span>
-                                <span>229</span>
-                            </div>
-                            <div class="badge primary">
-                                <span class="material-icons">quiz</span>
-                                <span>458</span>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Row: Probabilidade e Estatística (Collapsed) -->
+            <div class="table-row expandable">
+                <span class="material-icons table-expand-icon">keyboard_arrow_down</span>
+                <div class="table-number">4</div>
+                <div class="table-content">
+                    <span class="table-title">Probabilidade e Estatística</span>
+                    <span class="badge pink">Temática</span>
+                    <span class="badge warning">
+                        <span class="material-icons">quiz</span>
+                        0 questões
+                    </span>
                 </div>
+            </div>
 
-                <div class="table-row header" onclick="toggleRow(3)">
-                    <div class="row-toggle">
-                        <span class="material-icons" id="toggle-3">chevron_right</span>
-                    </div>
-                    <div class="row-number">3</div>
-                    <div class="row-content">
-                        <div class="row-header">
-                            <span class="row-title">Grandezas e Medidas</span>
-                            <div class="badge pink">Temática</div>
-                            <div class="badge primary">
-                                <span class="icon-ai">AI</span>
-                                <span>165</span>
-                            </div>
-                            <div class="badge primary">
-                                <span class="material-icons">article</span>
-                                <span>35</span>
-                            </div>
-                            <div class="badge primary">
-                                <span class="material-icons">quiz</span>
-                                <span>200</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="table-row header" onclick="toggleRow(4)">
-                    <div class="row-toggle">
-                        <span class="material-icons" id="toggle-4">chevron_right</span>
-                    </div>
-                    <div class="row-number">4</div>
-                    <div class="row-content">
-                        <div class="row-header">
-                            <span class="row-title">Probabilidade e Estatística</span>
-                            <div class="badge pink">Temática</div>
-                            <div class="badge warning">
-                                <span class="material-icons">quiz</span>
-                                <span>0 questões</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pagination">
-                    <button class="page-btn">
+            <!-- PAGINATION -->
+            <div data-role="pagination">
+                <div class="pagination-controls">
+                    <button class="pagination-button">
                         <span class="material-icons">chevron_left</span>
                     </button>
-                    <button class="page-btn active">1</button>
-                    <button class="page-btn">
+                    <button class="pagination-button active">1</button>
+                    <button class="pagination-button">
                         <span class="material-icons">chevron_right</span>
                     </button>
                 </div>
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
 
     <script>
-        function toggleRow(rowId) {
-            const toggle = document.getElementById(`toggle-${rowId}`);
-            const rows = document.querySelectorAll(`[id^="row-${rowId}-"]`);
+        // Toggle expand/collapse on table rows
+        document.querySelectorAll('.table-expand-icon').forEach(icon => {
+            icon.addEventListener('click', function () {
+                this.classList.toggle('rotate');
+                // Aqui você implementaria a lógica para mostrar/ocultar as child rows
+            });
+        });
 
-            if (toggle.textContent === 'chevron_right') {
-                toggle.textContent = 'expand_more';
-                toggle.classList.add('expanded');
-                rows.forEach(row => row.classList.remove('hidden'));
-            } else {
-                toggle.textContent = 'chevron_right';
-                toggle.classList.remove('expanded');
-                rows.forEach(row => row.classList.add('hidden'));
-            }
-        }
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
     </script>
 </body>
 
