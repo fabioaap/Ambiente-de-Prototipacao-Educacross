@@ -1,0 +1,762 @@
+/**
+ * CRIAR QUESTÃO DE QUIZ - Validado contra Figma MCP
+ * Node: 10061:58626
+ * 
+ * TOKENS VALIDADOS (do Figma):
+ * - Primary: #7367F0
+ * - Text Body: #6E6B7B  
+ * - Text Strong: #5E5873
+ * - Disabled Input: #EFEFEF
+ * - Disabled Text: #B9B9C3
+ * - White: #FFFFFF
+ * - Neutral Dark: #CCCCCC
+ * - Divider: #D8D6DE
+ * 
+ * FONTES VALIDADAS:
+ * - H1 (28px, medium, 500): Novo lote questão de quiz
+ * - H2 (24px, medium, 500): Quantidades do lote
+ * - H3 (21px, medium, 500): Habilidades, Tópico
+ * - Body (14px, regular, 400): textos gerais
+ * - Body Bold (14px, bold, 700): subtítulos
+ * - Small (12px, regular, 400): textos de info
+ */
+
+/* =======================================
+   SIDEBAR - Pixel Perfect do Figma
+   Node: 10061:58469
+   ======================================= */
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 40px 16px 20px;
+    margin-bottom: 10px;
+}
+
+.sidebar .logo-icon {
+    width: 32px;
+    height: 33px;
+    flex-shrink: 0;
+}
+
+.sidebar .logo-text {
+    width: 110px;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.sidebar .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 24px;
+    transition: background-color 0.2s ease;
+    position: relative;
+}
+
+.sidebar .menu-item:hover {
+    background-color: rgba(186, 191, 199, 0.08);
+}
+
+.sidebar .menu-item.active {
+    background-color: #7367f0;
+}
+
+.sidebar .menu-item-expandable .menu-item {
+    background-color: rgba(186, 191, 199, 0.12);
+}
+
+.sidebar .menu-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.sidebar .chevron-icon {
+    margin-left: auto;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+    opacity: 1;
+}
+
+.sidebar .chevron-icon.expanded {
+    transform: rotate(90deg);
+}
+
+.sidebar .chevron-icon.rotated {
+    transform: rotate(90deg);
+}
+
+.sidebar .menu-item span:not(.menu-icon) {
+    flex: 1;
+}
+
+/* =======================================
+   LAYOUT PRINCIPAL
+   ======================================= */
+/* O layout principal já vem do common.css (main com margin-left: 265px, padding-top: 98px)
+   Aqui só ajustamos o padding-bottom para a barra fixa */
+main {
+    padding-bottom: 100px;
+}
+
+/* =======================================
+   BREADCRUMB
+   ======================================= */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #babfc7;
+    /* text-muted */
+    margin-bottom: 0;
+}
+
+.breadcrumb-separator {
+    color: #babfc7;
+}
+
+.breadcrumb-current {
+    color: #6e6b7b;
+    /* text-body */
+}
+
+/* =======================================
+   PAGE TITLE (H1 - 28px Medium)
+   ======================================= */
+.page-title {
+    font-size: 28px;
+    font-weight: 500;
+    color: #7367f0;
+    /* primary */
+    line-height: 1;
+    margin: 0;
+}
+
+/* =======================================
+   CARDS (shadow validado do Figma)
+   ======================================= */
+.card {
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* =======================================
+   FORM GRID (3 colunas iguais com 10px gap)
+   ======================================= */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+/* =======================================
+   INPUT GROUP (label + field com 5px gap)
+   ======================================= */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: #6e6b7b;
+    /* text-body */
+}
+
+.input-label.required::after {
+    content: '*';
+    color: #ea5455;
+    margin-left: 2px;
+}
+
+/* =======================================
+   INPUT FIELD (44px height validado)
+   ======================================= */
+.input-field {
+    height: 44px;
+    padding: 10px;
+    border: 1px solid #d8d6de;
+    /* divider */
+    border-radius: 5px;
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: #6e6b7b;
+    /* text-body */
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: border-color 0.2s;
+}
+
+.input-field.disabled {
+    background: #efefef;
+    /* disabled input */
+    cursor: not-allowed;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #7367f0;
+    /* primary */
+}
+
+/* Select custom: valor visível no span, select invisível por cima para capturar cliques */
+.input-field select {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Chevron visual do select (somente quando não disabled) */
+.input-field:not(.disabled)::after {
+    content: '';
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #6e6b7b;
+    /* text-body */
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+/* Subject Badge (ícone Matemática cyan) */
+.subject-badge {
+    width: 26px;
+    height: 26px;
+    background: #00bdb8;
+    /* cyan */
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.subject-badge svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* =======================================
+   SECTION BLOCK (Habilidades e Tópico)
+   ======================================= */
+.section-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.section-block:last-child {
+    margin-bottom: 0;
+}
+
+/* Section Title Row (título + ícone + texto tudo inline) */
+.section-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+/* Section Title (H3 - 21px Medium Primary) */
+.section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1;
+    color: #7367f0;
+    /* primary */
+    margin: 0;
+    flex-shrink: 0;
+}
+
+/* Info Text (12px ao lado do título) */
+.info-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #6e6b7b;
+    /* text-body */
+}
+
+.info-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.info-row span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #6e6b7b;
+    /* text-body */
+}
+
+/* =======================================
+   BUTTONS FULL WIDTH (Incluir Habilidade/Tópico)
+   ======================================= */
+.btn-full-outline {
+    width: 100%;
+    height: 44px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background: #ffffff;
+    border: 1px solid #7367f0;
+    /* primary */
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 21px;
+    color: #7367f0;
+    /* primary */
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-full-outline:hover {
+    background: rgba(115, 103, 240, 0.12);
+    /* primary-12 */
+}
+
+.btn-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+/* =======================================
+   ESTADO B (selecionado) — Habilidades / Tópico
+   ======================================= */
+.skill-selected-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.skill-selected-text {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    background: rgba(115, 103, 240, 0.12);
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: var(--primary);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+
+
+.icon-box {
+    height: 44px;
+    background: #ffffff;
+    border: 1px solid var(--divider);
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-button {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+.delete-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--danger);
+}
+
+.topic-selected-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.topic-selected-box {
+    flex: 1;
+    background: #ffffff;
+    border: 1px solid var(--primary);
+    border-radius: 6px;
+    padding: 20px;
+}
+
+.topic-title {
+    margin: 0 0 6px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--primary);
+}
+
+.topic-desc {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: var(--text-body);
+}
+
+.topic-desc .strong {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* (Removido: estilos de seleção/chips para voltar ao layout original do Figma) */
+
+/* =======================================
+   SECTION SUBTITLE (14px Bold Dark)
+   ======================================= */
+.section-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 21px;
+    color: #5e5873;
+    /* text-strong */
+    margin-bottom: 10px;
+}
+
+/* =======================================
+   DIFFICULTY ROW (5 inputs em linha com 12px gap)
+   ======================================= */
+.difficulty-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.difficulty-row .input-group {
+    flex: 1;
+}
+
+.difficulty-row input[type="number"] {
+    width: 100%;
+    height: 44px;
+    padding: 10px;
+    border: 1px solid #d8d6de;
+    /* divider */
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: #6e6b7b;
+    /* text-body */
+    background: #ffffff;
+}
+
+.difficulty-row input[type="number"]:focus {
+    outline: none;
+    border-color: #7367f0;
+    /* primary */
+}
+
+/* =======================================
+   SWITCHES CONTAINER (20px gap horizontal)
+   ======================================= */
+.switches-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.switch-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.switch-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: #6e6b7b;
+    /* text-body */
+}
+
+/* Switch Toggle - Pixel Perfect Figma Estados A/B */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+}
+
+.switch input[type="checkbox"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Estado A (Inativo) - Cinza */
+.switch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #DBDADE !important;
+    border-radius: 12px;
+    transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Bolinha do switch */
+.switch-slider::before {
+    content: '';
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    top: 3px;
+    background-color: #ffffff !important;
+    border-radius: 50%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Estado B (Ativo) - Roxo Primary */
+.switch input[type="checkbox"]:checked+.switch-slider {
+    background-color: #7367f0 !important;
+}
+
+.switch input[type="checkbox"]:checked+.switch-slider::before {
+    transform: translateX(18px);
+}
+
+.switch-status {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: #6e6b7b;
+    /* text-body */
+}
+
+/* =======================================
+   IMAGE UPLOAD (150px height validado)
+   ======================================= */
+.image-upload {
+    margin-top: 24px;
+}
+
+.image-upload-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.image-upload-label span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 21px;
+    color: #6e6b7b;
+    /* text-body */
+}
+
+.image-upload-area {
+    width: 100%;
+    height: 150px;
+    border: 2px dashed #7666f8;
+    /* variação do primary */
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.image-upload-area:hover {
+    background: rgba(115, 103, 240, 0.05);
+}
+
+.image-upload-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 26px;
+    color: #7367f0;
+    /* primary */
+    text-align: center;
+}
+
+/* =======================================
+   TEXTAREA (109px height validado)
+   ======================================= */
+.textarea-field {
+    width: 100%;
+    min-height: 109px;
+    padding: 10px;
+    border: 1px solid #d8d6de;
+    /* divider */
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: #6e6b7b;
+    /* text-body */
+    background: #ffffff;
+    resize: vertical;
+    transition: border-color 0.2s;
+}
+
+.textarea-field::placeholder {
+    color: #b9b9c3;
+    /* disabled text */
+}
+
+.textarea-field:focus {
+    outline: none;
+    border-color: #7367f0;
+    /* primary */
+}
+
+/* =======================================
+   BOTTOM ACTIONS (fixo, 66px height)
+   ======================================= */
+.bottom-actions {
+    position: fixed;
+    bottom: 0;
+    left: 265px;
+    /* alinhado com sidebar do common.css (265px) */
+    right: 0;
+    height: 66px;
+    background: #ffffff;
+    border-top: 1px solid #d8d6de;
+    box-shadow: 0px -6px 14px rgba(0, 0, 0, 0.16);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    z-index: 999;
+}
+
+/* Cancelar Button (red outline) */
+.btn-cancel {
+    height: 46px;
+    padding: 12px 20px;
+    background: #ffffff;
+    border: 1px solid #ea5455;
+    /* danger */
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.4px;
+    color: #ea5455;
+    /* danger */
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+    background: rgba(234, 84, 85, 0.08);
+}
+
+/* Gerar Button (purple primary com IA icon) */
+.btn-generate {
+    height: 46px;
+    padding: 12px 20px;
+    background: #7367f0;
+    /* primary */
+    border: none;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.4px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-generate:hover:not(:disabled) {
+    background: #6254d8;
+}
+
+.btn-generate:disabled {
+    background: rgba(115, 103, 240, 0.65);
+    /* primary desabilitado 65% */
+    color: #ffffff;
+    cursor: not-allowed;
+}
+
+.ia-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    /* 24px conforme Figma MCP node 10061:59069 */
+}
+
+/* =======================================
+   PAGE SUBTITLE (H2 - 24px Medium Primary)
+   ======================================= */
+.page-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1;
+    color: #7367f0;
+    /* primary */
+    margin: 0;
+}

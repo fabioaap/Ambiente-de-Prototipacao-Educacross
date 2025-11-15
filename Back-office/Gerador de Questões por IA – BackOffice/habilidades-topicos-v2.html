@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/styles/basis.css">
     <link rel="stylesheet" href="../../assets/styles/common.css">
-    <link rel="stylesheet" href="habilidades-topicos.css">
+    <link rel="stylesheet" href="habilidades-topicos-v2.css">
 </head>
 
 <body>
@@ -29,11 +29,11 @@
                 <span class="menu-icon icon" style="--icon: url('assets/icons/icon-games.svg');"></span>
                 <span>Games</span>
             </a>
-            <a href="#" class="menu-item active">
+            <a href="#" class="menu-item">
                 <span class="menu-icon icon" style="--icon: url('assets/icons/icon-gestao.svg');"></span>
                 <span>Gestão de Atividades</span>
             </a>
-            <a href="#" class="menu-item" style="padding-left: 42px;">
+            <a href="#" class="menu-item active" style="padding-left: 42px;">
                 <span>Banco de Questões</span>
             </a>
             <a href="#" class="menu-item">
@@ -113,18 +113,18 @@
                     <span class="stats-label">Total de Questões:</span>
                 </div>
                 <div class="stats-badges">
-                    <span class="badge">
+                    <span class="badge badge-purple">
                         <span class="icon"
                             style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
                         330
                     </span>
                     <div class="stats-divider"></div>
-                    <span class="badge">
+                    <span class="badge badge-purple">
                         <span class="icon"
                             style="--icon: url('assets/icons/icon-psychology.svg'); width: 16px; height: 16px;"></span>
                         165
                     </span>
-                    <span class="badge">
+                    <span class="badge badge-purple">
                         <span class="icon"
                             style="--icon: url('assets/icons/icon-emoji-objects.svg'); width: 16px; height: 16px;"></span>
                         165
@@ -231,11 +231,16 @@
                                 style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 18px; height: 18px;"></span>
                         </div>
                     </div>
-                    <button class="filter-button outline">Todos os tópicos</button>
+                    <button class="filter-button outline">Todas as questões</button>
                     <button class="filter-button primary">
                         <span class="icon"
                             style="--icon: url('assets/icons/icon-add-circle.svg'); width: 24px; height: 24px;"></span>
-                        <span>Novo tópico</span>
+                        <span>Nova questão</span>
+                    </button>
+                    <button class="filter-button primary">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-psychology.svg'); width: 24px; height: 24px;"></span>
+                        <span>Nova questão IA</span>
                     </button>
                 </div>
                 <div class="search-input">
@@ -255,7 +260,7 @@
         </div>
     </main>
 
-    <script src="habilidades-topicos.js"></script>
+    <script src="habilidades-topicos-v2.js"></script>
 </body>
 
 </html>

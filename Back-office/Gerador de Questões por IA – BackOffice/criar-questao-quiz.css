@@ -147,8 +147,8 @@ main::before {
 .section-subtitle {
     font-size: 14px;
     font-weight: 700;
-    color: var(--text-strong);
-    margin-bottom: var(--space-10);
+    color: #5e5873;
+    margin-bottom: 10px;
 }
 
 .info-row {
@@ -185,8 +185,9 @@ main::before {
 .difficulty-row {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: var(--space-12);
-    margin-top: var(--space-20);
+    gap: 12px;
+    margin-top: 10px;
+    margin-bottom: 24px;
 }
 
 /* Switch */
@@ -243,8 +244,9 @@ main::before {
 
 .switches-container {
     display: flex;
-    gap: var(--space-20);
-    margin-top: var(--space-20);
+    gap: 20px;
+    margin-top: 0;
+    margin-bottom: 24px;
 }
 
 /* Image Upload */
