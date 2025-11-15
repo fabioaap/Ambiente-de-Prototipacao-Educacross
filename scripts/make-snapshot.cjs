@@ -15,7 +15,27 @@ function timestamp() {
     );
 }
 
-const src = path.join('Back-office', 'Gerador de Questões por IA – BackOffice', 'banco-questoes-pixel-perfect.html');
+// Permite escolher a página do snapshot
+// Opções:
+//  - --page=modular (padrão) => habilidades-topicos.html
+//  - --page=pixel => banco-questoes-pixel-perfect.html
+//  - --page=<nome>.html => usa o HTML informado
+const args = process.argv.slice(2);
+const pageArg = args.find(a => a.startsWith('--page='));
+const pageVal = pageArg ? pageArg.split('=')[1] : (process.env.SNAPSHOT_PAGE || 'modular');
+
+let pageFile;
+if (pageVal === 'pixel') {
+    pageFile = 'banco-questoes-pixel-perfect.html';
+} else if (pageVal === 'modular') {
+    pageFile = 'habilidades-topicos.html';
+} else if (pageVal.endsWith('.html')) {
+    pageFile = pageVal;
+} else {
+    pageFile = 'habilidades-topicos.html';
+}
+
+const src = path.join('Back-office', 'Gerador de Questões por IA – BackOffice', pageFile);
 const outDir = path.join('validation-artifacts', 'snapshots');
 
 if (!fs.existsSync(src)) {
@@ -32,7 +52,8 @@ const stamp = timestamp();
 const inject = `${marker}\n    <!-- Snapshot gerado em ${stamp} -->\n    <base href="/Back-office/Gerador de Questões por IA – BackOffice/">`;
 const withBase = raw.replace(marker, inject);
 
-const outFile = path.join(outDir, `snapshot_${stamp}_banco-questoes.html`);
+const baseName = path.basename(pageFile, '.html');
+const outFile = path.join(outDir, `snapshot_${stamp}_${baseName}.html`);
 fs.writeFileSync(outFile, withBase, 'utf8');
 
 console.log('Snapshot criado:', outFile);

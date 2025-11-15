@@ -1,0 +1,482 @@
+/**
+ * Habilidades e Tópicos - CSS Pixel-Perfect baseado no Figma
+ * Educacross - Back-office
+ * VERSÃO: 3.0 - Validado com Figma MCP (node-id: 10021:53621)
+ * ÚLTIMA ATUALIZAÇÃO: Layout de tabs com posição absoluta e borda roxa inferior
+ */
+
+/* Container das Tabs - Baseado no Figma (node-id="10021:53621") */
+div[data-role="tabs"] {
+    position: relative;
+    display: flex;
+    gap: 0;
+    margin-bottom: 20px;
+    height: 45px;
+    /* Borda inferior roxa de 2px como no Figma */
+    border-bottom: 2px solid #7367F0;
+}
+
+/* Tabs (Habilidades | Tópicos) - Baseado no Figma */
+.tab {
+    /* Posição exata do Figma: absolute com left calculado */
+    position: absolute;
+    top: 0.25px;
+    width: 131px;
+    height: 45px;
+    padding: 14px 20px;
+
+    /* Background lilás claro para inativa (Tópicos) */
+    background: rgba(115, 103, 240, 0.12);
+    border: none;
+    border-radius: 0;
+    /* Sem border-radius visível no Figma */
+
+    /* Tipografia Montserrat Bold 14px */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 21px;
+    color: #6E6B7B;
+
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tab 1 (Habilidades) - ativa por padrão */
+.tab:first-child {
+    left: 0;
+}
+
+/* Tab 2 (Tópicos) - inativa */
+.tab:nth-child(2) {
+    left: 195px;
+    /* calc(50% - 379px) conforme Figma */
+}
+
+.tab:hover {
+    background: rgba(115, 103, 240, 0.16);
+}
+
+/* Tab ativa - Background roxo sólido + texto branco */
+.tab.active {
+    background: #7367F0;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+}
+
+.tab-content:first-of-type,
+#tab-habilidades {
+    display: block;
+}
+
+
+/* STATS BAR */
+div[data-role="stats-bar"] {
+    background: rgba(115, 103, 240, 0.12);
+    border-radius: var(--radius-6);
+    padding: 10px 16px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.stats-label {
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.stats-badges {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.stats-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--divider);
+}
+
+/* Badges */
+.badge {
+    background: rgba(115, 103, 240, 0.12);
+    border-radius: 17px;
+    padding: 3px 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--primary);
+}
+
+.badge.pink {
+    background: rgba(234, 84, 85, 0.12);
+    color: #ea5455;
+}
+
+.badge.cyan {
+    background: rgba(0, 207, 232, 0.12);
+    color: #00cfe8;
+}
+
+.badge.warning {
+    background: rgba(255, 159, 67, 0.12);
+    color: #ff9f43;
+}
+
+.badge img,
+.badge .icon {
+    width: 16px;
+    height: 16px;
+}
+
+
+/* FILTERS CARD */
+div[data-role="filters-card"] {
+    background: var(--surface);
+    border-radius: var(--radius-6);
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.06);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.filters-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.filter-label {
+    color: var(--text-body);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.filter-select {
+    background: var(--surface);
+    border: 1px solid var(--divider);
+    border-radius: var(--radius-6);
+    padding: 10px 12px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-body);
+    transition: border-color 0.2s;
+}
+
+.filter-select:hover {
+    border-color: var(--primary);
+}
+
+.filter-select.selected {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.filter-select-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+}
+
+.filter-select .icon {
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
+}
+
+.filter-button {
+    height: 44px;
+    padding: 10px 20px;
+    border-radius: var(--radius-6);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    transition: all 0.2s;
+    border: none;
+}
+
+.filter-button.outline {
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+.filter-button.outline:hover {
+    background: rgba(115, 103, 240, 0.08);
+}
+
+.filter-button.primary {
+    background: var(--primary);
+    color: white;
+}
+
+.filter-button.primary:hover {
+    background: #6159d0;
+}
+
+.filter-button .icon {
+    width: 20px;
+    height: 20px;
+}
+
+.search-input {
+    background: var(--surface);
+    border: 1px solid var(--divider);
+    border-radius: var(--radius-6);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-input input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-body);
+    font-family: var(--font-sans);
+    background: transparent;
+}
+
+.search-input input::placeholder {
+    color: var(--text-muted);
+}
+
+.search-input .icon {
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
+}
+
+
+/* TABLE CARD */
+div[data-role="table-card"] {
+    background: var(--surface);
+    border-radius: var(--radius-6) var(--radius-6) 0 0;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.16);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.table-row {
+    border-bottom: 1px solid var(--divider);
+    padding: 12px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    min-height: 56px;
+    transition: background 0.2s;
+}
+
+.table-row:hover {
+    background: rgba(115, 103, 240, 0.04);
+}
+
+.table-row:first-child {
+    border-top: none;
+}
+
+.table-row.expandable {
+    background: var(--surface);
+}
+
+.table-row.child {
+    background: #fafafa;
+}
+
+.table-expand-icon {
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--primary);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.table-expand-icon.rotate {
+    transform: rotate(180deg);
+}
+
+.table-number {
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px;
+    min-width: 60px;
+    padding-left: var(--indent, 0px);
+    flex-shrink: 0;
+}
+
+.table-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.table-title {
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.table-description {
+    color: var(--text-body);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 4px;
+}
+
+.table-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.table-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.action-icon {
+    cursor: pointer;
+    color: var(--primary);
+    font-size: 20px;
+    transition: color 0.2s;
+}
+
+.action-icon:hover {
+    color: #5e54d6;
+}
+
+.action-icon.icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Hierarquia (Tópicos) */
+.indent-0 {
+    --indent: 0px;
+}
+
+.indent-1 {
+    --indent: 40px;
+}
+
+.indent-2 {
+    --indent: 80px;
+}
+
+.bg-depth-0 {
+    background: #ffffff !important;
+}
+
+.bg-depth-1 {
+    background: #f5f5f5 !important;
+}
+
+.bg-depth-2 {
+    background: #ececec !important;
+}
+
+
+/* PAGINATION */
+div[data-role="pagination"] {
+    background: var(--surface);
+    border-top: 1px solid var(--divider);
+    border-radius: 0 0 var(--radius-6) var(--radius-6);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pagination-button {
+    min-width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-body);
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.pagination-button:hover:not(:disabled):not(.active) {
+    background: rgba(115, 103, 240, 0.08);
+}
+
+.pagination-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination-button.active {
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+}
+
+.pagination-button .icon {
+    width: 16px;
+    height: 16px;
+}

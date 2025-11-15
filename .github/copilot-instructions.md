@@ -1,117 +1,131 @@
-> Fonte de verdade: use `.prompts/instructions.xml` como system prompt.
-> Blocos referenciados: `.prompts/blocks/`.
+> **Fonte de verdade:** `.prompts/instructions.xml` + `.prompts/blocks/*.md`  
+> **Este arquivo:** Resumo executivo para AI agents — detalhes completos nos docs linkados
 
-# Instruções para Agentes AI - Educacross Prototyping Platform
+# Instruções para AI Agents — Educacross Prototyping Platform
 
-## 🎯 Visão Geral
+## 🎯 Arquitetura: Multi-Produto com Stacks Diferentes
 
-Esta é uma **Plataforma Unificada de Prototipagem** para validação de 3 produtos educacionais antes da implementação em Vue.js:
-- **Front-office** (Professor) — Envio de missões gamificadas em lote → **Vanilla JS**
-- **Backoffice** (Admin) — Banco de questões e gerenciamento → **Vanilla JS**
-- **Games** (Aluno) — Plataforma de jogos educacionais → **React + TypeScript**
+**3 produtos independentes prototipados em paralelo:**
 
-**Arquitetura por Produto (ADR-0007):**
-- **Front/Back-office:** Vanilla JS + HTML + CSS (deploy estático, handoff fácil para Vue.js)
-- **Games:** React + TypeScript + Vite + Tailwind CSS + shadcn/ui + Storybook + Vitest
+| Produto | Stack | Localização | Dev Server | Deploy Final |
+|---------|-------|-------------|------------|--------------|
+| **Front-office** (Professor) | Vanilla JS + HTML + CSS | `Front-office/` | `python -m http.server 8080` | Vue.js |
+| **Back-office** (Admin) | Vanilla JS + HTML + CSS | `Back-office/` | `python -m http.server 8080` | Vue.js |
+| **Games** (Aluno) | React + TypeScript + Vite | `src/`, `apps/` | `npm run dev` (5173) | React (mantém) |
 
-## 🗂️ Estrutura Crítica
+**Por que stacks diferentes? (ADR-0007)**
+- Front/Back-office: HTMLs estáticos → handoff direto para Vue.js, zero overhead de framework
+- Games: Requer state management complexo, animações, interatividade → justifica React
+
+**Design System Compartilhado:**
+- `packages/tokens/` — DTCG tokens (Style Dictionary)
+- `packages/ui/` — Componentes React (Games apenas)
+- CSS vars Vuexy (`:root { --primary: #7367ef }`) — usadas em TODOS os produtos
+
+## 🗂️ Navegação Rápida: Onde Está Cada Coisa
 
 ```
-.prompts/                          # System prompts modulares (fonte de verdade)
-  ├── instructions.xml             # Prompt principal (inclui blocos)
-  └── blocks/                      # Pilares: core, discovery, design_system, arch_clean, etc.
+.prompts/
+  ├── instructions.xml              # 🔥 System prompt (inclui blocos)
+  └── blocks/                       # Pilares: 01_core.md, 02_discovery.md, 03_design_system.md...
 
-Front-office/                      # 🎓 Vanilla JS - Interface Professor
-  └── Adicionar modal de visualizaçãoaprovação no Banco de Questões/
-      └── prototipo-modal-aprovacao/
-          ├── demo-interativo.html
-          └── DOCUMENTACAO-TECNICA.txt
+Front-office/                       # 🎓 Vanilla JS - Prof envia missões
+  └── Adicionar modal de visualização*/prototipo-modal-aprovacao/
+      ├── demo-interativo.html      # Protótipo funcional
+      └── DOCUMENTACAO-TECNICA.txt  # Specs implementadas
 
-Back-office/                       # 🏢 Vanilla JS - Interface Admin
-  └── Gerador de Questões por IA – BackOffice/
-      └── banco-de-questoes.html
+Back-office/                        # 🏢 Vanilla JS - Admin gerencia questões
+  └── Gerador de Questões por IA*/
+      └── banco-de-questoes.html    # CRUD de questões
 
-apps/                              # 🎮 Games - React prototypes
-  ├── proto/                       # Next.js (stage futuro)
-  └── prototipo/stage01/           # Landing pages e protótipos iniciais
+src/                                # 🎮 Games - React prototype
+  ├── components/ui/                # Button, Card, Badge (shadcn/ui)
+  │   └── *.stories.tsx             # Storybook stories (cada componente tem)
+  ├── mocks/
+  │   ├── mission-batch.ts          # turmasMock, enviosAnterioresMock
+  │   └── missions.ts               # missoesMock (DEVE ter progress: 0)
+  └── types/                        # TypeScript types compartilhados
 
-packages/                          # Design system compartilhado (TODOS os produtos)
-  ├── tokens/                      # DTCG tokens (Style Dictionary)
-  └── ui/                          # Componentes React reutilizáveis (Games)
+packages/
+  ├── tokens/tokens.json            # DTCG tokens (cores, tipografia)
+  └── ui/                           # Componentes React reutilizáveis
 
-src/                               # 🎮 Games - Protótipo principal (Vite + React)
-  ├── components/                  # Componentes específicos do protótipo
-  │   ├── ui/                      # UI base (Button, Card, Badge + stories)
-  │   └── *.stories.tsx            # Storybook stories (Dashboard, etc.)
-  ├── mocks/                       # Dados mock (mission-batch.ts, missions.ts)
-  │   └── mission-batch.ts         # Mock de turmas, missões, alunos
-  └── types/                       # TypeScript types
-
-docs/                              # Documentação viva
-  ├── journeys/                    # Especificações de fluxos de usuário
-  │   ├── 01-professor-frontend.md # Jornada do Professor (Vanilla JS)
-  │   ├── 02-admin-backoffice.md   # Jornada do Admin (Vanilla JS)
-  │   └── 03-student-games-platform.md # Jornada do Aluno (React)
-  ├── adr/                         # Architecture Decision Records
+docs/
+  ├── journeys/                     # 🔥 Especificações obrigatórias antes de codar
+  │   ├── 01-professor-frontend.md  # Fluxo completo: autenticação → envio em lote
+  │   ├── 02-admin-backoffice.md
+  │   └── 03-student-games-platform.md
+  ├── adr/                          # Architecture Decision Records
   │   ├── ADR-0006-unified-prototyping-platform.md
   │   └── ADR-0007-vanilla-js-for-frontoffice-backoffice.md
-  ├── DAILY_OPERATIONS.md          # Workflows por role (dev, designer, PM)
-  ├── GIT_WORKFLOW.md              # Conventional commits em pt-BR
-  └── STORYBOOK_GUIDE.md           # Como criar stories (Games apenas)
+  ├── DAILY_OPERATIONS.md           # 🔥 Workflows por papel (designer, dev, PM)
+  └── GIT_WORKFLOW.md               # Conventional commits em pt-BR
 
-.storybook/                        # Config Storybook (Games apenas)
-  └── main.ts                      # Stories de src/**, apps/**, packages/**
+.storybook/main.ts                  # Stories de src/**, apps/**, packages/**
 ```
 
-## ⚙️ Workflows Essenciais
+**Arquivos críticos para descoberta arquitetônica:**
+- `.prompts/instructions.xml` — Comportamento do agent
+- `docs/adr/*.md` — Por que decisões estruturais foram tomadas
+- `docs/journeys/*.md` — O que implementar (requisitos detalhados)
+
+## ⚙️ Comandos Essenciais por Contexto
 
 ### 🎓 Front-office / 🏢 Back-office (Vanilla JS)
 ```powershell
-# Desenvolvimento
-python -m http.server 8080         # Servir HTMLs localmente
-# Abrir: http://localhost:8080/Front-office/ ou /Back-office/
+# Dev: Servir HTMLs localmente
+python -m http.server 8080
+# → http://localhost:8080/Front-office/ ou /Back-office/
 
-# Edição
-code Front-office/                 # VS Code com LiveServer extension
-# Salvar HTML → Auto-refresh no navegador
-
-# Validação
+# Validação estrutural
 python universal_validator.py --path=Front-office --type=html
 python universal_validator.py --path=Back-office --type=html
 
-# Deploy
-# Copiar HTMLs para dist/ ou GitHub Pages
+# Workflow recomendado (VS Code)
+# 1. Instalar extensão LiveServer
+# 2. Abrir HTML no editor
+# 3. Clicar direito → "Open with Live Server"
+# 4. Editar → Auto-refresh no navegador
 ```
 
 ### 🎮 Games (React + TypeScript)
 ```powershell
-# Setup inicial
-npm install                        # Instalar dependências
-npm run check-env                  # Verificar ambiente
+# Setup (primeira vez)
+npm install
+npm run check-env                  # Valida ambiente (Node, npm, dependências)
 
-# Desenvolvimento
-npm run dev                        # Vite dev server (http://localhost:5173)
-npm run storybook                  # Storybook (http://localhost:6006)
+# Dev (2 servidores em paralelo)
+npm run dev                        # Vite → http://localhost:5173
+npm run storybook                  # Storybook → http://localhost:6006
 
-# Build & Validação
-npm run check-mocks                # Validar mocks (progress: 0)
-npm run build                      # Build produção (roda check-mocks antes)
-npm run check-types                # TypeScript check
-npm run test                       # Vitest
-npm run test:coverage              # Coverage report
+# Pre-commit obrigatório
+npm run check-types                # TypeScript sem erros
+npm run check-mocks                # 🔥 Valida progress: 0 em src/mocks/missions.ts
+npm run test                       # Vitest (unit tests)
 
-# Preview
+# Build (CI/CD)
+npm run build                      # Roda check-mocks automaticamente
 npm run preview                    # Preview build local
-npm run preview:live               # Preview + watch mode
+
+# Validação visual
+npm run storybook                  # Stories = testes visuais documentados
 ```
 
-### 📝 Python Validators (Todos os produtos)
+### 📝 Validadores Python (Universal)
 ```powershell
-# Validação universal de protótipos
+# Validação completa da plataforma
 python universal_validator.py --path=. --output=json
-python interactive_validator.py    # Modo interativo
-python ci_validator.py             # CI/CD check
+python interactive_validator.py    # Modo interativo com perguntas
+python ci_validator.py             # CI/CD check (estrutura, sintaxe)
+
+# Validação específica pós-geração (usado por agents)
+npm run validate                   # Roda scripts/validate_latest.js
 ```
+
+**Importante:** 
+- `npm run build` FALHA se `src/mocks/missions.ts` tiver `progress: <número> !== 0`
+- Storybook stories são fonte de verdade para componentes React
+- Journeys são fonte de verdade para features (não implementar sem journey documentada)
 
 ## 🎨 Convenções do Projeto
 

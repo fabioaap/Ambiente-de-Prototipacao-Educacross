@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Nova Questão de Quiz - Back-office Educacross</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/styles/basis.css">
+    <link rel="stylesheet" href="../../assets/styles/common.css">
+    <link rel="stylesheet" href="criar-questao-quiz.css">
+    <style>
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg);
+            color: var(--text-body);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Layout Container */
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            padding: var(--space-20);
+            flex-shrink: 0;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: var(--space-40);
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-12);
+            padding: var(--space-12);
+            color: #b9b9c3;
+            text-decoration: none;
+            border-radius: var(--radius-6);
+            margin-bottom: var(--space-5);
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .menu-item.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .menu-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            background: var(--surface);
+            padding: var(--space-12) var(--space-20);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--divider);
+            position: fixed;
+            top: 0;
+            left: 260px;
+            right: 0;
+            z-index: var(--z-header);
+            height: 74px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: var(--space-12);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">EDUCACROSS</div>
+            <nav>
+                <a href="#" class="menu-item">
+                    <span class="menu-icon">📊</span>
+                    <span>Kanban</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="menu-icon">🏫</span>
+                    <span>Gestão escolar</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="menu-icon">💼</span>
+                    <span>Gestão administrativa</span>
+                </a>
+                <a href="#" class="menu-item active">
+                    <span class="menu-icon">📚</span>
+                    <span>Gestão pedagógica</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="menu-icon">🎮</span>
+                    <span>Gestão de games</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="menu-icon">📈</span>
+                    <span>Relatórios</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="menu-icon">⚙️</span>
+                    <span>Configurações</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div></div>
+                <div class="user-profile">
+                    <div class="user-avatar">AB</div>
+                    <span>Admin Educacross</span>
+                </div>
+            </header>
+
+            <!-- Main -->
+            <main>
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb">
+                    <span>Banco de Questões</span>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-current">Criar Nova Questão de Quiz</span>
+                </nav>
+
+                <!-- Page Title -->
+                <h1 class="page-title">Novo lote questão de quiz</h1>
+
+                <!-- Inputs Card -->
+                <div class="card">
+                    <div class="form-grid">
+                        <!-- Área de Conhecimento -->
+                        <div class="input-group">
+                            <label class="input-label required">Área de conhecimento</label>
+                            <div class="input-field disabled">
+                                <div class="subject-badge">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 1L1 4L8 7L15 4L8 1Z" fill="white" />
+                                        <path d="M1 8L8 11L15 8" stroke="white" stroke-width="1.5" />
+                                        <path d="M1 12L8 15L15 12" stroke="white" stroke-width="1.5" />
+                                    </svg>
+                                </div>
+                                <span>Matemática</span>
+                            </div>
+                        </div>
+
+                        <!-- Nível de Taxonomia -->
+                        <div class="input-group">
+                            <label class="input-label required">Nível de Taxonomia de Bloom</label>
+                            <div class="input-field">
+                                <span>Não mapeado</span>
+                                <select>
+                                    <option>Não mapeado</option>
+                                    <option>Lembrar</option>
+                                    <option>Entender</option>
+                                    <option>Aplicar</option>
+                                    <option>Analisar</option>
+                                    <option>Avaliar</option>
+                                    <option>Criar</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Subnível de Taxonomia -->
+                        <div class="input-group">
+                            <label class="input-label required">Subnível de Taxonomia de Bloom</label>
+                            <div class="input-field disabled">
+                                <span>Não mapeado</span>
+                                <select disabled>
+                                    <option>Não mapeado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Habilidades e Tópicos Card -->
+                <div class="card">
+                    <!-- Habilidades -->
+                    <div style="margin-bottom: var(--space-20);">
+                        <div class="section-title">
+                            Habilidades
+                            <div class="info-row">
+                                <svg class="info-icon" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="10" cy="10" r="9" stroke="#6e6b7b" stroke-width="1.5" />
+                                    <path d="M10 7V10" stroke="#6e6b7b" stroke-width="1.5" stroke-linecap="round" />
+                                    <circle cx="10" cy="13" r="0.5" fill="#6e6b7b" />
+                                </svg>
+                                <span>Só é permitida a inclusão de uma (1) habilidade por questão.</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-primary">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                                <path d="M12 8V16M8 12H16" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                            Incluir Habilidade
+                        </button>
+                    </div>
+
+                    <!-- Tópico de Conhecimento -->
+                    <div>
+                        <div class="section-title">
+                            Tópico de conhecimento
+                            <div class="info-row">
+                                <svg class="info-icon" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="10" cy="10" r="9" stroke="#6e6b7b" stroke-width="1.5" />
+                                    <path d="M10 7V10" stroke="#6e6b7b" stroke-width="1.5" stroke-linecap="round" />
+                                    <circle cx="10" cy="13" r="0.5" fill="#6e6b7b" />
+                                </svg>
+                                <span>Só é permitida a inclusão de um (1) tópico por questão</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-primary">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                                <path d="M12 8V16M8 12H16" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                            Incluir Tópico
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quantidades do Lote -->
+                <h2 style="font-size: 24px; font-weight: 500; color: var(--primary); margin: var(--space-10) 0;">
+                    Quantidades do lote
+                </h2>
+
+                <!-- Questões Card -->
+                <div class="card">
+                    <!-- Distribuição por Dificuldade -->
+                    <div class="section-subtitle">Distribuição por nível de dificuldade</div>
+
+                    <div class="difficulty-row">
+                        <div class="input-group">
+                            <label class="input-label">Muito fácil</label>
+                            <input type="number" value="0" min="0" id="muitoFacil">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Fácil</label>
+                            <input type="number" value="0" min="0" id="facil">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Médio</label>
+                            <input type="number" value="0" min="0" id="medio">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Difícil</label>
+                            <input type="number" value="0" min="0" id="dificil">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Muito difícil</label>
+                            <input type="number" value="0" min="0" id="muitoDificil">
+                        </div>
+                    </div>
+
+                    <!-- Switches -->
+                    <div class="switches-container">
+                        <div class="switch-group">
+                            <span class="switch-label">Status da questão:</span>
+                            <label class="switch">
+                                <input type="checkbox" id="statusQuestao">
+                                <div class="switch"></div>
+                                <span class="switch-slider"></span>
+                            </label>
+                            <span class="switch-status" id="statusQuestaoLabel">Inativa</span>
+                        </div>
+
+                        <div class="switch-group">
+                            <span class="switch-label">Caixa alta?</span>
+                            <label class="switch">
+                                <input type="checkbox" id="caixaAlta">
+                                <div class="switch"></div>
+                                <span class="switch-slider"></span>
+                            </label>
+                            <span class="switch-status" id="caixaAltaLabel">Inativa</span>
+                        </div>
+                    </div>
+
+                    <!-- Inserir Imagem -->
+                    <div class="image-upload">
+                        <div class="image-upload-label">
+                            <span>Inserir imagem</span>
+                            <svg class="info-icon" style="width: 24px; height: 24px;" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="#6e6b7b" stroke-width="1.5" />
+                                <path d="M12 8V12" stroke="#6e6b7b" stroke-width="1.5" stroke-linecap="round" />
+                                <circle cx="12" cy="15" r="0.5" fill="#6e6b7b" />
+                            </svg>
+                        </div>
+                        <div class="image-upload-area" id="imageUploadArea">
+                            <p class="image-upload-text">Clique para inserir a imagem</p>
+                        </div>
+                        <input type="file" id="imageUploadInput" accept="image/*" style="display: none;">
+                    </div>
+
+                    <!-- Instruções Adicionais -->
+                    <div class="input-group" style="margin-top: var(--space-24);">
+                        <label class="input-label" style="font-weight: 700;">Instruções adicionais (Opcional)</label>
+                        <textarea class="textarea-field" id="instrucoesAdicionais"
+                            placeholder="Campo livre para orientações finas (evitar repetição de nomes, temas, entre outras repetições, sugerir tema/contexto, proibir conteúdo sensível etc)."></textarea>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Bottom Actions -->
+            <div class="bottom-actions">
+                <button class="btn-cancel" id="btnCancelar">Cancelar</button>
+                <button class="btn-generate" id="btnGerar" disabled>
+                    <svg class="ia-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" fill="white" opacity="0.3" />
+                        <path d="M12 8L14 10L12 12L10 10L12 8Z" fill="white" />
+                        <path d="M8 12L10 14L8 16L6 14L8 12Z" fill="white" />
+                        <path d="M16 12L18 14L16 16L14 14L16 12Z" fill="white" />
+                        <path d="M12 16L14 18L12 20L10 18L12 16Z" fill="white" />
+                    </svg>
+                    Gerar
+                </button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="criar-questao-quiz.js"></script>
+</body>
+
+</html>

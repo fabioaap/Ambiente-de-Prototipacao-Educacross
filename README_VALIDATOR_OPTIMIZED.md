@@ -123,7 +123,7 @@ python universal_validator_optimized.py --path="Back-office" --max-depth=3
 .validation-cache/
   └── validation-cache.json
       {
-        "Back-office/banco-questoes.html": {
+        "Back-office/habilidades-topicos.html": {
           "hash": "a1b2c3d4e5f6...",           # MD5 do arquivo
           "validated_at": "2025-11-14T...",    # Timestamp
           "result": {
@@ -192,7 +192,7 @@ python universal_validator_optimized.py --path="." --force --max-depth=10
 ### Debug (arquivo específico)
 ```bash
 # Use o validador original para análise profunda
-python universal_validator.py --path="Back-office/banco-questoes.html" --type=html
+python universal_validator.py --path="Back-office/habilidades-topicos.html" --type=html
 ```
 
 ## 📝 Notas Técnicas

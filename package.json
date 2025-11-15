@@ -60,7 +60,10 @@
     "serve:static": "node scripts/serve-static.cjs",
     "figma:first": "node scripts/figma-first/check.cjs",
     "figma:first:strict": "node scripts/figma-first/check.cjs --strict",
-    "figma:first:open": "node scripts/figma-first/check.cjs && node scripts/figma-first/open-latest.cjs"
+    "figma:first:open": "node scripts/figma-first/check.cjs && node scripts/figma-first/open-latest.cjs",
+    "snapshot": "node scripts/make-snapshot.cjs --page=modular",
+    "snapshot:modular": "node scripts/make-snapshot.cjs --page=modular",
+    "snapshot:pixel": "node scripts/make-snapshot.cjs --page=pixel"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",
