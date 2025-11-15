@@ -34,6 +34,7 @@ Bem-vindo! Este arquivo lista toda a documentação disponível para a Plataform
 | [GIT_WORKFLOW.md](./GIT_WORKFLOW.md) | 15 min | Dev (commits e PRs) |
 | [STORYBOOK_GUIDE.md](./STORYBOOK_GUIDE.md) | 20 min | Dev (criar stories) |
 | [JOURNEYS_GUIDE.md](./JOURNEYS_GUIDE.md) | 20 min | PM (especificar fluxos) |
+| [CUSTOM_AGENTS.md](./CUSTOM_AGENTS.md) | 15 min | Dev (agentes especializados) |
 
 ### 🎓 **Para Aprender a Documentar**
 | Documento | Tópico | Tempo |
@@ -54,6 +55,13 @@ Bem-vindo! Este arquivo lista toda a documentação disponível para a Plataform
 |-----------|--------|--------|
 | [ADR-0004](./adr/ADR-0004-adocao-estetica-vuexy.md) | Adoção Vuexy aesthetics | ✅ Aprovado |
 | [ADR-0006](./adr/ADR-0006-unified-prototyping-platform.md) | Plataforma unificada | ✅ Aprovado |
+
+### 🤖 **Agentes Customizados**
+| Agente | Especialidade | Quando Usar |
+|--------|--------------|-------------|
+| [Dev Frontend Vanilla](./CUSTOM_AGENTS.md#1-dev-frontend-vanilla) | HTML/CSS/JS puro | Front-office, Back-office |
+
+**Veja:** [CUSTOM_AGENTS.md](./CUSTOM_AGENTS.md) para documentação completa.
 
 ---
 

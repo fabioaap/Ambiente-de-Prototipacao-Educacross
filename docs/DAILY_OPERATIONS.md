@@ -188,9 +188,12 @@ export const Empty: Story = {
 
 **Implementar Feature (Front/Back-office - Vanilla JS):**
 
+💡 **Dica:** Para tarefas Front/Back-office, você pode usar o **Agente Custom Frontend Vanilla** que automatiza a implementação pixel-perfect. Veja [CUSTOM_AGENTS.md](./CUSTOM_AGENTS.md) para detalhes.
+
 1. Leia a jornada em `docs/journeys/01-professor-frontend.md` ou `02-admin-backoffice.md`
 2. Abra `packages/snippets/vuexy-vanilla-examples.html` para referência
 3. Crie/edite HTML em `Front-office/` ou `Back-office/`
+4. (Opcional) Use agente para acelerar: "Implementar [feature] usando Dev Frontend Vanilla agent com tokens Vuexy"
 
 **Exemplo: Criar Formulário de Envio de Missão**
 ```html
