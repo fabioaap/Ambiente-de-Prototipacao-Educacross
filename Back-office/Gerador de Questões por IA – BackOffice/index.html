@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back-office - Banco de Questões | Educacross</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/styles/basis.css">
+    <link rel="stylesheet" href="../../assets/styles/common.css">
+    <style>
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0 0 12px;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .pages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-bottom: 64px;
+        }
+
+        .page-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .page-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(115, 103, 239, 0.15);
+        }
+
+        .page-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .page-card h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0;
+            color: var(--fg);
+        }
+
+        .page-card p {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .page-features {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .page-features li {
+            font-size: 14px;
+            color: var(--text-muted);
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .page-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .info-section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .info-section h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0 0 16px;
+            color: var(--fg);
+        }
+
+        .info-section p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 0 0 12px;
+        }
+
+        .info-section ul {
+            margin: 16px 0 0;
+            padding-left: 20px;
+        }
+
+        .info-section li {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: opacity 0.2s;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏢 Back-office - Banco de Questões</h1>
+            <p>Sistema de gerenciamento de questões educacionais</p>
+        </div>
+
+        <div class="pages-grid">
+            <a href="pages/01-habilidades-topicos/" class="page-card">
+                <div class="page-number">01</div>
+                <h2>Habilidades e Tópicos</h2>
+                <p>Gerenciamento de habilidades da BNCC e tópicos educacionais por disciplina e ano escolar.</p>
+                <ul class="page-features">
+                    <li>Navegação por disciplina</li>
+                    <li>Listagem de tópicos por ano</li>
+                    <li>Interface sidebar responsiva</li>
+                </ul>
+            </a>
+
+            <a href="pages/02-criar-questao-quiz/" class="page-card">
+                <div class="page-number">02</div>
+                <h2>Criar Questão Quiz</h2>
+                <p>Criação de questões de múltipla escolha com geração assistida por IA.</p>
+                <ul class="page-features">
+                    <li>Geração automática por IA</li>
+                    <li>Validação de questões</li>
+                    <li>Toast notifications (localStorage)</li>
+                    <li>Preview em tempo real</li>
+                </ul>
+            </a>
+
+            <a href="pages/03-banco-questoes-revisao/" class="page-card">
+                <div class="page-number">03</div>
+                <h2>Banco de Questões</h2>
+                <p>Visualização e gerenciamento do banco completo de questões com filtros e pesquisa.</p>
+                <ul class="page-features">
+                    <li>Stats-bar (Quiz: 15, IA: 5, Humano: 10)</li>
+                    <li>Filtros por disciplina e origem</li>
+                    <li>Pesquisa por texto</li>
+                    <li>Toast persistence (exibe de página 02)</li>
+                </ul>
+            </a>
+        </div>
+
+        <div class="info-section">
+            <h2>ℹ️ Sobre esta Estrutura</h2>
+            <p>Este projeto foi reorganizado em <strong>estrutura modular</strong> para facilitar manutenção e escalabilidade:</p>
+            <ul>
+                <li><strong>pages/0X-*/</strong> - Cada página isolada com seus próprios index.html, script.js e styles.css</li>
+                <li><strong>assets/</strong> - Recursos compartilhados (logos, ícones, CSS base)</li>
+                <li><strong>docs/</strong> - Documentação técnica e guias de uso</li>
+            </ul>
+            <p><strong>Benefícios:</strong> Fácil adicionar novas páginas, código modular, assets centralizados, paths claros.</p>
+        </div>
+
+        <div class="info-section">
+            <h2>📚 Documentação</h2>
+            <p>Consulte a documentação técnica para detalhes sobre arquitetura e funcionalidades:</p>
+            <ul>
+                <li><a href="docs/ARQUITETURA.md" style="color: var(--primary)">ARQUITETURA.md</a> - Estrutura e decisões técnicas (em breve)</li>
+                <li><a href="README.md" style="color: var(--primary)">README.md</a> - Instruções de uso e desenvolvimento</li>
+            </ul>
+        </div>
+
+        <a href="../../" class="back-link">← Voltar para dashboard principal</a>
+    </div>
+</body>
+</html>
