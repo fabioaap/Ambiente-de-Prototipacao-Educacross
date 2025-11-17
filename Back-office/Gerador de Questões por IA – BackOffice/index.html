@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Questões por IA - BackOffice | Educacross</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .intro {
+            margin-bottom: 40px;
+            padding: 24px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .intro h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .intro p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .pages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .page-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .page-card:hover {
+            border-color: #667eea;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+        }
+
+        .page-card h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .page-card .icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .page-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .page-card .path {
+            margin-top: 12px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #6c757d;
+            font-family: 'Courier New', monospace;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .docs-section {
+            margin-top: 48px;
+        }
+
+        .docs-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+        }
+
+        .doc-link {
+            padding: 12px 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #495057;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .doc-link:hover {
+            background: #e9ecef;
+            color: #667eea;
+        }
+
+        .doc-link::before {
+            content: "📄";
+            font-size: 16px;
+        }
+
+        .footer {
+            padding: 24px 40px;
+            background: #f8f9fa;
+            text-align: center;
+            color: #6c757d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Gerador de Questões por IA</h1>
+            <p>BackOffice - Plataforma Educacross</p>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <h2>📁 Estrutura Organizada</h2>
+                <p>
+                    Bem-vindo ao BackOffice do Gerador de Questões por IA da plataforma Educacross. 
+                    Esta estrutura foi reorganizada para facilitar a navegação, manutenção e desenvolvimento. 
+                    Cada página está em sua própria pasta com seus respectivos arquivos CSS e JavaScript.
+                </p>
+            </div>
+
+            <h2 class="section-title">📄 Páginas Disponíveis</h2>
+            
+            <div class="pages-grid">
+                <a href="pages/banco-questoes-revisao/banco-questoes-revisao.html" class="page-card">
+                    <h3>
+                        <span class="icon">📋</span>
+                        Banco de Questões - Em Revisão
+                    </h3>
+                    <p>
+                        Página para visualização e gerenciamento de questões que estão em processo de revisão.
+                        Permite filtrar, ordenar e revisar questões pendentes.
+                    </p>
+                    <div class="path">pages/banco-questoes-revisao/</div>
+                </a>
+
+                <a href="pages/criar-questao-quiz/criar-questao-quiz.html" class="page-card">
+                    <h3>
+                        <span class="icon">✨</span>
+                        Criar Nova Questão de Quiz
+                    </h3>
+                    <p>
+                        Interface para criação de novas questões de quiz utilizando inteligência artificial.
+                        Suporta múltiplos tipos de questões e níveis de dificuldade.
+                    </p>
+                    <div class="path">pages/criar-questao-quiz/</div>
+                </a>
+
+                <a href="pages/habilidades-topicos/habilidades-topicos.html" class="page-card">
+                    <h3>
+                        <span class="icon">🎯</span>
+                        Habilidades e Tópicos (v1)
+                    </h3>
+                    <p>
+                        Primeira versão da página de gerenciamento de habilidades e tópicos educacionais.
+                        Permite organizar conteúdos por competências e áreas de conhecimento.
+                    </p>
+                    <div class="path">pages/habilidades-topicos/</div>
+                </a>
+
+                <a href="pages/habilidades-topicos-v2/habilidades-topicos-v2.html" class="page-card">
+                    <h3>
+                        <span class="icon">🎯</span>
+                        Habilidades e Tópicos (v2)
+                    </h3>
+                    <p>
+                        Segunda versão aprimorada da página de gerenciamento de habilidades e tópicos.
+                        Inclui melhorias de interface e funcionalidades adicionais.
+                    </p>
+                    <div class="path">pages/habilidades-topicos-v2/</div>
+                </a>
+            </div>
+
+            <div class="docs-section">
+                <h2 class="section-title">📚 Documentação</h2>
+                <div class="docs-list">
+                    <a href="README.md" class="doc-link">README Principal</a>
+                    <a href="docs/README-MODULAR.md" class="doc-link">Arquitetura Modular</a>
+                    <a href="docs/GUIA-USO-BANCO-QUESTOES-REVISAO.md" class="doc-link">Guia de Uso</a>
+                    <a href="docs/REORGANIZACAO-ESTRUTURA.md" class="doc-link">Resumo da Reorganização</a>
+                    <a href="docs/COMPARACAO-FIGMA-VS-IMPLEMENTACAO.md" class="doc-link">Comparação Figma</a>
+                    <a href="docs/ENTREGA-FINAL-BANCO-QUESTOES.md" class="doc-link">Entrega Final</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Educacross © 2024 - Ambiente de Prototipação</p>
+            <p style="margin-top: 8px; font-size: 12px;">
+                Estrutura reorganizada em novembro de 2024 | 
+                <a href="https://github.com/fabioaap/Ambiente-de-Prototipacao-Educacross" 
+                   style="color: #667eea; text-decoration: none;">
+                    GitHub
+                </a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
