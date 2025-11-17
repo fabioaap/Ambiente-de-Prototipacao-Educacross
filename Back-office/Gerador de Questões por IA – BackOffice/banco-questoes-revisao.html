@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/styles/basis.css">
     <link rel="stylesheet" href="../../assets/styles/common.css">
-    <link rel="stylesheet" href="banco-questoes-revisao.css">
+    <link rel="stylesheet" href="banco-questoes-revisao.css?v=5">
 </head>
 
 <body>
@@ -312,9 +312,28 @@
                 <section class="filters-section">
                     <!-- Row 1: Total + Botões de Ação -->
                     <div class="actions-row">
-                        <div class="total-badge">
-                            <span class="total-label">Total de Questões:</span>
-                            <span class="total-value">1</span>
+                        <div data-role="stats-bar">
+                            <div>
+                                <span class="stats-label">Total de Questões:</span>
+                            </div>
+                            <div class="stats-badges">
+                                <span class="badge badge-purple">
+                                    <span class="icon"
+                                        style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                                    15
+                                </span>
+                                <div class="stats-divider"></div>
+                                <span class="badge badge-purple">
+                                    <span class="icon"
+                                        style="--icon: url('assets/icons/icon-psychology.svg'); width: 16px; height: 16px;"></span>
+                                    5
+                                </span>
+                                <span class="badge badge-purple">
+                                    <span class="icon"
+                                        style="--icon: url('assets/icons/icon-emoji-objects.svg'); width: 16px; height: 16px;"></span>
+                                    10
+                                </span>
+                            </div>
                         </div>
                         <button class="btn-primary">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">

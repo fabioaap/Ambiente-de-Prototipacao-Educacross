@@ -309,24 +309,138 @@ body {
     margin-bottom: var(--spacing-sm);
 }
 
+/* Stats Bar - Total de Questões (habilidades-topicos-v2.css) */
+div[data-role="stats-bar"] {
+    flex: 1;
+    background: rgba(115, 103, 240, 0.12);
+    border-radius: 6px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.stats-label {
+    color: #7367F0;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 21px;
+}
+
+.stats-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stats-badges .badge {
+    background: rgba(115, 103, 240, 0.12);
+    padding: 1px 9px;
+    border-radius: 17px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 18px;
+    color: #7367F0;
+}
+
+.badge-purple {
+    background: rgba(115, 103, 240, 0.12);
+    color: #7367F0;
+    padding: 1px 9px;
+    border-radius: 17px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+}
+
+.stats-divider {
+    width: 1px;
+    height: 20px;
+    background: #DBDADE;
+    align-self: stretch;
+}
+
+.icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: currentColor;
+    -webkit-mask-image: var(--icon);
+    mask-image: var(--icon);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    flex-shrink: 0;
+}
+
 .total-badge {
     flex: 1;
-    background-color: var(--primary-light);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--border-radius);
+    background-color: rgba(115, 103, 240, 0.12);
+    padding: 20px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     gap: 65px;
-    font-size: var(--font-size-base);
-    color: var(--primary);
+}
+
+.total-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .total-label {
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
+    font-size: 14px;
+    line-height: 21px;
+    color: #7367F0;
+    white-space: nowrap;
 }
 
-.total-value {
-    font-weight: 400;
+.total-stats {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.stat-badge {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    background-color: rgba(115, 103, 240, 0.12);
+    padding: 1px 9px;
+    border-radius: 17px;
+}
+
+.stat-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.stat-value {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 18px;
+    color: #7367F0;
+    text-align: center;
+}
+
+.stat-separator {
+    width: 1px;
+    height: 20px;
+    background-color: #7367F0;
+    opacity: 0.5;
+    transform: rotate(90deg);
 }
 
 .btn-primary {
