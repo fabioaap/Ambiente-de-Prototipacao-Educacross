@@ -14,6 +14,9 @@
 </head>
 
 <body>
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
     <!-- Container Principal -->
     <div class="app-container">
         <!-- Sidebar (compartilhada) -->
@@ -341,7 +344,7 @@
                             </svg>
                             <span>Exportar questões</span>
                         </button>
-                        <button class="btn-primary">
+                        <button class="btn-primary" id="btnNovaQuestao">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
                                 <path d="M12 8V16M8 12H16" stroke="currentColor" stroke-width="2"
@@ -881,6 +884,47 @@
                     });
                 }
             });
+
+            // Sistema de Toast Notificações
+            window.showToast = function (title, message, type = 'info', duration = 5000) {
+                const toastContainer = document.getElementById('toastContainer');
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+
+                // Ícones por tipo
+                const icons = {
+                    success: '✓',
+                    error: '✕',
+                    warning: '⚠',
+                    info: 'ℹ'
+                };
+
+                toast.innerHTML = `
+                    <div class="toast-icon">${icons[type] || icons.info}</div>
+                    <div class="toast-content">
+                        <p class="toast-title">${title}</p>
+                        <p class="toast-message">${message}</p>
+                    </div>
+                    <button class="toast-close">&times;</button>
+                `;
+
+                toastContainer.appendChild(toast);
+
+                const closeBtn = toast.querySelector('.toast-close');
+                closeBtn.addEventListener('click', () => {
+                    toast.style.animation = 'slideOutToast 0.3s ease';
+                    setTimeout(() => toast.remove(), 300);
+                });
+
+                if (duration > 0) {
+                    setTimeout(() => {
+                        if (toast.parentNode) {
+                            toast.style.animation = 'slideOutToast 0.3s ease';
+                            setTimeout(() => toast.remove(), 300);
+                        }
+                    }, duration);
+                }
+            };
         </script>
         <script src="banco-questoes-revisao-FUNCIONANDO.js"></script>
 </body>

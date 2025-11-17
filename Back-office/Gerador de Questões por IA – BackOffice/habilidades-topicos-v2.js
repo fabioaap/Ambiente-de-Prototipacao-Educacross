@@ -392,11 +392,65 @@ function trocarAba(nomeAba) {
     renderizarPaginacao();
 }
 
-// =========================
-// INICIALIZAÇÃO
-// =========================
-
 document.addEventListener('DOMContentLoaded', () => {
+    // =========================
+    // SISTEMA DE TOAST NOTIFICAÇÕES
+    // =========================
+
+    window.showToast = function (title, message, type = 'info', duration = 5000) {
+        const toastContainer = document.getElementById('toastContainer');
+        if (!toastContainer) {
+            console.error('❌ Toast container não encontrado!');
+            return;
+        }
+
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+
+        // Ícones por tipo
+        const icons = {
+            success: '✓',
+            error: '✕',
+            warning: '⚠',
+            info: 'ℹ'
+        };
+
+        toast.innerHTML = `
+            <div class="toast-icon">${icons[type] || icons.info}</div>
+            <div class="toast-content">
+                <p class="toast-title">${title}</p>
+                <p class="toast-message">${message}</p>
+            </div>
+            <button class="toast-close">&times;</button>
+        `;
+
+        toastContainer.appendChild(toast);
+
+        // Botão de fechar
+        const closeBtn = toast.querySelector('.toast-close');
+        closeBtn.addEventListener('click', () => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(20px)';
+            setTimeout(() => toast.remove(), 300);
+        });
+
+        // Auto-remover após duração
+        if (duration > 0) {
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translateY(20px)';
+                    toast.style.transition = 'all 0.3s ease';
+                    setTimeout(() => toast.remove(), 300);
+                }
+            }, duration);
+        }
+    };
+
+    // =========================
+    // INICIALIZAÇÃO
+    // =========================
+
     // Event listeners para tabs
     document.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', (e) => {
@@ -407,9 +461,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listener para botão Nova Questão IA
     const btnNovaQuestaoIA = document.getElementById('btnNovaQuestaoIA');
+
     if (btnNovaQuestaoIA) {
         btnNovaQuestaoIA.addEventListener('click', () => {
-            // Redirecionar para a página de criar questão
             window.location.href = 'criar-questao-quiz.html';
         });
     }
@@ -417,4 +471,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // Renderização inicial
     renderizarTabela();
     renderizarPaginacao();
+
+    // DEBUG: Verificar se tudo foi carregado corretamente
+    window.debugToast = function () {
+        console.group('🔍 DEBUG TOAST SYSTEM');
+
+        const container = document.getElementById('toastContainer');
+        console.log('Container existe?', !!container);
+        console.log('Container:', container);
+
+        const btn = document.getElementById('btnNovaQuestaoIA');
+        console.log('Botão existe?', !!btn);
+        console.log('Botão:', btn);
+
+        console.log('showToast é função?', typeof window.showToast === 'function');
+
+        if (container && typeof window.showToast === 'function') {
+            console.log('✅ TUDO OK - Testando...');
+            window.showToast('Teste de Debug', 'Sistema funcionando!', 'success');
+        } else {
+            console.error('❌ PROBLEMA: Container ou showToast não disponível');
+        }
+
+        console.groupEnd();
+    };
+
+    // Executar debug automaticamente
+    window.debugToast();
 });

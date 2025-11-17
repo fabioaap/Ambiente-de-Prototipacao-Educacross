@@ -285,6 +285,32 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ============================================
+    // BOTÃO: NOVA QUESTÃO (com Toast)
+    // ============================================
+    function inicializarBtnNovaQuestao() {
+        const btn = document.getElementById('btnNovaQuestao');
+
+        if (btn) {
+            btn.addEventListener('click', () => {
+                // Mostrar notificação de geração em andamento
+                if (window.showToast) {
+                    window.showToast(
+                        'Lote em Geração',
+                        'Seu lote de questões está sendo gerado. Isso pode levar alguns momentos...',
+                        'info',
+                        5000
+                    );
+                }
+
+                // Aguardar um tempo para o toast aparecer, depois redirecionar
+                setTimeout(() => {
+                    window.location.href = 'criar-questao-quiz.html';
+                }, 500);
+            });
+        }
+    }
+
+    // ============================================
     // DRAWER: PAINEL DE GERAÇÃO (IA)
     // ============================================
     function inicializarDrawerGeracaoIA() {
@@ -324,6 +350,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     aplicarFiltros(); // Renderizar todas as questões inicialmente
     inicializarFiltrosInterativos(); // Tornar filtros clicáveis
+    inicializarBtnNovaQuestao(); // Ativar botão "Nova questão" com Toast
     inicializarDrawerGeracaoIA(); // Ativar drawer Painel de Geração (IA)
     console.log('🖱️ Clique nos filtros para filtrar manualmente!');
 });

@@ -23,6 +23,57 @@ function validarFormulario() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // ========================================
+    // SISTEMA DE TOAST NOTIFICAÇÕES
+    // ========================================
+
+    window.showToast = function (title, message, type = 'info', duration = 5000) {
+        const toastContainer = document.getElementById('toastContainer');
+        if (!toastContainer) {
+            console.error('Toast container não encontrado');
+            return;
+        }
+
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+
+        const icons = {
+            success: '✓',
+            error: '✕',
+            warning: '⚠',
+            info: 'ℹ'
+        };
+
+        toast.innerHTML = `
+            <div class="toast-icon">${icons[type] || icons.info}</div>
+            <div class="toast-content">
+                <p class="toast-title">${title}</p>
+                <p class="toast-message">${message}</p>
+            </div>
+            <button class="toast-close">&times;</button>
+        `;
+
+        toastContainer.appendChild(toast);
+
+        const closeBtn = toast.querySelector('.toast-close');
+        closeBtn.addEventListener('click', () => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(20px)';
+            setTimeout(() => toast.remove(), 300);
+        });
+
+        if (duration > 0) {
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translateY(20px)';
+                    toast.style.transition = 'all 0.3s ease';
+                    setTimeout(() => toast.remove(), 300);
+                }
+            }, duration);
+        }
+    };
+
     // Inputs de dificuldade
     ['muitoFacil', 'facil', 'medio', 'dificil', 'muitoDificil'].forEach(id => {
         const el = document.getElementById(id);
@@ -106,6 +157,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 caixaAlta: document.getElementById('caixaAlta').checked,
                 instrucoes: document.getElementById('instrucoesAdicionais').value,
             };
+
+            // Mostrar toast de geração
+            if (typeof window.showToast === 'function') {
+                window.showToast(
+                    'Lote em Geração',
+                    'Seu lote de questões está sendo gerado. Isso pode levar alguns momentos...',
+                    'info',
+                    5000
+                );
+            }
 
             console.log('Gerando questões com:', dados);
             const total = dados.muitoFacil + dados.facil + dados.medio + dados.dificil + dados.muitoDificil;
