@@ -2,605 +2,528 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Proposta oficial do Ambiente de Prototipação da Educacross - infraestrutura estratégica para validação de produtos educacionais">
-    <meta name="keywords" content="prototipação, design system, educacross, vanilla js, storybook">
-    <meta name="author" content="Educacross - Time de Produto">
-    <title>Ambiente de Prototipação Educacross</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Protótipos – Educacross (Vanilla)</title>
+    <style>
+        :root {
+            --bg: #0f1220;
+            --card: #161a2b;
+            --text: #e7e8ee;
+            --muted: #a8acc4;
+            --link: #7aa2ff;
+            --link-hover: #9cc1ff;
+            --accent: #2a2f48;
+            --border: #232844;
+        }
 
-    <!-- Favicon -->
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23111111%22/></svg>">
+        * {
+            box-sizing: border-box;
+        }
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        html,
+        body {
+            height: 100%;
+        }
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="./base.css">
-    <link rel="stylesheet" href="./styles.css">
+        body {
+            margin: 0;
+            font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 20px 64px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 0 0 8px;
+        }
+
+        p.desc {
+            margin: 0 0 24px;
+            color: var(--muted);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .card-destaque {
+            background: linear-gradient(135deg, #1a1f35 0%, #161b2e 100%);
+            border: 2px solid var(--link);
+            box-shadow: 0 4px 16px rgba(122, 162, 255, 0.15);
+        }
+
+        .card-destaque h2 {
+            color: var(--link);
+        }
+
+        .card h2 {
+            font-size: 18px;
+            margin: 0 0 8px;
+        }
+
+        .card p {
+            margin: 0 0 12px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        ul.links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 8px;
+        }
+
+        .link-item a {
+            color: var(--link);
+            text-decoration: none;
+        }
+
+        .link-item a:hover {
+            color: var(--link-hover);
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 32px;
+            color: var(--muted);
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        /* Dashboard de Débito Técnico */
+        .debt-dashboard {
+            background: linear-gradient(135deg, #1a1f35 0%, #161b2e 100%);
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--link);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                border-top-color: var(--link);
+            }
+
+            50% {
+                border-top-color: #9cc1ff;
+            }
+        }
+
+        .debt-dashboard h2 {
+            font-size: 20px;
+            margin: 0 0 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #28c76f;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: scale(1.2);
+            }
+        }
+
+        .debt-dashboard .subtitle {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .debt-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .stat-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .stat-value.p0 {
+            color: #ea5455;
+        }
+
+        .stat-value.p1 {
+            color: #ff9f43;
+        }
+
+        .stat-value.p2 {
+            color: #7aa2ff;
+        }
+
+        .stat-value.effort {
+            color: #28c76f;
+        }
+
+        .recovery-section {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .recovery-label {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .recovery-percent {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28c76f 0%, #7ee8a5 100%);
+            border-radius: 999px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .debt-footer {
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.healthy {
+            background: rgba(40, 199, 111, 0.15);
+            color: #28c76f;
+        }
+
+        .status-badge.warning {
+            background: rgba(255, 159, 67, 0.15);
+            color: #ff9f43;
+        }
+
+        .status-badge.critical {
+            background: rgba(234, 84, 85, 0.15);
+            color: #ea5455;
+        }
+
+        .debt-link {
+            color: var(--link);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .debt-link:hover {
+            color: var(--link-hover);
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        // Lista de protótipos vanilla (HTML/CSS/JS puros)
+        const prototipos = [
+            {
+                categoria: '📚 Documentação',
+                descricao: 'Proposta oficial do Ambiente de Prototipação da Educacross.',
+                destaque: true,
+                links: [
+                    {
+                        label: 'Proposta de Ambiente de Prototipação (documentação completa)',
+                        path: 'docs/ambiente-prototipacao/index.html'
+                    }
+                ]
+            },
+            {
+                categoria: 'Front-office',
+                descricao: 'Fluxos usados por professores e coordenadores pedagógicos.',
+                links: [
+                    {
+                        label: 'Modal de aprovação com motivo de reprovação (demo interativo)',
+                        path: 'Front-office/Adicionar modal de visualizaçãoaprovação no Banco de Questões/prototipo-modal-aprovacao/demo-interativo.html'
+                    }
+                ]
+            },
+            {
+                categoria: 'Back-office',
+                descricao: 'Ferramentas internas para gestão/curadoria de conteúdo.',
+                links: [
+                    {
+                        label: 'Criar nova questão (BackOffice)',
+                        path: 'Back-office/Gerador de Questões por IA – BackOffice/criar-nova-questao.html'
+                    }
+                ]
+            },
+            {
+                categoria: 'Outros',
+                descricao: 'Páginas auxiliares e materiais de apoio.',
+                links: [
+                    {
+                        label: 'Envio de missões em lote (HTML estático v5.1)',
+                        path: 'enviar_missoes_em_lote_html_com_drawer_assistente_v5.1.html'
+                    }
+                ]
+            }
+        ];
+
+        function montarCard({ categoria, descricao, links, destaque }) {
+            const card = document.createElement('section');
+            card.className = destaque ? 'card card-destaque' : 'card';
+            const h2 = document.createElement('h2');
+            h2.textContent = categoria;
+            const p = document.createElement('p');
+            p.className = 'desc';
+            p.textContent = descricao;
+            const ul = document.createElement('ul');
+            ul.className = 'links';
+            links.forEach(({ label, path }) => {
+                const li = document.createElement('li');
+                li.className = 'link-item';
+                const a = document.createElement('a');
+                // encodeURI para lidar com espaços e caracteres especiais no caminho
+                a.href = encodeURI(path);
+                a.textContent = label;
+                a.rel = 'noopener noreferrer';
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
+            card.appendChild(h2);
+            card.appendChild(p);
+            card.appendChild(ul);
+            return card;
+        }
+
+        function init() {
+            const grid = document.getElementById('grid');
+            prototipos.forEach(grupo => grid.appendChild(montarCard(grupo)));
+        }
+
+        // Dashboard de débito técnico
+        async function loadDebtData() {
+            try {
+                const response = await fetch('docs/TECHNICAL_DEBT.json');
+                if (!response.ok) throw new Error('TECHNICAL_DEBT.json não encontrado');
+                const data = await response.json();
+                updateDashboard(data);
+            } catch (error) {
+                console.warn('Usando dados mock:', error.message);
+                // Dados mock caso o arquivo não exista
+                updateDashboard({
+                    p0: 0,
+                    p1: 3,
+                    p2: 7,
+                    effortHours: 2.5,
+                    recoveryRate: 78,
+                    status: 'healthy',
+                    lastUpdate: new Date().toISOString()
+                });
+            }
+        }
+
+        function updateDashboard(data) {
+            // Atualizar contadores
+            document.getElementById('p0-count').textContent = data.p0 || 0;
+            document.getElementById('p1-count').textContent = data.p1 || 0;
+            document.getElementById('p2-count').textContent = data.p2 || 0;
+            document.getElementById('effort-hours').textContent = (data.effortHours || 0).toFixed(1);
+
+            // Atualizar barra de progresso
+            const recoveryRate = data.recoveryRate || 0;
+            document.getElementById('recovery-fill').style.width = `${recoveryRate}%`;
+            document.getElementById('recovery-percent').textContent = `${recoveryRate}%`;
+
+            // Atualizar status badge
+            const badge = document.getElementById('status-badge');
+            badge.className = 'status-badge';
+            if (data.p0 > 0 || data.p1 > 10) {
+                badge.classList.add('critical');
+                badge.textContent = 'Crítico';
+            } else if (data.p1 > 5) {
+                badge.classList.add('warning');
+                badge.textContent = 'Atenção';
+            } else {
+                badge.classList.add('healthy');
+                badge.textContent = 'Saudável';
+            }
+
+            // Atualizar última atualização
+            if (data.lastUpdate) {
+                const date = new Date(data.lastUpdate);
+                const formatted = date.toLocaleString('pt-BR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                document.getElementById('last-update').textContent = `Atualizado: ${formatted}`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            init();
+            loadDebtData();
+            // Atualizar a cada 5 minutos
+            setInterval(loadDebtData, 5 * 60 * 1000);
+        });
+    </script>
+    <noscript>
+        <style>
+            .grid {
+                display: block
+            }
+
+            .card {
+                margin-bottom: 12px
+            }
+        </style>
+    </noscript>
+    <meta name="robots" content="noindex, nofollow" />
+    <!-- Página simples de índice para navegação de protótipos vanilla -->
 </head>
 
 <body>
-    <header class="header-with-logo">
-        <div class="logo-container">
-            <img src="./assets/logo-educacross.svg" alt="Logo Educacross" class="logo-icon">
-            <div class="header-text">
-                <h1 class="header-title">Ambiente de Prototipação</h1>
-                <p class="header-subtitle">Educacross</p>
-            </div>
-        </div>
-    </header>
+    <main class="container">
+        <h1>Protótipos – Educacross</h1>
+        <p class="desc">Índice rápido de protótipos em HTML/CSS/JS puros (vanilla). <span class="tag">beta</span></p>
 
-    <div class="layout">
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-search">
-                <div class="input-wrapper">
-                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                    <input type="text" id="sidebarSearch" class="sidebar-search-input" placeholder="Buscar..."
-                        aria-label="Buscar seções">
-                    <!-- Botão limpar -->
-                    <button id="btnClear" class="input-clear" type="button" aria-label="Limpar busca"
-                        title="Limpar (Esc)">
-                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </button>
-                    <span id="kbdShortcut" class="kbd input-kbd" aria-hidden="true"
-                        title="Atalho: pressione / para focar a busca">/</span>
+        <!-- Dashboard de Débito Técnico -->
+        <section class="debt-dashboard" aria-label="Dashboard de Débito Técnico">
+            <h2>
+                <span class="pulse-dot"></span>
+                Débito Técnico
+            </h2>
+            <p class="subtitle">Sistema de aprendizagem contínua monitorando qualidade do código</p>
+
+            <div class="debt-stats">
+                <div class="stat-item">
+                    <div class="stat-label">P0 – Crítico</div>
+                    <div class="stat-value p0" id="p0-count">0</div>
                 </div>
-                <div class="sidebar-search-options" aria-label="Opções de busca">
-                    <label class="option">
-                        <input type="checkbox" id="optWholeWord">
-                        <span>Palavra inteira</span>
-                    </label>
-                    <label class="option">
-                        <input type="checkbox" id="optIgnoreAccents" checked>
-                        <span>Ignorar acentos</span>
-                    </label>
+                <div class="stat-item">
+                    <div class="stat-label">P1 – Alto</div>
+                    <div class="stat-value p1" id="p1-count">3</div>
                 </div>
-                <div class="sidebar-search-actions" aria-live="polite">
-                    <span id="searchCount" class="search-count badge badge-muted">0 resultados</span>
-                    <div class="search-nav">
-                        <span class="tooltip">
-                            <button id="btnPrev" class="btn btn-ghost btn-icon" type="button"
-                                aria-label="Resultado anterior">
-                                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </button>
-                            <span class="tooltip-text">Shift+Enter</span>
-                        </span>
-                        <span class="tooltip">
-                            <button id="btnNext" class="btn btn-ghost btn-icon" type="button"
-                                aria-label="Próximo resultado">
-                                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </button>
-                            <span class="tooltip-text">Enter</span>
-                        </span>
-                    </div>
+                <div class="stat-item">
+                    <div class="stat-label">P2 – Médio</div>
+                    <div class="stat-value p2" id="p2-count">7</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Esforço Total</div>
+                    <div class="stat-value effort" id="effort-hours">2.5</div>
                 </div>
             </div>
-            <nav id="sidebarNav">
-                <a href="#intro" class="active">Introdução</a>
-                <a href="#contexto">1. Contexto e Propósito</a>
-                <a href="#por-que-nao">2. Por que não usar soluções empacotadas?</a>
-                <a href="#vantagens">3. Vantagens do ambiente interno</a>
-                <a href="#processo" class="has-submenu">4. Processo de Prototipagem</a>
-                <div class="submenu">
-                    <a href="#processo-4-1" class="submenu-item">4.1 Os 3 Estágios</a>
-                    <a href="#processo-4-2" class="submenu-item">4.2 Fluxo Prático</a>
-                    <a href="#processo-4-3" class="submenu-item">4.3 Responsabilidades</a>
-                    <a href="#processo-4-4" class="submenu-item">4.4 Ferramentas Práticas</a>
-                    <a href="#processo-4-5" class="submenu-item">4.5 Ganhos Mensuráveis</a>
-                    <a href="#processo-4-6" class="submenu-item">4.6 Evolução Futura</a>
-                </div>
-                <a href="#design">5. Facilidade no design</a>
-                <a href="#legado">6. Legado e redução de riscos</a>
-                <a href="#validacao">7. Proposta de validação</a>
-                <a href="#custos">8. Comparativo de custos</a>
-                <a href="#arquitetura">9. Arquitetura proposta</a>
-                <a href="#conclusao">Conclusão</a>
-            </nav>
-        </aside>
 
-        <main>
-            <div class="hero">
-                <h2>Proposta de Ambiente de Prototipação Educacross</h2>
-                <p>Um espaço criado para conectar design, produto e tecnologia, acelerando a inovação e reduzindo
-                    barreiras técnicas.</p>
+            <div class="recovery-section">
+                <div class="recovery-label">
+                    <span>Taxa de Auto-Recuperação</span>
+                    <span class="recovery-percent" id="recovery-percent">78%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="recovery-fill" style="width: 78%;"></div>
+                </div>
             </div>
 
-            <section id="intro">
-                <h2>Introdução</h2>
-                <p>Este documento apresenta a proposta oficial do <strong>Ambiente de Prototipação da
-                        Educacross</strong>, sua importância estratégica, seus diferenciais em relação a soluções
-                    empacotadas do mercado e o plano de validação necessário para consolidá-lo como um dos pilares
-                    do processo de produto da empresa. O ambiente ainda está em fase de construção e validação, e
-                    este material tem como finalidade obter o apoio e o patrocínio da diretoria para seu avanço.</p>
-            </section>
+            <div class="debt-footer">
+                <span id="last-update">Carregando...</span>
+                <div>
+                    <span class="status-badge healthy" id="status-badge">Saudável</span>
+                    <a href="docs/TECHNICAL_DEBT.md" class="debt-link" style="margin-left: 12px;">Ver detalhes →</a>
+                </div>
+            </div>
+        </section>
 
-            <section id="contexto">
-                <h2>1. Contexto e propósito do ambiente</h2>
-                <p>O time de produto na pessoa do designer Fábio Alves está desenvolvendo um <strong>ambiente de
-                        prototipação leve, acessível e altamente adaptável</strong>, projetado para acelerar a
-                    compreensão
-                    de problemas, a validação de hipóteses e a experimentação de jornadas reais de produto das
-                    plataformas Front-office, Back-office e Games.</p>
-                <p>O ambiente utiliza uma stack <strong>vanilla (HTML, CSS e JavaScript puro)</strong> para garantir
-                    baixíssima barreira técnica, especialmente para designers e product managers. Essa escolha elimina
-                    dependências complexas de build, reduz a carga cognitiva e evita fricções comuns de tecnologias
-                    como React ou frameworks proprietários.</p>
-                <p>O propósito central é permitir prototipação rápida, clara e realista aproximando a experimentação
-                    do comportamento final do produto, sem expor dados sensíveis a plataformas externas ou limitar a
-                    equipe às restrições de ferramentas empacotadas.</p>
-            </section>
-
-            <section id="por-que-nao">
-                <h2>2. Por que não usar soluções empacotadas?</h2>
-                <p>Embora ferramentas como Lovable e Figma Make tenham seu valor, elas resolvem problemas genéricos e
-                    trazem limitações importantes para o nosso contexto.</p>
-                <p>Nosso ambiente interno resolve o problema oposto: <strong>flexibilidade total, controle, baixo custo
-                        e aderência ao ecossistema Educacross</strong>.</p>
-            </section>
-
-            <section id="vantagens">
-                <h2>3. Vantagens do ambiente interno</h2>
-
-                <h3>3.1 Autonomia e controle total</h3>
-                <p>Soluções empacotadas trabalham majoritariamente com React e geram códigos complexos e pouco
-                    previsíveis. Isso exige conhecimento técnico e dependência de decisões tomadas por terceiros.</p>
-                <p>Nosso ambiente interno oferece:</p>
-                <ul>
-                    <li>Stack acessível (vanilla), com baixa barreira de entrada.</li>
-                    <li>Total controle sobre estrutura, comportamento e evolução do protótipo.</li>
-                    <li>Independência de bibliotecas externas, versões e roadmaps de outras empresas.</li>
-                </ul>
-
-                <h3>3.2 Fidelidade técnica e clareza de comunicação na hora do Handoff</h3>
-                <p>O código dos protótipos gerados pode ser facilmente traduzido para o stack real de desenvolvimento,
-                    hoje em Vue, reduzindo ruídos entre os times, aumentando a precisão e acelerando o tempo de
-                    desenvolvimento das entregas.</p>
-
-                <h3>3.3 Segurança e privacidade</h3>
-                <p>Atualmente, o ambiente de prototipação está hospedado em um repositório privado no GitHub, vinculado
-                    a uma conta pessoal sob governança técnica temporária.
-                    Nenhum dado sensível ou estratégico é exposto a serviços SaaS externos; o fluxo de prototipação e
-                    documentação opera de forma isolada, com acesso restrito e controle versionado.
-                    A migração para a infraestrutura corporativa da Educacross (Azure DevOps) está planejada para
-                    ocorrer assim que o projeto receber o patrocínio oficial da diretoria, garantindo total
-                    conformidade, rastreabilidade e segurança institucional no ambiente definitivo.</p>
-
-                <h3>3.4 Escalabilidade, customização e automação</h3>
-                <p>Como o ambiente é nosso, sua evolução é contínua e incremental passando diretamente pelo nosso
-                    <strong>Design System</strong>.
-                </p>
-                <ul>
-                    <li>Validações automatizadas alinhadas aos padrões do DS.</li>
-                    <li>Scripts sob medida para atualizar e sincronizar componentes de UI.</li>
-                    <li>Adaptações específicas ao produto educacional, refletidas tanto no protótipo quanto no DS.</li>
-                    <li>Uso do <strong>Storybook como plataforma central</strong> para visualizar, documentar e testar
-                        componentes e variações.</li>
-                </ul>
-
-                <h3>3.5 Documentação viva e integrada</h3>
-                <p>O Storybook funciona como a "vitrine" oficial do Design System: cada componente, estado e variação
-                    pode ser navegado, testado e referenciado por produto, design, tecnologia e pedagogia.</p>
-                <p>Cada experimento feito no ambiente de prototipação pode gerar, quando consolidado, um componente ou
-                    padrão documentado no Storybook, mantendo tudo alinhado ao design system e aos padrões de produto.
-                    Isso cria um ciclo de aprendizado contínuo entre protótipo → componente → produto, reduz retrabalho
-                    e fortalece a consistência visual e funcional em toda a plataforma.</p>
-            </section>
-
-            <section id="processo">
-                <h2>4. Processo de Prototipagem</h2>
-                <p>O Ambiente de Prototipação segue um fluxo estruturado que conecta design, desenvolvimento e validação
-                    em ciclos rápidos e iterativos. O processo é pensado para ser acessível a designers e PMs, sem
-                    exigir conhecimento técnico profundo.</p>
-
-                <h3 id="processo-4-1">4.1 Os 3 Estágios da Prototipagem</h3>
-
-                <h4>Estágio 1: Discovery (Figma + MCP)</h4>
-                <p><strong>Quem participa:</strong> Designer, PM</p>
-                <p>Nesta etapa, o designer cria wireframes e high-fidelity mockups no Figma, estruturando jornadas e
-                    interfaces. O MCP do Figma funciona como ponte entre design e código:</p>
-                <ul>
-                    <li>Extrai design tokens (cores, tipografia, espaçamentos, raios).</li>
-                    <li>Exporta estrutura de componentes e variações.</li>
-                    <li>Documenta constraints, states e interações esperadas.</li>
-                    <li>Gera especificações de layout (grid, alinhamentos, responsive).</li>
-                </ul>
-                <p><strong>Saída esperada:</strong> Arquivo de tokens + especificação de tela pronta para codificação.
-                </p>
-
-                <h4>Estágio 2: Build (Vanilla HTML/CSS/JS)</h4>
-                <p><strong>Quem participa:</strong> Designer (com apoio de GitHub Copilot Pro+)</p>
-                <p>Com as especificações em mãos, o designer constrói o protótipo em vanilla, transformando design em
-                    código funcional:</p>
-                <ul>
-                    <li>Estrutura semântica HTML baseada na jornada documentada.</li>
-                    <li>CSS utiliza design tokens como variáveis (`:root { --primary: #7367F0 }`).</li>
-                    <li>JavaScript implementa interações (abrir/fechar modais, tabs, filtros, drawers).</li>
-                    <li>GitHub Copilot Pro+ auxilia na geração de código vanilla, validação de tokens e refactoring
-                        automático.</li>
-                </ul>
-                <p><strong>Tempo médio:</strong> 30 minutos a 2 horas por tela simples (com Copilot + MCP).</p>
-                <p><strong>Saída esperada:</strong> Protótipo funcionando localmente no navegador, 1:1 com Figma.</p>
-
-                <h4>Estágio 3: Validação (Browser + Feedback)</h4>
-                <p><strong>Quem participa:</strong> Designer, PM, Stakeholders (pedagógico, diretoria)</p>
-                <p>O protótipo é testado em navegador real, validando:</p>
-                <ul>
-                    <li>Fidelidade visual em relação ao Figma (pixel-perfect dentro de limites responsivos).</li>
-                    <li>Interatividade: cliques, teclado (ESC, Enter), foco, acessibilidade.</li>
-                    <li>Responsividade: comportamento em desktop, tablet e mobile.</li>
-                    <li>Usabilidade: fluxo de usuário é intuitivo? O copy está claro? As ações são óbvias?</li>
-                </ul>
-                <p>Feedback é coletado e novas iterações reiniciam no Estágio 1 (refinamento de design) ou Estágio 2
-                    (ajustes de código).</p>
-                <p><strong>Saída esperada:</strong> Aprovação para handoff ou lista priorizada de ajustes.</p>
-
-                <h3 id="processo-4-2">4.2 Fluxo Prático: Do Figma ao Protótipo Interativo</h3>
-                <p><strong>Exemplo real:</strong> Tela de login com validação de email.</p>
-
-                <p><strong>Passo 1: Designer cria e documenta no Figma</strong></p>
-                <ul>
-                    <li>Desenha a tela com todos os estados visuais (campo vazio, preenchido, com erro, enviando).</li>
-                    <li>Documenta as cores, tamanhos e espaçamentos utilizados.</li>
-                    <li>Usa uma ferramenta integrada (MCP) para exportar essas especificações de forma estruturada.</li>
-                </ul>
-
-                <p><strong>Passo 2: Designer constrói o protótipo interativo com assistência de IA</strong></p>
-                <ul>
-                    <li>Abre um editor de código (VS Code) no computador.</li>
-                    <li>Descreve para o GitHub Copilot Pro+ a tela que acabou de desenhar no Figma: "Crie a tela de
-                        login com validação de email que eu estou selecionando no Figma".
-                    </li>
-                    <li>A IA gera automaticamente o código (HTML, CSS, JavaScript) usando as cores e medidas
-                        documentadas.</li>
-                    <li>Designer revisa o resultado, faz pequenos ajustes se necessário.</li>
-                    <li>Inicia um servidor local no computador para visualizar o protótipo.</li>
-                </ul>
-
-                <p><strong>Passo 3: Designer e PM testam e validam no navegador</strong></p>
-                <ul>
-                    <li>Abrem o protótipo no navegador do computador.</li>
-                    <li>Comparam visualmente com o desenho original no Figma: as cores batem? Os tamanhos estão
-                        corretos?</li>
-                    <li>Testam as interações: clicam nos campos, digitam, tentam enviar, testam mensagens de erro.</li>
-                    <li>Se tudo está como esperado: protótipo aprovado e pronto para o próximo passo. Caso contrário:
-                        designer faz ajustes rápidos.</li>
-                </ul>
-
-                <h3 id="processo-4-3">4.3 Responsabilidades por Role</h3>
-
-                <h4>Designer (Protagonista do Processo)</h4>
-                <ul>
-                    <li>Estruturar jornadas e wireframes no Figma.</li>
-                    <li>Definir design tokens (cores, tipografia, espaçamentos).</li>
-                    <li>Usar MCP do Figma para exportar especificações de layout e componentes.</li>
-                    <li><strong>Implementar protótipos em vanilla HTML/CSS/JS com suporte do GitHub Copilot
-                            Pro+.</strong></li>
-                    <li>Testar e validar fidelidade visual, interatividade e responsividade.</li>
-                    <li>Iterar com feedback do PM e stakeholders.</li>
-                </ul>
-
-                <h4>Product Manager (PM)</h4>
-                <ul>
-                    <li>Definir objetivos, hipóteses e critérios de sucesso.</li>
-                    <li>Navegar protótipos construídos pelo designer e coletar feedback de stakeholders.</li>
-                    <li>Priorizar ajustes (MVP vs. nice-to-have).</li>
-                    <li>Preparar relatório de learnings e recomendações para próximos passos.</li>
-                </ul>
-
-                <h4>👨‍💻 Desenvolvedor (Suporte Pós-Prototipagem)</h4>
-                <ul>
-                    <li>Revisar código vanilla do protótipo aprovado.</li>
-                    <li>Traduzir para Vue.js (stack de produção).</li>
-                    <li>Garantir acessibilidade, performance e manutenibilidade.</li>
-                    <li>Documentar componentes reutilizáveis no Storybook.</li>
-                    <li>Feedback para melhorias em futuras prototipagens.</li>
-                </ul>
-
-                <h3 id="processo-4-4">4.4 Ferramentas Práticas por Role</h3>
-
-                <p><strong>Designer → MCP do Figma</strong></p>
-                <ul>
-                    <li>Exporta design tokens: `color-primary: #7367F0`, `spacing-md: 16px`.</li>
-                    <li>Gera especificações de layout: grid, alinhamentos, responsive breakpoints.</li>
-                    <li>Documenta estados de componentes (normal, hover, active, disabled, error).</li>
-                </ul>
-
-                <p><strong>Designer → GitHub Copilot Pro+ + Vanilla</strong></p>
-                <ul>
-                    <li>Prompt: "Crie um campo de email com validação em tempo real usando tokens CSS".</li>
-                    <li>Copilot gera HTML/CSS/JS em segundos, alinhado aos tokens do Figma.</li>
-                    <li>Designer refina, valida no browser e testa responsividade.</li>
-                </ul>
-
-                <p><strong>PM → Protótipo no Navegador</strong></p>
-                <ul>
-                    <li>Abre arquivo HTML localmente: arrastar para navegador ou `Live Server` no VS Code.</li>
-                    <li>Testa fluxo completo: preenche formulário, clica botões, valida mensagens.</li>
-                    <li>Coleta feedback: "Essa validação está muito rápida? O usuário entende o erro?"</li>
-                </ul>
-
-                <h3 id="processo-4-5">4.5 Ganhos Mensuráveis</h3>
-
-                <p><strong>Tempo economizado por etapa:</strong></p>
-                <ul>
-                    <li><strong>Discovery:</strong> MCP elimina documentação manual (-30% tempo).</li>
-                    <li><strong>Build:</strong> GitHub Copilot Pro+ acelera codificação vanilla (-50% tempo).</li>
-                    <li><strong>Validação:</strong> Protótipo funcional permite feedback imediato (-40% iterações
-                        posteriores).</li>
-                </ul>
-
-                <p><strong>Qualidade do handoff para engenharia:</strong></p>
-                <ul>
-                    <li>Código vanilla é 100% compreensível, facilita tradução para Vue.js.</li>
-                    <li>Componentes e padrões já documentados no Storybook.</li>
-                    <li>Reduz discussões em planning e alinhamento de escopo.</li>
-                </ul>
-
-                <h3 id="processo-4-6">4.6 Evolução Futura: Prototipagem Baseada em Design System</h3>
-                <p>Conforme o Design System da Educacross amadurece, uma oportunidade estratégica emerge: <strong>criar
-                        novas jornadas e telas diretamente a partir dos componentes e tokens já existentes, sem
-                        necessidade de desenho prévio no Figma</strong>.</p>
-
-                <h4>Como funcionará:</h4>
-                <ul>
-                    <li><strong>Design System como fonte de verdade:</strong> O GitHub Copilot Pro+ lerá todos os
-                        componentes, tokens (cores, tipografia, espaçamentos) e padrões já documentados no Storybook.
-                    </li>
-                    <li><strong>Prototipagem acelerada:</strong> Designer descreve a jornada desejada: "Crie uma tela de
-                        inscrição usando componentes de formulário, card e botão já documentados no Design System".</li>
-                    <li><strong>Código gerado automaticamente:</strong> A IA compõe a nova tela combinando componentes
-                        existentes, respeitando 100% das especificações do Design System.</li>
-                    <li><strong>Validação rápida:</strong> Designer testa o protótipo no navegador, valida fluxo e
-                        usabilidade <strong>sem passar pelo Figma primeiro</strong>.</li>
-                </ul>
-
-                <h4>Fluxo futuro (após validação de prototipagem inicial):</h4>
-                <p><strong>Se aprovado:</strong> Designer vai ao Figma para criar wireframes de alta fidelidade,
-                    refinando detalhes visuais. Depois, ativa novamente o Copilot para gerar a versão final do
-                    protótipo, agora com maior precisão visual.</p>
-                <p><strong>Se precisa de ajustes:</strong> Iterações mais rápidas no protótipo, sem ciclos longos de
-                    design → desenvolvimento.</p>
-
-                <h4>Benefícios dessa evolução:</h4>
-                <ul>
-                    <li><strong>Velocidade exponencial:</strong> Novas telas em minutos, não horas.</li>
-                    <li><strong>Consistência garantida:</strong> Todos os componentes seguem Design System
-                        automaticamente.</li>
-                    <li><strong>Menos retrabalho:</strong> Design System e Storybook como fonte única de verdade durante
-                        prototipagem.</li>
-                    <li><strong>Qualidade do handoff:</strong> Código já alinhado aos padrões de produção.</li>
-                </ul>
-
-                <p><strong>Nota:</strong> Figma e Storybook continuarão como pilares complementares. Figma para
-                    refinamento visual de alta fidelidade, e Storybook como documentação viva do Design System.</p>
-
-            </section>
-
-            <section id="design">
-                <h2>5. Facilidade no design</h2>
-                <p>O ambiente permite que designers e PMs criem, testem e revisem telas sem etapas técnicas
-                    desnecessárias. A interação entre Figma, MCP e o ambiente vanilla possibilita gerar fluxos
-                    rapidamente e manter documentação organizada, acelerando a comunicação com tecnologia.</p>
-            </section>
-
-            <section id="legado">
-                <h2>6. Legado e redução de riscos</h2>
-                <p>O ambiente se transforma em um <strong>ativo institucional</strong>: consolidando padrões, práticas
-                    e decisões em um único espaço acessível.</p>
-                <p>Por ser vanilla, qualquer novo membro do time de produto ou design, em tese, consegue compreender a
-                    estrutura rapidamente, o que reduz riscos, evita silos de conhecimento e facilita o onboarding.</p>
-                <p>Testes com LLMs (como Claude Sonnet 4.5) mostraram que manter o controle interno aumenta a fidelidade
-                    visual e o rigor do processo, sem perder velocidade.</p>
-            </section>
-
-            <section id="validacao">
-                <h2>7. Proposta de validação</h2>
-                <p>Para transformar o ambiente em parte oficial da operação de produto, propomos um ciclo de validação
-                    com métricas claras.</p>
-
-                <h3>Objetivos</h3>
-                <ul>
-                    <li>Reduzir o tempo entre <strong>hipótese → protótipo → aprendizado</strong>, encurtando o ciclo
-                        de discovery e aumentando a eficiência dos experimentos.</li>
-                    <li>Garantir <strong>autonomia para PMs e Designers</strong>, permitindo validar hipóteses sem
-                        depender do ambiente de desenvolvimento.</li>
-                    <li>Gerar protótipos que <strong>facilitem o trabalho de engenharia</strong>, trazendo maior
-                        clareza de escopo e reduzindo retrabalho.</li>
-                    <li>Melhorar o <strong>alinhamento multifuncional no handoff</strong>, diminuindo discussões em
-                        plannings e testando soluções com usuários reais antes do desenvolvimento, aumentando o ROI
-                        do esforço de produto.</li>
-                </ul>
-
-                <h3>Métricas</h3>
-                <p>Para garantir uma avaliação objetiva e baseada em evidências, sugerimos métricas diretamente
-                    acionáveis:</p>
-                <ul>
-                    <li><strong>Tempo médio por ciclo (hipótese → protótipo → aprendizado):</strong> medir a redução
-                        percentual ao longo das semanas.</li>
-                    <li><strong>Profundidade das iterações:</strong> quantidade de versões por jornada e qualidade das
-                        decisões tomadas entre elas.</li>
-                    <li><strong>Autonomia operacional:</strong> número de protótipos criados por PMs/Designers sem
-                        suporte técnico.</li>
-                    <li><strong>Clareza técnica percebida pela engenharia:</strong> avaliação qualitativa e quantitativa
-                        (escala de 1 a 5) sobre o nível de precisão dos protótipos.</li>
-                    <li><strong>Retrabalho evitado:</strong> comparação entre iniciativas que passaram pelo ambiente e
-                        as que foram direto para desenvolvimento.</li>
-                    <li><strong>Aderência ao Design System:</strong> percentual de componentes, tokens e padrões
-                        replicados corretamente no protótipo.</li>
-                </ul>
-            </section>
-
-            <section id="custos">
-                <h2>8. Comparativo de custos entre planos premium</h2>
-                <p>A tabela abaixo apresenta uma comparação direta entre os planos premium das ferramentas empacotadas
-                    e os custos necessários para operar o ambiente interno com segurança e performance.</p>
-
-                <h3>Comparativo de Ferramentas de Prototipação</h3>
-                <blockquote>
-                    <p>Valores em dólares (USD), conforme planos oficiais das ferramentas. A conversão para reais
-                        dependerá do câmbio vigente. No caso da Educacross, parte da infraestrutura (Azure DevOps) já
-                        está contratada, portanto não gera custo incremental para o ambiente de prototipação.</p>
-                </blockquote>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Ferramenta</th>
-                            <th>Plano</th>
-                            <th>Custo (USD)</th>
-                            <th>Diferenciais</th>
-                            <th>Limitações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Lovable</strong></td>
-                            <td>Premium</td>
-                            <td>US$ 25/mês</td>
-                            <td>Geração de apps full‑stack, deploy automatizado, projetos privados e créditos de IA</td>
-                            <td>Não integra com MCP do Figma; sem fidelidade às telas originais; dependente de créditos
-                                e upgrades para uso intenso.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Figma Professional</strong></td>
-                            <td>Team</td>
-                            <td>US$ 16/assento/mês</td>
-                            <td>Figma Design, FigJam, Slides, Dev Mode, Sites e Make com IA</td>
-                            <td>Não permite uso do Figma MCP no pipeline; aumento de custo proporcional por editor;
-                                dependência de ambiente fechado.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Azure DevOps</strong></td>
-                            <td>Enterprise</td>
-                            <td>Incluso</td>
-                            <td>Governança, pipelines CI/CD e integração com repositórios corporativos.</td>
-                            <td>Requer setup técnico e integração com ambiente externo.</td>
-                        </tr>
-                        <tr class="table-row-premium">
-                            <td><strong>GitHub Copilot Pro+</strong><br><span
-                                    class="badge-recomendado">Recomendado</span></td>
-                            <td>Avançado</td>
-                            <td>US$ 39/mês</td>
-                            <td><strong>Integração direta com repositórios GitHub e Azure, acesso ao Claude Sonnet 4.5,
-                                    múltiplos modelos de LLM e suporte nativo à validação via MCP.</strong></td>
-                            <td>Necessário plano pago para Cloud Compute.</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>Resumo estratégico</h3>
-                <blockquote>
-                    <p><strong>GitHub Copilot Pro+</strong> supera os concorrentes ao unir IA, controle técnico e
-                        integração total com o pipeline de design e código, permitindo validação visual via Figma MCP,
-                        conversas com repositórios e adaptação rápida entre diferentes modelos de linguagem — algo
-                        inviável nos ambientes empacotados.</p>
-                </blockquote>
-
-                <h3>Conclusão do comparativo</h3>
-                <ul>
-                    <li>O custo total do ambiente de prototipação da Educacross é <strong>substancialmente
-                            menor</strong>
-                        do que o de soluções empacotadas baseadas apenas em Lovable ou Figma Make/Full.</li>
-                    <li>O único investimento direto em IA é a assinatura de <strong>GitHub Copilot Pro+</strong> para
-                        1 usuário chave (produto/design), garantindo capacidade de uso intensivo de modelos avançados.
-                    </li>
-                    <li>Não há cobrança por usuário final no ambiente de prototipação: PMs, designers e engenheiros
-                        utilizam a mesma base sem taxas adicionais de seat ou licença.</li>
-                    <li>A infraestrutura de código e deploy permanece sob domínio interno da Educacross, alavancando
-                        <strong>Azure DevOps</strong> e <strong>Azure Pipelines</strong>, enquanto o Copilot é utilizado
-                        como acelerador de produtividade e documentação técnica.
-                    </li>
-                </ul>
-            </section>
-
-            <section id="arquitetura">
-                <h2>9. Arquitetura proposta do ambiente</h2>
-                <p>Abaixo, um esquema simplificado da arquitetura do <strong>Ambiente de Prototipação da
-                        Educacross</strong>,
-                    mostrando como as peças se conectam na prática.</p>
-                <pre>
-[PM / Design]
-     │
-     ▼
-[Figma + MCP]
-     │   (exporta fluxos, telas e specs)
-     ▼
-[Ambiente de Prototipação (HTML/CSS/JS vanilla)]
-     │   (implementação rápida apoiada por GitHub Copilot Pro+)
-     ▼
-[Repositório privado – Azure DevOps]
-     │   (controle de versão, histórico e segurança)
-     ▼
-[Azure Pipelines]
-     │
-     ├──► [Deploy Storybook / Design System]
-     │        (documentação viva para produto, design e tecnologia)
-     └──► [Deploy Protótipos interativos]
-              (acesso para diretoria, pedagógico e demais stakeholders)
-                </pre>
-
-                <p>Nesse fluxo:</p>
-                <ul>
-                    <li><strong>Designers e PMs</strong> trabalham no Figma, estruturando jornadas e interfaces, e
-                        utilizam o MCP quando necessário para aproximar design e código.</li>
-                    <li>O <strong>Ambiente de Prototipação vanilla</strong> permite transformar rapidamente essas ideias
-                        em experiências navegáveis, com baixo atrito técnico.</li>
-                    <li>O código é versionado em <strong>Azure DevOps</strong>, garantindo governança, histórico e
-                        alinhamento com a infraestrutura oficial da Educacross.</li>
-                    <li>Por fim, <strong>Azure Pipelines</strong> automatiza a publicação de Storybook e protótipos,
-                        permitindo que diretoria e áreas parceiras acessem versões sempre atualizadas, sem depender do
-                        ambiente de desenvolvimento.</li>
-                </ul>
-            </section>
-
-            <section id="conclusao">
-                <h2>Conclusão</h2>
-                <p>O Ambiente de Prototipação da Educacross não é apenas uma ferramenta: é uma <strong>infraestrutura
-                        estratégica</strong> que oferece velocidade, segurança, autonomia e clareza para a construção de
-                    produtos educacionais de alta qualidade.</p>
-                <p>Ele reduz riscos, diminui retrabalho, fortalece o alinhamento entre equipes e potencializa o uso de
-                    IA no futuro, mantendo custos <strong>mínimos</strong>, limitados apenas às assinaturas essenciais:
-                    <strong>Azure DevOps (repositório privado)</strong> para garantir segurança e governança, e
-                    <strong>GitHub Copilot</strong> para operar com modelos como Claude Sonnet 4.5 sem restrições de
-                    uso.
-                    Mesmo assim, o investimento permanece muito abaixo do custo de ferramentas empacotadas e totalmente
-                    aderente às necessidades da Educacross.
-                </p>
-                <p>Com o apoio da diretoria, este ambiente pode se consolidar como um dos pilares centrais do processo
-                    de produto, garantindo eficiência, consistência e governança visual para os próximos anos.</p>
-            </section>
-        </main>
-    </div>
-
-    <footer>
-        © 2025 Educacross — Documento vivo do Ambiente de Prototipação
-    </footer>
-
-    <!-- Scripts -->
-    <script src="./script.js"></script>
+        <div id="grid" class="grid" aria-live="polite" aria-busy="false"></div>
+        <footer>Se algo não abrir no GitHub Pages, verifique o caminho e a codificação de espaços (%20).</footer>
+    </main>
 </body>
 
 </html>

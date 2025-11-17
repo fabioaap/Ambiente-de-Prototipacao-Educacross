@@ -396,14 +396,9 @@ function initSidebarSearch() {
         }
     });
 
-    // Expandir ao focar, colapsar ao sair sem valor
+    // Expandir ao focar; removido blur para não fechar ao clicar em opções
     searchInput.addEventListener('focus', () => container?.classList.add('expanded'));
-    searchInput.addEventListener('blur', () => {
-        setTimeout(() => {
-            const hasValue = searchInput.value.trim().length > 0;
-            if (!hasValue) container?.classList.remove('expanded');
-        }, 0);
-    });
+    // (Fechamento apenas em clique fora com container vazio.)
 
     // Colapsa ao clicar fora se vazio
     document.addEventListener('click', (e) => {

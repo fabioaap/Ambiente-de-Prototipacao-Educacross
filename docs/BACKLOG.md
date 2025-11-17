@@ -1,8 +1,8 @@
 # 📋 Backlog - Plataforma de Prototipagem Educacross
 
-**Data Atualização:** 14 de novembro de 2025  
-**Status:** ✅ **BACKLOG ZERADO! 🎉**  
-**Todos os Sprints:** CONCLUÍDOS
+**Data Atualização:** 17 de novembro de 2025  
+**Status:** 🔄 **EM ANDAMENTO**  
+**Todos os Sprints:** 20/21 tarefas concluídas (95%)
 
 ---
 
@@ -15,10 +15,43 @@
 | **Sprint 2 (P1)** | 🟠 High | ✅ **CONCLUÍDO** | 5/5 (100%) | 3-5 dias | ~2h |
 | **Sprint 4 (P2)** | 🟢 Medium | ✅ **CONCLUÍDO** | 4/4 (100%) | 1-2 semanas | ~1h |
 | **Sprint 5 (P3)** | 🔵 Low | ✅ **CONCLUÍDO** | 2/2 (100%) | 1 semana | ~30min |
+| **Sprint 6 (P1)** | 🟠 High | 🔄 **EM ANDAMENTO** | 0/1 (0%) | 2-3h | - |
 
-**Total Concluído:** 20/20 tarefas (100%) ✨  
+**Total Concluído:** 20/21 tarefas (95%) ✨  
 **Tempo Total:** ~8.5h (estimado: 3-5 semanas!)  
 **Burn Rate:** Velocidade excepcional! 🚀🚀🚀
+
+---
+
+## 🔄 Sprint 6 (P1) - High Priority - **EM ANDAMENTO**
+
+**Objetivo:** Corrigir layout mobile da página de documentação
+
+**Status:** 🔄 0% INICIADO (17/nov/2025)
+
+### Tarefas Pendentes
+
+| ID | Tarefa | Status | Impacto | Esforço | Prioridade |
+|----|--------|--------|---------|---------|------------|
+| **M1** | Corrigir layout mobile quebrado (ambiente-prototipacao) | ⏳ | 🔴 High | 🟡 Medium | 🟠 P1 |
+
+**Problemas Identificados:**
+- ❌ Conflitos entre estilos desktop e mobile
+- ❌ Media queries duplicadas causando sobreposição
+- ❌ Header mobile não respeitando z-index correto
+- ❌ Sidebar com comportamento inconsistente
+- ❌ Botão menu aparecendo incorretamente
+
+**Solução Proposta:**
+1. Consolidar media queries (remover duplicação)
+2. Refatorar estrutura mobile-first
+3. Separar claramente estilos desktop × mobile
+4. Testar em dispositivos reais (iPhone, Android)
+
+**Arquivos Afetados:**
+- `docs/ambiente-prototipacao/styles.css`
+- `docs/ambiente-prototipacao/index.html`
+- `ambiente-styles.css` (root)
 
 ---
 

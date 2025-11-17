@@ -74,12 +74,31 @@ header h1 {
 }
 
 .menu-toggle {
-    display: none;
     background: none;
     border: none;
-    font-size: var(--font-size-2xl);
+    font-size: 24px;
     cursor: pointer;
     color: var(--fg);
+    padding: 8px;
+    margin-right: var(--spacing-md);
+    line-height: 1;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-base);
+}
+
+.menu-toggle:hover {
+    background: var(--bg-alt);
+}
+
+.menu-toggle:active {
+    background: var(--border);
+}
+
+/* Desktop: esconder botão de menu */
+@media (min-width: 769px) {
+    .menu-toggle {
+        display: none;
+    }
 }
 
 /* Sidebar */
@@ -756,10 +775,40 @@ footer {
         display: block;
     }
 
+    header,
+    .header-with-logo {
+        flex-wrap: wrap;
+        padding: var(--spacing-sm) var(--spacing-md);
+        gap: var(--spacing-sm);
+    }
+
+    .logo-container {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: var(--spacing-xs);
+        gap: var(--spacing-sm);
+        text-align: center;
+    }
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .header-title {
+        font-size: var(--font-size-lg);
+    }
+
+    .header-subtitle {
+        font-size: var(--font-size-xs);
+    }
+
     .sidebar {
         transform: translateX(-100%);
         width: 240px;
         z-index: var(--z-fixed);
+        top: 110px;
     }
 
     .sidebar.open {
@@ -804,6 +853,167 @@ html {
 
 section {
     animation: fadeIn 0.5s ease-out;
+}
+
+/* Mobile Responsive - ChatGPT Style */
+@media (max-width: 768px) {
+    .header-with-logo {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: hsl(0, 0%, 12%);
+        border-bottom: 1px solid hsl(0, 0%, 20%);
+        padding: 0.75rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1001;
+    }
+
+    .header-left {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .logo-icon {
+        width: 28px;
+        height: 28px;
+        flex-shrink: 0;
+    }
+
+    .page-title {
+        color: white;
+        font-size: 1rem;
+        margin: 0;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        cursor: pointer;
+        line-height: 1;
+        flex-shrink: 0;
+    }
+
+    .menu-toggle .menu-icon,
+    .menu-toggle .close-icon {
+        display: block;
+    }
+
+    .menu-toggle .close-icon {
+        display: none;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 56px;
+        width: 100%;
+        height: calc(100vh - 56px);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+        background: hsl(0, 0%, 12%);
+        color: white;
+        overflow-y: auto;
+        padding-top: 1rem;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar h2 {
+        color: white;
+    }
+
+    .sidebar a {
+        color: hsl(0, 0%, 85%);
+        background: transparent;
+    }
+
+    .sidebar a:hover {
+        background: hsl(0, 0%, 18%);
+    }
+
+    .sidebar a.active {
+        background: hsl(0, 0%, 18%);
+        border-left-color: hsl(0, 0%, 50%);
+    }
+
+    .sidebar-search {
+        background: hsl(0, 0%, 15%);
+        border: 1px solid hsl(0, 0%, 25%);
+    }
+
+    .sidebar-search.expanded {
+        background: hsl(0, 0%, 15%);
+    }
+
+    .search-header {
+        color: white;
+    }
+
+    .search-input {
+        background: hsl(0, 0%, 20%);
+        border: 1px solid hsl(0, 0%, 30%);
+        color: white;
+    }
+
+    .search-input::placeholder {
+        color: hsl(0, 0%, 60%);
+    }
+
+    .search-options label {
+        color: hsl(0, 0%, 85%);
+    }
+
+    .search-nav button {
+        background: hsl(0, 0%, 25%);
+        color: white;
+    }
+
+    .search-nav button:hover {
+        background: hsl(0, 0%, 30%);
+    }
+
+    .badge {
+        background: hsl(0, 0%, 25%);
+        color: white;
+    }
+
+    main {
+        margin-left: 0;
+        padding-top: 56px;
+    }
+}
+
+/* Desktop Header Styles */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.page-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    margin: 0;
+    color: var(--fg);
 }
 
 /* Print styles */

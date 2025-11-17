@@ -172,13 +172,61 @@ function initActiveNavigation() {
 }
 
 /**
- * Toggle do menu mobile (se aplicável)
+ * Toggle do menu mobile
  */
+/**
+ * Atualiza ícone do botão toggle baseado no estado da sidebar
+ */
+function updateToggleIcon() {
+    const sidebar = document.getElementById('sidebar');
+    const menuIcon = document.querySelector('.menu-icon');
+    const closeIcon = document.querySelector('.close-icon');
+
+    if (!sidebar || !menuIcon || !closeIcon) return;
+
+    if (sidebar.classList.contains('open')) {
+        menuIcon.style.display = 'none';
+        closeIcon.style.display = 'block';
+    } else {
+        menuIcon.style.display = 'block';
+        closeIcon.style.display = 'none';
+    }
+}
+
 function initMobileMenu() {
     const sidebar = document.getElementById('sidebar');
-    if (!sidebar) return;
+    const menuToggle = document.getElementById('menuToggle');
+    if (!sidebar || !menuToggle) return;
 
-    // Implementar lógica de menu mobile aqui se necessário
+    menuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+        updateToggleIcon();
+    });
+
+    // Fechar ao clicar em um link (mobile)
+    const sidebarLinks = sidebar.querySelectorAll('a');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('open');
+                updateToggleIcon();
+            }
+        });
+    });
+
+    // Fechar ao clicar fora (mobile)
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768 &&
+            sidebar.classList.contains('open') &&
+            !sidebar.contains(e.target) &&
+            !menuToggle.contains(e.target)) {
+            sidebar.classList.remove('open');
+            updateToggleIcon();
+        }
+    });
+
+    // Inicializar estado do ícone
+    updateToggleIcon();
 }
 
 /**
@@ -396,13 +444,22 @@ function initSidebarSearch() {
         }
     });
 
-    // Expandir ao focar, colapsar ao sair sem valor
+    // Expandir ao focar o input principal; não usamos blur para fechar (apenas clique fora controla fechamento)
     searchInput.addEventListener('focus', () => container?.classList.add('expanded'));
-    searchInput.addEventListener('blur', () => {
-        setTimeout(() => {
-            const hasValue = searchInput.value.trim().length > 0;
-            if (!hasValue) container?.classList.remove('expanded');
-        }, 0);
+
+    // Garantir que interação nos botões de navegação mantenha expansão
+    [btnNext, btnPrev].forEach(btn => {
+        if (btn) {
+            ['mousedown', 'click', 'focus'].forEach(ev => btn.addEventListener(ev, () => container?.classList.add('expanded')));
+        }
+    });
+
+    // Manter expandido ao interagir com os checkboxes de opções
+    const optionCheckboxes = container?.querySelectorAll('.sidebar-search-options input[type="checkbox"]') || [];
+    optionCheckboxes.forEach(cb => {
+        ['mousedown', 'click', 'focus', 'change'].forEach(ev => {
+            cb.addEventListener(ev, () => container?.classList.add('expanded'));
+        });
     });
 
     // Colapsa ao clicar fora se vazio
