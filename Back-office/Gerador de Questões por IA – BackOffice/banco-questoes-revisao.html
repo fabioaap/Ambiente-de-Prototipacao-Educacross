@@ -751,10 +751,32 @@
 
                     <div class="info-message">
                         <p>Os status de gerações são atualizados a cada 1 minuto.</p>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <circle cx="12" cy="12" r="10" stroke="#6E6B7B" stroke-width="2" />
-                            <path d="M12 16V12M12 8H12.01" stroke="#6E6B7B" stroke-width="2" stroke-linecap="round" />
-                        </svg>
+                        <div class="tooltip-wrapper">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="info-icon">
+                                <circle cx="12" cy="12" r="10" stroke="#6E6B7B" stroke-width="2" />
+                                <path d="M12 16V12M12 8H12.01" stroke="#6E6B7B" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <div class="tooltip-content">
+                                <div class="tooltip-header">Legenda de Status</div>
+                                <div class="tooltip-items">
+                                    <div class="tooltip-item">
+                                        <span class="status-badge status-progress">Andamento</span>
+                                        <span class="tooltip-description">As questões estão sendo geradas</span>
+                                    </div>
+                                    <div class="tooltip-item">
+                                        <span class="status-badge status-success">Concluído</span>
+                                        <span class="tooltip-description">Lote finalizado com sucesso</span>
+                                    </div>
+                                    <div class="tooltip-item">
+                                        <span class="status-badge status-error">Erro</span>
+                                        <span class="tooltip-description">Erro durante o processo, gere o lote
+                                            novamente</span>
+                                    </div>
+                                </div>
+                                <div class="tooltip-arrow"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -835,6 +857,29 @@
             </div>
         </aside>
 
+        <script>
+            // Posicionar tooltip com position fixed
+            document.addEventListener('DOMContentLoaded', function () {
+                const tooltipWrapper = document.querySelector('.tooltip-wrapper');
+                const tooltipContent = document.querySelector('.tooltip-content');
+                const infoIcon = document.querySelector('.info-icon');
+
+                if (tooltipWrapper && tooltipContent && infoIcon) {
+                    tooltipWrapper.addEventListener('mouseenter', function () {
+                        const iconRect = infoIcon.getBoundingClientRect();
+                        const tooltipWidth = 320;
+                        const tooltipHeight = tooltipContent.offsetHeight || 200;
+
+                        // Posicionar à esquerda do ícone
+                        const left = iconRect.left - tooltipWidth - 16;
+                        const top = iconRect.top + (iconRect.height / 2) - (tooltipHeight / 2);
+
+                        tooltipContent.style.left = left + 'px';
+                        tooltipContent.style.top = top + 'px';
+                    });
+                }
+            });
+        </script>
         <script src="banco-questoes-revisao-FUNCIONANDO.js"></script>
 </body>
 
