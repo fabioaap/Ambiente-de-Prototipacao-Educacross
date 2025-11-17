@@ -7,6 +7,23 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('✅ Banco de Questões carregado');
 
     // ============================================
+    // TOAST PENDENTE (cross-page persistence)
+    // ============================================
+    const toastPendente = localStorage.getItem('toastPendente');
+    if (toastPendente) {
+        try {
+            const data = JSON.parse(toastPendente);
+            // Pequeno delay para garantir que a página carregou completamente
+            setTimeout(() => {
+                window.showToast(data.title, data.message, data.type, data.duration);
+            }, 100);
+            localStorage.removeItem('toastPendente');
+        } catch (e) {
+            console.error('❌ Erro ao processar toast pendente:', e);
+        }
+    }
+
+    // ============================================
     // DADOS MOCKADOS
     // ============================================
 

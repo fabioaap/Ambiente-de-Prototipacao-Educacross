@@ -169,6 +169,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             console.log('Gerando questões com:', dados);
+
+            // Guardar no localStorage para mostrar toast na próxima página
+            localStorage.setItem('toastPendente', JSON.stringify({
+                title: 'Lote em Geração',
+                message: 'Seu lote de questões está sendo gerado. Aguarde a finalização...',
+                type: 'info',
+                duration: 5000
+            }));
+
+            // Redirecionar após 1 segundo
+            setTimeout(() => {
+                window.location.href = 'banco-questoes-revisao.html';
+            }, 1000);
             const total = dados.muitoFacil + dados.facil + dados.medio + dados.dificil + dados.muitoDificil;
 
             // Redirecionar para banco de questões após gerar
