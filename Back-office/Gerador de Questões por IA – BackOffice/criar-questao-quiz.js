@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnCancelar) {
         btnCancelar.addEventListener('click', () => {
             if (confirm('Tem certeza que deseja cancelar? Todas as alterações serão perdidas.')) {
-                window.location.href = 'habilidades-topicos.html';
+                window.location.href = 'banco-questoes-revisao.html';
             }
         });
     }
@@ -109,7 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log('Gerando questões com:', dados);
             const total = dados.muitoFacil + dados.facil + dados.medio + dados.dificil + dados.muitoDificil;
-            alert(`Questões geradas com sucesso!\n\nTotal: ${total} questões`);
+
+            // Redirecionar para banco de questões após gerar
+            window.location.href = 'banco-questoes-revisao.html';
         });
     }
 

@@ -409,7 +409,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnNovaQuestaoIA = document.getElementById('btnNovaQuestaoIA');
     if (btnNovaQuestaoIA) {
         btnNovaQuestaoIA.addEventListener('click', () => {
-            alert('Modal de Nova Questão IA (a ser implementado)');
+            // Redirecionar para a página de criar questão
+            window.location.href = 'criar-questao-quiz.html';
         });
     }
 
