@@ -1,0 +1,15 @@
+{
+    "cssMatch": {
+        "caseInsensitive": true,
+        "whitespaceInsensitive": true
+    },
+    "svgAudit": {
+        "requireCurrentColor": true,
+        "allowNone": true,
+        "ignore": [
+            "Back-office/Gerador de Questões por IA – BackOffice/assets/logo-icon-real.svg",
+            "Back-office/Gerador de Questões por IA – BackOffice/assets/logo-text-real.svg",
+            "assets/logo-"
+        ]
+    }
+}

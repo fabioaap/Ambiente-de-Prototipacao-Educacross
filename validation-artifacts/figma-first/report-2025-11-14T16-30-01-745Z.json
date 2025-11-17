@@ -1,0 +1,173 @@
+{
+  "pagePath": "Back-office/Gerador de Questões por IA – BackOffice/banco-questoes-pixel-perfect.html",
+  "checks": [
+    {
+      "area": "badges",
+      "selector": ".badge",
+      "prop": "background",
+      "expected": "rgba(115, 103, 240, 0.12)",
+      "pass": true
+    },
+    {
+      "area": "badges",
+      "selector": ".badge",
+      "prop": "color",
+      "expected": "#7367f0",
+      "pass": true
+    },
+    {
+      "area": "badges",
+      "selector": ".badge.pink",
+      "prop": "background",
+      "expected": "rgba(214, 51, 132, 0.12)",
+      "pass": true
+    },
+    {
+      "area": "badges",
+      "selector": ".badge.pink",
+      "prop": "color",
+      "expected": "#d63384",
+      "pass": true
+    },
+    {
+      "area": "badges",
+      "selector": ".badge.warning",
+      "prop": "background",
+      "expected": "rgba(255, 159, 67, 0.12)",
+      "pass": true
+    },
+    {
+      "area": "badges",
+      "selector": ".badge.warning",
+      "prop": "color",
+      "expected": "#ff9f43",
+      "pass": true
+    },
+    {
+      "area": "statsBar",
+      "selector": "div[data-role='stats-bar']",
+      "prop": "background",
+      "expected": "rgba(115, 103, 240, 0.12)",
+      "pass": true
+    },
+    {
+      "area": "statsBar",
+      "selector": ".stats-label",
+      "prop": "color",
+      "expected": "#7367f0",
+      "pass": true
+    }
+  ],
+  "svgAudits": [
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\logo-icon-real.svg",
+      "issues": [
+        "ignorado por configuração"
+      ],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\logo-text-real.svg",
+      "issues": [
+        "ignorado por configuração"
+      ],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-home.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-games.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-gestao.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-escolas.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-usuarios.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-calendario.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-biblioteca.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-analises.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-relatorios.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-estatisticas.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-quiz.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-psychology.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-emoji-objects.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-keyboard-arrow-down.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-add-circle.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-search.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-chevron-left.svg",
+      "issues": [],
+      "pass": true
+    },
+    {
+      "file": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office\\Gerador de Questões por IA – BackOffice\\assets\\icons\\icon-chevron-right.svg",
+      "issues": [],
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 28,
+    "passed": 28,
+    "failed": 0,
+    "timestamp": "2025-11-14T16-30-01-745Z"
+  }
+}

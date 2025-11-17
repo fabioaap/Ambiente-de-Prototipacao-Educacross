@@ -1,0 +1,37 @@
+name: mcp-validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  mcp-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps
+        run: |
+          npm ci
+
+      - name: Install Playwright browsers
+        run: |
+          npx playwright install --with-deps
+
+      - name: Run MCP validation
+        run: |
+          npm run mcp:validate
+
+      - name: Gate reports
+        run: |
+          npm run mcp:gate
+
+      # Opcional: usar FIGMA_TOKEN real via secrets
+      # env:
+      #   FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}

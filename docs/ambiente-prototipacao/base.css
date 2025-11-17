@@ -1,0 +1,214 @@
+/* ============================================
+   TOKENS DO DESIGN SYSTEM - SHADCN/UI
+   Ambiente de Prototipação Educacross
+   ============================================ */
+
+:root {
+    /* Cores Base */
+    --bg: #ffffff;
+    --bg-alt: #f9fafb;
+    --fg: #111111;
+    --fg-muted: #666666;
+    --border: #e5e5e5;
+    --accent: #000000;
+
+    /* Espaçamento */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    --spacing-3xl: 4rem;
+
+    /* Tipografia */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+    --line-height-loose: 2;
+
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+
+    /* Sombras */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+    /* Transições */
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.2s ease;
+    --transition-slow: 0.3s ease;
+
+    /* Z-index */
+    --z-base: 1;
+    --z-dropdown: 10;
+    --z-sticky: 20;
+    --z-fixed: 30;
+    --z-modal: 40;
+    --z-popover: 50;
+    --z-tooltip: 60;
+}
+
+/* Reset e Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    color: var(--fg);
+    background-color: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Links */
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: opacity var(--transition-base);
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
+/* Tipografia Base */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-tight);
+    color: var(--fg);
+}
+
+h1 {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-lg);
+}
+
+h2 {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-md);
+    margin-top: var(--spacing-2xl);
+}
+
+h3 {
+    font-size: var(--font-size-2xl);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+p {
+    margin-bottom: var(--spacing-md);
+    line-height: var(--line-height-relaxed);
+}
+
+/* Listas */
+ul,
+ol {
+    margin: var(--spacing-md) 0;
+    padding-left: var(--spacing-xl);
+    line-height: var(--line-height-loose);
+}
+
+li {
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Code e Pre */
+code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: var(--font-size-sm);
+    background: var(--bg-alt);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+}
+
+pre {
+    background: var(--bg-alt);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    border: 1px solid var(--border);
+}
+
+/* Blockquote */
+blockquote {
+    background: var(--bg-alt);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 3px solid var(--accent);
+    margin: var(--spacing-md) 0;
+    font-style: italic;
+    color: var(--fg-muted);
+}
+
+/* Tabelas */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: var(--spacing-lg) 0;
+    font-size: var(--font-size-sm);
+    background: var(--bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+}
+
+th {
+    background: var(--fg);
+    color: var(--bg);
+    text-align: left;
+    padding: var(--spacing-md);
+    font-weight: var(--font-weight-semibold);
+}
+
+td {
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--border);
+    color: var(--fg-muted);
+    vertical-align: top;
+}
+
+tr:hover td {
+    background: var(--bg-alt);
+    color: var(--fg);
+}
+
+/* Strong */
+strong {
+    font-weight: var(--font-weight-semibold);
+    color: var(--fg);
+}

@@ -1,0 +1,122 @@
+{
+    "MCP_OFFLINE": {
+        "severity": "high",
+        "effortMinutes": 2,
+        "blockage": "blocking",
+        "impact": "MCP Figma offline, fallback para REST API lenta",
+        "workaround": "Executar npm run mcp:check para auto-restart",
+        "permanentFix": "Implementar auto-recovery completo em check-mcp-figma.cjs"
+    },
+    "PATH_CONFLICT": {
+        "severity": "medium",
+        "effortMinutes": 30,
+        "blockage": "partial",
+        "impact": "Assets salvos em diretório errado (diretórios duplicados)",
+        "workaround": "Copiar manualmente para diretório correto",
+        "permanentFix": "Consolidar diretórios duplicados no Back-office"
+    },
+    "SVG_DISTORTION": {
+        "severity": "low",
+        "effortMinutes": 15,
+        "blockage": "none",
+        "impact": "Distorção visual em SVG logos (aspect ratio incorreto)",
+        "workaround": "preserveAspectRatio=\"none\" + CSS fixo",
+        "permanentFix": "Usar height: auto para respeitar viewBox"
+    },
+    "VALIDATION_FALSE_POSITIVE": {
+        "severity": "high",
+        "effortMinutes": 60,
+        "blockage": "blocking",
+        "impact": "Validator compara HTML vs HTML snapshot ao invés de Figma source",
+        "workaround": "Validação manual via mcp_figma_get_design_context",
+        "permanentFix": "Refatorar dual-validate.cjs para usar MCP como source of truth"
+    },
+    "AUTH_FAILURE": {
+        "severity": "critical",
+        "effortMinutes": 5,
+        "blockage": "blocking",
+        "impact": "Falha de autenticação bloqueia workflow Figma",
+        "workaround": "Reiniciar Figma Desktop manualmente",
+        "permanentFix": "Token refresh automático + fallback para REST API"
+    },
+    "NETWORK_ERROR": {
+        "severity": "medium",
+        "effortMinutes": 10,
+        "blockage": "partial",
+        "impact": "Timeout ou conexão recusada em APIs externas",
+        "workaround": "Retry manual ou usar dados mockados",
+        "permanentFix": "Exponential backoff + circuit breaker pattern"
+    },
+    "TYPE_ERROR": {
+        "severity": "high",
+        "effortMinutes": 45,
+        "blockage": "blocking",
+        "impact": "TypeError quebra execução (undefined, null reference)",
+        "workaround": "Adicionar null checks defensivos",
+        "permanentFix": "TypeScript strict mode + runtime validation com Zod"
+    },
+    "STORYBOOK_LOAD_FAILURE": {
+        "severity": "medium",
+        "effortMinutes": 20,
+        "blockage": "partial",
+        "impact": "Stories não carregam (import error, missing dependencies)",
+        "workaround": "Comentar story problemática temporariamente",
+        "permanentFix": "Validar imports + adicionar error boundaries em stories"
+    },
+    "MOCK_INVALID_STATE": {
+        "severity": "medium",
+        "effortMinutes": 10,
+        "blockage": "none",
+        "impact": "Mocks com dados inconsistentes (progress != 0)",
+        "workaround": "check-mocks.cjs corrige automaticamente",
+        "permanentFix": "JSON Schema validation com Ajv pré-build"
+    },
+    "CSS_FIGMA_MISMATCH": {
+        "severity": "high",
+        "effortMinutes": 90,
+        "blockage": "blocking",
+        "impact": "CSS não corresponde ao design Figma (cores, spacing, fonts)",
+        "workaround": "Ajuste manual baseado em mcp_figma_get_design_context",
+        "permanentFix": "Pipeline automático: Figma Variables → DTCG tokens → CSS vars"
+    },
+    "BUILD_FAILURE": {
+        "severity": "critical",
+        "effortMinutes": 3,
+        "blockage": "blocking",
+        "impact": "npm run build falha (syntax error, missing deps)",
+        "workaround": "Reverter último commit",
+        "permanentFix": "Pre-commit hooks com lint + type check"
+    },
+    "MISSING_DEPENDENCY": {
+        "severity": "high",
+        "effortMinutes": 1,
+        "blockage": "blocking",
+        "impact": "Pacote não instalado (MODULE_NOT_FOUND)",
+        "workaround": "npm install <package>",
+        "permanentFix": "Verificar package.json + package-lock.json no CI"
+    },
+    "DEPLOYMENT_404": {
+        "severity": "medium",
+        "effortMinutes": 15,
+        "blockage": "partial",
+        "impact": "GitHub Pages retorna 404 para assets",
+        "workaround": "Verificar caminhos e encoding (%20 para espaços)",
+        "permanentFix": "Remover espaços e caracteres especiais de nomes de arquivos"
+    },
+    "MEMORY_LEAK": {
+        "severity": "low",
+        "effortMinutes": 120,
+        "blockage": "none",
+        "impact": "Consumo gradual de memória ao longo do tempo",
+        "workaround": "Reiniciar processo periodicamente",
+        "permanentFix": "Profile com Chrome DevTools + limpar event listeners"
+    },
+    "UNKNOWN": {
+        "severity": "medium",
+        "effortMinutes": 30,
+        "blockage": "none",
+        "impact": "Erro não classificado",
+        "workaround": "Investigar logs e stack trace",
+        "permanentFix": "Adicionar pattern específico em severity-rules.json"
+    }
+}

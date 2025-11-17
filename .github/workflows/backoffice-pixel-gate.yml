@@ -25,6 +25,9 @@ jobs:
       - name: Verificar tipos TS
         run: npm run check-types
 
+      - name: Figma-first (estrito)
+        run: npm run figma:first:strict
+
       - name: Testes unitários (Vitest)
         run: npm test -- --run
 

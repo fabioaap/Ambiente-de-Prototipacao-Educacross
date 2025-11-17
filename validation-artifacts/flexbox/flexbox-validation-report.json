@@ -1,0 +1,325 @@
+{
+  "url": "http://localhost:8080/Back-office/Gerador%20de%20Quest%C3%B5es%20por%20IA%20%E2%80%93%20BackOffice/banco-questoes-pixel-perfect.html",
+  "dpr": 1,
+  "browser": "chromium",
+  "timestamp": "2025-11-14T12:32:04.154Z",
+  "containers": [
+    {
+      "nome": "stats-bar",
+      "seletor": "[data-role=stats-bar]",
+      "containerInfo": {
+        "container": {
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "normal",
+          "alignItems": "center",
+          "gap": "65px",
+          "rowGap": "65px",
+          "columnGap": "65px",
+          "width": 975,
+          "height": 44,
+          "x": 285,
+          "y": 276.3999938964844
+        },
+        "children": [
+          {
+            "index": 0,
+            "tag": "div",
+            "className": "",
+            "rect": {
+              "x": 305,
+              "y": 287.8999938964844,
+              "width": 134.8625030517578,
+              "height": 21,
+              "top": 287.8999938964844,
+              "left": 305,
+              "right": 439.8625030517578,
+              "bottom": 308.8999938964844
+            },
+            "relativePosition": {
+              "x": 20,
+              "y": 11.5
+            },
+            "styles": {
+              "display": "block",
+              "flex": "0 1 auto",
+              "flexGrow": "0",
+              "flexShrink": "1",
+              "flexBasis": "auto",
+              "alignSelf": "auto"
+            }
+          },
+          {
+            "index": 1,
+            "tag": "div",
+            "className": "stats-badges",
+            "rect": {
+              "x": 504.8625183105469,
+              "y": 288.3999938964844,
+              "width": 221.3000030517578,
+              "height": 20,
+              "top": 288.3999938964844,
+              "left": 504.8625183105469,
+              "right": 726.1625213623047,
+              "bottom": 308.3999938964844
+            },
+            "relativePosition": {
+              "x": 219.86251831054688,
+              "y": 12
+            },
+            "styles": {
+              "display": "flex",
+              "flex": "0 1 auto",
+              "flexGrow": "0",
+              "flexShrink": "1",
+              "flexBasis": "auto",
+              "alignSelf": "auto"
+            }
+          }
+        ]
+      },
+      "gaps": [
+        {
+          "between": "0 → 1",
+          "esperado": 65,
+          "obtido": 65.00001525878906,
+          "diff": 0.0000152587890625
+        }
+      ],
+      "gapsDiffs": [],
+      "alinhamentoErros": [],
+      "status": "PASSED"
+    },
+    {
+      "nome": "tabs",
+      "seletor": "[data-role=tabs]",
+      "containerInfo": {
+        "container": {
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "normal",
+          "alignItems": "normal",
+          "gap": "0px",
+          "rowGap": "0px",
+          "columnGap": "0px",
+          "width": 975,
+          "height": 42.400001525878906,
+          "x": 285,
+          "y": 214
+        },
+        "children": [
+          {
+            "index": 0,
+            "tag": "button",
+            "className": "tab active",
+            "rect": {
+              "x": 285,
+              "y": 214,
+              "width": 118.5875015258789,
+              "height": 40.79999923706055,
+              "top": 214,
+              "left": 285,
+              "right": 403.5875015258789,
+              "bottom": 254.79999923706055
+            },
+            "relativePosition": {
+              "x": 0,
+              "y": 0
+            },
+            "styles": {
+              "display": "block",
+              "flex": "0 1 auto",
+              "flexGrow": "0",
+              "flexShrink": "1",
+              "flexBasis": "auto",
+              "alignSelf": "auto"
+            }
+          },
+          {
+            "index": 1,
+            "tag": "button",
+            "className": "tab",
+            "rect": {
+              "x": 403.5874938964844,
+              "y": 214,
+              "width": 93.67500305175781,
+              "height": 40.79999923706055,
+              "top": 214,
+              "left": 403.5874938964844,
+              "right": 497.2624969482422,
+              "bottom": 254.79999923706055
+            },
+            "relativePosition": {
+              "x": 118.58749389648438,
+              "y": 0
+            },
+            "styles": {
+              "display": "block",
+              "flex": "0 1 auto",
+              "flexGrow": "0",
+              "flexShrink": "1",
+              "flexBasis": "auto",
+              "alignSelf": "auto"
+            }
+          }
+        ]
+      },
+      "gaps": [
+        {
+          "between": "0 → 1",
+          "esperado": 0,
+          "obtido": -0.00000762939453125,
+          "diff": 0.00000762939453125
+        }
+      ],
+      "gapsDiffs": [],
+      "alinhamentoErros": [],
+      "status": "PASSED"
+    },
+    {
+      "nome": "header",
+      "seletor": "[data-role=header]",
+      "containerInfo": {
+        "container": {
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "flex-end",
+          "alignItems": "center",
+          "gap": "12px",
+          "rowGap": "12px",
+          "columnGap": "12px",
+          "width": 975,
+          "height": 75.5999984741211,
+          "x": 285,
+          "y": 20
+        },
+        "children": [
+          {
+            "index": 0,
+            "tag": "span",
+            "className": "header-user",
+            "rect": {
+              "x": 1038.1375732421875,
+              "y": 49.400001525878906,
+              "width": 151.0625,
+              "height": 16.80000114440918,
+              "top": 49.400001525878906,
+              "left": 1038.1375732421875,
+              "right": 1189.2000732421875,
+              "bottom": 66.20000267028809
+            },
+            "relativePosition": {
+              "x": 753.1375732421875,
+              "y": 29.400001525878906
+            },
+            "styles": {
+              "display": "block",
+              "flex": "0 1 auto",
+              "flexGrow": "0",
+              "flexShrink": "1",
+              "flexBasis": "auto",
+              "alignSelf": "auto"
+            }
+          },
+          {
+            "index": 1,
+            "tag": "div",
+            "className": "header-avatar",
+            "rect": {
+              "x": 1201.2000732421875,
+              "y": 36.79999923706055,
+              "width": 42,
+              "height": 42,
+              "top": 36.79999923706055,
+              "left": 1201.2000732421875,
+              "right": 1243.2000732421875,
+              "bottom": 78.79999923706055
+            },
+            "relativePosition": {
+              "x": 916.2000732421875,
+              "y": 16.799999237060547
+            },
+            "styles": {
+              "display": "flex",
+              "flex": "0 1 auto",
+              "flexGrow": "0",
+              "flexShrink": "1",
+              "flexBasis": "auto",
+              "alignSelf": "auto"
+            }
+          }
+        ]
+      },
+      "gaps": [
+        {
+          "between": "0 → 1",
+          "esperado": 12,
+          "obtido": 12,
+          "diff": 0
+        }
+      ],
+      "gapsDiffs": [],
+      "alinhamentoErros": [],
+      "status": "PASSED"
+    },
+    {
+      "nome": "pagination",
+      "seletor": "[data-role=pagination]",
+      "containerInfo": {
+        "container": {
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "alignItems": "center",
+          "gap": "normal",
+          "rowGap": "normal",
+          "columnGap": "normal",
+          "width": 975,
+          "height": 48.79999923706055,
+          "x": 285,
+          "y": 990.2000122070312
+        },
+        "children": [
+          {
+            "index": 0,
+            "tag": "div",
+            "className": "pagination-controls",
+            "rect": {
+              "x": 305,
+              "y": 1001,
+              "width": 94,
+              "height": 28,
+              "top": 1001,
+              "left": 305,
+              "right": 399,
+              "bottom": 1029
+            },
+            "relativePosition": {
+              "x": 20,
+              "y": 10.79998779296875
+            },
+            "styles": {
+              "display": "flex",
+              "flex": "0 1 auto",
+              "flexGrow": "0",
+              "flexShrink": "1",
+              "flexBasis": "auto",
+              "alignSelf": "auto"
+            }
+          }
+        ]
+      },
+      "gaps": [],
+      "gapsDiffs": [],
+      "alinhamentoErros": [],
+      "status": "PASSED"
+    }
+  ],
+  "status": "PASSED",
+  "summary": {
+    "containersValidados": 4,
+    "totalGapDiffs": 0,
+    "totalAlignDiffs": 0,
+    "totalDiffs": 0
+  }
+}

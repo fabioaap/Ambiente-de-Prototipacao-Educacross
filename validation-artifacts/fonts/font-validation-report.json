@@ -1,0 +1,48 @@
+{
+  "url": "http://localhost:8081/Back-office/Gerador%20de%20Quest%C3%B5es%20por%20IA%20%E2%80%93%20BackOffice/banco-de-questoes-pixel-perfect.html",
+  "browser": "chromium",
+  "timestamp": "2025-11-14T13:07:30.879Z",
+  "fontes": {
+    "carregadas": [
+      {
+        "family": "Montserrat",
+        "weight": "400",
+        "style": "normal",
+        "fontString": "400 normal 12px \"Montserrat\"",
+        "loaded": true
+      },
+      {
+        "family": "Montserrat",
+        "weight": "500",
+        "style": "normal",
+        "fontString": "500 normal 12px \"Montserrat\"",
+        "loaded": true
+      },
+      {
+        "family": "Montserrat",
+        "weight": "600",
+        "style": "normal",
+        "fontString": "600 normal 12px \"Montserrat\"",
+        "loaded": true
+      },
+      {
+        "family": "Montserrat",
+        "weight": "700",
+        "style": "normal",
+        "fontString": "700 normal 12px \"Montserrat\"",
+        "loaded": true
+      }
+    ],
+    "faltando": [],
+    "fallback": [],
+    "total": 4
+  },
+  "status": "PASSED",
+  "warnings": 0,
+  "summary": {
+    "total": 4,
+    "carregadas": 4,
+    "faltando": 0,
+    "fallback": 0
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "url": "http://localhost:8080/Back-office/Gerador%20de%20Quest%C3%B5es%20por%20IA%20%E2%80%93%20BackOffice/banco-questoes-pixel-perfect.html",
+  "dpr": 1,
+  "mode": "update",
+  "timestamp": "2025-11-14T13:38:25.901Z",
+  "screenshot": {
+    "current": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\validation-artifacts\\screenshots\\current\\page-1x-2025-11-14T13-38-25.png",
+    "baseline": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\validation-artifacts\\screenshots\\baseline\\page-1x-baseline.png",
+    "diff": null
+  },
+  "comparison": null,
+  "status": "BASELINE_CREATED"
+}

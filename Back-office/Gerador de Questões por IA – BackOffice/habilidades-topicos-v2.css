@@ -1,0 +1,683 @@
+/**
+ * Habilidades e Tópicos - CSS Pixel-Perfect baseado no Figma
+ * Educacross - Back-office
+ * VERSÃO: 4.0 - Validado com Figma MCP (nodes: 10021:53621, 10021:53628, 10021:54305)
+ * ÚLTIMA ATUALIZAÇÃO: Codificação completa a partir das specs do Figma
+ */
+
+/* ========================================
+   DESIGN TOKENS EXTRAÍDOS DO FIGMA
+   ======================================== */
+
+:root {
+    /* Cores primárias */
+    --primary: #7367F0;
+    --primary-transparent: rgba(115, 103, 240, 0.12);
+
+    /* Cores de texto */
+    --text-body: #6E6B7B;
+    --text-white: #FFFFFF;
+
+    /* Cores de borda */
+    --border-light: #D8D6DE;
+    --border-table: #EBE9F1;
+
+    /* Badge temática */
+    --badge-tematica: #D63384;
+    --badge-tematica-bg: rgba(214, 51, 132, 0.12);
+
+    /* Tipografia Montserrat */
+    --font-family: 'Montserrat', sans-serif;
+    --font-regular: 400;
+    --font-bold: 700;
+
+    /* Tamanhos de fonte */
+    --font-size-12: 12px;
+    --font-size-14: 14px;
+
+    /* Line heights */
+    --line-height-18: 18px;
+    --line-height-21: 21px;
+    --line-height-24: 24px;
+
+    /* Espacamentos */
+    --spacing-1: 1px;
+    --spacing-3: 3px;
+    --spacing-5: 5px;
+    --spacing-8: 8px;
+    --spacing-9: 9px;
+    --spacing-10: 10px;
+    --spacing-16: 16px;
+    --spacing-20: 20px;
+
+    /* Border radius */
+    --radius-5: 5px;
+    --radius-6: 6px;
+    --radius-17: 17px;
+
+    /* Dimensões */
+    --tab-width: 131px;
+    --tab-height: 45px;
+    --stats-bar-height: 44px;
+    --filter-height: 44px;
+    --icon-16: 16px;
+    --icon-18: 18px;
+    --icon-24: 24px;
+}
+
+/* ========================================
+   PAGE TITLE (node 10021:53614)
+   ======================================== */
+
+h1[data-role="page-title"] {
+    /* Heading H1 - Montserrat Medium 28px (Figma spec) */
+    font-family: var(--font-family);
+    font-size: 28px;
+    font-weight: 500;
+    line-height: normal;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+/* ========================================
+   BREADCRUMB (node 10021:53498)
+   ======================================== */
+
+div[data-role="breadcrumb"] {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8);
+    margin-bottom: 16px;
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-text {
+    /* Montserrat Regular 14px line-height 24px (Figma spec) */
+    font-family: var(--font-family);
+    font-size: var(--font-size-14);
+    font-weight: var(--font-regular);
+    line-height: var(--line-height-24);
+    color: var(--text-body);
+}
+
+.breadcrumb-text.active {
+    /* Último item: #5E5873 (Figma spec, NÃO roxo) */
+    color: #5E5873;
+}
+
+.breadcrumb-separator {
+    display: flex;
+    align-items: center;
+}
+
+/* ========================================
+   TABS (node 10021:53621)
+   ======================================== */
+
+div[data-role="tabs"] {
+    position: relative;
+    display: flex;
+    gap: 0;
+    margin-bottom: 20px;
+    /* Border bottom: 2px solid roxo */
+    border-bottom: 2px solid var(--primary);
+}
+
+.tab {
+    /* Dimensões exatas do Figma */
+    width: 131px;
+    height: 45px;
+
+    /* Reset */
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+
+    /* Tipografia Montserrat Bold 14px */
+    font-family: var(--font-family);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 21px;
+    color: var(--body-text);
+
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab:hover {
+    opacity: 0.8;
+}
+
+/* Tab ativa - Background roxo sólido + texto branco */
+.tab.active {
+    background: var(--primary);
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+}
+
+.tab-content:first-of-type,
+#tab-habilidades {
+    display: block;
+}
+
+/* ========================================
+   STATS BAR (node 10021:53628)
+   ======================================== */
+
+div[data-role="stats-bar"] {
+    /* Specs exatas do Figma */
+    background: var(--primary-transparent);
+    border-radius: var(--radius-6);
+    padding: var(--spacing-10) var(--spacing-20);
+    height: var(--stats-bar-height);
+
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-16);
+    margin-bottom: var(--spacing-16);
+}
+
+.stats-label {
+    /* Montserrat Bold 14px #7367F0 (Figma spec) */
+    color: var(--primary);
+    font-size: var(--font-size-14);
+    font-weight: var(--font-bold);
+    line-height: var(--line-height-21);
+}
+
+.stats-badges {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8);
+}
+
+.stats-badges .badge {
+    /* Badges com background lilás claro (Figma spec) */
+    background: var(--primary-transparent);
+    padding: var(--spacing-1) var(--spacing-9);
+    border-radius: var(--radius-17);
+
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+
+    /* Montserrat Bold 12px #7367F0 (Figma spec) */
+    font-size: var(--font-size-12);
+    font-weight: var(--font-bold);
+    line-height: var(--line-height-18);
+    color: var(--primary);
+}
+
+.stats-divider {
+    width: 1px;
+    height: 20px;
+    background: #DBDADE;
+    align-self: stretch;
+}
+
+/* ========================================
+   FILTERS CARD (node 10021:54305)
+   ======================================== */
+
+div[data-role="filters-card"] {
+    background: white;
+    padding: var(--spacing-20);
+    border-radius: var(--radius-6);
+    margin-bottom: var(--spacing-16);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.filters-row {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--spacing-10);
+    margin-bottom: var(--spacing-10);
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-10);
+    flex: 1;
+    min-width: 259px;
+}
+
+.filter-label {
+    /* Montserrat Bold 12px #6E6B7B (Figma spec) */
+    font-size: var(--font-size-12);
+    font-weight: var(--font-bold);
+    line-height: normal;
+    color: var(--text-body);
+}
+
+.filter-select {
+    /* Specs exatas do Figma */
+    background: white;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-5);
+    padding: var(--spacing-10);
+    height: var(--filter-height);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    /* Montserrat Regular 14px (Figma spec) */
+    font-size: var(--font-size-14);
+    font-weight: var(--font-regular);
+    line-height: var(--line-height-21);
+    color: var(--text-body);
+}
+
+.filter-select:hover {
+    border-color: var(--primary);
+}
+
+.filter-select.selected {
+    color: var(--primary);
+}
+
+.filter-select-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-5);
+}
+
+.filter-button {
+    /* Base button (Figma spec) */
+    height: var(--filter-height);
+    padding: var(--spacing-10) var(--spacing-20);
+    border-radius: var(--radius-6);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-5);
+    cursor: pointer;
+    transition: all 0.2s;
+
+    /* Montserrat Bold 14px (Figma spec) */
+    font-family: var(--font-family);
+    font-size: var(--font-size-14);
+    font-weight: var(--font-bold);
+    line-height: var(--line-height-21);
+    white-space: nowrap;
+}
+
+.filter-button.outline {
+    /* Botão outline (Figma spec) */
+    background: white;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+.filter-button.outline:hover {
+    background: var(--primary-transparent);
+}
+
+.filter-button.primary {
+    /* Botão primário (Figma spec) */
+    background: var(--primary);
+    border: none;
+    color: var(--text-white);
+}
+
+.filter-button.primary:hover {
+    background: #6159d0;
+}
+
+.search-input {
+    /* Container do input de busca (Figma spec) */
+    position: relative;
+    width: 100%;
+}
+
+.search-input input {
+    width: 100%;
+    height: var(--filter-height);
+    padding: 12px var(--spacing-16);
+    padding-right: 48px;
+
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-5);
+
+    /* Montserrat Regular 14px (Figma spec) */
+    font-family: var(--font-family);
+    font-size: var(--font-size-14);
+    font-weight: var(--font-regular);
+    line-height: var(--line-height-21);
+    color: var(--text-body);
+}
+
+.search-input input::placeholder {
+    color: var(--text-body);
+    opacity: 0.5;
+}
+
+.search-input input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.search-input .icon {
+    position: absolute;
+    right: var(--spacing-16);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* ========================================
+   TABLE CARD (node 10021:53782)
+   ======================================== */
+
+div[data-role="table-card"] {
+    background: white;
+    border-radius: var(--radius-6);
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.table-row {
+    /* Specs do Figma */
+    background: white;
+    border-top: 1px solid var(--border-table);
+    border-bottom: 1px solid var(--border-table);
+    padding: var(--spacing-10) var(--spacing-20);
+
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-20);
+
+    transition: background 0.2s;
+}
+
+.table-row:hover {
+    background: rgba(115, 103, 240, 0.04);
+}
+
+/* Linhas filhas (child) - background cinza neutro conforme Figma */
+.table-row-child {
+    background: #F5F5F5;
+}
+
+.table-row-expand {
+    width: var(--icon-24);
+    height: var(--icon-24);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transform: rotate(0deg);
+    transition: transform 0.2s;
+}
+
+.table-row-expand.expanded {
+    transform: rotate(180deg);
+}
+
+.table-row-number {
+    /* Montserrat Bold 14px #7367F0 (Figma spec) */
+    font-size: var(--font-size-14);
+    font-weight: var(--font-bold);
+    line-height: var(--line-height-24);
+    color: var(--primary);
+    width: 83px;
+}
+
+.table-row-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-5);
+}
+
+.table-row-title {
+    /* Montserrat Bold 14px #7367F0 (Figma spec) */
+    font-size: var(--font-size-14);
+    font-weight: var(--font-bold);
+    line-height: var(--line-height-24);
+    color: var(--primary);
+}
+
+.table-row-description {
+    /* Montserrat Regular 14px #6E6B7B (Figma spec - para linhas filhas) */
+    font-size: var(--font-size-14);
+    font-weight: var(--font-regular);
+    line-height: var(--line-height-24);
+    color: var(--text-body);
+}
+
+.table-row-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-10);
+    margin-left: auto;
+}
+
+.action-btn {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+.action-btn:hover {
+    opacity: 0.7;
+}
+
+/* Ícones dos botões em roxo primário conforme Figma */
+.action-btn .icon {
+    color: var(--primary);
+}
+
+.badge-tematica {
+    /* Badge rosa (Figma spec) */
+    background: var(--badge-tematica-bg);
+    color: var(--badge-tematica);
+    padding: var(--spacing-1) var(--spacing-9);
+    border-radius: var(--radius-17);
+
+    /* Montserrat Bold 12px (Figma spec) */
+    font-size: var(--font-size-12);
+    font-weight: var(--font-bold);
+    line-height: var(--line-height-18);
+    text-align: center;
+}
+
+.badge-cyan {
+    /* Badge cyan para Objeto do Conhecimento (Figma spec) */
+    background: rgba(0, 189, 185, 0.12);
+    color: #00bdb9;
+    padding: var(--spacing-1) var(--spacing-9);
+    border-radius: var(--radius-17);
+
+    /* Montserrat Bold 12px (Figma spec) */
+    font-size: var(--font-size-12);
+    font-weight: var(--font-bold);
+    line-height: var(--line-height-18);
+    text-align: center;
+}
+
+.table-row-expand-static {
+    /* Seta estática (não clicável) - sempre apontando para baixo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    cursor: default;
+    pointer-events: none;
+}
+
+.badge-pink {
+    /* Alias para badge-tematica (nome usado no JS) */
+    background: var(--badge-tematica-bg);
+    color: var(--badge-tematica);
+    padding: var(--spacing-1) var(--spacing-9);
+    border-radius: var(--radius-17);
+
+    /* Montserrat Bold 12px (Figma spec) */
+    font-size: var(--font-size-12);
+    font-weight: var(--font-bold);
+    line-height: var(--line-height-18);
+    text-align: center;
+}
+
+.badge-purple {
+    /* Badge roxo para contadores (Figma spec) */
+    background: rgba(115, 103, 240, 0.12);
+    color: var(--primary);
+    padding: var(--spacing-1) var(--spacing-9);
+    border-radius: var(--radius-17);
+
+    /* Montserrat Bold 12px (Figma spec) */
+    font-size: var(--font-size-12);
+    font-weight: var(--font-bold);
+    line-height: var(--line-height-18);
+    text-align: center;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+/* ========================================
+   PAGINATION
+   ======================================== */
+
+div[data-role="pagination"] {
+    padding: var(--spacing-20);
+    display: flex;
+    justify-content: center;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8);
+}
+
+.pagination-btn {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    border-color: var(--primary);
+    background: var(--primary-transparent);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-page {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Montserrat Bold 12px (Figma spec) */
+    font-size: var(--font-size-12);
+    font-weight: var(--font-bold);
+    color: var(--text-body);
+}
+
+.pagination-page:hover {
+    border-color: var(--primary);
+    background: var(--primary-transparent);
+}
+
+.pagination-page.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--text-white);
+}
+
+/* ========================================
+   ICON SYSTEM (usado em todo o projeto)
+   ======================================== */
+
+.icon {
+    display: inline-block;
+    width: var(--icon-16);
+    height: var(--icon-16);
+
+    background-color: currentColor;
+    -webkit-mask-image: var(--icon);
+    mask-image: var(--icon);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+
+    flex-shrink: 0;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 1200px) {
+    .filters-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-group {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .tab:nth-child(2) {
+        left: 135px;
+    }
+
+    .table-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-10);
+    }
+}

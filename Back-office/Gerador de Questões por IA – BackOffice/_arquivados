@@ -1,0 +1,2 @@
+// Arquivo arquivado: a página foi movida para habilidades-topicos.*
+window.location.replace('habilidades-topicos.html');

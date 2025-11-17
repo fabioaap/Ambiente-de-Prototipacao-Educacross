@@ -1,0 +1,51 @@
+{
+    "pagePath": "Back-office/Gerador de Questões por IA – BackOffice/banco-questoes-pixel-perfect.html",
+    "checks": {
+        "badges": {
+            "selectors": [
+                ".badge",
+                ".badge.pink",
+                ".badge.warning"
+            ],
+            "expected": {
+                ".badge": {
+                    "background": "rgba(115, 103, 240, 0.12)",
+                    "color": "#7367f0",
+                    "font-size": "12px",
+                    "font-weight": "700",
+                    "line-height": "18px"
+                },
+                ".badge.pink": {
+                    "background": "rgba(214, 51, 132, 0.12)",
+                    "color": "#d63384"
+                },
+                ".badge.warning": {
+                    "background": "rgba(255, 159, 67, 0.12)",
+                    "color": "#ff9f43"
+                }
+            }
+        },
+        "statsBar": {
+            "selectors": [
+                "div[data-role='stats-bar']",
+                ".stats-label",
+                ".stats-badges"
+            ],
+            "expected": {
+                "div[data-role='stats-bar']": {
+                    "background": "rgba(115, 103, 240, 0.12)",
+                    "padding": "12px 16px"
+                },
+                ".stats-label": {
+                    "color": "#7367f0",
+                    "font-size": "14px",
+                    "font-weight": "700",
+                    "line-height": "21px"
+                },
+                ".stats-badges": {
+                    "gap": "16px"
+                }
+            }
+        }
+    }
+}

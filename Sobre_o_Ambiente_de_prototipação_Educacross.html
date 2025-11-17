@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambiente de Prototipação Educacross</title>
+    <link href="https://cdn.jsdelivr.net/npm/@shadcn/ui@latest/dist/shadcn.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --bg-alt: #f9fafb;
+            --fg: #111111;
+            --fg-muted: #666666;
+            --border: #e5e5e5;
+            --accent: #000000;
+            --radius: 10px;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--fg);
+            margin: 0;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: var(--bg-alt);
+            border-right: 1px solid var(--border);
+            padding: 2rem 1rem;
+            position: fixed;
+            top: 65px;
+            bottom: 0;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a {
+            display: block;
+            color: var(--fg-muted);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: var(--fg);
+            color: var(--bg);
+        }
+
+        main {
+            margin-left: 250px;
+            padding: 3rem 4rem;
+            max-width: 900px;
+        }
+
+        .hero {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        h3 {
+            color: var(--fg);
+            font-size: 1.25rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        ul,
+        ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            line-height: 1.8;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        blockquote {
+            background: var(--bg-alt);
+            padding: 1rem;
+            border-left: 3px solid var(--accent);
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        pre {
+            background: var(--bg-alt);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        section {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            background: var(--bg-alt);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        th {
+            background: var(--fg);
+            color: var(--bg);
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            color: var(--fg-muted);
+            vertical-align: top;
+        }
+
+        tr:hover td {
+            background: #f0f0f0;
+            color: var(--fg);
+        }
+
+        th:first-child,
+        td:first-child {
+            border-left: none;
+        }
+
+        th:last-child,
+        td:last-child {
+            border-right: none;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            color: var(--accent);
+            font-weight: 500;
+            border-bottom: 1px dashed var(--accent);
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 260px;
+            background-color: var(--fg);
+            color: var(--bg);
+            text-align: left;
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            color: var(--fg-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Ambiente de Prototipação da Educacross</h1>
+    </header>
+
+    <div class="layout">
+        <nav class="sidebar" id="sidebar">
+            <a href="#intro" class="active">Introdução</a>
+            <a href="#contexto">1. Contexto e Propósito</a>
+            <a href="#por-que-nao">2. Por que não usar soluções empacotadas?</a>
+            <a href="#vantagens">3. Vantagens do ambiente interno</a>
+            <a href="#design">5. Facilidade no design</a>
+            <a href="#legado">6. Legado e redução de riscos</a>
+            <a href="#validacao">7. Proposta de validação</a>
+            <a href="#custos">8. Comparativo de custos</a>
+            <a href="#arquitetura">9. Arquitetura proposta</a>
+            <a href="#conclusao">Conclusão</a>
+        </nav>
+
+        <main>
+            <div class="hero">
+                <h2>Ambiente de Prototipação Educacross</h2>
+                <p>Um espaço criado para conectar design, produto e tecnologia, acelerando a inovação e reduzindo
+                    barreiras técnicas.</p>
+            </div>
+
+            <section id="intro">
+                <h2>Introdução</h2>
+                <p>Este documento apresenta a proposta oficial do <strong>Ambiente de Prototipação da
+                        Educacross</strong>, sua importância estratégica, seus diferenciais em relação a soluções
+                    empacotadas do mercado e o plano de validação necessário para consolidá-lo como um dos pilares
+                    do processo de produto da empresa. O ambiente ainda está em fase de construção e validação, e
+                    este material tem como finalidade obter o apoio e o patrocínio da diretoria para seu avanço.</p>
+            </section>
+
+            <section id="contexto">
+                <h2>1. Contexto e propósito do ambiente</h2>
+                <p>O time de produto na pessoa do designer Fábio Alves está desenvolvendo um <strong>ambiente de
+                        prototipação leve, acessível e altamente adaptável</strong>, projetado para acelerar a
+                    compreensão
+                    de problemas, a validação de hipóteses e a experimentação de jornadas reais de produto das
+                    plataformas Front-office, Back-office e Games.</p>
+                <p>O ambiente utiliza uma stack <strong>vanilla (HTML, CSS e JavaScript puro)</strong> para garantir
+                    baixíssima barreira técnica, especialmente para designers e product managers. Essa escolha elimina
+                    dependências complexas de build, reduz a carga cognitiva e evita fricções comuns de tecnologias
+                    como React ou frameworks proprietários.</p>
+                <p>O propósito central é permitir prototipação rápida, clara e realista aproximando a experimentação
+                    do comportamento final do produto, sem expor dados sensíveis a plataformas externas ou limitar a
+                    equipe às restrições de ferramentas empacotadas.</p>
+            </section>
+
+            <section id="por-que-nao">
+                <h2>2. Por que não usar soluções empacotadas?</h2>
+                <p>Embora ferramentas como Lovable e Figma Make tenham seu valor, elas resolvem problemas genéricos e
+                    trazem limitações importantes para o nosso contexto.</p>
+                <p>Nosso ambiente interno resolve o problema oposto: <strong>flexibilidade total, controle, baixo custo
+                        e aderência ao ecossistema Educacross</strong>.</p>
+            </section>
+
+            <section id="vantagens">
+                <h2>3. Vantagens do ambiente interno</h2>
+
+                <h3>3.1 Autonomia e controle total</h3>
+                <p>Soluções empacotadas trabalham majoritariamente com React e geram códigos complexos e pouco
+                    previsíveis. Isso exige conhecimento técnico e dependência de decisões tomadas por terceiros.</p>
+                <p>Nosso ambiente interno oferece:</p>
+                <ul>
+                    <li>Stack acessível (vanilla), com baixa barreira de entrada.</li>
+                    <li>Total controle sobre estrutura, comportamento e evolução do protótipo.</li>
+                    <li>Independência de bibliotecas externas, versões e roadmaps de outras empresas.</li>
+                </ul>
+
+                <h3>3.2 Fidelidade técnica e clareza de comunicação na hora do Handoff</h3>
+                <p>O código dos protótipos gerados pode ser facilmente traduzido para o stack real de desenvolvimento,
+                    hoje em Vue, reduzindo ruídos entre os times, aumentando a precisão e acelerando o tempo de
+                    desenvolvimento das entregas.</p>
+
+                <h3>3.3 Segurança e privacidade</h3>
+                <p>Nenhum dado sensível ou estratégico é exposto a serviços SaaS externos. Todo o fluxo de prototipação
+                    e documentação opera dentro da infraestrutura da Educacross, garantindo conformidade,
+                    rastreabilidade
+                    e proteção das informações. Com a assinatura privada do Azure DevOps (repositório privado) + GitHub
+                    Copilot Pro+, o repositório permanece fechado e sob total governança interna, eliminando riscos de
+                    vazamento e reforçando nosso compromisso com segurança e sigilo institucional.</p>
+
+                <h3>3.4 Escalabilidade, customização e automação</h3>
+                <p>Como o ambiente é nosso, sua evolução é contínua e incremental passando diretamente pelo nosso
+                    <strong>Design System</strong>.
+                </p>
+                <ul>
+                    <li>Validações automatizadas alinhadas aos padrões do DS.</li>
+                    <li>Scripts sob medida para atualizar e sincronizar componentes de UI.</li>
+                    <li>Adaptações específicas ao produto educacional, refletidas tanto no protótipo quanto no DS.</li>
+                    <li>Uso do <strong>Storybook como plataforma central</strong> para visualizar, documentar e testar
+                        componentes e variações.</li>
+                </ul>
+
+                <h3>3.5 Documentação viva e integrada</h3>
+                <p>O Storybook funciona como a "vitrine" oficial do Design System: cada componente, estado e variação
+                    pode ser navegado, testado e referenciado por produto, design, tecnologia e pedagogia.</p>
+                <p>Cada experimento feito no ambiente de prototipação pode gerar, quando consolidado, um componente ou
+                    padrão documentado no Storybook, mantendo tudo alinhado ao design system e aos padrões de produto.
+                    Isso cria um ciclo de aprendizado contínuo entre protótipo → componente → produto, reduz retrabalho
+                    e fortalece a consistência visual e funcional em toda a plataforma.</p>
+            </section>
+
+            <section id="design">
+                <h2>5. Facilidade no design</h2>
+                <p>O ambiente permite que designers e PMs criem, testem e revisem telas sem etapas técnicas
+                    desnecessárias. A interação entre Figma, MCP e o ambiente vanilla possibilita gerar fluxos
+                    rapidamente e manter documentação organizada, acelerando a comunicação com tecnologia.</p>
+            </section>
+
+            <section id="legado">
+                <h2>6. Legado e redução de riscos</h2>
+                <p>O ambiente se transforma em um <strong>ativo institucional</strong>: consolidando padrões, práticas
+                    e decisões em um único espaço acessível.</p>
+                <p>Por ser vanilla, qualquer novo membro do time de produto ou design, em tese, consegue compreender a
+                    estrutura rapidamente, o que reduz riscos, evita silos de conhecimento e facilita o onboarding.</p>
+                <p>Testes com LLMs (como Claude Sonnet 4.5) mostraram que manter o controle interno aumenta a fidelidade
+                    visual e o rigor do processo, sem perder velocidade.</p>
+            </section>
+
+            <section id="validacao">
+                <h2>7. Proposta de validação</h2>
+                <p>Para transformar o ambiente em parte oficial da operação de produto, propomos um ciclo de validação
+                    com métricas claras.</p>
+
+                <h3>Objetivos</h3>
+                <ul>
+                    <li>Reduzir o tempo entre <strong>hipótese → protótipo → aprendizado</strong>, encurtando o ciclo
+                        de discovery e aumentando a eficiência dos experimentos.</li>
+                    <li>Garantir <strong>autonomia para PMs e Designers</strong>, permitindo validar hipóteses sem
+                        depender do ambiente de desenvolvimento.</li>
+                    <li>Gerar protótipos que <strong>facilitem o trabalho de engenharia</strong>, trazendo maior
+                        clareza de escopo e reduzindo retrabalho.</li>
+                    <li>Melhorar o <strong>alinhamento multifuncional no handoff</strong>, diminuindo discussões em
+                        plannings e testando soluções com usuários reais antes do desenvolvimento, aumentando o ROI
+                        do esforço de produto.</li>
+                </ul>
+
+                <h3>Métricas</h3>
+                <p>Para garantir uma avaliação objetiva e baseada em evidências, sugerimos métricas diretamente
+                    acionáveis:</p>
+                <ul>
+                    <li><strong>Tempo médio por ciclo (hipótese → protótipo → aprendizado):</strong> medir a redução
+                        percentual ao longo das semanas.</li>
+                    <li><strong>Profundidade das iterações:</strong> quantidade de versões por jornada e qualidade das
+                        decisões tomadas entre elas.</li>
+                    <li><strong>Autonomia operacional:</strong> número de protótipos criados por PMs/Designers sem
+                        suporte técnico.</li>
+                    <li><strong>Clareza técnica percebida pela engenharia:</strong> avaliação qualitativa e quantitativa
+                        (escala de 1 a 5) sobre o nível de precisão dos protótipos.</li>
+                    <li><strong>Retrabalho evitado:</strong> comparação entre iniciativas que passaram pelo ambiente e
+                        as que foram direto para desenvolvimento.</li>
+                    <li><strong>Aderência ao Design System:</strong> percentual de componentes, tokens e padrões
+                        replicados corretamente no protótipo.</li>
+                </ul>
+            </section>
+
+            <section id="custos">
+                <h2>8. Comparativo de custos entre planos premium</h2>
+                <p>A tabela abaixo apresenta uma comparação direta entre os planos premium das ferramentas empacotadas
+                    e os custos necessários para operar o ambiente interno com segurança e performance.</p>
+
+                <h3>Comparativo de Custos (Planos Premium)</h3>
+                <blockquote
+                    style="background: var(--bg-alt); padding: 1rem; border-left: 3px solid var(--accent); margin: 1rem 0;">
+                    <p style="margin: 0; font-size: 0.9rem; color: var(--fg-muted);">Valores em dólares (USD), conforme
+                        planos oficiais das ferramentas. A conversão para reais dependerá do câmbio vigente. No caso da
+                        Educacross, parte da infraestrutura (Azure DevOps) já está contratada, portanto não gera custo
+                        incremental para o ambiente de prototipação.</p>
+                </blockquote>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ferramenta / Assinatura</th>
+                            <th>Custo Mensal (USD)</th>
+                            <th>Benefícios principais</th>
+                            <th>Observações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Lovable – Pro</strong></td>
+                            <td>US$ 25/mês</td>
+                            <td>Geração de apps full‑stack, deploy, projetos privados, créditos de IA</td>
+                            <td>Limitado por créditos; uso intenso exige upgrades de pacote.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Figma Professional – Full seat</strong></td>
+                            <td>US$ 16/assento/mês</td>
+                            <td>Figma Design, FigJam, Slides, Dev Mode, Sites e Make com créditos de IA</td>
+                            <td>Custo cresce por assento; para escalar, é necessário pagar por cada
+                                editor/desenvolvedor.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GitHub Copilot – Pro</strong></td>
+                            <td>US$ 10/mês</td>
+                            <td>Autocomplete ilimitado, agente de código, acesso a Sonnet 4.5, GPT‑5 e outros modelos
+                            </td>
+                            <td>300 requisições premium/mês; adequado para uso moderado. Em nossos testes, limite
+                                estourou.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GitHub Copilot – Pro+</strong></td>
+                            <td>US$ 39/mês</td>
+                            <td>Tudo do Pro, com 1.500 requisições premium/mês e acesso a todos os modelos suportados
+                            </td>
+                            <td>Indicado para uso intensivo de IA. É o plano recomendado para o Ambiente de
+                                Prototipação.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 2rem;">Conclusão do comparativo</h3>
+                <ul>
+                    <li>O custo total do ambiente de prototipação da Educacross é <strong>substancialmente
+                            menor</strong>
+                        do que o de soluções empacotadas baseadas apenas em Lovable ou Figma Make/Full.</li>
+                    <li>O único investimento direto em IA é a assinatura de <strong>GitHub Copilot Pro+</strong> para
+                        1 usuário chave (produto/design), garantindo capacidade de uso intensivo de modelos avançados.
+                    </li>
+                    <li>Não há cobrança por usuário final no ambiente de prototipação: PMs, designers e engenheiros
+                        utilizam a mesma base sem taxas adicionais de seat ou licença.</li>
+                    <li>A infraestrutura de código e deploy permanece sob domínio interno da Educacross, alavancando
+                        <strong>Azure DevOps</strong> e <strong>Azure Pipelines</strong>, enquanto o Copilot é utilizado
+                        como acelerador de produtividade e documentação técnica.
+                    </li>
+                </ul>
+            </section>
+
+            <section id="arquitetura">
+                <h2>9. Arquitetura proposta do ambiente</h2>
+                <p>Abaixo, um esquema simplificado da arquitetura do <strong>Ambiente de Prototipação da
+                        Educacross</strong>,
+                    mostrando como as peças se conectam na prática.</p>
+                <pre
+                    style="background: var(--bg-alt); padding: 1.5rem; border-radius: var(--radius); overflow-x: auto;">
+[PM / Design]
+     │
+     ▼
+[Figma + MCP]
+     │   (exporta fluxos, telas e specs)
+     ▼
+[Ambiente de Prototipação (HTML/CSS/JS vanilla)]
+     │   (implementação rápida apoiada por GitHub Copilot Pro+)
+     ▼
+[Repositório privado – Azure DevOps]
+     │   (controle de versão, histórico e segurança)
+     ▼
+[Azure Pipelines]
+     │
+     ├──► [Deploy Storybook / Design System]
+     │        (documentação viva para produto, design e tecnologia)
+     └──► [Deploy Protótipos interativos]
+              (acesso para diretoria, pedagógico e demais stakeholders)
+                </pre>
+
+                <p style="margin-top: 1.5rem;">Nesse fluxo:</p>
+                <ul>
+                    <li><strong>Designers e PMs</strong> trabalham no Figma, estruturando jornadas e interfaces, e
+                        utilizam o MCP quando necessário para aproximar design e código.</li>
+                    <li>O <strong>Ambiente de Prototipação vanilla</strong> permite transformar rapidamente essas ideias
+                        em experiências navegáveis, com baixo atrito técnico.</li>
+                    <li>O código é versionado em <strong>Azure DevOps</strong>, garantindo governança, histórico e
+                        alinhamento com a infraestrutura oficial da Educacross.</li>
+                    <li>Por fim, <strong>Azure Pipelines</strong> automatiza a publicação de Storybook e protótipos,
+                        permitindo que diretoria e áreas parceiras acessem versões sempre atualizadas, sem depender do
+                        ambiente de desenvolvimento.</li>
+                </ul>
+            </section>
+
+            <section id="conclusao">
+                <h2>Conclusão</h2>
+                <p>O Ambiente de Prototipação da Educacross não é apenas uma ferramenta: é uma <strong>infraestrutura
+                        estratégica</strong> que oferece velocidade, segurança, autonomia e clareza para a construção de
+                    produtos educacionais de alta qualidade.</p>
+                <p>Ele reduz riscos, diminui retrabalho, fortalece o alinhamento entre equipes e potencializa o uso de
+                    IA no futuro, mantendo custos <strong>mínimos</strong>, limitados apenas às assinaturas essenciais:
+                    <strong>Azure DevOps (repositório privado)</strong> para garantir segurança e governança, e
+                    <strong>GitHub Copilot</strong> para operar com modelos como Claude Sonnet 4.5 sem restrições de
+                    uso.
+                    Mesmo assim, o investimento permanece muito abaixo do custo de ferramentas empacotadas e totalmente
+                    aderente às necessidades da Educacross.
+                </p>
+                <p>Com o apoio da diretoria, este ambiente pode se consolidar como um dos pilares centrais do processo
+                    de produto, garantindo eficiência, consistência e governança visual para os próximos anos.</p>
+            </section>
+        </main>
+    </div>
+
+    <footer>© 2025 Educacross — Documento vivo do Ambiente de Prototipação</footer>
+</body>
+
+</html>

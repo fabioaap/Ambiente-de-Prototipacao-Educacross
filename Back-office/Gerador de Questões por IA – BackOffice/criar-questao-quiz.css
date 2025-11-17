@@ -1,0 +1,397 @@
+/* Criar Questão de Quiz - Estilos específicos da página */
+
+/* Main Area */
+main {
+    margin-top: 74px;
+    padding: var(--space-24);
+    flex: 1;
+    padding-bottom: 100px;
+    /* espaço para barra fixa */
+}
+
+main::before {
+    content: '';
+    display: block;
+    height: 74px;
+    margin-top: calc(-74px - var(--space-24));
+    position: relative;
+    z-index: var(--z-header-blocker);
+    background: var(--bg);
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: var(--space-20);
+}
+
+.breadcrumb-separator {
+    color: var(--text-muted);
+}
+
+.breadcrumb-current {
+    color: var(--text-body);
+}
+
+/* Page Title */
+.page-title {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--primary);
+    margin-bottom: var(--space-20);
+}
+
+/* Card */
+.card {
+    background: var(--surface);
+    border-radius: var(--radius-6);
+    padding: var(--space-20);
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.06);
+    margin-bottom: var(--space-20);
+}
+
+/* Form Grid */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-10);
+}
+
+/* Input Group */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+.input-label {
+    font-size: 14px;
+    color: var(--text-body);
+    font-weight: 400;
+}
+
+.input-label.required::after {
+    content: '*';
+    color: var(--danger);
+    margin-left: 2px;
+}
+
+.input-field {
+    height: 44px;
+    padding: var(--space-10);
+    border: 1px solid var(--divider);
+    border-radius: var(--radius-6);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--text-body);
+    background: var(--surface);
+    transition: border-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.input-field.disabled {
+    background: #efefef;
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.input-field select {
+    border: none;
+    background: transparent;
+    flex: 1;
+    font: inherit;
+    color: inherit;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Subject Badge */
+.subject-badge {
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    background: #00bdb8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.subject-badge img {
+    width: 16px;
+    height: 16px;
+}
+
+/* Section Title */
+.section-title {
+    font-size: 21px;
+    font-weight: 500;
+    color: var(--primary);
+    margin-bottom: var(--space-10);
+    display: flex;
+    align-items: center;
+    gap: var(--space-10);
+}
+
+.section-subtitle {
+    font-size: 14px;
+    font-weight: 700;
+    color: #5e5873;
+    margin-bottom: 10px;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    font-size: 12px;
+    color: var(--text-body);
+}
+
+.info-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+/* Buttons específicos */
+.btn-outline-primary {
+    background: var(--surface);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary-12);
+}
+
+.btn-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Difficulty Inputs */
+.difficulty-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+    margin-bottom: 24px;
+}
+
+/* Switch */
+.switch-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    height: 34px;
+}
+
+.switch-label {
+    font-size: 14px;
+    color: var(--text-body);
+}
+
+.switch {
+    position: relative;
+    width: 42px;
+    height: 24px;
+    background: #cccccc;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.switch input {
+    display: none;
+}
+
+.switch-slider {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+    box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.switch input:checked+.switch {
+    background: var(--success);
+}
+
+.switch input:checked~.switch-slider {
+    transform: translateX(18px);
+}
+
+.switch-status {
+    font-size: 14px;
+    color: var(--text-body);
+}
+
+.switches-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+/* Image Upload */
+.image-upload {
+    margin-top: var(--space-20);
+}
+
+.image-upload-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-body);
+    margin-bottom: var(--space-5);
+}
+
+.image-upload-area {
+    width: 100%;
+    height: 150px;
+    border: 2px dashed #7666f8;
+    border-radius: var(--radius-10);
+    background: rgba(255, 255, 255, 0.94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.image-upload-area:hover {
+    background: var(--primary-12);
+}
+
+.image-upload-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--primary);
+    text-align: center;
+}
+
+/* Textarea */
+.textarea-field {
+    width: 100%;
+    min-height: 109px;
+    padding: var(--space-10);
+    border: 1px solid var(--divider);
+    border-radius: var(--radius-6);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--text-body);
+    background: var(--surface);
+    resize: vertical;
+    transition: border-color 0.2s;
+}
+
+.textarea-field::placeholder {
+    color: #b9b9c3;
+}
+
+.textarea-field:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* Bottom Actions */
+.bottom-actions {
+    position: fixed;
+    bottom: 0;
+    left: 260px;
+    right: 0;
+    background: var(--surface);
+    padding: var(--space-10) var(--space-20);
+    box-shadow: 0px -6px 14px rgba(0, 0, 0, 0.16);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-10);
+    height: 66px;
+    z-index: var(--z-header);
+}
+
+.btn-cancel {
+    padding: var(--space-12) var(--space-20);
+    border: 1px solid var(--danger);
+    background: var(--surface);
+    color: var(--danger);
+    border-radius: var(--radius-6);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    height: 46px;
+    transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+    background: rgba(234, 84, 85, 0.1);
+}
+
+.btn-generate {
+    padding: var(--space-12) var(--space-20);
+    background: rgba(115, 103, 240, 0.65);
+    color: white;
+    border: none;
+    border-radius: var(--radius-6);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    height: 46px;
+    transition: all 0.2s;
+}
+
+.btn-generate:hover {
+    background: var(--primary);
+}
+
+.btn-generate:disabled {
+    background: rgba(115, 103, 240, 0.35);
+    cursor: not-allowed;
+}
+
+.ia-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Number Input */
+input[type="number"] {
+    width: 100%;
+    height: 44px;
+    padding: var(--space-10);
+    border: 1px solid var(--divider);
+    border-radius: var(--radius-6);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--text-body);
+    background: var(--surface);
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary);
+}

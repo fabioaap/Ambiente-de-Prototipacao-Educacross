@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "validator_version": "1.0.0",
+    "timestamp": "2025-11-14T11:39:23.131496",
+    "root_path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office"
+  },
+  "project_structure": {
+    "root_path": "C:\\Users\\Educacross\\Documents\\Educacross\\Ambiente de Prototipação Educacross\\Back-office",
+    "scan_timestamp": "2025-11-14T11:39:23.132492",
+    "areas": {
+      "front_office": {
+        "path": null,
+        "prototypes": []
+      },
+      "back_office": {
+        "path": null,
+        "prototypes": []
+      },
+      "game": {
+        "path": null,
+        "prototypes": []
+      },
+      "components": {
+        "path": null,
+        "files": []
+      },
+      "docs": {
+        "path": null,
+        "files": []
+      },
+      "config": {
+        "files": []
+      }
+    },
+    "totals": {
+      "html_files": 0,
+      "css_files": 0,
+      "js_files": 0,
+      "react_files": 0,
+      "config_files": 0
+    }
+  },
+  "validation_results": {},
+  "summary": {
+    "total_files_validated": 0,
+    "total_tests_run": 0,
+    "total_passed": 0,
+    "total_failed": 0,
+    "areas_validated": [],
+    "overall_percentage": 0
+  }
+}

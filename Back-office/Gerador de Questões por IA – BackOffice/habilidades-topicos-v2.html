@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habilidades e Tópicos | Educacross</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/styles/basis.css">
+    <link rel="stylesheet" href="../../assets/styles/common.css">
+    <link rel="stylesheet" href="habilidades-topicos-v2.css">
+</head>
+
+<body>
+    <!-- SIDEBAR -->
+    <aside data-role="sidebar">
+        <div class="sidebar-logo">
+            <img src="assets/logo-icon-real.svg" alt="Educacross Icon" class="sidebar-logo-icon">
+            <img src="assets/logo-text-real.svg" alt="Educacross" class="sidebar-logo-text">
+        </div>
+        <nav class="sidebar-menu">
+            <a href="#" class="menu-item">
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-home.svg');"></span>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-games.svg');"></span>
+                <span>Games</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-gestao.svg');"></span>
+                <span>Gestão de Atividades</span>
+            </a>
+            <a href="#" class="menu-item active" style="padding-left: 42px;">
+                <span>Banco de Questões</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-escolas.svg');"></span>
+                <span>Escolas</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-usuarios.svg');"></span>
+                <span>Usuários</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-calendario.svg');"></span>
+                <span>Calendário</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-biblioteca.svg');"></span>
+                <span>Biblioteca</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-analises.svg');"></span>
+                <span>Análises</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-relatorios.svg');"></span>
+                <span>Relatórios</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="menu-icon icon" style="--icon: url('assets/icons/icon-estatisticas.svg');"></span>
+                <span>Estatísticas</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- HEADER -->
+        <header data-role="header">
+            <span class="header-user">Usuário do backoffice</span>
+            <div class="header-avatar">A</div>
+        </header>
+
+        <!-- BREADCRUMB -->
+        <div data-role="breadcrumb">
+            <div class="breadcrumb-item">
+                <span class="icon" style="--icon: url('assets/icons/icon-home.svg'); width: 14px; height: 14px;"></span>
+            </div>
+            <div class="breadcrumb-separator">
+                <span class="icon"
+                    style="--icon: url('assets/icons/icon-chevron-right.svg'); width: 14px; height: 14px;"></span>
+            </div>
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-text">Gestão de Atividades</span>
+            </div>
+            <div class="breadcrumb-separator">
+                <span class="icon"
+                    style="--icon: url('assets/icons/icon-chevron-right.svg'); width: 14px; height: 14px;"></span>
+            </div>
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-text active">Banco de Questões</span>
+            </div>
+        </div>
+
+        <!-- PAGE TITLE -->
+        <h1 data-role="page-title">Banco de Questões</h1>
+
+        <!-- TABS -->
+        <div data-role="tabs">
+            <button class="tab active" data-tab="habilidades">Habilidades</button>
+            <button class="tab" data-tab="topicos">Tópicos</button>
+        </div>
+
+        <!-- CONTEÚDO DA ABA HABILIDADES -->
+        <div id="tab-habilidades" class="tab-content">
+            <!-- STATS BAR -->
+            <div data-role="stats-bar">
+                <div>
+                    <span class="stats-label">Total de Questões:</span>
+                </div>
+                <div class="stats-badges">
+                    <span class="badge badge-purple">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                        330
+                    </span>
+                    <div class="stats-divider"></div>
+                    <span class="badge badge-purple">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-psychology.svg'); width: 16px; height: 16px;"></span>
+                        165
+                    </span>
+                    <span class="badge badge-purple">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-emoji-objects.svg'); width: 16px; height: 16px;"></span>
+                        165
+                    </span>
+                </div>
+            </div>
+
+            <!-- FILTERS CARD -->
+            <div data-role="filters-card">
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label class="filter-label">Área de Conhecimento</label>
+                        <div class="filter-select selected">
+                            <div class="filter-select-content">
+                                <span style="font-size: 20px;">🔢</span>
+                                <span>Matemática</span>
+                            </div>
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 18px; height: 18px;"></span>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Ano Escolar</label>
+                        <div class="filter-select selected">
+                            <span>Todos os anos escolares</span>
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 18px; height: 18px;"></span>
+                        </div>
+                    </div>
+                    <button class="filter-button outline">Todas as questões</button>
+                    <button class="filter-button primary">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-add-circle.svg'); width: 24px; height: 24px;"></span>
+                        <span>Nova questão</span>
+                    </button>
+                    <button class="filter-button primary" id="btnNovaQuestaoIA">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-psychology.svg'); width: 24px; height: 24px;"></span>
+                        <span>Nova questão IA</span>
+                    </button>
+                </div>
+                <div class="search-input">
+                    <input type="text" placeholder="Pesquisar por tópico">
+                    <span class="icon"
+                        style="--icon: url('assets/icons/icon-search.svg'); width: 18px; height: 18px;"></span>
+                </div>
+            </div>
+
+            <!-- TABLE CARD -->
+            <div data-role="table-card"></div>
+
+            <!-- PAGINATION -->
+            <div data-role="pagination">
+                <div class="pagination-controls"></div>
+            </div>
+        </div>
+
+        <!-- CONTEÚDO DA ABA TÓPICOS -->
+        <div id="tab-topicos" class="tab-content" style="display:none">
+            <!-- STATS BAR (Tópicos) -->
+            <div data-role="stats-bar">
+                <div>
+                    <span class="stats-label">Total de tópicos:</span>
+                </div>
+                <div class="stats-badges">
+                    <span class="badge">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-quiz.svg'); width: 16px; height: 16px;"></span>
+                        15
+                    </span>
+                    <div class="stats-divider"></div>
+                    <span class="badge">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-psychology.svg'); width: 16px; height: 16px;"></span>
+                        5
+                    </span>
+                    <span class="badge">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-emoji-objects.svg'); width: 16px; height: 16px;"></span>
+                        10
+                    </span>
+                </div>
+            </div>
+
+            <!-- FILTERS CARD (Tópicos) -->
+            <div data-role="filters-card">
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label class="filter-label">Área de Conhecimento</label>
+                        <div class="filter-select selected">
+                            <div class="filter-select-content">
+                                <span style="font-size: 20px;">🔢</span>
+                                <span>Matemática</span>
+                            </div>
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 18px; height: 18px;"></span>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Ano Escolar</label>
+                        <div class="filter-select selected">
+                            <span>Todos os anos escolares</span>
+                            <span class="icon"
+                                style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 18px; height: 18px;"></span>
+                        </div>
+                    </div>
+                    <button class="filter-button outline">Todas as questões</button>
+                    <button class="filter-button primary">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-add-circle.svg'); width: 24px; height: 24px;"></span>
+                        <span>Nova questão</span>
+                    </button>
+                    <button class="filter-button primary">
+                        <span class="icon"
+                            style="--icon: url('assets/icons/icon-psychology.svg'); width: 24px; height: 24px;"></span>
+                        <span>Nova questão IA</span>
+                    </button>
+                </div>
+                <div class="search-input">
+                    <input type="text" placeholder="Pesquisar por tópico">
+                    <span class="icon"
+                        style="--icon: url('assets/icons/icon-search.svg'); width: 18px; height: 18px;"></span>
+                </div>
+            </div>
+
+            <!-- TABLE CARD (Tópicos) -->
+            <div data-role="table-card"></div>
+
+            <!-- PAGINATION (Tópicos) -->
+            <div data-role="pagination">
+                <div class="pagination-controls"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="habilidades-topicos-v2.js"></script>
+</body>
+
+</html>

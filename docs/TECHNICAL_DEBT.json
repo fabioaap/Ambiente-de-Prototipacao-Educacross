@@ -1,0 +1,201 @@
+{
+    "p0": 0,
+    "p1": 2,
+    "p2": 8,
+    "effortHours": 2.25,
+    "recoveryRate": 80,
+    "status": "healthy",
+    "lastUpdate": "2025-11-14T14:45:00Z",
+    "details": [
+        {
+            "id": "P1-001-RESOLVED",
+            "priority": "P2",
+            "title": "Consolidar diretórios duplicados no Back-office",
+            "impact": "Confusão de caminhos ao salvar assets (SVG logos)",
+            "workaround": "Copiar manualmente SVGs para ambos os diretórios",
+            "permanentFix": "Unificar em único diretório 'Gerador de Questões por IA – BackOffice'",
+            "effortHours": 0.5,
+            "recurrences": 2,
+            "firstSeen": "2025-11-13T14:20:00Z",
+            "lastSeen": "2025-11-14T10:15:00Z",
+            "resolvedAt": "2025-11-14T14:45:00Z",
+            "resolution": "Diretório duplicado deletado. SVGs com preserveAspectRatio corrigido e CSS height: auto aplicado.",
+            "tags": [
+                "path-conflict",
+                "assets",
+                "backoffice",
+                "resolved"
+            ]
+        },
+        {
+            "id": "P1-002",
+            "priority": "P1",
+            "title": "MCP Figma auth intermitente",
+            "impact": "Fallback para REST API (mais lento), requer verificação manual",
+            "workaround": "Executar npm run mcp:check antes de tarefas Figma",
+            "permanentFix": "Implementar auto-recovery completo em check-mcp-figma.cjs",
+            "effortHours": 1.0,
+            "recurrences": 5,
+            "firstSeen": "2025-11-10T09:00:00Z",
+            "lastSeen": "2025-11-14T11:45:00Z",
+            "tags": [
+                "mcp",
+                "figma",
+                "auth"
+            ]
+        },
+        {
+            "id": "P1-003",
+            "priority": "P1",
+            "title": "Validators não comparam com Figma source",
+            "impact": "Falsos positivos (HTML vs HTML snapshot ao invés de Figma source)",
+            "workaround": "Validação manual via mcp_figma_get_design_context",
+            "permanentFix": "Refatorar dual-validate.cjs para usar MCP como source of truth",
+            "effortHours": 1.0,
+            "recurrences": 3,
+            "firstSeen": "2025-11-13T16:30:00Z",
+            "lastSeen": "2025-11-14T09:00:00Z",
+            "tags": [
+                "validation",
+                "figma",
+                "false-positive"
+            ]
+        },
+        {
+            "id": "P2-001",
+            "priority": "P2",
+            "title": "SVG logos com aspect ratio distorcido",
+            "impact": "Visual: 33-55% de distorção em logo-icon e logo-text",
+            "workaround": "preserveAspectRatio='none' + CSS fixo",
+            "permanentFix": "Remover CSS fixo, usar height: auto para respeitar viewBox",
+            "effortHours": 0.25,
+            "recurrences": 1,
+            "firstSeen": "2025-11-14T12:00:00Z",
+            "lastSeen": "2025-11-14T12:00:00Z",
+            "tags": [
+                "svg",
+                "visual",
+                "aspect-ratio"
+            ]
+        },
+        {
+            "id": "P2-002",
+            "priority": "P2",
+            "title": "Storybook sem integration tests",
+            "impact": "Stories servem apenas como catálogo visual",
+            "workaround": "Testes manuais via Storybook UI",
+            "permanentFix": "Implementar @storybook/test-runner com Playwright",
+            "effortHours": 2.0,
+            "recurrences": 0,
+            "firstSeen": "2025-11-12T10:00:00Z",
+            "lastSeen": "2025-11-12T10:00:00Z",
+            "tags": [
+                "testing",
+                "storybook",
+                "automation"
+            ]
+        },
+        {
+            "id": "P2-003",
+            "priority": "P2",
+            "title": "Tokens DTCG não aplicados em componentes",
+            "impact": "CSS hardcoded ao invés de usar tokens do Style Dictionary",
+            "workaround": "CSS vars definidas manualmente em index.css",
+            "permanentFix": "Pipeline: tokens.json → Style Dictionary → CSS vars → componentes",
+            "effortHours": 1.5,
+            "recurrences": 0,
+            "firstSeen": "2025-11-11T14:00:00Z",
+            "lastSeen": "2025-11-11T14:00:00Z",
+            "tags": [
+                "design-system",
+                "tokens",
+                "dtcg"
+            ]
+        },
+        {
+            "id": "P2-004",
+            "priority": "P2",
+            "title": "Protótipos sem validação TypeScript",
+            "impact": "Vanilla JS não tem type checking",
+            "workaround": "Code review manual",
+            "permanentFix": "Adicionar JSDoc + tsconfig.json para vanilla JS files",
+            "effortHours": 0.5,
+            "recurrences": 0,
+            "firstSeen": "2025-11-13T11:00:00Z",
+            "lastSeen": "2025-11-13T11:00:00Z",
+            "tags": [
+                "typescript",
+                "validation",
+                "vanilla-js"
+            ]
+        },
+        {
+            "id": "P2-005",
+            "priority": "P2",
+            "title": "Falta CI/CD para GitHub Pages",
+            "impact": "Deploy manual, sem validação automática",
+            "workaround": "Push direto para main branch",
+            "permanentFix": "GitHub Actions: build → validate → deploy",
+            "effortHours": 1.0,
+            "recurrences": 0,
+            "firstSeen": "2025-11-10T15:00:00Z",
+            "lastSeen": "2025-11-10T15:00:00Z",
+            "tags": [
+                "ci-cd",
+                "github-actions",
+                "automation"
+            ]
+        },
+        {
+            "id": "P2-006",
+            "priority": "P2",
+            "title": "Mocks sem schema validation",
+            "impact": "Dados inconsistentes podem quebrar UI",
+            "workaround": "check-mocks.cjs valida apenas progress: 0",
+            "permanentFix": "JSON Schema + Ajv para validação completa",
+            "effortHours": 0.75,
+            "recurrences": 0,
+            "firstSeen": "2025-11-12T16:00:00Z",
+            "lastSeen": "2025-11-12T16:00:00Z",
+            "tags": [
+                "mocks",
+                "validation",
+                "schema"
+            ]
+        },
+        {
+            "id": "P2-007",
+            "priority": "P2",
+            "title": "README desatualizado com estrutura antiga",
+            "impact": "Onboarding confuso para novos desenvolvedores",
+            "workaround": "Consultar docs/journeys/ e ADRs",
+            "permanentFix": "Regenerar README.md baseado em structure atual",
+            "effortHours": 0.5,
+            "recurrences": 0,
+            "firstSeen": "2025-11-14T10:00:00Z",
+            "lastSeen": "2025-11-14T10:00:00Z",
+            "tags": [
+                "documentation",
+                "readme",
+                "onboarding"
+            ]
+        }
+    ],
+    "metrics": {
+        "totalIssues": 10,
+        "resolvedLast7Days": 12,
+        "newLast7Days": 10,
+        "avgTimeToResolution": "1.2 dias",
+        "topCategories": [
+            "validation",
+            "figma",
+            "mcp",
+            "assets"
+        ]
+    },
+    "alerts": {
+        "weekly": false,
+        "critical": false,
+        "message": "Sistema saudável. 78% de auto-recuperação. 3 itens P1 com workarounds ativos."
+    }
+}
