@@ -142,11 +142,13 @@ body {
 /* Main Content */
 .main-content {
     margin-left: var(--sidebar-width);
-    flex: 1;
+    width: calc(100% - var(--sidebar-width));
+    max-width: calc(100% - var(--sidebar-width));
     display: flex;
     flex-direction: column;
-    /* Permite que o main-content encolha em flexbox (evita overflow horizontal que causa espaço vazio à direita) */
-    min-width: 0;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 /* Header Global */
@@ -217,7 +219,9 @@ body {
 .content-container {
     padding: var(--spacing-lg);
     flex: 1;
-    /* Evita que o conteúdo force o container a exceder a largura disponível */
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     min-width: 0;
 }
 
@@ -973,6 +977,213 @@ div[data-role="stats-bar"] {
 .pagination-arrow:hover:not(:disabled),
 .pagination-number:hover {
     background-color: var(--bg-light);
+}
+
+/* ============================================
+   Modal - detalhes de dificuldades com erro
+   ============================================ */
+/* Modal overlay and modal are hidden by default; toggled using aria-hidden */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: none;
+    z-index: 2000;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2001;
+}
+
+.modal-panel {
+    width: min(760px, calc(100vw - 48px));
+    background: var(--bg-white);
+    border-radius: calc(var(--border-radius) * 1.2);
+    box-shadow: 0 8px 28px rgba(16, 23, 37, 0.12);
+    padding: calc(var(--spacing-md) + 8px);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+    gap: 12px;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-body);
+}
+
+.modal-body p {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Subtitle to give more breathing room */
+.modal-subtitle {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: calc(var(--spacing-md) - 6px);
+}
+
+.modal-table td.count {
+    text-align: right;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* Row hover */
+.modal-table tbody tr:hover {
+    background: rgba(115, 103, 240, 0.03);
+}
+
+/* Focus styles */
+.modal-close:focus,
+.btn-modal-cta:focus {
+    outline: 3px solid rgba(115, 103, 240, 0.18);
+    outline-offset: 2px;
+}
+
+.modal-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.modal-table th,
+.modal-table td {
+    padding: 16px 12px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* Cabeçalho estilizado */
+.modal-table thead th {
+    padding-bottom: 12px;
+    text-transform: none;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--bg-divider);
+}
+
+.modal-table tbody tr+tr {
+    border-top: 1px solid var(--bg-divider);
+}
+
+/* Ajuste do layout das linhas: left label e right count */
+.modal-table tbody td:first-child {
+    width: 100%;
+}
+
+.modal-table tbody td.count {
+    width: 110px;
+}
+
+.modal-table tbody td {
+    padding-left: 8px;
+    padding-right: 12px;
+}
+
+/* Mais espaço entre as linhas */
+.modal-table tbody tr {
+    line-height: 1.4;
+}
+
+.modal-footer {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: flex-end;
+    /* align buttons to the right */
+    margin-top: var(--spacing-md);
+    align-items: center;
+    width: 100%;
+}
+
+.btn-modal-cta {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;
+    margin-left: 0;
+    /* keep CTA next to Cancel */
+}
+
+/* Close button style */
+.modal-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid transparent;
+}
+
+.modal-close:hover {
+    background: var(--bg-light);
+}
+
+/* Mobile adjustments */
+@media (max-width: 420px) {
+    .modal-panel {
+        width: calc(100vw - 24px);
+        padding: var(--spacing-md);
+    }
+
+    .modal-table th,
+    .modal-table td {
+        padding: 12px 8px;
+    }
+
+    .btn-modal-cta {
+        min-width: auto;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    /* Empilha botões no mobile */
+    .modal-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        justify-content: center;
+        /* center stack in mobile */
+    }
+
+    .modal-footer .btn-outline-primary {
+        width: 100%;
+    }
+}
+
+.modal[aria-hidden="false"],
+.modal-overlay[aria-hidden="false"] {
+    display: flex;
+}
+
+/* Alinhar contador à direita */
+.modal-table td.count {
+    text-align: right;
+    font-weight: 600;
 }
 
 .pagination-arrow:disabled {
@@ -1763,4 +1974,59 @@ div[data-role="stats-bar"] {
         opacity: 0;
         transform: translateX(400px);
     }
+}
+
+/* Botão 'Cancelar' no modal com identidade visual, menor que o CTA principal */
+.modal-footer .btn-outline-primary {
+    padding: 8px 14px;
+    min-width: 120px;
+    font-weight: 600;
+    border-width: 2px;
+}
+
+.modal-footer .btn-outline-primary:hover {
+    transform: translateY(-1px);
+}
+
+/* Header alert (icon + title) */
+.modal-header-alert {
+    gap: 12px;
+}
+
+.modal-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.modal-header-left h3 {
+    margin: 0;
+}
+
+.modal-header-alert .modal-header-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--danger-light);
+    color: var(--danger);
+    flex-shrink: 0;
+}
+
+.modal-header-alert .modal-header-icon svg {
+    width: 18px;
+    height: 18px;
+    color: var(--danger);
+}
+
+.modal-header-alert h3 {
+    color: var(--text-primary);
+    font-size: 20px;
+    margin-left: 0;
+}
+
+.modal-header-alert .modal-subtitle {
+    margin-top: 4px;
 }

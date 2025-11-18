@@ -822,15 +822,7 @@
                             </span>
                             <span class="cell-progress">50/1000</span>
                             <span class="cell-action">
-                                <button class="btn-view" aria-label="Visualizar detalhes">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path
-                                            d="M12 9C13.6569 9 15 10.3431 15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9Z"
-                                            stroke="#7367F0" stroke-width="1.5" />
-                                        <path d="M12 5C17 5 20 12 20 12C20 12 17 19 12 19C7 19 4 12 4 12C4 12 7 5 12 5Z"
-                                            stroke="#7367F0" stroke-width="1.5" />
-                                    </svg>
-                                </button>
+                                <!-- Sem ação para status Andamento -->
                             </span>
                         </div>
 
@@ -843,15 +835,7 @@
                             </span>
                             <span class="cell-progress">1000/1000</span>
                             <span class="cell-action">
-                                <button class="btn-view" aria-label="Visualizar detalhes">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path
-                                            d="M12 9C13.6569 9 15 10.3431 15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9Z"
-                                            stroke="#7367F0" stroke-width="1.5" />
-                                        <path d="M12 5C17 5 20 12 20 12C20 12 17 19 12 19C7 19 4 12 4 12C4 12 7 5 12 5Z"
-                                            stroke="#7367F0" stroke-width="1.5" />
-                                    </svg>
-                                </button>
+                                <!-- Sem ação para status Concluído -->
                             </span>
                         </div>
 
@@ -945,6 +929,70 @@
             };
         </script>
         <script src="banco-questoes-revisao-FUNCIONANDO.js"></script>
+        <!-- Modal de Detalhes de Dificuldade (apenas para erros) -->
+        <div id="modalDificuldadesOverlay" class="modal-overlay" aria-hidden="true"></div>
+        <div id="modalDificuldades" class="modal" role="dialog" aria-modal="true"
+            aria-labelledby="modalDificuldadesTitle" aria-hidden="true">
+            <div class="modal-panel">
+                <div class="modal-header modal-header-alert" role="status" aria-live="polite">
+                    <div class="modal-header-left">
+                        <span class="modal-header-icon" aria-hidden="true">
+                            <!-- Triângulo de alerta -->
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L22 20H2L12 2Z" fill="currentColor" />
+                                <path d="M12 8V13" stroke="#FFF" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M12 17H12.01" stroke="#FFF" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <h3 id="modalDificuldadesTitle">Falha na geração de lote</h3>
+                    </div>
+                    <button id="modalClose" class="modal-close" aria-label="Fechar modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-subtitle">Reveja os níveis apresentados abaixo; selecione os que deseja gerar
+                        novamente.</p>
+                    <table class="modal-table">
+                        <thead>
+                            <tr>
+                                <th>Dificuldade</th>
+                                <th>Quantidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Muito difícil</td>
+                                <td class="count">200</td>
+                            </tr>
+                            <tr>
+                                <td>Difícil</td>
+                                <td class="count">200</td>
+                            </tr>
+                            <tr>
+                                <td>Médio</td>
+                                <td class="count">200</td>
+                            </tr>
+                            <tr>
+                                <td>Fácil</td>
+                                <td class="count">200</td>
+                            </tr>
+                            <tr>
+                                <td>Muito Fácil</td>
+                                <td class="count">200</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button id="modalCancel" class="btn-outline-primary" type="button">Cancelar</button>
+                    <a id="modalCta" class="btn-primary btn-modal-cta"
+                        href="http://127.0.0.1:5502/Back-office/Gerador%20de%20Quest%C3%B5es%20por%20IA%20%E2%80%93%20BackOffice/criar-questao-quiz.html">Gerar
+                        lote novamente</a>
+                </div>
+            </div>
+        </div>
 </body>
 
 </html>

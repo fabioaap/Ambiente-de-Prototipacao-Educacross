@@ -369,5 +369,73 @@ document.addEventListener('DOMContentLoaded', function () {
     inicializarFiltrosInterativos(); // Tornar filtros clicáveis
     inicializarBtnNovaQuestao(); // Ativar botão "Nova questão" com Toast
     inicializarDrawerGeracaoIA(); // Ativar drawer Painel de Geração (IA)
+    inicializarModalErroGeracao(); // Ativar modal de dificuldades (apenas quando erro)
     console.log('🖱️ Clique nos filtros para filtrar manualmente!');
 });
+
+// ============================================
+// MODAL: Detalhes de dificuldades com erro
+// ============================================
+function inicializarModalErroGeracao() {
+    const modal = document.getElementById('modalDificuldades');
+    const overlay = document.getElementById('modalDificuldadesOverlay');
+    const closeBtn = document.getElementById('modalClose');
+    const cancelBtn = document.getElementById('modalCancel');
+    const cta = document.getElementById('modalCta');
+
+    if (!modal || !overlay || !closeBtn || !cancelBtn || !cta) {
+        console.warn('Modal Erro: elementos não encontrados');
+        return;
+    }
+
+    let lastFocus = null;
+    function mostrarModal() {
+        lastFocus = document.activeElement;
+        overlay.setAttribute('aria-hidden', 'false');
+        modal.setAttribute('aria-hidden', 'false');
+        // foco no primeiro elemento do modal
+        closeBtn.focus();
+    }
+
+    function fecharModal() {
+        overlay.setAttribute('aria-hidden', 'true');
+        modal.setAttribute('aria-hidden', 'true');
+        if (lastFocus) lastFocus.focus();
+    }
+
+    // Fechar com ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') fecharModal();
+    });
+
+    closeBtn.addEventListener('click', fecharModal);
+    cancelBtn.addEventListener('click', fecharModal);
+    overlay.addEventListener('click', fecharModal);
+
+    // CTA já aponta para criar-questao-quiz.html; pode fechar o modal
+    cta.addEventListener('click', () => {
+        fecharModal();
+    });
+
+    // Abrir o modal apenas nos itens do drawer com status 'Erro'
+    const drawer = document.getElementById('painelGeracaoDrawer');
+    if (!drawer) return;
+
+    const rows = drawer.querySelectorAll('.table-row');
+    rows.forEach(row => {
+        const status = row.querySelector('.status-error') || row.querySelector('.status-badge.status-error');
+        const btn = row.querySelector('.btn-view');
+        if (status && btn) {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Preencher os valores estáticos (200) — se quiser, podemos calcular dinamicamente
+                const counts = [200, 200, 200, 200, 200];
+                const countCells = modal.querySelectorAll('.modal-table tbody .count');
+                countCells.forEach((td, idx) => {
+                    td.textContent = counts[idx] || '0';
+                });
+                mostrarModal();
+            });
+        }
+    });
+}
