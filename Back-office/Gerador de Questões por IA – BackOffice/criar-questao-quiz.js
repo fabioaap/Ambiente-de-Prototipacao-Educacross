@@ -1,7 +1,23 @@
 // Criar Questão de Quiz - Lógica da página
-// Usa utils compartilhados em ../../assets/scripts/common.js
+// Tenta usar utils compartilhados; se indisponíveis, aplica fallbacks locais
 
-import { inicializarSwitch, configurarUploadImagem } from '../../assets/scripts/common.js';
+let inicializarSwitch = function (switchElement, labelElement, textoAtivo = 'Ativa', textoInativo = 'Inativa') {
+    if (!switchElement || !labelElement) return;
+    labelElement.textContent = switchElement.checked ? textoAtivo : textoInativo;
+    switchElement.addEventListener('change', function () {
+        labelElement.textContent = this.checked ? textoAtivo : textoInativo;
+    });
+};
+
+let configurarUploadImagem = function (areaElement, inputElement, callback) {
+    if (!areaElement || !inputElement) return;
+    areaElement.addEventListener('click', () => inputElement.click());
+    inputElement.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files.length > 0 && typeof callback === 'function') {
+            callback(e.target.files[0]);
+        }
+    });
+};
 
 function validarFormulario() {
     const muitoFacil = parseInt(document.getElementById('muitoFacil').value) || 0;
@@ -22,25 +38,40 @@ function validarFormulario() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Tentar carregar módulo compartilhado (opcional)
+    try {
+        const mod = await import('../../assets/scripts/common.js');
+        if (mod.inicializarSwitch) inicializarSwitch = mod.inicializarSwitch;
+        if (mod.configurarUploadImagem) configurarUploadImagem = mod.configurarUploadImagem;
+    } catch (e) {
+        console.warn('common.js não carregado, usando fallbacks locais');
+    }
     // ========================================
     // CARREGAR ESTADO DE HABILIDADE DA URL
     // ========================================
-    
-    // Capturar parâmetro de query string
+
+    // Capturar parâmetros de query string
     const params = new URLSearchParams(window.location.search);
     const habilidadeParam = params.get('habilidade');
-    
+    const topicoParam = params.get('topico');
+
     if (habilidadeParam) {
-        // Pré-popular o campo de habilidade se vindo de habilidades-topicos-v2.html
-        const selectHabilidade = document.getElementById('habilidade') || 
-                                 document.querySelector('select[name="habilidade"]') ||
-                                 document.querySelector('[data-field="habilidade"]');
+        // Tentar setar em um possível select/hidden (fallback)
+        const selectHabilidade = document.getElementById('habilidade') ||
+            document.querySelector('select[name="habilidade"]') ||
+            document.querySelector('[data-field="habilidade"]');
         if (selectHabilidade) {
             selectHabilidade.value = habilidadeParam;
-            // Se for dropdown que muda o layout, disparar change
             selectHabilidade.dispatchEvent(new Event('change', { bubbles: true }));
         }
+        // Exibir imediatamente o "estado B" de Habilidades com o texto vindo da URL
+        // (equivalente a clicar em "Incluir Habilidade")
+        window.__habilidadeSelecionadaInicial = habilidadeParam;
+    }
+    if (topicoParam) {
+        // Guardar para render imediato do estado B de Tópico
+        window.__topicoSelecionadoInicial = topicoParam;
     }
 
     // ========================================
@@ -156,7 +187,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnCancelar) {
         btnCancelar.addEventListener('click', () => {
             if (confirm('Tem certeza que deseja cancelar? Todas as alterações serão perdidas.')) {
-                window.location.href = 'banco-questoes-revisao.html';
+                // Voltar para a lista de Habilidades e Tópicos
+                window.location.href = 'habilidades-topicos-v2.html';
             }
         });
     }
@@ -227,13 +259,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return svg
     }
 
-    function createHabilidadeSelecionadaRow() {
+    function createHabilidadeSelecionadaRow(textoCustom) {
         const row = document.createElement('div')
         row.className = 'skill-selected-row'
 
         const texto = document.createElement('div')
         texto.className = 'skill-selected-text'
-        texto.textContent = 'Selecionado: Interpretação de texto — 5.º ano — EF15LP02'
+        texto.textContent = textoCustom || 'Selecionado: Interpretação de texto — 5.º ano — EF15LP02'
 
         const iconBox = document.createElement('div')
         iconBox.className = 'icon-box'
@@ -258,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return row
     }
 
-    function createTopicoSelecionadoRow() {
+    function createTopicoSelecionadoRow(textoCustom) {
         const row = document.createElement('div')
         row.className = 'topic-selected-row'
 
@@ -266,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
         box.className = 'topic-selected-box'
         const h = document.createElement('h4')
         h.className = 'topic-title'
-        h.textContent = 'Interpretação de texto'
+        h.textContent = textoCustom || 'Interpretação de texto'
         const p = document.createElement('p')
         p.className = 'topic-desc'
         p.innerHTML = 'Gerar questões de <span class="strong">interpretação de texto</span> com foco em <span class="strong">análise literal</span> e compreensão global.'
@@ -309,6 +341,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 section.insertBefore(row, btnAddHabilidade)
                 btnAddHabilidade.style.display = 'none'
             })
+
+            // Caso a página tenha sido aberta com ?habilidade=..., já mostrar a seleção
+            if (window.__habilidadeSelecionadaInicial) {
+                const section = btnAddHabilidade.closest('.section-block') || btnAddHabilidade.parentElement
+                if (section && !section.querySelector('.skill-selected-row')) {
+                    const texto = `Selecionado: ${window.__habilidadeSelecionadaInicial}`
+                    const row = createHabilidadeSelecionadaRow(texto)
+                    section.insertBefore(row, btnAddHabilidade)
+                    btnAddHabilidade.style.display = 'none'
+                }
+            }
         }
 
         if (btnAddTopico) {
@@ -320,6 +363,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 section.insertBefore(row, btnAddTopico)
                 btnAddTopico.style.display = 'none'
             })
+
+            // Caso a página tenha sido aberta com ?topico=..., já mostrar a seleção
+            if (window.__topicoSelecionadoInicial) {
+                const section = btnAddTopico.closest('.section-block') || btnAddTopico.parentElement
+                if (section && !section.querySelector('.topic-selected-row')) {
+                    const row = createTopicoSelecionadoRow(window.__topicoSelecionadoInicial)
+                    section.insertBefore(row, btnAddTopico)
+                    btnAddTopico.style.display = 'none'
+                }
+            }
         }
     }
 

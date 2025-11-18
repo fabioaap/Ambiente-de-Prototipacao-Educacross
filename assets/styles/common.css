@@ -26,6 +26,7 @@ body {
     background: var(--bg);
     display: flex;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* =======================================
@@ -146,6 +147,10 @@ main,
     flex-direction: column;
     gap: 20px;
     position: relative;
+    /* Permite que o main-content encolha quando necessário e evite overflow horizontal */
+    min-width: 0;
+    /* Garante que o main não exceda a largura do viewport mesmo com margin-left do sidebar */
+    max-width: calc(100vw - var(--sidebar-width));
 }
 
 /* Bloqueio de conteúdo atrás do header */
@@ -518,4 +523,18 @@ label {
 
 .text-success {
     color: var(--success);
+}
+
+/* Imagens e svgs responsivos por padrão para evitar overflow */
+img,
+picture,
+svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Variáveis globais mínimas para evitar cálculos inválidos em pages que não carregam o CSS local */
+:root {
+    --sidebar-width: 265px;
 }

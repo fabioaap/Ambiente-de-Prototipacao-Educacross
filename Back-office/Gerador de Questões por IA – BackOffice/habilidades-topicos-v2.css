@@ -391,6 +391,8 @@ div[data-role="table-card"] {
     border-radius: var(--radius-6);
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .table-row {
@@ -837,4 +839,14 @@ div[data-role="pagination"] {
         opacity: 0;
         transform: translateY(20px);
     }
+}
+
+/* Evita que conteúdo em .table-row force overflow horizontal */
+.table-row {
+    box-sizing: border-box;
+}
+
+.table-row-content {
+    min-width: 0;
+    /* Permite encolher quando o container precisa */
 }

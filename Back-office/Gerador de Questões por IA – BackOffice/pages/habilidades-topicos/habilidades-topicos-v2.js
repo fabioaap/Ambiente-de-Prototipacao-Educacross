@@ -6,14 +6,14 @@
 // Aguardar carregamento do DOM
 document.addEventListener('DOMContentLoaded', function () {
     /**
-     * Função para redirecionar para criar-questao-quiz.html com estado de habilidade
-     * @param {string} habilidade - Nome da habilidade selecionada
+     * Redireciona com habilidade/topico para a página de criação
+     * @param {{habilidade?: string, topico?: string}} params
      */
-    function redirecionarParaNovaQuestaoIA(habilidade = null) {
-        let url = '../../criar-questao-quiz.html'; // 2 níveis acima (pages/habilidades-topicos/ -> BackOffice)
-        if (habilidade) {
-            url += '?habilidade=' + encodeURIComponent(habilidade);
-        }
+    function redirecionarParaNovaQuestaoIA(params = {}) {
+        const qs = new URLSearchParams();
+        if (params.habilidade) qs.set('habilidade', params.habilidade);
+        if (params.topico) qs.set('topico', params.topico);
+        const url = '../../criar-questao-quiz.html' + (qs.toString() ? `?${qs.toString()}` : '');
         window.location.href = url;
     }
 
@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const btnNovaQuestaoIA = document.getElementById('btnNovaQuestaoIA');
     if (btnNovaQuestaoIA) {
         btnNovaQuestaoIA.addEventListener('click', () => {
-            const filterAreaText = document.getElementById('filterAreaTextHabilidades')?.textContent || '';
-            redirecionarParaNovaQuestaoIA(filterAreaText);
+            // Estado A: sem parâmetros
+            redirecionarParaNovaQuestaoIA();
         });
     }
 
@@ -30,36 +30,28 @@ document.addEventListener('DOMContentLoaded', function () {
     const btnNovaQuestaoIATopicos = document.getElementById('btnNovaQuestaoIATopicos');
     if (btnNovaQuestaoIATopicos) {
         btnNovaQuestaoIATopicos.addEventListener('click', () => {
-            const filterAreaText = document.getElementById('filterAreaTextTopicos')?.textContent || '';
-            redirecionarParaNovaQuestaoIA(filterAreaText);
+            // Estado A: sem parâmetros
+            redirecionarParaNovaQuestaoIA();
         });
     }
 
-    // Event listeners para badges psychology (stats-bar)
-    document.addEventListener('click', function (e) {
-        const badgeClicavel = e.target.closest('.badge-clicavel[data-acao="nova-questao-ia"]');
-        if (badgeClicavel) {
-            // Determinar qual aba está ativa e pegar a habilidade correspondente
-            const abaAtiva = document.querySelector('[data-role="tabs"] .tab.active')?.dataset.tab || 'habilidades';
-            let habilidade = '';
-            
-            if (abaAtiva === 'habilidades') {
-                habilidade = document.getElementById('filterAreaTextHabilidades')?.textContent || '';
-            } else if (abaAtiva === 'topicos') {
-                habilidade = document.getElementById('filterAreaTextTopicos')?.textContent || '';
-            }
-            
-            redirecionarParaNovaQuestaoIA(habilidade);
-        }
-    });
+    // Removido: badges da stats-bar não são interativos
 
     // Event listeners para botões IA na tabela (dinâmicos)
     // Usar event delegation para capturar clicks nos botões de IA
     document.addEventListener('click', function (e) {
         const btnIA = e.target.closest('.btn-ia-tabela');
         if (btnIA) {
-            const habilidade = btnIA.dataset.habilidade;
-            redirecionarParaNovaQuestaoIA(habilidade);
+            const topico = btnIA.dataset.topico || document.getElementById('filterAreaTextTopicos')?.textContent || '';
+            const habilidade = btnIA.dataset.habilidade || document.getElementById('filterAreaTextHabilidades')?.textContent || '';
+            const aba = document.querySelector('[data-role="tabs"] .tab.active')?.dataset.tab || 'habilidades';
+            if (aba === 'topicos' && topico) {
+                redirecionarParaNovaQuestaoIA({ topico });
+            } else if (habilidade) {
+                redirecionarParaNovaQuestaoIA({ habilidade });
+            } else if (topico) {
+                redirecionarParaNovaQuestaoIA({ topico });
+            }
         }
     });
 

@@ -257,7 +257,7 @@ function renderizarLinhaTopico(item, nivel = 0) {
                     <button class="action-btn" title="Nova questão">
                         <span class="icon" style="--icon: url('assets/icons/icon-add-circle.svg'); width: 24px; height: 24px;"></span>
                     </button>
-                    <button class="action-btn btn-ia-tabela" title="Nova questão IA" data-habilidade="${item.titulo}">
+                    <button class="action-btn btn-ia-tabela" title="Nova questão IA" data-topico="${item.titulo}">
                         <span class="icon" style="--icon: url('assets/icons/icon-psychology.svg'); width: 24px; height: 24px;"></span>
                     </button>
                 </div>
@@ -460,14 +460,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /**
-     * Função para redirecionar para criar-questao-quiz.html com estado de habilidade
-     * @param {string} habilidade - Nome da habilidade selecionada
+     * Redireciona para criar-questao-quiz com possíveis estados (habilidade ou tópico)
+     * @param {{habilidade?: string, topico?: string}} params
      */
-    function redirecionarParaNovaQuestaoIA(habilidade = null) {
-        let url = 'criar-questao-quiz.html';
-        if (habilidade) {
-            url += '?habilidade=' + encodeURIComponent(habilidade);
-        }
+    function redirecionarParaNovaQuestaoIA(params = {}) {
+        const search = new URLSearchParams();
+        if (params.habilidade) search.set('habilidade', params.habilidade);
+        if (params.topico) search.set('topico', params.topico);
+        const qs = search.toString();
+        const url = 'criar-questao-quiz.html' + (qs ? `?${qs}` : '');
         window.location.href = url;
     }
 
@@ -475,8 +476,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnNovaQuestaoIA = document.getElementById('btnNovaQuestaoIA');
     if (btnNovaQuestaoIA) {
         btnNovaQuestaoIA.addEventListener('click', () => {
-            const filterAreaText = document.getElementById('filterAreaTextHabilidades')?.textContent || '';
-            redirecionarParaNovaQuestaoIA(filterAreaText);
+            // Estado A: sem parâmetros
+            redirecionarParaNovaQuestaoIA();
         });
     }
 
@@ -484,44 +485,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnNovaQuestaoIATopicos = document.getElementById('btnNovaQuestaoIATopicos');
     if (btnNovaQuestaoIATopicos) {
         btnNovaQuestaoIATopicos.addEventListener('click', () => {
-            const filterAreaText = document.getElementById('filterAreaTextTopicos')?.textContent || '';
-            redirecionarParaNovaQuestaoIA(filterAreaText);
+            // Estado A: sem parâmetros
+            redirecionarParaNovaQuestaoIA();
         });
     }
 
-    // Event listeners para badges psychology (stats-bar)
-    document.addEventListener('click', function (e) {
-        const badgeClicavel = e.target.closest('.badge-clicavel[data-acao="nova-questao-ia"]');
-        if (badgeClicavel) {
-            // Determinar qual aba está ativa e pegar a habilidade correspondente
-            const abaAtiva = document.querySelector('[data-role="tabs"] .tab.active')?.dataset.tab || 'habilidades';
-            let habilidade = '';
-
-            if (abaAtiva === 'habilidades') {
-                habilidade = document.getElementById('filterAreaTextHabilidades')?.textContent || '';
-            } else if (abaAtiva === 'topicos') {
-                habilidade = document.getElementById('filterAreaTextTopicos')?.textContent || '';
-            }
-
-            redirecionarParaNovaQuestaoIA(habilidade);
-        }
-    });
+    // Removido: badges da stats-bar não são interativos
 
     // Renderização inicial
     renderizarTabela();
     renderizarPaginacao();
 
-    // Event listeners para botões IA na tabela (depois da renderização)
-    // Usar event delegation para capturar clicks nos botões de IA
-    document.querySelector(`#tab-${estado.abaAtiva} [data-role="table-card"]`)?.addEventListener('click', function (e) {
+    // Event listeners para botões IA na tabela (dinâmicos)
+    // Usar event delegation no documento para funcionar em ambas as abas
+    document.addEventListener('click', function (e) {
         const btnIA = e.target.closest('.btn-ia-tabela');
         if (btnIA) {
-            // Prioriza data-habilidade (usado em Tópicos). Se ausente, usa estado B (filtro de Habilidades/Tópicos)
-            const habilidade = btnIA.dataset.habilidade
-                || document.getElementById('filterAreaTextHabilidades')?.textContent
-                || document.getElementById('filterAreaTextTopicos')?.textContent
-                || '';
-            redirecionarParaNovaQuestaoIA(habilidade);
+            const topico = btnIA.dataset.topico || document.getElementById('filterAreaTextTopicos')?.textContent || '';
+            const habilidade = btnIA.dataset.habilidade || document.getElementById('filterAreaTextHabilidades')?.textContent || '';
+            // Se estiver na aba tópicos, prioriza tópico; caso contrário, habilidade
+            const aba = document.querySelector('[data-role="tabs"] .tab.active')?.dataset.tab || estado.abaAtiva;
+            if (aba === 'topicos' && topico) {
+                redirecionarParaNovaQuestaoIA({ topico });
+            } else if (habilidade) {
+                redirecionarParaNovaQuestaoIA({ habilidade });
+            } else if (topico) {
+                redirecionarParaNovaQuestaoIA({ topico });
+            }
         }
     });
 
