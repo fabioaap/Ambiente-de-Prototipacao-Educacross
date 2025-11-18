@@ -35,6 +35,24 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Event listeners para badges psychology (stats-bar)
+    document.addEventListener('click', function (e) {
+        const badgeClicavel = e.target.closest('.badge-clicavel[data-acao="nova-questao-ia"]');
+        if (badgeClicavel) {
+            // Determinar qual aba está ativa e pegar a habilidade correspondente
+            const abaAtiva = document.querySelector('[data-role="tabs"] .tab.active')?.dataset.tab || 'habilidades';
+            let habilidade = '';
+            
+            if (abaAtiva === 'habilidades') {
+                habilidade = document.getElementById('filterAreaTextHabilidades')?.textContent || '';
+            } else if (abaAtiva === 'topicos') {
+                habilidade = document.getElementById('filterAreaTextTopicos')?.textContent || '';
+            }
+            
+            redirecionarParaNovaQuestaoIA(habilidade);
+        }
+    });
+
     // Event listeners para botões IA na tabela (dinâmicos)
     // Usar event delegation para capturar clicks nos botões de IA
     document.addEventListener('click', function (e) {
