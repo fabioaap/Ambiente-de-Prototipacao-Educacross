@@ -257,7 +257,7 @@ function renderizarLinhaTopico(item, nivel = 0) {
                     <button class="action-btn" title="Nova questão">
                         <span class="icon" style="--icon: url('assets/icons/icon-add-circle.svg'); width: 24px; height: 24px;"></span>
                     </button>
-                    <button class="action-btn" title="Nova questão IA">
+                    <button class="action-btn btn-ia-tabela" title="Nova questão IA" data-habilidade="${item.titulo}">
                         <span class="icon" style="--icon: url('assets/icons/icon-psychology.svg'); width: 24px; height: 24px;"></span>
                     </button>
                 </div>
@@ -459,18 +459,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Event listener para botão Nova Questão IA
-    const btnNovaQuestaoIA = document.getElementById('btnNovaQuestaoIA');
+    /**
+     * Função para redirecionar para criar-questao-quiz.html com estado de habilidade
+     * @param {string} habilidade - Nome da habilidade selecionada
+     */
+    function redirecionarParaNovaQuestaoIA(habilidade = null) {
+        let url = 'criar-questao-quiz.html';
+        if (habilidade) {
+            url += '?habilidade=' + encodeURIComponent(habilidade);
+        }
+        window.location.href = url;
+    }
 
+    // Event listener para botão Nova Questão IA (header - Habilidades)
+    const btnNovaQuestaoIA = document.getElementById('btnNovaQuestaoIA');
     if (btnNovaQuestaoIA) {
         btnNovaQuestaoIA.addEventListener('click', () => {
-            window.location.href = 'criar-questao-quiz.html';
+            const filterAreaText = document.getElementById('filterAreaTextHabilidades')?.textContent || '';
+            redirecionarParaNovaQuestaoIA(filterAreaText);
+        });
+    }
+
+    // Event listener para botão Nova Questão IA (header - Tópicos)
+    const btnNovaQuestaoIATopicos = document.getElementById('btnNovaQuestaoIATopicos');
+    if (btnNovaQuestaoIATopicos) {
+        btnNovaQuestaoIATopicos.addEventListener('click', () => {
+            const filterAreaText = document.getElementById('filterAreaTextTopicos')?.textContent || '';
+            redirecionarParaNovaQuestaoIA(filterAreaText);
         });
     }
 
     // Renderização inicial
     renderizarTabela();
     renderizarPaginacao();
+
+    // Event listeners para botões IA na tabela (depois da renderização)
+    // Usar event delegation para capturar clicks nos botões de IA
+    document.querySelector(`#tab-${estado.abaAtiva} [data-role="table-card"]`)?.addEventListener('click', function(e) {
+        const btnIA = e.target.closest('.btn-ia-tabela');
+        if (btnIA) {
+            const habilidade = btnIA.dataset.habilidade;
+            redirecionarParaNovaQuestaoIA(habilidade);
+        }
+    });
 
     // DEBUG: Verificar se tudo foi carregado corretamente
     window.debugToast = function () {

@@ -24,6 +24,26 @@ function validarFormulario() {
 
 document.addEventListener('DOMContentLoaded', () => {
     // ========================================
+    // CARREGAR ESTADO DE HABILIDADE DA URL
+    // ========================================
+    
+    // Capturar parâmetro de query string
+    const params = new URLSearchParams(window.location.search);
+    const habilidadeParam = params.get('habilidade');
+    
+    if (habilidadeParam) {
+        // Pré-popular o campo de habilidade se vindo de habilidades-topicos-v2.html
+        const selectHabilidade = document.getElementById('habilidade') || 
+                                 document.querySelector('select[name="habilidade"]') ||
+                                 document.querySelector('[data-field="habilidade"]');
+        if (selectHabilidade) {
+            selectHabilidade.value = habilidadeParam;
+            // Se for dropdown que muda o layout, disparar change
+            selectHabilidade.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+    }
+
+    // ========================================
     // SISTEMA DE TOAST NOTIFICAÇÕES
     // ========================================
 
