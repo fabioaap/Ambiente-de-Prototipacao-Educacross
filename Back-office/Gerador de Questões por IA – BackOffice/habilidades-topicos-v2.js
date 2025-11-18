@@ -201,7 +201,7 @@ function renderizarLinhaHabilidade(item, nivel = 0) {
                     <button class="action-btn" title="Adicionar questão">
                         <span class="icon" style="--icon: url('assets/icons/icon-add-circle.svg'); width: 24px; height: 24px;"></span>
                     </button>
-                    <button class="action-btn" title="Visualizar habilidade">
+                    <button class="action-btn btn-ia-tabela" title="Nova questão IA (Acordeon)">
                         <span class="icon" style="--icon: url('assets/icons/icon-psychology.svg'); width: 24px; height: 24px;"></span>
                     </button>
                 </div>
@@ -496,13 +496,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Determinar qual aba está ativa e pegar a habilidade correspondente
             const abaAtiva = document.querySelector('[data-role="tabs"] .tab.active')?.dataset.tab || 'habilidades';
             let habilidade = '';
-            
+
             if (abaAtiva === 'habilidades') {
                 habilidade = document.getElementById('filterAreaTextHabilidades')?.textContent || '';
             } else if (abaAtiva === 'topicos') {
                 habilidade = document.getElementById('filterAreaTextTopicos')?.textContent || '';
             }
-            
+
             redirecionarParaNovaQuestaoIA(habilidade);
         }
     });
@@ -516,7 +516,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector(`#tab-${estado.abaAtiva} [data-role="table-card"]`)?.addEventListener('click', function (e) {
         const btnIA = e.target.closest('.btn-ia-tabela');
         if (btnIA) {
-            const habilidade = btnIA.dataset.habilidade;
+            // Prioriza data-habilidade (usado em Tópicos). Se ausente, usa estado B (filtro de Habilidades/Tópicos)
+            const habilidade = btnIA.dataset.habilidade
+                || document.getElementById('filterAreaTextHabilidades')?.textContent
+                || document.getElementById('filterAreaTextTopicos')?.textContent
+                || '';
             redirecionarParaNovaQuestaoIA(habilidade);
         }
     });
