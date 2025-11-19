@@ -154,7 +154,7 @@
                                 style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 18px; height: 18px;"></span>
                         </div>
                     </div>
-                    <button class="filter-button outline">Todas as questões</button>
+                    <button class="filter-button outline" id="btnTodasQuestoesHabilidades">Todas as questões</button>
                     <button class="filter-button primary">
                         <span class="icon"
                             style="--icon: url('assets/icons/icon-add-circle.svg'); width: 24px; height: 24px;"></span>
@@ -231,7 +231,7 @@
                                 style="--icon: url('assets/icons/icon-keyboard-arrow-down.svg'); width: 18px; height: 18px;"></span>
                         </div>
                     </div>
-                    <button class="filter-button outline">Todas as questões</button>
+                    <button class="filter-button outline" id="btnTodasQuestoesTopicos">Todas as questões</button>
                     <button class="filter-button primary">
                         <span class="icon"
                             style="--icon: url('assets/icons/icon-add-circle.svg'); width: 24px; height: 24px;"></span>
@@ -261,6 +261,16 @@
     </main>
 
     <script src="habilidades-topicos-v2.js"></script>
+    <script>
+        // Redirecionamento para página de Todas as questões
+        document.querySelectorAll('#btnTodasQuestoesHabilidades, #btnTodasQuestoesTopicos, .filter-button.outline').forEach(btn => {
+            if (btn.textContent.trim() === 'Todas as questões') {
+                btn.addEventListener('click', () => {
+                    window.location.href = 'banco-questoes-revisao.html';
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

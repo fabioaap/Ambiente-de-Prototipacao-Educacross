@@ -797,7 +797,7 @@
                                             novamente</span>
                                     </div>
                                 </div>
-                                <div class="tooltip-arrow"></div>
+
                             </div>
                         </div>
                     </div>
@@ -857,6 +857,7 @@
                                             stroke="#7367F0" stroke-width="1.5" />
                                     </svg>
                                 </button>
+
                             </span>
                         </div>
                     </div>
@@ -877,12 +878,19 @@
                         const tooltipWidth = 320;
                         const tooltipHeight = tooltipContent.offsetHeight || 200;
 
-                        // Posicionar à esquerda do ícone
-                        const left = iconRect.left - tooltipWidth - 16;
+                        // Posicionar à esquerda do ícone por padrão; se pouca largura, posiciona à direita
+                        let left = iconRect.left - tooltipWidth - 16;
+                        let position = 'left';
+                        if (left < 8) {
+                            left = iconRect.right + 12;
+                            // Keep arrow orientation consistent (left), do not flip to right
+                        }
                         const top = iconRect.top + (iconRect.height / 2) - (tooltipHeight / 2);
 
                         tooltipContent.style.left = left + 'px';
                         tooltipContent.style.top = top + 'px';
+                        // Force left orientation for arrow (no right-positioned arrow support)
+                        tooltipContent.setAttribute('data-position', 'left');
                     });
                 }
             });
@@ -929,6 +937,27 @@
             };
         </script>
         <script src="banco-questoes-revisao-FUNCIONANDO.js"></script>
+        <script>
+            // Fallback inline para garantir abertura do drawer caso o script externo falhe
+            document.addEventListener('DOMContentLoaded', function () {
+                const btn = document.getElementById('btnPainelGeracao');
+                const drawer = document.getElementById('painelGeracaoDrawer');
+                const overlay = document.getElementById('drawerOverlay');
+                if (!btn || !drawer || !overlay) {
+                    console.warn('[Fallback Drawer] Elementos não encontrados');
+                    return;
+                }
+                if (!drawer.classList.contains('active')) {
+                    btn.addEventListener('click', function (e) {
+                        drawer.classList.add('active');
+                        overlay.classList.add('active');
+                        drawer.setAttribute('aria-hidden', 'false');
+                        overlay.setAttribute('aria-hidden', 'false');
+                        console.log('[Fallback Drawer] Aberto');
+                    });
+                }
+            });
+        </script>
         <!-- Modal de Detalhes de Dificuldade (apenas para erros) -->
         <div id="modalDificuldadesOverlay" class="modal-overlay" aria-hidden="true"></div>
         <div id="modalDificuldades" class="modal" role="dialog" aria-modal="true"
@@ -947,49 +976,29 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </span>
-                        <h3 id="modalDificuldadesTitle">Falha na geração de lote</h3>
+                        <h3 id="modalDificuldadesTitle">Falha na Geração</h3>
                     </div>
                     <button id="modalClose" class="modal-close" aria-label="Fechar modal">×</button>
                 </div>
                 <div class="modal-body">
-                    <p class="modal-subtitle">Reveja os níveis apresentados abaixo; selecione os que deseja gerar
-                        novamente.</p>
-                    <table class="modal-table">
+                    <p class="modal-subtitle">Não foi possível gerar 200 questões. Tente novamente.</p>
+                    <table class="modal-table" aria-describedby="modalDificuldadesTitle">
                         <thead>
                             <tr>
-                                <th>Dificuldade</th>
-                                <th>Quantidade</th>
+                                <th scope="col">Dificuldade</th>
+                                <th scope="col" class="text-right">Quantidade</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Muito difícil</td>
-                                <td class="count">200</td>
-                            </tr>
-                            <tr>
-                                <td>Difícil</td>
-                                <td class="count">200</td>
-                            </tr>
-                            <tr>
-                                <td>Médio</td>
-                                <td class="count">200</td>
-                            </tr>
-                            <tr>
-                                <td>Fácil</td>
-                                <td class="count">200</td>
-                            </tr>
-                            <tr>
-                                <td>Muito Fácil</td>
-                                <td class="count">200</td>
-                            </tr>
+                            <!-- Linhas geradas dinamicamente via JS somente para dificuldades com erro -->
                         </tbody>
                     </table>
                 </div>
                 <div class="modal-footer">
                     <button id="modalCancel" class="btn-outline-primary" type="button">Cancelar</button>
                     <a id="modalCta" class="btn-primary btn-modal-cta"
-                        href="http://127.0.0.1:5502/Back-office/Gerador%20de%20Quest%C3%B5es%20por%20IA%20%E2%80%93%20BackOffice/criar-questao-quiz.html">Gerar
-                        lote novamente</a>
+                        href="http://127.0.0.1:5502/Back-office/Gerador%20de%20Quest%C3%B5es%20por%20IA%20%E2%80%93%20BackOffice/criar-questao-quiz.html">Tentar
+                        Novamente</a>
                 </div>
             </div>
         </div>

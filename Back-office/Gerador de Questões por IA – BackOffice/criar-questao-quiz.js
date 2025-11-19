@@ -132,17 +132,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     // Switches
+    // Garantir que statusQuestao esteja habilitado por padrão (nova regra)
+    const statusQuestaoEl = document.getElementById('statusQuestao');
+    if (statusQuestaoEl) statusQuestaoEl.checked = true;
     inicializarSwitch(
-        document.getElementById('statusQuestao'),
+        statusQuestaoEl,
         document.getElementById('statusQuestaoLabel'),
         'Ativa',
-        'Ativa'
+        'Inativa'
     );
     inicializarSwitch(
         document.getElementById('caixaAlta'),
         document.getElementById('caixaAltaLabel'),
         'Ativa',
-        'Ativa'
+        'Inativa'
     );
 
     // Upload de imagem - Simulação direta sem janela de seleção
@@ -181,6 +184,76 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
+
+    // Tooltip: posicionar dinamicamente para cada tooltip (hover) e fallback click/touch
+    document.querySelectorAll('.tooltip-wrapper').forEach(wrapper => {
+        const infoIcon = wrapper.querySelector('.info-icon');
+        const tooltipContent = wrapper.querySelector('.tooltip-content');
+        if (!infoIcon || !tooltipContent) return;
+
+        const positionTooltip = () => {
+            // Temporariamente exibe para medir
+            const prevDisplay = tooltipContent.style.display;
+            tooltipContent.style.display = 'block';
+            tooltipContent.style.visibility = 'hidden';
+
+            const iconRect = infoIcon.getBoundingClientRect();
+            const tooltipWidth = tooltipContent.offsetWidth || 320;
+            const tooltipHeight = tooltipContent.offsetHeight || 160;
+
+            // Tenta posicionar à esquerda do ícone; se pouco espaço, posiciona à direita
+            let left = iconRect.left - tooltipWidth - 12;
+            let position = 'left';
+            if (left < 8) {
+                left = iconRect.right + 12;
+                // Force left arrow visual; keep tooltip offset but do not change arrow orientation
+            }
+
+            let top = iconRect.top + (iconRect.height / 2) - (tooltipHeight / 2);
+            if (top < 8) top = 8;
+            if ((top + tooltipHeight) > (window.innerHeight - 8)) top = window.innerHeight - tooltipHeight - 8;
+
+            tooltipContent.style.left = left + 'px';
+            tooltipContent.style.top = top + 'px';
+            // Set orientation attribute for CSS arrow styling (always left)
+            tooltipContent.setAttribute('data-position', 'left');
+
+            tooltipContent.style.display = prevDisplay;
+            tooltipContent.style.visibility = '';
+        };
+
+        // Atualizar no hover e resize
+        infoIcon.addEventListener('mouseenter', positionTooltip);
+        window.addEventListener('resize', positionTooltip);
+
+        // Click/touch fallback (mobile) - toggle tooltip on click or touch
+        const toggleTooltip = (event) => {
+            event.stopPropagation();
+            const isVisible = tooltipContent.style.display === 'block';
+            if (isVisible) {
+                tooltipContent.style.display = '';
+                tooltipContent.setAttribute('aria-hidden', 'true');
+            } else {
+                positionTooltip();
+                tooltipContent.style.display = 'block';
+                tooltipContent.setAttribute('aria-hidden', 'false');
+            }
+        };
+
+        infoIcon.addEventListener('click', toggleTooltip);
+
+        // Close tooltip on outside click
+        document.addEventListener('click', (e) => {
+            if (!wrapper.contains(e.target)) {
+                tooltipContent.style.display = '';
+                tooltipContent.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+        // Inicializa aria-hidden
+        tooltipContent.setAttribute('aria-hidden', 'true');
+        // window.addEventListener('resize', positionTooltip); // already bound above
+    });
 
     // Botão Cancelar
     const btnCancelar = document.getElementById('btnCancelar');
@@ -235,6 +308,36 @@ document.addEventListener('DOMContentLoaded', async () => {
                 window.location.href = 'banco-questoes-revisao.html';
             }, 1000);
             const total = dados.muitoFacil + dados.facil + dados.medio + dados.dificil + dados.muitoDificil;
+
+            // Simular resultado da geração: salvar resumo detalhado no localStorage
+            // Nova lógica: cada dificuldade pode ter sucesso total ou parcial independente
+            const requestedPerDifficulty = [
+                dados.muitoFacil,
+                dados.facil,
+                dados.medio,
+                dados.dificil,
+                dados.muitoDificil
+            ];
+            const successPerDifficulty = requestedPerDifficulty.map(req => {
+                if (req === 0) return 0;
+                const r = Math.random();
+                // 35% chance de sucesso total
+                if (r < 0.35) return req;
+                // 20% chance de falha moderada (60% a 80%)
+                if (r < 0.55) return Math.max(0, Math.round(req * (0.60 + Math.random() * 0.20)));
+                // Caso geral: alto sucesso (85% a 98%)
+                return Math.max(0, Math.round(req * (0.85 + Math.random() * 0.13)));
+            });
+            const errorPerDifficulty = requestedPerDifficulty.map((req, i) => Math.max(0, req - successPerDifficulty[i]));
+            const counts = {
+                total,
+                success: successPerDifficulty.reduce((a, b) => a + b, 0),
+                error: errorPerDifficulty.reduce((a, b) => a + b, 0),
+                requestedPerDifficulty,
+                successPerDifficulty,
+                errorPerDifficulty
+            };
+            localStorage.setItem('geracaoResumo', JSON.stringify(counts));
 
             // Redirecionar para banco de questões após gerar
             window.location.href = 'banco-questoes-revisao.html';

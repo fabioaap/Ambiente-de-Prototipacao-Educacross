@@ -143,18 +143,35 @@ body {
 .main-content {
     margin-left: var(--sidebar-width);
     width: calc(100% - var(--sidebar-width));
-    max-width: calc(100% - var(--sidebar-width));
+    max-width: calc(100vw - var(--sidebar-width));
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     box-sizing: border-box;
     overflow-x: hidden;
+    padding-top: 98px;
+}
+
+/* Aplicar margem horizontal uniforme a todos os elementos filhos diretos para alinhar com o header */
+.main-content>* {
+    margin-left: var(--spacing-md);
+    margin-right: var(--spacing-md);
+}
+
+/* Espaçamento vertical entre elementos */
+.main-content>*+* {
+    margin-top: var(--spacing-md);
 }
 
 /* Header Global */
+/* Global header (top of content area) */
 .global-header {
     background-color: var(--bg-white);
-    padding: var(--spacing-md);
+    /* Use same horizontal padding as the content container so both align perfectly */
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -216,13 +233,17 @@ body {
 }
 
 /* Content Container */
+/* Content wrapper must align with the header horizontally */
+/* Usar viewport como base (igual ao header) para garantir alinhamento perfeito */
+/* Header usa: left: 285px, right: 20px → largura = calc(100vw - 305px) */
 .content-container {
-    padding: var(--spacing-lg);
-    flex: 1;
-    width: 100%;
-    max-width: 100%;
+    position: relative;
+    width: calc(100vw - 305px) !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
     box-sizing: border-box;
-    min-width: 0;
 }
 
 /* ============================================
@@ -485,6 +506,11 @@ div[data-role="stats-bar"] {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
+    /* Compensar a margem do main-content para alinhar com o header */
+    margin-left: calc(var(--spacing-md) * -1) !important;
+    margin-right: calc(var(--spacing-md) * -1) !important;
+    padding-left: calc(var(--spacing-md) * 2);
+    padding-right: calc(var(--spacing-md) * 2);
 }
 
 .filters-row {
@@ -989,7 +1015,7 @@ div[data-role="stats-bar"] {
     inset: 0;
     background: rgba(0, 0, 0, 0.4);
     display: none;
-    z-index: 2000;
+    z-index: 3000;
 }
 
 .modal {
@@ -998,7 +1024,7 @@ div[data-role="stats-bar"] {
     display: none;
     align-items: center;
     justify-content: center;
-    z-index: 2001;
+    z-index: 3001;
 }
 
 .modal-panel {
@@ -1180,6 +1206,26 @@ div[data-role="stats-bar"] {
     display: flex;
 }
 
+/* Badge de erros nas dificuldades */
+.badge-erros {
+    display: inline-block;
+    background: #ea5455;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.modal-table .text-right {
+    text-align: right;
+}
+
+.modal-table th.text-right {
+    text-align: right;
+}
+
 /* Alinhar contador à direita */
 .modal-table td.count {
     text-align: right;
@@ -1204,12 +1250,6 @@ div[data-role="stats-bar"] {
 /* ============================================
    RESPONSIVIDADE
    ============================================ */
-
-@media (max-width: 1440px) {
-    .content-container {
-        padding: 16px;
-    }
-}
 
 @media (max-width: 768px) {
     .sidebar {
@@ -1254,11 +1294,13 @@ div[data-role="stats-bar"] {
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     z-index: 1099;
+    pointer-events: none;
 }
 
 .drawer-overlay.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
 
 .drawer {
@@ -1834,6 +1876,65 @@ div[data-role="stats-bar"] {
     filter: drop-shadow(2px 0 2px rgba(0, 0, 0, 0.1));
 }
 
+/* No right-positioned arrow flip to keep drawer markup unchanged */
+.modal-table .count-error {
+    color: #ea5455;
+    font-weight: 600;
+}
+
+.modal-table td.status-col {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.status-badge-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.status-badge-inline.ok {
+    background: rgba(40, 199, 111, .12);
+    color: #28c76f;
+}
+
+.status-badge-inline.erro {
+    background: rgba(234, 84, 85, .12);
+    color: #ea5455;
+}
+
+.modal-table tr.row-error {
+    background: rgba(234, 84, 85, .08);
+}
+
+.modal-table tr.row-error:hover {
+
+    .modal-table td.solicitado,
+    .modal-table td.geradas,
+    .modal-table td.erros {
+        font-size: 12px;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .modal-table td.erros.count-error {
+        color: #ea5455;
+    }
+
+    .modal-table th {
+        font-size: 12px;
+    }
+
+    background: rgba(234, 84, 85, .12);
+}
+
 @keyframes slideLeftFixed {
     from {
         opacity: 0;
@@ -2030,3 +2131,5 @@ div[data-role="stats-bar"] {
 .modal-header-alert .modal-subtitle {
     margin-top: 4px;
 }
+
+/* No .btn-rerun styles — drawer remains unmodified */
