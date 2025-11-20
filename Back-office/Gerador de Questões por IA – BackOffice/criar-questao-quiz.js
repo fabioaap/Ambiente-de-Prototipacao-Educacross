@@ -345,13 +345,31 @@ document.addEventListener('DOMContentLoaded', async () => {
         return svg
     }
 
-    function createHabilidadeSelecionadaRow(textoCustom) {
+    function normalizarHabilidadeConfig(config) {
+        if (!config) return { texto: 'Selecionado: Interpretação de texto — 5.º ano — EF15LP02' };
+        if (typeof config === 'string') return { texto: config };
+        return {
+            texto: config.texto || config.titulo || 'Selecionado: Interpretação de texto — 5.º ano — EF15LP02',
+            subtexto: config.subtexto || config.descricao || ''
+        };
+    }
+
+    function createHabilidadeSelecionadaRow(config) {
         const row = document.createElement('div')
         row.className = 'skill-selected-row'
 
         const texto = document.createElement('div')
         texto.className = 'skill-selected-text'
-        texto.textContent = textoCustom || 'Selecionado: Interpretação de texto — 5.º ano — EF15LP02'
+        const normalizado = normalizarHabilidadeConfig(config)
+
+        if (normalizado.subtexto) {
+            texto.innerHTML = `
+                <span class="skill-selected-main">${normalizado.texto}</span>
+                <span class="skill-selected-sub">${normalizado.subtexto}</span>
+            `
+        } else {
+            texto.textContent = normalizado.texto
+        }
 
         const iconBox = document.createElement('div')
         iconBox.className = 'icon-box'
@@ -376,7 +394,43 @@ document.addEventListener('DOMContentLoaded', async () => {
         return row
     }
 
-    function createTopicoSelecionadoRow(textoCustom) {
+    function normalizarTopicoConfig(config) {
+        if (!config) {
+            return {
+                titulo: 'Interpretação de texto',
+                detalhes: ['Gerar questões de <span class="strong">interpretação de texto</span> com foco em <span class="strong">análise literal</span> e compreensão global.']
+            }
+        }
+
+        if (typeof config === 'string') {
+            return {
+                titulo: config,
+                detalhes: []
+            }
+        }
+
+        const detalhes = []
+        if (config.objeto) {
+            detalhes.push(`<span class="topic-meta-label">Objeto do conhecimento:</span> ${config.objeto}`)
+        }
+        if (config.tematica) {
+            detalhes.push(`<span class="topic-meta-label">Temática:</span> ${config.tematica}`)
+        }
+        if (config.descricao) {
+            detalhes.push(config.descricao)
+        }
+
+        if (detalhes.length === 0 && config.textoComplementar) {
+            detalhes.push(config.textoComplementar)
+        }
+
+        return {
+            titulo: config.titulo || config.texto || 'Interpretação de texto',
+            detalhes
+        }
+    }
+
+    function createTopicoSelecionadoRow(config) {
         const row = document.createElement('div')
         row.className = 'topic-selected-row'
 
@@ -384,10 +438,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         box.className = 'topic-selected-box'
         const h = document.createElement('h4')
         h.className = 'topic-title'
-        h.textContent = textoCustom || 'Interpretação de texto'
+        const normalizado = normalizarTopicoConfig(config)
+        h.textContent = normalizado.titulo
         const p = document.createElement('p')
         p.className = 'topic-desc'
-        p.innerHTML = 'Gerar questões de <span class="strong">interpretação de texto</span> com foco em <span class="strong">análise literal</span> e compreensão global.'
+        if (normalizado.detalhes.length > 0) {
+            p.innerHTML = normalizado.detalhes.map(detalhe => `<span class="topic-meta-line">${detalhe}</span>`).join('')
+        } else {
+            p.innerHTML = 'Gerar questões de <span class="strong">interpretação de texto</span> com foco em <span class="strong">análise literal</span> e compreensão global.'
+        }
         box.appendChild(h)
         box.appendChild(p)
 

@@ -3,15 +3,29 @@
  * Esta página SEMPRE tenta carregar contexto de erro do localStorage
  */
 
+// Prefill automático das seções "Habilidades" e "Tópico" (estado B do Figma)
+if (!window.__habilidadeSelecionadaInicial) {
+    window.__habilidadeSelecionadaInicial = {
+        texto: 'BNCC 6º Ano - Números - EF06MA02',
+        subtexto: 'Contar de maneira exata ou aproximada, utilizando diferentes estratégias como o pareamento e outros agrupamentos.'
+    };
+}
+
+if (!window.__topicoSelecionadoInicial) {
+    window.__topicoSelecionadoInicial = {
+        titulo: '1.31.1.2 Período de uma dízima periódica',
+        objeto: 'Dízimas Periódicas',
+        tematica: 'Números'
+    };
+}
+
 // ========================================
 // VERIFICAR CONTEXTO DE REGENERAÇÃO
 // ========================================
 document.addEventListener('DOMContentLoaded', () => {
     console.log('[Regeneração] Página de regeneração carregada');
 
-    // Tentar carregar contexto do localStorage
     const contextoErroStr = localStorage.getItem('errosRegeneracao');
-
     if (!contextoErroStr) {
         console.warn('[Regeneração] Contexto não encontrado no localStorage');
         return;
@@ -20,19 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
         const contextoErro = JSON.parse(contextoErroStr);
         console.log('[Regeneração] Contexto carregado:', contextoErro);
-
-        // Aplicar contexto visual de erro após DOM estar pronto
-        setTimeout(() => {
-            aplicarContextoDeErro(contextoErro);
-        }, 100);
-    } catch (e) {
-        console.error('[Regeneração] Erro ao processar contexto:', e);
+        setTimeout(() => aplicarContextoDeErro(contextoErro), 100);
+    } catch (erro) {
+        console.error('[Regeneração] Erro ao processar contexto:', erro);
     }
 
-    // Limpar contexto após submissão
     const btnGerar = document.getElementById('btnGerar');
     if (btnGerar) {
-        btnGerar.addEventListener('click', function () {
+        btnGerar.addEventListener('click', () => {
             localStorage.removeItem('errosRegeneracao');
             console.log('[Regeneração] Contexto de erro limpo após submissão');
         });
@@ -43,63 +52,52 @@ document.addEventListener('DOMContentLoaded', () => {
 // APLICAR CONTEXTO VISUAL DE ERRO
 // ========================================
 function aplicarContextoDeErro(contextoErro) {
+    if (!contextoErro || !Array.isArray(contextoErro.dificuldades)) {
+        console.warn('[Regeneração] Contexto inválido recebido:', contextoErro);
+        return;
+    }
+
     console.log('[Regeneração] Aplicando contexto visual de erro');
-    main.insertBefore(banner, pageSubtitle);
-    console.log('[Regeneração] Banner inserido antes de "Quantidades do lote"');
-} else {
-    // Fallback: inserir antes do título da página
-    const pageTitle = main.querySelector('.page-title');
-    if (pageTitle) {
-        main.insertBefore(banner, pageTitle);
-        console.log('[Regeneração] Banner inserido antes do título (fallback)');
-    }
-}
 
-// Mapear IDs dos inputs por índice: [muitoFácil, fácil, médio, difícil, muitoDifícil]
-const inputIds = ['muitoFacil', 'facil', 'medio', 'dificil', 'muitoDificil'];
+    const inputIds = ['muitoFacil', 'facil', 'medio', 'dificil', 'muitoDificil'];
+    const camposComErro = [];
 
-// Aplicar estado de erro nos campos afetados
-contextoErro.dificuldades.forEach(dif => {
-    const inputId = inputIds[dif.indice];
-    const input = document.getElementById(inputId);
-    if (!input) return;
+    contextoErro.dificuldades.forEach(dif => {
+        const inputId = inputIds[dif.indice];
+        if (!inputId) return;
 
-    // Adicionar classe de erro ao input
-    input.classList.add('input-com-erro');
+        const input = document.getElementById(inputId);
+        if (!input) return;
 
-    // Pré-preencher com quantidade de erro
-    input.value = dif.quantidade;
+        input.classList.add('input-com-erro');
+        input.value = dif.quantidade;
+        camposComErro.push(input);
 
-    // Criar badge de erro no label
-    const inputGroup = input.closest('.input-group');
-    if (inputGroup) {
-        const label = inputGroup.querySelector('.input-label');
-        if (label && !label.querySelector('.badge-erro-input')) {
-            // Badge vermelha
-            const badge = document.createElement('span');
-            badge.className = 'badge-erro-input';
-            badge.textContent = `${dif.quantidade} erro${dif.quantidade > 1 ? 's' : ''}`;
-            badge.style.marginLeft = '6px';
-            label.appendChild(badge);
+        const inputGroup = input.closest('.input-group');
+        if (inputGroup) {
+            const label = inputGroup.querySelector('.input-label');
+            if (label && !label.querySelector('.badge-erro-input')) {
+                const badge = document.createElement('span');
+                badge.className = 'badge-erro-input';
+                badge.textContent = `${dif.quantidade} erro${dif.quantidade > 1 ? 's' : ''}`;
+                label.appendChild(badge);
+            }
         }
-    }
 
-    console.log(`[Regeneração] Campo ${inputId} marcado com erro:`, dif.quantidade);
-});
+        console.log(`[Regeneração] Campo ${inputId} marcado com erro:`, dif.quantidade);
+    });
 
-// REMOVER DESTAQUE quando usuário deletar/zerar o valor
-inputIds.forEach(inputId => {
-    const input = document.getElementById(inputId);
-    if (!input) return;
+    // Listeners para limpar destaque assim que usuário corrigir valores
+    inputIds.forEach(inputId => {
+        const input = document.getElementById(inputId);
+        if (!input) return;
 
-    input.addEventListener('input', function () {
-        const valor = parseInt(this.value) || 0;
+        input.addEventListener('input', function () {
+            const valor = parseInt(this.value, 10) || 0;
+            if (valor !== 0) return;
 
-        if (valor === 0) {
-            // Remover classe de erro
             this.classList.remove('input-com-erro');
 
-            // Remover badge do label
             const inputGroup = this.closest('.input-group');
             if (inputGroup) {
                 const label = inputGroup.querySelector('.input-label');
@@ -110,27 +108,23 @@ inputIds.forEach(inputId => {
             }
 
             console.log(`[Regeneração] Destaque removido de ${inputId}`);
-        }
+        });
     });
-});
 
-// Chamar validação do formulário (assumindo que existe na página principal)
-if (typeof validarFormulario === 'function') {
-    validarFormulario();
-} else {
-    // Fallback: habilitar botão manualmente
-    const btnGerar = document.getElementById('btnGerar');
-    if (btnGerar) {
-        btnGerar.disabled = false;
-        btnGerar.style.background = 'var(--primary)';
+    if (typeof validarFormulario === 'function') {
+        validarFormulario();
+    } else {
+        const btnGerar = document.getElementById('btnGerar');
+        if (btnGerar) {
+            btnGerar.disabled = false;
+            btnGerar.style.background = 'var(--primary)';
+        }
     }
-}
 
-// Scroll suave para o primeiro campo com erro
-const primeiroComErro = document.querySelector('.input-com-erro');
-if (primeiroComErro) {
-    setTimeout(() => {
-        primeiroComErro.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 300);
-}
+    const primeiroComErro = camposComErro[0];
+    if (primeiroComErro) {
+        setTimeout(() => {
+            primeiroComErro.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+    }
 }

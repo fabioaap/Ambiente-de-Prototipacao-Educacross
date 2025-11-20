@@ -522,6 +522,26 @@ main {
 }
 
 
+.skill-selected-text {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.skill-selected-main {
+    font-weight: 600;
+    width: 100%;
+}
+
+.skill-selected-sub {
+    margin-top: 2px;
+    font-size: 12px;
+    line-height: 18px;
+    color: #5e5873;
+    width: 100%;
+}
+
+
 
 .icon-box {
     height: 44px;
@@ -580,6 +600,22 @@ main {
 }
 
 .topic-desc .strong {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.topic-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.topic-meta-line {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.topic-meta-label {
     font-weight: 700;
     color: var(--primary);
 }
