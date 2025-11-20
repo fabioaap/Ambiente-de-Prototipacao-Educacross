@@ -302,27 +302,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ============================================
-    // BOTÃO: NOVA QUESTÃO (com Toast)
+    // BOTÃO: NOVA QUESTÃO
     // ============================================
     function inicializarBtnNovaQuestao() {
         const btn = document.getElementById('btnNovaQuestao');
 
         if (btn) {
             btn.addEventListener('click', () => {
-                // Mostrar notificação de geração em andamento
-                if (window.showToast) {
-                    window.showToast(
-                        'Lote em Geração',
-                        'Seu lote de questões está sendo gerado. Isso pode levar alguns momentos...',
-                        'info',
-                        5000
-                    );
-                }
-
-                // Aguardar um tempo para o toast aparecer, depois redirecionar
-                setTimeout(() => {
-                    window.location.href = 'criar-questao-quiz.html';
-                }, 500);
+                // Redirecionar para criar nova questão
+                window.location.href = 'criar-questao-quiz.html';
             });
         }
     }
@@ -777,4 +765,76 @@ function inicializarModalErroGeracao() {
     }
 }
 
-// (Debug removido) Função de teste do modal foi eliminada conforme solicitação.
+// ========================
+// ALERT: LOTE EM GERAÇÃO
+// ========================
+
+/**
+ * Gerencia o alert de "Lote em geração"
+ * Posição: top-right fixa
+ * Ativação: Automática ao entrar na página
+ */
+const AlertLoteGeracao = {
+    /**
+     * Mostra o alert
+     */
+    show: function () {
+        const alert = document.getElementById('alertLoteGeracao');
+        if (alert) {
+            alert.style.display = 'flex';
+            alert.classList.remove('hide');
+            console.log('[AlertLoteGeracao] Exibido');
+        }
+    },
+
+    /**
+     * Oculta o alert com animação
+     */
+    hide: function () {
+        const alert = document.getElementById('alertLoteGeracao');
+        if (alert) {
+            alert.classList.add('hide');
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 300);
+            console.log('[AlertLoteGeracao] Oculto');
+        }
+    },
+
+    /**
+     * Alterna visibilidade
+     */
+    toggle: function () {
+        const alert = document.getElementById('alertLoteGeracao');
+        if (alert && alert.style.display === 'none') {
+            this.show();
+        } else {
+            this.hide();
+        }
+    },
+
+    /**
+     * Atualiza mensagem do alert
+     */
+    setMessage: function (title, message) {
+        const titleEl = document.querySelector('.alert-lote-geracao__title');
+        const messageEl = document.querySelector('.alert-lote-geracao__message');
+        if (titleEl) titleEl.textContent = title;
+        if (messageEl) messageEl.textContent = message;
+    }
+};
+
+// Configurar botão de fechar
+document.addEventListener('DOMContentLoaded', function () {
+    const closeBtn = document.getElementById('closeAlertLote');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function () {
+            AlertLoteGeracao.hide();
+        });
+    }
+
+    // Mostrar alert automaticamente ao entrar na página
+    setTimeout(() => {
+        AlertLoteGeracao.show();
+    }, 500);
+});

@@ -1,0 +1,60 @@
+<svg width="320" height="156" viewBox="0 0 320 156" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="320" height="156" rx="8" fill="#2c2c2c"/>
+  
+  <!-- Header: "Legenda de Status" -->
+  <text x="16" y="24" font-family="Montserrat" font-size="14" font-weight="600" fill="#ffffff" opacity="0.8" letter-spacing="0.5">
+    <tspan>LEGENDA DE STATUS</tspan>
+  </text>
+  
+  <!-- Item 1: Andamento -->
+  <g>
+    <!-- Badge Andamento -->
+    <rect x="16" y="40" width="120" height="28" rx="20" fill="#00bad1"/>
+    <text x="76" y="58" font-family="Montserrat" font-size="12" font-weight="600" fill="white" text-anchor="middle">
+      <tspan>Andamento</tspan>
+    </text>
+    
+    <!-- Description -->
+    <text x="144" y="46" font-family="Montserrat" font-size="12" font-weight="400" fill="#e0e0e0">
+      <tspan>As questões estão</tspan>
+    </text>
+    <text x="144" y="62" font-family="Montserrat" font-size="12" font-weight="400" fill="#e0e0e0">
+      <tspan>sendo geradas</tspan>
+    </text>
+  </g>
+  
+  <!-- Item 2: Concluído -->
+  <g>
+    <!-- Badge Concluído -->
+    <rect x="16" y="80" width="120" height="28" rx="20" fill="#28c76f"/>
+    <text x="76" y="98" font-family="Montserrat" font-size="12" font-weight="600" fill="white" text-anchor="middle">
+      <tspan>Concluído</tspan>
+    </text>
+    
+    <!-- Description -->
+    <text x="144" y="86" font-family="Montserrat" font-size="12" font-weight="400" fill="#e0e0e0">
+      <tspan>Lote finalizado com</tspan>
+    </text>
+    <text x="144" y="102" font-family="Montserrat" font-size="12" font-weight="400" fill="#e0e0e0">
+      <tspan>sucesso</tspan>
+    </text>
+  </g>
+  
+  <!-- Item 3: Erro -->
+  <g>
+    <!-- Badge Erro -->
+    <rect x="16" y="120" width="120" height="28" rx="20" fill="#ea5455"/>
+    <text x="76" y="138" font-family="Montserrat" font-size="12" font-weight="600" fill="white" text-anchor="middle">
+      <tspan>Erro</tspan>
+    </text>
+    
+    <!-- Description -->
+    <text x="144" y="126" font-family="Montserrat" font-size="12" font-weight="400" fill="#e0e0e0">
+      <tspan>Erro durante o processo,</tspan>
+    </text>
+    <text x="144" y="142" font-family="Montserrat" font-size="12" font-weight="400" fill="#e0e0e0">
+      <tspan>gere o lote novamente</tspan>
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legenda de Status - Tooltip | Educacross</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f5f5f5;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* ========================================
+           TOOLTIP - LEGENDA DE STATUS
+           ======================================== */
+
+        .tooltip-legenda-status {
+            background: #2c2c2c;
+            border-radius: 8px;
+            padding: 16px;
+            max-width: 320px;
+            box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        .tooltip-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+        }
+
+        .tooltip-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .tooltip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .tooltip-item__badge {
+            flex-shrink: 0;
+            width: 100%;
+            max-width: 120px;
+            height: 28px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+            text-transform: capitalize;
+        }
+
+        /* Estados específicos */
+        .tooltip-item__badge--andamento {
+            background: linear-gradient(135deg, #00bad1 0%, #00a3b8 100%);
+            box-shadow: 0 2px 8px rgba(0, 186, 209, 0.3);
+        }
+
+        .tooltip-item__badge--concluido {
+            background: linear-gradient(135deg, #28c76f 0%, #20a452 100%);
+            box-shadow: 0 2px 8px rgba(40, 199, 111, 0.3);
+        }
+
+        .tooltip-item__badge--erro {
+            background: linear-gradient(135deg, #ea5455 0%, #c73f40 100%);
+            box-shadow: 0 2px 8px rgba(234, 84, 85, 0.3);
+        }
+
+        .tooltip-item__description {
+            flex: 1;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 1.4;
+            color: #e0e0e0;
+            margin-top: 2px;
+        }
+
+        /* ========================================
+           PREVIEW GRID
+           ======================================== */
+
+        .preview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .preview-item {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .preview-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* ========================================
+           VARIAÇÕES
+           ======================================== */
+
+        .tooltip-legenda-status--compact {
+            max-width: 280px;
+        }
+
+        .tooltip-legenda-status--light {
+            background: #f8f8f8;
+            color: #333;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .tooltip-legenda-status--light .tooltip-header {
+            color: #333;
+            opacity: 0.7;
+        }
+
+        .tooltip-legenda-status--light .tooltip-item__description {
+            color: #555;
+        }
+
+        /* ========================================
+           INTEGRAÇÃO EM CONTEXTO
+           ======================================== */
+
+        .status-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .status-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: help;
+            position: relative;
+        }
+
+        .status-icon--andamento {
+            background: rgba(0, 186, 209, 0.2);
+            color: #00bad1;
+        }
+
+        .status-icon--concluido {
+            background: rgba(40, 199, 111, 0.2);
+            color: #28c76f;
+        }
+
+        .status-icon--erro {
+            background: rgba(234, 84, 85, 0.2);
+            color: #ea5455;
+        }
+
+        .status-icon:hover .tooltip-legenda-status {
+            display: block;
+        }
+
+        .status-icon .tooltip-legenda-status {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+            z-index: 1000;
+        }
+
+        /* Arrow for tooltip */
+        .status-icon .tooltip-legenda-status::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid #2c2c2c;
+        }
+
+        .status-icon .tooltip-legenda-status--light::after {
+            border-top-color: #f8f8f8;
+        }
+
+        /* ========================================
+           CODE EXPORT
+           ======================================== */
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 16px;
+            border-radius: 6px;
+            font-size: 11px;
+            line-height: 1.5;
+            overflow-x: auto;
+            margin-top: 16px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .copy-btn {
+            background: #7367f0;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #5e4dd1;
+        }
+
+        .copy-btn:active {
+            background: #4a3db8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="preview-container">
+        <!-- VERSÃO PADRÃO -->
+        <div class="preview-item">
+            <div class="preview-title">Padrão (Dark)</div>
+            <div class="tooltip-legenda-status">
+                <div class="tooltip-header">Legenda de Status</div>
+                <div class="tooltip-items">
+                    <div class="tooltip-item">
+                        <div class="tooltip-item__badge tooltip-item__badge--andamento">Andamento</div>
+                        <div class="tooltip-item__description">As questões estão sendo geradas</div>
+                    </div>
+                    <div class="tooltip-item">
+                        <div class="tooltip-item__badge tooltip-item__badge--concluido">Concluído</div>
+                        <div class="tooltip-item__description">Lote finalizado com sucesso</div>
+                    </div>
+                    <div class="tooltip-item">
+                        <div class="tooltip-item__badge tooltip-item__badge--erro">Erro</div>
+                        <div class="tooltip-item__description">Erro durante o processo, gere o lote novamente</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CÓDIGO -->
+            <div class="code-block">
+                &lt;div class="tooltip-legenda-status"&gt;
+                &lt;div class="tooltip-header"&gt;Legenda de Status&lt;/div&gt;
+                &lt;div class="tooltip-items"&gt;
+                &lt;div class="tooltip-item"&gt;
+                &lt;div class="tooltip-item__badge tooltip-item__badge--andamento"&gt;
+                Andamento
+                &lt;/div&gt;
+                &lt;div class="tooltip-item__description"&gt;
+                As questões estão sendo geradas
+                &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;/div&gt;
+            </div>
+            <button class="copy-btn" onclick="copiarCodigo(this)">Copiar código</button>
+        </div>
+
+        <!-- VERSÃO LIGHT -->
+        <div class="preview-item">
+            <div class="preview-title">Variação Light</div>
+            <div class="tooltip-legenda-status tooltip-legenda-status--light">
+                <div class="tooltip-header">Legenda de Status</div>
+                <div class="tooltip-items">
+                    <div class="tooltip-item">
+                        <div class="tooltip-item__badge tooltip-item__badge--andamento">Andamento</div>
+                        <div class="tooltip-item__description">As questões estão sendo geradas</div>
+                    </div>
+                    <div class="tooltip-item">
+                        <div class="tooltip-item__badge tooltip-item__badge--concluido">Concluído</div>
+                        <div class="tooltip-item__description">Lote finalizado com sucesso</div>
+                    </div>
+                    <div class="tooltip-item">
+                        <div class="tooltip-item__badge tooltip-item__badge--erro">Erro</div>
+                        <div class="tooltip-item__description">Erro durante o processo, gere o lote novamente</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CÓDIGO -->
+            <div class="code-block">
+                &lt;div class="tooltip-legenda-status tooltip-legenda-status--light"&gt;
+                &lt;!-- mesmo conteúdo --&gt;
+                &lt;/div&gt;
+            </div>
+            <button class="copy-btn" onclick="copiarCodigo(this)">Copiar código</button>
+        </div>
+
+        <!-- VERSÃO COMPACT -->
+        <div class="preview-item">
+            <div class="preview-title">Variação Compact</div>
+            <div class="tooltip-legenda-status tooltip-legenda-status--compact">
+                <div class="tooltip-header">Status</div>
+                <div class="tooltip-items">
+                    <div class="tooltip-item">
+                        <div class="tooltip-item__badge tooltip-item__badge--andamento">Andamento</div>
+                        <div class="tooltip-item__description">Em geração</div>
+                    </div>
+                    <div class="tooltip-item">
+                        <div class="tooltip-item__badge tooltip-item__badge--concluido">Concluído</div>
+                        <div class="tooltip-item__description">Pronto</div>
+                    </div>
+                    <div class="tooltip-item">
+                        <div class="tooltip-item__badge tooltip-item__badge--erro">Erro</div>
+                        <div class="tooltip-item__description">Falhou</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CÓDIGO -->
+            <div class="code-block">
+                &lt;div class="tooltip-legenda-status tooltip-legenda-status--compact"&gt;
+                &lt;!-- ... --&gt;
+                &lt;/div&gt;
+            </div>
+            <button class="copy-btn" onclick="copiarCodigo(this)">Copiar código</button>
+        </div>
+
+        <!-- INTEGRAÇÃO COM ÍCONE -->
+        <div class="preview-item">
+            <div class="preview-title">Integração com Ícone (Hover)</div>
+            <div style="padding: 20px; background: #f9f9f9; border-radius: 6px;">
+                <div class="status-container">
+                    <div class="status-icon status-icon--andamento" title="Passe o mouse">
+                        ⏳
+                        <div class="tooltip-legenda-status">
+                            <div class="tooltip-header">Legenda de Status</div>
+                            <div class="tooltip-items">
+                                <div class="tooltip-item">
+                                    <div class="tooltip-item__badge tooltip-item__badge--andamento">Andamento</div>
+                                    <div class="tooltip-item__description">As questões estão sendo geradas</div>
+                                </div>
+                                <div class="tooltip-item">
+                                    <div class="tooltip-item__badge tooltip-item__badge--concluido">Concluído</div>
+                                    <div class="tooltip-item__description">Lote finalizado com sucesso</div>
+                                </div>
+                                <div class="tooltip-item">
+                                    <div class="tooltip-item__badge tooltip-item__badge--erro">Erro</div>
+                                    <div class="tooltip-item__description">Erro durante o processo, gere o lote
+                                        novamente</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span style="color: #666; font-size: 12px;">Passe o mouse sobre o ícone</span>
+                </div>
+            </div>
+
+            <!-- CÓDIGO -->
+            <div class="code-block">
+                &lt;div class="status-icon status-icon--andamento"&gt;
+                ⏳
+                &lt;div class="tooltip-legenda-status"&gt;
+                &lt;!-- conteúdo do tooltip --&gt;
+                &lt;/div&gt;
+                &lt;/div&gt;
+            </div>
+            <button class="copy-btn" onclick="copiarCodigo(this)">Copiar código</button>
+        </div>
+
+        <!-- ESPECIFICAÇÕES -->
+        <div class="preview-item">
+            <div class="preview-title">📐 Especificações de Design</div>
+            <div style="font-size: 12px; line-height: 1.6; color: #555;">
+                <strong>Dimensões:</strong>
+                <ul style="margin-left: 16px; margin-top: 8px;">
+                    <li>Largura padrão: 320px</li>
+                    <li>Padding: 16px</li>
+                    <li>Border Radius: 8px</li>
+                </ul>
+
+                <strong style="margin-top: 12px; display: block;">Cores (Design System):</strong>
+                <ul style="margin-left: 16px; margin-top: 8px;">
+                    <li><strong>Andamento:</strong> #00bad1 (Teal)</li>
+                    <li><strong>Concluído:</strong> #28c76f (Green)</li>
+                    <li><strong>Erro:</strong> #ea5455 (Red)</li>
+                </ul>
+
+                <strong style="margin-top: 12px; display: block;">Tipografia:</strong>
+                <ul style="margin-left: 16px; margin-top: 8px;">
+                    <li>Font: Montserrat</li>
+                    <li>Header: 14px / 600 / Uppercase</li>
+                    <li>Badge: 12px / 600</li>
+                    <li>Description: 12px / 400</li>
+                </ul>
+
+                <strong style="margin-top: 12px; display: block;">Shadow:</strong>
+                <ul style="margin-left: 16px; margin-top: 8px;">
+                    <li>0px 8px 24px rgba(0, 0, 0, 0.2)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TOKENS FIGMA -->
+        <div class="preview-item">
+            <div class="preview-title">🎨 Tokens para Figma</div>
+            <div class="code-block" style="background: #f5f5f5; color: #333;">
+                {
+                "tooltip": {
+                "legenda-status": {
+                "background": "#2c2c2c",
+                "border-radius": "8px",
+                "padding": "16px",
+                "shadow": "0px 8px 24px rgba(0, 0, 0, 0.2)",
+                "header": {
+                "font-size": "14px",
+                "font-weight": 600,
+                "text-transform": "uppercase"
+                },
+                "badge": {
+                "height": "28px",
+                "border-radius": "20px",
+                "font-size": "12px",
+                "font-weight": 600
+                }
+                },
+                "status": {
+                "andamento": "#00bad1",
+                "concluido": "#28c76f",
+                "erro": "#ea5455"
+                }
+                }
+                }
+            </div>
+            <button class="copy-btn" onclick="copiarCodigo(this)">Copiar JSON</button>
+        </div>
+    </div>
+
+    <script>
+        function copiarCodigo(btn) {
+            const codeBlock = btn.previousElementSibling;
+            const texto = codeBlock.textContent.trim();
+
+            navigator.clipboard.writeText(texto).then(() => {
+                const textoOriginal = btn.textContent;
+                btn.textContent = '✓ Copiado!';
+                setTimeout(() => {
+                    btn.textContent = textoOriginal;
+                }, 2000);
+            }).catch(() => {
+                alert('Erro ao copiar código');
+            });
+        }
+    </script>
+</body>
+
+</html>

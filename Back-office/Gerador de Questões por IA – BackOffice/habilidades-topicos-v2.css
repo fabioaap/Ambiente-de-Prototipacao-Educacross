@@ -850,3 +850,134 @@ div[data-role="pagination"] {
     min-width: 0;
     /* Permite encolher quando o container precisa */
 }
+
+/* ========================================
+   ALERT - LOTE EM GERAÇÃO
+   Componente baseado em Design System Educacross
+   ======================================== */
+
+.alert-lote-geracao {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    max-width: 480px;
+    width: auto;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 12px 16px;
+    background-color: #00bad1;
+    border-radius: 6px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
+    animation: slideInAlert 0.3s ease-out forwards;
+}
+
+@keyframes slideInAlert {
+    from {
+        opacity: 0;
+        transform: translateX(400px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.alert-lote-geracao.hide {
+    animation: slideOutAlert 0.3s ease-out forwards;
+}
+
+@keyframes slideOutAlert {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(400px);
+    }
+}
+
+.alert-lote-geracao__icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    flex-shrink: 0;
+    padding: 4px;
+}
+
+.alert-lote-geracao__icon-container img {
+    width: 22px;
+    height: 22px;
+    display: block;
+}
+
+.alert-lote-geracao__content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    color: #ffffff;
+}
+
+.alert-lote-geracao__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+    margin: 0;
+    color: #ffffff;
+}
+
+.alert-lote-geracao__message {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 22px;
+    margin: 0;
+    color: #ffffff;
+    opacity: 0.95;
+}
+
+.alert-lote-geracao__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 24px;
+    padding: 7px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.alert-lote-geracao__close:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.alert-lote-geracao__close:active {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Responsivo */
+@media (max-width: 640px) {
+    .alert-lote-geracao {
+        max-width: calc(100vw - 40px);
+        top: 16px;
+        right: 20px;
+        left: 20px;
+        width: auto;
+    }
+}

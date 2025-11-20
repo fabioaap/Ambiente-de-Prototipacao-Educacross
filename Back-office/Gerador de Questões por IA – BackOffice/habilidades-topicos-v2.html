@@ -187,7 +187,7 @@
             <!-- STATS BAR (Tópicos) -->
             <div data-role="stats-bar">
                 <div>
-                    <span class="stats-label">Total de tópicos:</span>
+                    <span class="stats-label">Total de Questões:</span>
                 </div>
                 <div class="stats-badges">
                     <span class="badge">
@@ -259,6 +259,21 @@
             </div>
         </div>
     </main>
+
+    <!-- ALERT: LOTE EM GERAÇÃO -->
+    <div id="alertLoteGeracao" class="alert-lote-geracao" style="display: none;">
+        <div class="alert-lote-geracao__icon-container">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="10" stroke="#00bad1" stroke-width="1.5" fill="none" />
+                <circle cx="11" cy="11" r="6" fill="#00bad1" />
+            </svg>
+        </div>
+        <div class="alert-lote-geracao__content">
+            <p class="alert-lote-geracao__title">Lote em geração</p>
+            <p class="alert-lote-geracao__message">Seu lote de questões está sendo gerado. Aguarde a finalização...</p>
+        </div>
+        <button class="alert-lote-geracao__close" id="closeAlertLote" aria-label="Fechar alerta">×</button>
+    </div>
 
     <script src="habilidades-topicos-v2.js"></script>
     <script>

@@ -283,25 +283,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 instrucoes: document.getElementById('instrucoesAdicionais').value,
             };
 
-            // Mostrar toast de geração
-            if (typeof window.showToast === 'function') {
-                window.showToast(
-                    'Lote em Geração',
-                    'Seu lote de questões está sendo gerado. Isso pode levar alguns momentos...',
-                    'info',
-                    5000
-                );
-            }
 
             console.log('Gerando questões com:', dados);
-
-            // Guardar no localStorage para mostrar toast na próxima página
-            localStorage.setItem('toastPendente', JSON.stringify({
-                title: 'Lote em Geração',
-                message: 'Seu lote de questões está sendo gerado. Aguarde a finalização...',
-                type: 'info',
-                duration: 5000
-            }));
 
             // Redirecionar após 1 segundo
             setTimeout(() => {
